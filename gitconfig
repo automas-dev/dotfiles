@@ -1,8 +1,16 @@
 [color]
-diff = auto
-status = auto
-branch = auto
-interactive = auto
-ui = true
-pager = true
-commit = true
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = true
+	pager = true
+	commit = true
+
+[user]
+	name = Thomas Harrison
+	email = twh2898@vt.edu
+
+[credential]
+	helper = store
+
