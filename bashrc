@@ -31,5 +31,5 @@ WHITE="\[$(tput setaf 7)\]"
 RESET="\[$(tput sgr0)\]"
 
 ## PS1 line
-export PS1="${RESET}[${CYAN}\u@\h${RESET}] ${YELLOW}\w${RESET}\n\$ "
+export PS1="${RESET}[${CYAN}\u${WHITE}@${GREEN}\h${RESET}] ${YELLOW}\w${RESET}\n\$ "
 
