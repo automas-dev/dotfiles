@@ -16,8 +16,9 @@ alias cll='clear && ll'
 alias cla='clear && la'
 
 ## ping commands
-alias pingg='ping -c 4 google.com'
-alias ping8='ping -c 4 8.8.8.8'
+alias ping4='ping -c 4'
+alias pingg='ping4 google.com'
+alias ping8='ping4 8.8.8.8'
 alias pingd='ping8'
 
 ## Terminal Colors
