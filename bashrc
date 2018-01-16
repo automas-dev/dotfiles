@@ -22,14 +22,14 @@ alias ping8='ping4 8.8.8.8'
 alias pingd='ping8'
 
 ## Terminal Colors
-RED="\[$(tput setaf 1)\]"
-GREEN="\[$(tput setaf 2)\]"
-YELLOW="\[$(tput setaf 3)\]"
-BLUE="\[$(tput setaf 4)\]"
-MAGENTA="\[$(tput setaf 5)\]"
-CYAN="\[$(tput setaf 6)\]"
-WHITE="\[$(tput setaf 7)\]"
-RESET="\[$(tput sgr0)\]"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+CYAN="\e[36m"
+WHITE="\e[37m"
+RESET="\e[0m"
 
 ## PS1 line
 export PS1="${RESET}[${CYAN}\u${WHITE}@${GREEN}\h${RESET}] ${YELLOW}\w${RESET}\n\$ "
