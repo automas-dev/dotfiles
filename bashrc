@@ -21,6 +21,12 @@ alias pingg='ping4 google.com'
 alias ping8='ping4 8.8.8.8'
 alias pingd='ping8'
 
+# color grep
+alias cgrep='grep --color=always'
+
+# color less
+alias less='less -r'
+
 ## Terminal Colors
 RED="\[$(tput setaf 1)\]"
 GREEN="\[$(tput setaf 2)\]"
