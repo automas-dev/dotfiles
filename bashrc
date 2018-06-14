@@ -38,8 +38,12 @@ WHITE="\e[37m"
 RESET="\e[0m"
 
 ## PS1 line
-export PS1="${RESET}[${CYAN}\u${WHITE}@${GREEN}\h${RESET}] ${YELLOW}\w${RESET}\n\$ "
-
+check_git() {
+	if [ -d '.git' ]; then
+		git branch
+	fi
+}
+export PS1="${RESET}[${CYAN}\u${WHITE}@${GREEN}\h${RESET}] ${YELLOW}\w${MAGENTA}\$(check_git)${RESET}\n\$ "
 
 ## Rust Lang config
 CARGO_INCREMENTAL=1
