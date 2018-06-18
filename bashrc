@@ -48,3 +48,6 @@ export PS1="${RESET}[${CYAN}\u${WHITE}@${GREEN}\h${RESET}] ${YELLOW}\w${MAGENTA}
 ## Rust Lang config
 CARGO_INCREMENTAL=1
 
+## umask for gi script
+umask 002
+
