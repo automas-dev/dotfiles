@@ -21,6 +21,9 @@ alias pingg='ping4 google.com'
 alias ping8='ping4 8.8.8.8'
 alias pingd='ping8'
 
+## Human Readable df
+alias df='df -h'
+
 # color grep
 alias cgrep='grep --color=always'
 
