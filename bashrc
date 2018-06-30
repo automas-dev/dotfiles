@@ -46,7 +46,7 @@ check_git() {
 		git branch
 	fi
 }
-export PS1="${RESET}[${CYAN}\u${WHITE}@${GREEN}\h${RESET}] ${YELLOW}\w${MAGENTA}\$(check_git)${RESET}\n\$ "
+export PS1="${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${MAGENTA}\$(check_git)${RESET}\n${WHITE}\$ ${RESET}"
 
 ## Rust Lang config
 CARGO_INCREMENTAL=1
