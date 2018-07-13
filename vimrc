@@ -55,28 +55,32 @@ set encoding=utf8
 " Set a leader character used as <leader>
 let mapleader = ","
 
-" Pressing ,ss will toggle spell check
+" Toggle spell check
 map <leader>ss :setlocal spell!<cr>
-
-" Write as sudo
-cmap W w !sudo tee > /dev/null %
-
-" ,b will run the build script
-map <leader>b !./build
-
-" ,r will run the run script
-map <leader>r !./run
-
-map <F5> :w<CR>:!./build && ./run<CR>
-
-" Write and build
-cmap wb<CR> w<CR>:!./build<CR>
-
-" Write and run
-cmap wr<CR> w<CR>:!./run<CR>
 
 " Figlet banners
 map <leader>fb :read !figlet -f big 
 map <leader>fn :read !figlet -f standard 
 map <leader>fs :read !figlet -f small 
+
+" Run ./build
+map <leader>b !./build
+
+" Run ./run
+map <leader>r !./run
+
+" Build and Run
+map <F5> :w<CR>:!./build && ./run<CR>
+
+" Write as sudo
+cmap W w !sudo tee > /dev/null %
+
+" Write and Build
+cmap wb<CR> w<CR>:!./build<CR>
+
+" Write and Run
+cmap wr<CR> w<CR>:!./%<CR>
+
+" Write and run
+cmap wr<CR> w<CR>:!./run<CR>
 
