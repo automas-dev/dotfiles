@@ -1,3 +1,7 @@
+#
+# ~/.gitconfig
+#
+
 [color]
 	diff = auto
 	status = auto
