@@ -1,3 +1,5 @@
+#!/bin/bash
+
 T='gYw' #The testt text
 
 echo -e "\n                 40m     41m     42m     43m\
