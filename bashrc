@@ -46,7 +46,12 @@ check_git() {
 		git branch
 	fi
 }
-export PS1="${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${MAGENTA}\$(check_git)${RESET}\n${WHITE}\$ ${RESET}"
+check_ssh() {
+	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+		echo @SSH@
+	fi
+}
+export PS1="\$(check_ssh)${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${MAGENTA}\$(check_git)${RESET}\n${WHITE}\$ ${RESET}"
 
 ## Rust Lang config
 CARGO_INCREMENTAL=1
