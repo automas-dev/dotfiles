@@ -15,6 +15,3 @@
 	name = Thomas Harrison
 	email = twh2898@vt.edu
 
-[credential]
-	helper = store
-
