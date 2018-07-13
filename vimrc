@@ -16,6 +16,9 @@ set shiftwidth=4
 " Enable mouse
 set mouse=a
 
+" Enable spell check
+set spell spelllang=en_us
+
 " Set a leader character used as <leader>
 let mapleader = ","
 
