@@ -54,3 +54,8 @@ cmap wb<CR> w<CR>:!./build<CR>
 " Write and run
 cmap wr<CR> w<CR>:!./run<CR>
 
+" Figlet banners
+map <leader>fb :read !figlet -f big 
+map <leader>fn :read !figlet -f standard 
+map <leader>fs :read !figlet -f small
+
