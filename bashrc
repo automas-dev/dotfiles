@@ -2,9 +2,24 @@
 # ~/.bashrc
 #
 
+#  _____ _                                   ____            _     ____   ____ 
+# |_   _| |__   ___  _ __ ___   __ _ ___    | __ )  __ _ ___| |__ |  _ \ / ___|
+#   | | | '_ \ / _ \| '_ ` _ \ / _` / __|   |  _ \ / _` / __| '_ \| |_) | |    
+#   | | | | | | (_) | | | | | | (_| \__ \  _| |_) | (_| \__ \ | | |  _ <| |___ 
+#   |_| |_| |_|\___/|_| |_| |_|\__,_|___/ (_)____/ \__,_|___/_| |_|_| \_\\____|
+                                                                            
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+## umask for gi script
+umask 002
+
+
+#    _   _ _                 
+#   /_\ | (_)__ _ ___ ___ ___
+#  / _ \| | / _` (_-</ -_|_-<
+# /_/ \_\_|_\__,_/__/\___/__/
+                           
 ## ls commands
 alias ls='ls -h --color=auto'
 alias ll='ls -l'
@@ -30,6 +45,12 @@ alias cgrep='grep --color=always'
 # color less
 alias less='less -r'
 
+
+#   ___     _            
+#  / __|___| |___ _ _ ___
+# | (__/ _ \ / _ \ '_(_-<
+#  \___\___/_\___/_| /__/
+                       
 ## Terminal Colors
 RED="\[\e[31m\]"
 GREEN="\[\e[32m\]"
@@ -52,10 +73,4 @@ check_ssh() {
 	fi
 }
 export PS1="\$(check_ssh)${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${MAGENTA}\$(check_git)${RESET}\n${WHITE}\$ ${RESET}"
-
-## Rust Lang config
-CARGO_INCREMENTAL=1
-
-## umask for gi script
-umask 002
 
