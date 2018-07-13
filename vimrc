@@ -1,3 +1,7 @@
+"
+" ~/.vimrc
+"
+
 " Import file type plugins and indentation
 filetype plugin on
 filetype indent on
