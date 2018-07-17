@@ -26,6 +26,7 @@ syntax on
 " Set tab size to 4 spaces
 set tabstop=4
 set shiftwidth=4
+set noexpandtab
 
 " Enable mouse
 set mouse=a
@@ -72,6 +73,15 @@ map <leader>r !./run
 " Build and Run
 map <F5> :w<CR>:!./build && ./run<CR>
 
+" Write and quit
+map <leader>w :wq<CR>
+
+" Quit
+map <leader>q :q<CR>
+
+" Force quit
+map <leader>Q :q!<CR>
+
 " Write as sudo
 cmap W w !sudo tee > /dev/null %
 
@@ -83,4 +93,6 @@ cmap wr<CR> w<CR>:!./%<CR>
 
 " Write and run
 cmap wr<CR> w<CR>:!./run<CR>
+
+autocmd FileType python map <C-M> <ESC>idef main():<CR><CR><HOME><CR><CR>if __name__ == "__main__":<CR>try:<CR>main()<CR><BS>except KeyboardInterrupt:<CR>print("Exiting!")<CR><ESC>7k<END>i
 
