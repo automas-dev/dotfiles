@@ -23,7 +23,7 @@ umask 002
 ## ls commands
 alias ls='ls -h --color=auto'
 alias ll='ls -l'
-alias la='ls -l'
+alias la='ls -a'
 alias lla='ls -al'
 
 ## clear && ls commands
