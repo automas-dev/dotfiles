@@ -32,7 +32,7 @@ set noexpandtab
 set mouse=a
 
 " Enable spell check
-set spell spelllang=en_us
+"set spell spelllang=en_us
 
 " Ignore case while searching
 set ignorecase
@@ -88,11 +88,11 @@ cmap W w !sudo tee > /dev/null %
 " Write and Build
 cmap wb<CR> w<CR>:!./build<CR>
 
-" Write and Run
-cmap wr<CR> w<CR>:!./%<CR>
+" Write and Call
+cmap wc<CR> w<CR>:!./%<CR>
 
 " Write and run
 cmap wr<CR> w<CR>:!./run<CR>
 
-autocmd FileType python map <C-M> <ESC>idef main():<CR><CR><HOME><CR><CR>if __name__ == "__main__":<CR>try:<CR>main()<CR><BS>except KeyboardInterrupt:<CR>print("Exiting!")<CR><ESC>7k<END>i
+autocmd FileType python map <C-M> <ESC>idef main():<CR>pass<CR><HOME><CR><CR>if __name__ == "__main__":<CR>try:<CR>main()<CR><BS>except KeyboardInterrupt:<CR>print("Exiting!")<CR><ESC>8k<END>v3hda
 
