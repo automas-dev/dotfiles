@@ -76,6 +76,9 @@ map <F5> :w<CR>:!./build && ./run<CR>
 " Write and quit
 map <leader>w :wq<CR>
 
+" Write as sudo
+map <leader>W :w !sudo tee > /dev/null %
+
 " Quit
 map <leader>q :q<CR>
 
