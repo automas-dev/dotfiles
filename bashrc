@@ -23,12 +23,14 @@ umask 002
 ## ls commands
 alias ls='ls -h --color=auto'
 alias ll='ls -l'
-alias la='ls -al'
+alias la='ls -a'
+alias lla='ls -al'
 
 ## clear && ls commands
 alias cls='clear && ls'
 alias cll='clear && ll'
 alias cla='clear && la'
+alias clla='clear && lla'
 
 ## ping commands
 alias ping4='ping -c 4'
