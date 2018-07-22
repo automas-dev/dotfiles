@@ -83,7 +83,7 @@ map <leader>q :q<CR>
 map <leader>Q :q!<CR>
 
 " Write as sudo
-cmap W w !sudo tee > /dev/null %
+cmap w! w !sudo tee > /dev/null %
 
 " Write and Build
 cmap wb<CR> w<CR>:!./build<CR>
