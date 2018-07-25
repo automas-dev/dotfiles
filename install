@@ -9,7 +9,7 @@ try_install() {
 		echo Warning: File already exists: $1
 	else
 		ln -s $(pwd $1) ../.$1
-		echo Linke created for $(pwd $1) at $(pwd ../.$1)
+		echo Linke created for $1 at ../.$1
 	fi
 }
 
