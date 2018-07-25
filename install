@@ -1,0 +1,24 @@
+#!/bin/bash
+
+try_install() {
+	if [ -L ../.$1 ]; then
+		echo Warning: Symbolic link already exists: $1
+	elif [ -d ../.$1 ]; then
+		echo Warning: Directory already exists: $1
+	elif [ -f ../.$1 ]; then
+		echo Warning: File already exists: $1
+	else
+		ln -s $(pwd $1) ../.$1
+		echo Linke created for $(pwd $1) at $(pwd ../.$1)
+	fi
+}
+
+try_install bashrc
+try_install gdbinit
+try_install gitconfig
+try_install scripts
+try_install vimrc
+
+echo Done!
+exit 0
+
