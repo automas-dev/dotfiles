@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TODAY=$(date +%FT%H:%M:%SZ%z)
+VIDEOSIZE="1366x728"
+FRAMERATE="20"
+OUTPUT="$HOME/Recordings/$TODAY.mov"
+
+ffmpeg	-video_size $VIDEOSIZE -framerate $FRAMERATE -f x11grab -i :0.0+0,0 $OUTPUT
+
+#ffmpeg -y -rtbufsize 100M -f gdigrab -framerate 20 -offset_x 0 -offset_y 0 -video_size 1250x750 -draw_mouse 1 -i desktop -f dshow -i video="HP Truevision HD":audio="Microphone (High Definition Audio Device)" -filter_complex "[0]pad=height=ih+10:color=black[b];[b][1:v]overlay=(main_w-overlay_w):main_h-overlay_h[v]" -map "[v]" -c:v libx264 -r 20 -preset ultrafast -tune zerolatency -crf 30 -pix_fmt yuv420p -map 1:a -c:a libmp3lame -qscale:a 4 "D:\today.mp4"
+
