@@ -46,6 +46,14 @@ set showmatch
 " Set UTF8 as the standard encoding
 set encoding=utf8
 
+" Persistent  undo
+if has('persistent_undo')
+	set undofile
+	set undodir=$HOME/.vim/undo
+endif
+
+" Latex flavor
+let g:tex_flavor = "plain"
 
 "  _  __           __  __                _           
 " | |/ /___ _  _  |  \/  |__ _ _ __ _ __(_)_ _  __ _ 
