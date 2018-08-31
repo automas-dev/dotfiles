@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# cd .. until we are in a project folder (has .mk file) or we are in the root
+while [[ $PWD != "/" && ! -f .mk ]]; do
+	cd ..
+done
+
+# Check that we are not in the root dir / we have a .mk file
+if [[ ! -f .mk ]]; then
+	echo You are not in a project directory or a subdirectory of one! \($pwd\)
+	exit -1
+fi
+
+if [[ -f run ]]; then
+	./run
+else
+	echo "No run file found!"
+fi
+

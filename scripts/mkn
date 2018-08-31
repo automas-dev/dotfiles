@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Check if a name is given
+if [[ $1 != "" ]]; then
+	name=$1
+	mkdir -p $name
+	cd $name
+else
+	name=$(basename $(pwd))
+fi
+
+# Check that we are not writing over a project
+if [[ -f .mk ]]; then
+	echo Project $name already exists!
+	exit -1
+fi
+
+echo Making new project: $name
+echo "#!/bin/bash" > .mk
+chmod +x .mk
+
+copy_template() {
+	cat ~/.scripts/templates/$1 > $1
+}
+
+copy_template main.cpp
+copy_template makefile
+copy_template build
+copy_template run
+
+chmod +x build run
