@@ -14,6 +14,8 @@
 ## umask for gi script
 umask 002
 
+#
+export PATH="$PATH:$HOME/.scripts"
 
 #    _   _ _                 
 #   /_\ | (_)__ _ ___ ___ ___
