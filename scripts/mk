@@ -11,6 +11,5 @@ if [[ ! -f .mk ]]; then
 	exit -1
 fi
 
-mkb
-mkr
+mkb && mkr || echo "Error during build!"
 
