@@ -9,6 +9,10 @@ PATH = '/home/thomas/wallpapers'
 TYPES = ['png', 'gif', 'jpe', 'jpeg', 'jpg']
 MODE = '--bg-fill'
 
+# Usage: changewall [--help] <category> <filename>
+# Note if you do not provide a category, one will be selected at random.
+# You may not provide a filename without first providing a category
+
 
 def scan_dir(category):
     files = []
@@ -40,6 +44,9 @@ def main(argv):
     file = None
 
     if len(argv) > 1:
+        if argv[1] == '--help':
+            print('Usage: changewall [--help] <category> <filename>')
+            return
         category = argv[1]
     
     if len(argv) > 2:
