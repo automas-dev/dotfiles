@@ -1,7 +1,7 @@
 # Makefile
 
 CPP=g++
-CPPFLAGS=-Wall -O2 -std=c++17
+CPPFLAGS=-Wall -Weffc++ -O2 -std=c++17
 NAME=main
 OBJECTS=main.o
 
