@@ -5,67 +5,66 @@ from subprocess import call
 from os.path import isfile, join
 from datetime import datetime
 
+
 PATH = '/home/thomas/wallpapers'
+LOG = '/home/thomas/wallpapers/last.txt'
 TYPES = ['png', 'gif', 'jpe', 'jpeg', 'jpg']
 MODE = '--bg-fill'
 
-# Usage: changewall [--help] <category> <filename>
-# Note if you do not provide a category, one will be selected at random.
-# You may not provide a filename without first providing a category
+
+def print_help():
+    print('Usage: changewall [--help] <category> <filename>')
 
 
-def scan_dir(category):
+def rand(category = '*'):
+    ''' Select a random file from the given `category` '''
     files = []
-
     for t in TYPES:
         path = join(PATH, '{}/*.{}'.format(category, t))
         files.extend(glob(path))
-    
-    choice = random.choice(files)
-    return choice
+    return random.choice(files)
 
 
 def now_timestamp():
+    ''' Get the utc timestamp for now in UTC format '''
     now = datetime.now()
     return now.strftime('%Y-%m-%dT%H:%M:%SZ%Z')
 
 
-def log_choice(choice):
-    with open('/home/thomas/wallpapers/last.txt', 'a') as fout:
+def log(choice):
+    ''' Log the choice to the file `LOG` with a utc timestamp '''
+    with open(LOG, 'a') as fout:
         fout.write(now_timestamp())
         fout.write(' ')
         fout.write(choice)
         fout.write('\n')
- 
 
-def main(argv):
-    category = '*'
-    choice = None
-    file = None
 
-    if len(argv) > 1:
-        if argv[1] == '--help':
-            print('Usage: changewall [--help] <category> <filename>')
+def feh(file):
+    ''' Call `feh` with the `MODE` flag and `file` '''
+    call(['feh', MODE, file])
+    print('Called feh with', MODE, 'and', file)
+
+
+def main(args):
+    if len(args) == 0:
+        file = rand()
+    elif len(args) == 2:
+        category = args[0]
+        file = join(PATH, category, args[1])
+    elif len(args) == 1:
+        if args[0] == '--help':
+            print_help()
             return
-        category = argv[1]
-    
-    if len(argv) > 2:
-        file = argv[2]
-
-        if isfile(join(PATH, '{}/{}'.format(category, file))):
-            choice = join(PATH, '{}/{}'.format(category, file))
         else:
-            print('File does not exist {}/{}'.format(category, file))
-            return
-
-    if not choice:
-        choice = scan_dir(category)
-
-    log_choice(choice)
-    call(['feh', MODE, choice])
+            category = args[0]
+            file = rand(category)
+    
+    log(file)
+    feh(file)
 
 
 if __name__ == '__main__':
     import sys
-    main(sys.argv)
+    main(sys.argv[1:])
 
