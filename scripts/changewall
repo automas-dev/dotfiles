@@ -43,7 +43,7 @@ def log(choice):
 def feh(file):
     ''' Call `feh` with the `MODE` flag and `file` '''
     call(['feh', MODE, file])
-    print('Called feh with', MODE, 'and', file)
+    #print('Called feh with', MODE, 'and', file)
 
 
 def main(args):
