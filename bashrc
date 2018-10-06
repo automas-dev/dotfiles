@@ -68,9 +68,7 @@ RESET="\[\e[0m\]"
 
 ## PS1 line
 check_git() {
-	if [ -d '.git' ]; then
-		git branch
-	fi
+	git branch 2>&1 | grep -i "^\*"
 }
 check_ssh() {
 	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
