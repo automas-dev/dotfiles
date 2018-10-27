@@ -50,6 +50,12 @@ alias cgrep='grep --color=always'
 # color less
 alias less='less -r'
 
+# color gcc and g++
+alias gcc='gcc -fdiagnostics-color=always'
+alias g++='g++ -fdiagnostics-color=always'
+
+# git helpers
+alias gl='git log --oneline --graph'
 
 #   ___     _            
 #  / __|___| |___ _ _ ___
