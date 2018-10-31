@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DIR=$(mktemp)
+#echo made $DIR
+
+cd $DIR
+mkn
+
+bash
+
+rm -rf $DIR
+
