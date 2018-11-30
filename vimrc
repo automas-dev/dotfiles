@@ -102,8 +102,11 @@ cmap wb<CR> w<CR>:!./build<CR>
 " Write and Call
 cmap wc<CR> w<CR>:!./%<CR>
 
-" Write and run
+" Write and Run
 cmap wr<CR> w<CR>:!./run<CR>
+
+" MK build system
+cmap mk<CR> w<CR>:!mk<CR>
 
 autocmd FileType python map <C-M> <ESC>idef main():<CR>pass<CR><HOME><CR><CR>if __name__ == "__main__":<CR>try:<CR>main()<CR><BS>except KeyboardInterrupt:<CR>print("Exiting!")<CR><ESC>8k<END>v3hda
 
