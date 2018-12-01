@@ -1,14 +1,14 @@
 # Makefile
 
+AR=ar
 CPP=g++
 CPPFLAGS=-Wall -std=c++17 -O0 -g -Iinclude/
-TARGET=main
-OBJECTS=main.o
-LIBS=
+TARGET=name
+OBJECTS=name.o
 
 OBJDIR=obj
 SRCDIR=src
-BINDIR=bin
+BINDIR=lib
 
 all: build
 
@@ -20,9 +20,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CPP) -c $(CPPFLAGS) $< -o $@
 
 build: directories $(addprefix $(OBJDIR)/,$(OBJECTS))
-	$(CPP) -o $(BINDIR)/$(TARGET) $(addprefix $(OBJDIR)/,$(OBJECTS)) $(LIBS)
+	$(AR) rcs $(BINDIR)/lib$(TARGET).a $(addprefix $(OBJDIR)/, $(OBJECTS))
 
 clean:
 	$(RM) -r $(OBJDIR)/*
 	$(RM) -r $(BINDIR)/*
+	make -C tests clean
 
+test: build
+	make -C tests

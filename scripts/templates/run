@@ -1,4 +1,5 @@
 #!/bin/bash
 
-./main
+cd bin
+./main $*
 

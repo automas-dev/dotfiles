@@ -12,7 +12,7 @@ if [[ ! -f .mk ]]; then
 fi
 
 if [[ -f build ]]; then
-	./build
+	./build $*
 else
 	echo "No build file found!"
 fi

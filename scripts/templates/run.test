@@ -1,0 +1,6 @@
+#!/bin/bash
+
+make test
+cd tests
+./test_main $*
+

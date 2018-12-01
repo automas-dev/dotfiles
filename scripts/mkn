@@ -1,11 +1,35 @@
 #!/bin/bash
 
+usage() {
+	echo 'Usage: mkn [--lib|--help] name'
+}
+
 # Check if a name is given
-if [[ $1 != "" ]]; then
-	name=$1
-	mkdir -p $name
-	cd $name
+if [[ $1 == "--help" ]]; then
+	usage
+	exit 0
+elif [[ $# -gt 1 ]]; then
+	if [[ $1 == '--lib' ]]; then
+		copytest=true
+		name=$2
+		mkdir -p $name
+		cd $name
+	else
+		usage
+		exit 0
+	fi
+elif [[ $# -gt 0 ]]; then
+	if [[ $1 == "--lib" ]]; then
+		copytest=true
+		name=$(basename $(pwd))
+	else
+		copytest=false
+		name=$1
+		mkdir -p $name
+		cd $name
+	fi
 else
+	copytest=false
 	name=$(basename $(pwd))
 fi
 
@@ -16,16 +40,43 @@ if [[ -f .mk ]]; then
 fi
 
 echo Making new project: $name
-echo "#!/bin/bash" > .mk
-chmod +x .mk
+echo "1.0" > .mk
 
 copy_template() {
-	cat ~/.scripts/templates/$1 > $1
+	if [[ $# == 2 ]]; then
+		cat ~/.scripts/templates/$1 > $2
+		echo $1 copy $2
+	else
+		cat ~/.scripts/templates/$1 > $1
+		echo copy $1
+	fi
 }
 
-copy_template main.cpp
-copy_template makefile
+mkdir -p src include
 copy_template build
-copy_template run
+
+git init
+
+if $copytest; then
+	copy_template makefile.test makefile
+	copy_template run.test run
+	copy_template name.cpp src/name.cpp
+	copy_template name.h include/name.h
+	mkdir -p tests tests/src tests/include
+	copy_template tests/makefile
+	copy_template tests/TestsMain.cpp tests/src/TestsMain.cpp
+	git submodule add https://github.com/abseil/googletest tests/gtest
+else
+	copy_template makefile
+	copy_template run
+	copy_template main.cpp src/main.cpp
+fi
 
 chmod +x build run
+git add .
+git commit -m "First Commit"
+
+cd tests/gtest
+cmake .
+make
+

@@ -12,7 +12,7 @@ if [[ ! -f .mk ]]; then
 fi
 
 if [[ -f run ]]; then
-	./run
+	./run $*
 else
 	echo "No run file found!"
 fi

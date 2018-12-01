@@ -11,5 +11,13 @@ if [[ ! -f .mk ]]; then
 	exit -1
 fi
 
-mkb && mkr || echo "Error during build!"
+mkb $*
+last=$?
+if [[ $1 == "clean" ]]; then
+   echo "Done cleaning!"
+elif [[ $last == 0 ]]; then
+	mkr
+else
+	echo "Error during build!"
+fi
 
