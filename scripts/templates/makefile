@@ -14,4 +14,4 @@ build: $(OBJECTS)
 	$(CPP) $(OBJECTS) -o $(NAME)
 
 clean:
-	rm -r *.o main
+	$(RM) -r *.o main
