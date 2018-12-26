@@ -55,6 +55,10 @@ endif
 " Latex flavor
 let g:tex_flavor = "plain"
 
+" Color Column (Print Margin)
+set cc=81
+highlight ColorColumn ctermbg=gray guibg=gray
+
 "  _  __           __  __                _           
 " | |/ /___ _  _  |  \/  |__ _ _ __ _ __(_)_ _  __ _ 
 " | ' </ -_) || | | |\/| / _` | '_ \ '_ \ | ' \/ _` |
