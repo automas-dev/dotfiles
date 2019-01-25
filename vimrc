@@ -57,7 +57,7 @@ let g:tex_flavor = "plain"
 
 " Color Column (Print Margin)
 set cc=81
-highlight ColorColumn ctermbg=gray guibg=gray
+highlight ColorColumn ctermbg=darkgray guibg=darkgray
 
 "  _  __           __  __                _           
 " | |/ /___ _  _  |  \/  |__ _ _ __ _ __(_)_ _  __ _ 
