@@ -1,4 +1,5 @@
 #!/bin/bash
 
-mount -t cifs //arch-tom-pi.local/deepstorage /mnt/smb -o username=Thomas,gid=smb 
+ADDR="192.168.1.4"
+mount -t cifs //$ADDR/deepstorage /mnt/smb -o username=Thomas,gid=smb 
 
