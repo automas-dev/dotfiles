@@ -76,7 +76,9 @@ chmod +x build run
 git add .
 git commit -m "First Commit"
 
-cd tests/gtest
-cmake .
-make
+if $copytest; then
+	cd tests/gtest
+	cmake .
+	make
+fi
 
