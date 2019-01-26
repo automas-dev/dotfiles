@@ -35,7 +35,7 @@ def print_row(row, widths, aligns, fout=sys.stdout):
 def print_table(table, cols, widths, aligns, header=True, fout=sys.stdout):
     width = sum(widths) + 3*(cols-1)
     if header:
-        print_row(table[0], widths, aligns)
+        print_row(table[0], widths, aligns, fout)
         print('-+-'.join(['-'*w for w in widths]), file=fout)
         table = table[1:]
 
@@ -69,19 +69,14 @@ if __name__ == '__main__':
             nargs=1)
     
     args = parser.parse_args()
-    print(args)
-    print('header', args.header)
-    print('align', args.align)
-    print('input', args.input)
-    print('output', args.output)
 
     if args.input:
-        fin = open(args.input, 'r')
+        fin = open(args.input[0], 'r')
     else:
         fin = sys.stdin
 
     if args.output:
-        fout = open(args.output, 'w')
+        fout = open(args.output[0], 'w')
     else:
         fout = sys.stdout
 
