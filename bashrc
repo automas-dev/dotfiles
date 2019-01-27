@@ -78,8 +78,8 @@ check_git() {
 }
 check_ssh() {
 	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-		echo @SSH@
+		echo SSH 
 	fi
 }
-export PS1="\$(check_ssh)${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${MAGENTA}\$(check_git)${RESET}\n${WHITE}\$ ${RESET}"
+export PS1="${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${MAGENTA}\$(check_git)${RESET}\n\$(check_ssh)${WHITE}\$ ${RESET}"
 
