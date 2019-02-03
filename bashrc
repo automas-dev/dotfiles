@@ -56,6 +56,7 @@ alias g++='g++ -fdiagnostics-color=always'
 
 # git helpers
 alias gl='git log --oneline --graph'
+alias commit='git commit'
 
 #   ___     _            
 #  / __|___| |___ _ _ ___
