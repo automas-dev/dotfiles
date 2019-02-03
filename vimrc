@@ -70,6 +70,7 @@ let mapleader = ","
 
 " Toggle spell check
 map <leader>ss :setlocal spell!<cr>
+map <leader>st :syntax spell toplevel<cr>
 
 " Figlet banners
 map <leader>fb :read !figlet -f big 
