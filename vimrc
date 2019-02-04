@@ -77,6 +77,10 @@ map <leader>fb :read !figlet -f big
 map <leader>fn :read !figlet -f standard 
 map <leader>fs :read !figlet -f small 
 
+" Latex math wrap binding
+map <leader>mi xi\\(\\)<ESC>hhhp
+map <leader>mm xi\\[\\]<ESC>hhhp
+
 " Run ./build
 map <leader>b !./build
 
