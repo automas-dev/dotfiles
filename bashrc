@@ -17,6 +17,10 @@ umask 002
 #
 export PATH="$PATH:$HOME/.scripts"
 
+# disable rm, use trash
+alias rm='echo "rm is disabled, use trash or /bin/rm instead."'
+
+
 #    _   _ _                 
 #   /_\ | (_)__ _ ___ ___ ___
 #  / _ \| | / _` (_-</ -_|_-<
