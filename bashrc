@@ -59,7 +59,7 @@ alias gcc='gcc -fdiagnostics-color=always'
 alias g++='g++ -fdiagnostics-color=always'
 
 # git helpers
-alias gl='git log --oneline --graph'
+alias gl='git log --oneline --graph --decorate --branches'
 alias commit='git commit'
 
 #   ___     _            
