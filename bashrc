@@ -17,6 +17,10 @@ umask 002
 #
 export PATH="$PATH:$HOME/.scripts"
 
+export LESS="--RAW-CONTROL-CHARS"
+
+[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
+
 # disable rm, use trash
 alias rm='echo "rm is disabled, use trash or /bin/rm instead."'
 

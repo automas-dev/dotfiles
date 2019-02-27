@@ -18,6 +18,7 @@ try_install gdbinit
 try_install gitconfig
 try_install scripts
 try_install vimrc
+try_install LESS_TERMCAP
 
 echo Done!
 exit 0
