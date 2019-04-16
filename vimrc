@@ -9,6 +9,8 @@
 "   | | | | | | (_) | | | | | | (_| \__ \  _\ V / | | | | | | |  _ <| |___ 
 "   |_| |_| |_|\___/|_| |_| |_|\__,_|___/ (_)\_/  |_|_| |_| |_|_| \_\\____|
 
+set nocompatible
+
 " Import file type plugins and indentation
 filetype plugin on
 filetype indent on
@@ -16,6 +18,7 @@ filetype indent on
 " Enable syntax highlighting
 syntax on
 
+set foldmethod=syntax
 
 "  ___      _   _   _              
 " / __| ___| |_| |_(_)_ _  __ _ ___
@@ -40,6 +43,10 @@ set ignorecase
 " Enable regular expressions
 set magic
 
+" Fuzzy Find
+set path+=**
+set wildmenu
+
 " Show matching brackets when cursor is over one
 set showmatch
 
@@ -52,12 +59,26 @@ if has('persistent_undo')
 	set undodir=$HOME/.vim/undo
 endif
 
+" Diff with disk
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
 " Latex flavor
 let g:tex_flavor = "plain"
 
 " Color Column (Print Margin)
 set cc=81
 highlight ColorColumn ctermbg=darkgray guibg=darkgray
+
+" Add line numbers
+set number
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 "  _  __           __  __                _           
 " | |/ /___ _  _  |  \/  |__ _ _ __ _ __(_)_ _  __ _ 
@@ -116,6 +137,47 @@ cmap wr<CR> w<CR>:!./run<CR>
 
 " MK build system
 cmap mk<CR> w<CR>:!mk<CR>
+
+" Line nav
+nmap <C-down> 10j
+nmap <C-up> 10k
+
+" Nerd Tree
+nmap <C-o> :NERDTreeToggle<CR>
+imap <C-o> <Esc>:NERDTreeToggle<CR>
+
+" Auto indent and Trim trailing whitespace
+" nnoremap <C-F> gg=G<BAR>:let _s=@/ <BAR>:%s/\s\+$//e<BAR>:let @/=_s<BAR><CR>
+
+" Smart Home
+nnoremap <Home> ^
+
+set laststatus=2
+:let g:buftabs_in_statusline=1
+:let g:buftabs_only_basename=1
+
+" buftabs nav
+noremap <C-left> :bprev<CR>
+noremap <C-right> :bnext<CR>
+
+" Clang-format
+" map <C-f> :pyf /usr/share/clang/clang-format.py<CR>
+
+function! FormatFile()
+	let save_pos = getpos(".")
+	normal! gg=G
+	call setpos('.', save_pos)
+endfunction
+
+nmap <C-f> :call FormatFile()<CR>
+imap <C-f> <ESC>:call FormatFile()<CR>a
+
+autocmd FileType c setlocal equalprg=clang-format
+autocmd FileType c++ setlocal equalprg=clang-format
+autocmd FileType python setlocal equalprg=autopep8\ -
+
+" Autopep8
+" au FileType python setlocal formatprg=autopep8\ -
 
 "autocmd FileType python map <C-M> <ESC>idef main():<CR>pass<CR><HOME><CR><CR>if __name__ == "__main__":<CR>try:<CR>main()<CR><BS>except KeyboardInterrupt:<CR>print("Exiting!")<CR><ESC>8k<END>v3hda
 
