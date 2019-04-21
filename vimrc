@@ -137,7 +137,7 @@ cmap wc<CR> w<CR>:!./%<CR>
 cmap wr<CR> w<CR>:!./run<CR>
 
 " Write and Test
-cmap wt<CR> w<CR>:!/.test<CR>
+cmap wt<CR> w<CR>:!./test<CR>
 
 " MK build system
 cmap mk<CR> w<CR>:!mk<CR>
