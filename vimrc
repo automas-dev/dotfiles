@@ -46,6 +46,7 @@ set magic
 " Fuzzy Find
 set path+=**
 set wildmenu
+set wildmode=full
 
 " Show matching brackets when cursor is over one
 set showmatch
