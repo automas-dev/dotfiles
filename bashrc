@@ -63,8 +63,12 @@ alias g++='g++ -fdiagnostics-color=always'
 
 # git helpers
 alias gl='git log --oneline --graph --decorate --branches'
+alias push='git push'
+alias pull='git pull'
+alias merge='git merge'
 alias commit='git commit'
 alias checkout='git checkout'
+alias gsync='git checkout master && git pull && git merge local && git push'
 
 #   ___     _            
 #  / __|___| |___ _ _ ___
