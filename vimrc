@@ -135,12 +135,15 @@ cmap wc<CR> w<CR>:!./%<CR>
 " Write and Run
 cmap wr<CR> w<CR>:!./run<CR>
 
+" Write and Test
+cmap wt<CR> w<CR>:!/.test<CR>
+
 " MK build system
 cmap mk<CR> w<CR>:!mk<CR>
 
-" Line nav
-nmap <C-down> 10j
-nmap <C-up> 10k
+" Line Movement
+nmap <C-down> <End>vk<End>xj<End>pj<End>
+nmap <C-up> <End>vk<End>xk<End>pj<End>
 
 " Nerd Tree
 nmap <C-o> :NERDTreeToggle<CR>
@@ -175,6 +178,7 @@ imap <C-f> <ESC>:call FormatFile()<CR>a
 autocmd FileType c setlocal equalprg=clang-format
 autocmd FileType c++ setlocal equalprg=clang-format
 autocmd FileType python setlocal equalprg=autopep8\ -
+autocmd FileType rust setlocal equalprg=rustfmt
 
 " Autopep8
 " au FileType python setlocal formatprg=autopep8\ -
