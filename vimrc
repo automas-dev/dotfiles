@@ -20,6 +20,7 @@ syntax on
 
 set foldmethod=syntax
 
+let g:jedi#auto_initialization=0
 "  ___      _   _   _              
 " / __| ___| |_| |_(_)_ _  __ _ ___
 " \__ \/ -_)  _|  _| | ' \/ _` (_-<
@@ -62,11 +63,11 @@ endif
 
 " Diff with disk
 function! s:DiffWithSaved()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+	let filetype=&ft
+	diffthis
+	vnew | r # | normal! 1Gdd
+	diffthis
+	exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 com! DiffSaved call s:DiffWithSaved()
 
@@ -185,4 +186,7 @@ autocmd FileType rust setlocal equalprg=rustfmt
 " au FileType python setlocal formatprg=autopep8\ -
 
 "autocmd FileType python map <C-M> <ESC>idef main():<CR>pass<CR><HOME><CR><CR>if __name__ == "__main__":<CR>try:<CR>main()<CR><BS>except KeyboardInterrupt:<CR>print("Exiting!")<CR><ESC>8k<END>v3hda
+
+" YCM
+let g:ycm_auto_trigger = 0
 
