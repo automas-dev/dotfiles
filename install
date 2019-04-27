@@ -27,6 +27,7 @@ try_install scripts
 try_install vimrc
 try_install LESS_TERMCAP
 try_install i3config ../.config/i3/config
+try_install i3status ../.config/i3status/config
 
 echo Done!
 exit 0
