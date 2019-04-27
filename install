@@ -1,15 +1,22 @@
 #!/bin/bash
 
 try_install() {
-	if [ -L ../.$1 ]; then
-		echo Warning: Symbolic link already exists: $1
-	elif [ -d ../.$1 ]; then
-		echo Warning: Directory already exists: $1
-	elif [ -f ../.$1 ]; then
-		echo Warning: File already exists: $1
+	TO_INSTALL=$1
+	INSTALL_TO=$2
+
+	if [ -z "$INSTALL_TO" ]; then
+		INSTALL_TO="../.$TO_INSTALL"
+	fi
+
+	if [ -L $INSTALL_TO ]; then
+		echo Warning: Symbolic link already exists: $INSTALL_TO
+	elif [ -d $INSTALL_TO ]; then
+		echo Warning: Directory already exists: $INSTALL_TO
+	elif [ -f $INSTALL_TO ]; then
+		echo Warning: File already exists: $INSTALL_TO
 	else
-		ln -s $(pwd ./)/$1 ../.$1
-		echo Linke created for $1 at ../.$1
+		ln -s $(pwd ./)/$TO_INSTALL $INSTALL_TO
+		echo Linke created for $TO_INSTALL at $INSTALL_TO
 	fi
 }
 
@@ -19,6 +26,7 @@ try_install gitconfig
 try_install scripts
 try_install vimrc
 try_install LESS_TERMCAP
+try_install i3config ../.config/i3/config
 
 echo Done!
 exit 0

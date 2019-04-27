@@ -1,0 +1,343 @@
+##
+## ~/.config/i3/config
+##
+
+
+#  _____ _                                 _ _____                  __ 
+# |_   _| |__   ___  _ __ ___   __ _ ___  (_)___ /  ___ ___  _ __  / _|
+#   | | | '_ \ / _ \| '_ ` _ \ / _` / __| | | |_ \ / __/ _ \| '_ \| |_ 
+#   | | | | | | (_) | | | | | | (_| \__ \ | |___) | (_| (_) | | | |  _|
+#   |_| |_| |_|\___/|_| |_| |_|\__,_|___/ |_|____(_)___\___/|_| |_|_|  
+#
+
+## Set mod key to Win/Cmd
+set $mod Mod4
+set $term $TERMINAL
+
+
+
+# __      ___         _            
+# \ \    / (_)_ _  __| |_____ __ __
+#  \ \/\/ /| | ' \/ _` / _ \ V  V /
+#   \_/\_/ |_|_||_\__,_\___/\_/\_/ 
+#
+
+hide_edge_borders smart
+for_window [class="^.*"] border pixel 0
+gaps inner 15
+gaps outer 0
+
+for_window [window_role="pop-up"] floating enabled
+for_window [window_role="task_dialog"] floating enable
+
+for_window [title="^pdfpc - present"] border none floating enable
+
+
+#  ___        _      
+# | __|__ _ _| |_ ___
+# | _/ _ \ ' \  _(_-<
+# |_|\___/_||_\__/__/
+#
+
+#font pango:ttf-inconsolata 8
+font pango:monospace 9
+
+
+#  _                      _      ___ _         _ _              
+# | |   __ _ _  _ _ _  __| |_   | _ |_)_ _  __| (_)_ _  __ _ ___
+# | |__/ _` | || | ' \/ _| ' \  | _ \ | ' \/ _` | | ' \/ _` (_-<
+# |____\__,_|\_,_|_||_\__|_||_| |___/_|_||_\__,_|_|_||_\__, /__/
+#                                                      |___/    
+
+# Start a Terminal
+bindsym $mod+Return exec $term
+
+# Kill a Focused Window
+bindsym $mod+Shift+q kill
+
+# Kill an X Window
+bindsym --release $mod+Shift+x exec xkill
+
+# Open a browser
+
+bindsym $mod+b exec $BROWSER
+
+# open htop
+bindsym $mod+i exec $term -e htop
+
+# open nemo
+
+bindsym $mod+n exec nemo
+
+# change wallpaper
+
+bindsym $mod+c exec --no-startup-id changewall
+
+# i3lock
+
+bindsym $mod+Shift+Delete exec lock
+
+# scratchpad
+
+bindsym $mod+Shift+a move scratchpad
+bindsym $mod+a scratchpad show
+
+# start dmenu (a program launcher)
+#bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+
+#  _  _          _           _   _            ___ _         _ _              
+# | \| |__ ___ _(_)__ _ __ _| |_(_)___ _ _   | _ |_)_ _  __| (_)_ _  __ _ ___
+# | .` / _` \ V / / _` / _` |  _| / _ \ ' \  | _ \ | ' \/ _` | | ' \/ _` (_-<
+# |_|\_\__,_|\_/|_\__, \__,_|\__|_\___/_||_| |___/_|_||_\__,_|_|_||_\__, /__/
+#                 |___/                                             |___/    
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# resize window
+bindsym $mod+Shift+u resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+i resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+o resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+p resize grow width 10 px or 10 ppt
+
+
+#  _____ _ _ _             ___ _         _ _              
+# |_   _(_) (_)_ _  __ _  | _ |_)_ _  __| (_)_ _  __ _ ___
+#   | | | | | | ' \/ _` | | _ \ | ' \/ _` | | ' \/ _` (_-<
+#   |_| |_|_|_|_||_\__, | |___/_|_||_\__,_|_|_||_\__, /__/
+#                  |___/                         |___/    
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+
+# __      __       _                           ___ _         _ _              
+# \ \    / /__ _ _| |__ ____ __  __ _ __ ___  | _ |_)_ _  __| (_)_ _  __ _ ___
+#  \ \/\/ / _ \ '_| / /(_-< '_ \/ _` / _/ -_) | _ \ | ' \/ _` | | ' \/ _` (_-<
+#   \_/\_/\___/_| |_\_\/__/ .__/\__,_\__\___| |___/_|_||_\__,_|_|_||_\__, /__/
+#                         |_|                                        |___/    
+
+# Panic
+bindsym $mod+p exec --no-startup-id feh --bg-fill $HOME/wallpapers/black.png; workspace 10; exec $term -e htop
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        bindsym Shift+j resize shrink width 1 px or 1 ppt
+        bindsym Shift+k resize grow height 1 px or 1 ppt
+        bindsym Shift+l resize shrink height 1 px or 1 ppt
+        bindsym Shift+semicolon resize grow width 1 px or 1 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left move left 10 px
+        bindsym Down move down 10 px
+        bindsym Up move up 10 px
+        bindsym Right move right 10 px
+
+		# c for center
+		bindsym c move position center
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+#  __  __                  ___                
+# |  \/  |___ _  _ ___ ___| __|__  __ _  _ ___
+# | |\/| / _ \ || (_-</ -_) _/ _ \/ _| || (_-<
+# |_|  |_\___/\_,_/__/\___|_|\___/\__|\_,_/__/
+#                                             
+
+focus_follows_mouse no
+set $mouse_focus_launcher Launch: [1]On [2]Off
+bindsym $mod+Shift+d mode "$mouse_focus_launcher"
+
+mode "$mouse_focus_launcher" {
+	bindsym 1 focus_follows_mouse yes; mode "default"
+	bindsym 2 focus_follows_mouse no; mode "default"
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+
+#  _ ____   _        _           
+# (_)__ /__| |_ __ _| |_ _  _ ___
+# | ||_ (_-<  _/ _` |  _| || (_-<
+# |_|___/__/\__\__,_|\__|\_,_/__/
+#                                
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	id status-bar
+        status_command i3status
+	position bottom
+	mode dock
+	font pango:DejaVu Sans Mono 8
+}
+
+# i3 bar visibility toggle
+
+bindsym $mod+m bar mode toggle
+
+
+#  _                      _      __  __                 
+# | |   __ _ _  _ _ _  __| |_   |  \/  |___ _ _ _  _ ___
+# | |__/ _` | || | ' \/ _| ' \  | |\/| / -_) ' \ || (_-<
+# |____\__,_|\_,_|_||_\__|_||_| |_|  |_\___|_||_\_,_/__/
+                                                      
+# App Launcher
+set $mode_launcher Launch: [f]irefox [h]top [r]anger [c]angewall
+bindsym $mod+o mode "$mode_launcher"
+
+mode "$mode_launcher" {
+	bindsym f exec firefox; mode "default"
+	bindsym h exec $term -e htop; mode "default"
+	bindsym r exec $term -e ranger; mode "default"
+	bindsym c exec --no-startup-id changewall; mode "default"
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+# Screen Brightness
+set $brightness_launcher Launch: [1]0% [2]10% [3]25% [4]50% [5]100%
+bindsym $mod+Shift+b mode "$brightness_launcher"
+
+mode "$brightness_launcher" {
+	bindsym 1 exec --no-startup-id xbacklight -set 0%; mode "default"
+	bindsym 2 exec --no-startup-id xbacklight -set 10%; mode "default"
+	bindsym 3 exec --no-startup-id xbacklight -set 25%; mode "default"
+	bindsym 4 exec --no-startup-id xbacklight -set 50%; mode "default"
+	bindsym 5 exec --no-startup-id xbacklight -set 100%; mode "default"
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+# Mute / Unmute
+set $audio_launcher Launch: [M]ute [U]nmute [T]oggle
+bindsym $mod+Shift+m mode "$audio_launcher"
+
+mode "$audio_launcher" {
+	bindsym m exec --no-startup-id amixer set Master mute; mode "default"
+	bindsym u exec --no-startup-id amixer set Master unmute; mode "default"
+	bindsym t exec --no-startup-id amixer set Master toggle; mode "default"
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+
+#    _               ___ _            _   
+#   /_\  _ __ _ __  / __| |_ __ _ _ _| |_ 
+#  / _ \| '_ \ '_ \ \__ \  _/ _` | '_|  _|
+# /_/ \_\ .__/ .__/ |___/\__\__,_|_|  \__|
+#       |_|  |_|                          
+
+exec --no-startup-id xmodmap -e "clear lock" #disable caps lock switch
+exec --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
+#exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper.png
+#exec --no-startup-id $HOME/.scripts/changewall
+exec --no-startup-id $HOME/.fehbg
+#exec --no-startup-id redshift-gtk
+exec --no-startup-id dunst
+#exec launchpolybar
+#exec --no-startup-id xmodmap ~/.xmodmap-`uname -n`
+#exec --no-startup-id discord
+exec --no-startup-id volumeicon
+#exec --no-startup-id xbindkeys
+exec --no-startup-id nm-applet
+exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+#exec --no-startup-id xbacklight -set 25%
+exec --no-startup-id compton --xrender-sync-fence
+exec --no-startup-id unclutter -idle 3
+exec --no-startup-id udiskie -ant
+exec $term
