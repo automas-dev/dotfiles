@@ -30,7 +30,7 @@ alias rm='echo "rm is disabled, use trash or /bin/rm instead."'
 # /_/ \_\_|_\__,_/__/\___/__/
                            
 ## ls commands
-alias ls='ls -h --color=auto'
+alias ls='ls -h --color=always'
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -al'
