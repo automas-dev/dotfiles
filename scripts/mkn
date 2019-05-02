@@ -1,84 +1,105 @@
 #!/bin/bash
 
+TARDIR=$(dirname "$0")/templates
+
+## Print usage message
 usage() {
-	echo 'Usage: mkn [--lib|--help] name'
+	echo "Usage: mkn [options] language name"
+	echo
+	echo "Options:"
+	echo "    -h|--help     Display this help message"
+	echo "    -l|--library  Use a library template"
+	echo "    -t|--test     Add tests to the project"
+	echo "    -g|--gtest    Add google tests to the project (for c/c++ only)"
 }
 
-# Check if a name is given
-if [[ $1 == "--help" ]]; then
-	usage
-	exit 0
-elif [[ $# -gt 1 ]]; then
-	if [[ $1 == '--lib' ]]; then
-		copytest=true
-		name=$2
-		mkdir -p $name
-		cd $name
+## Clean the language string
+clean_lang() {
+	local LANG=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	if [ "cpp" == "$LANG" ] || [ "c++" == "$LANG" ] || [ "cxx" == "$LANG" ]
+	then
+		echo "cpp"
+	elif [ "python" == "$LANG" ] || [ "py" == "$LANG" ]
+	then
+		echo "py"
 	else
-		usage
-		exit 0
+		echo "$LANG"
 	fi
-elif [[ $# -gt 0 ]]; then
-	if [[ $1 == "--lib" ]]; then
-		copytest=true
-		name=$(basename $(pwd))
-	else
-		copytest=false
-		name=$1
-		mkdir -p $name
-		cd $name
-	fi
+}
+
+## GetOpt parse
+SHORT=hltg
+LONG=help,lib,test,gtest
+OPTS=$(getopt -o $SHORT --long $LONG --name "$0" -- "$@")
+
+## Check for parse errors
+if [ $? != 0 ]; then echo "Parsing failed, exiting." >&2; exit 1; fi
+
+eval set -- "$OPTS"
+
+## Read optional args
+while true
+do
+	case "$1" in
+		-h|--help) usage; exit 0;;
+		-l|--lib|--library) LIB="lib"; shift;;
+		-t|--test) TEST="test"; shift;;
+		-g|--gtest) GTEST="gtest"; shift;;
+		--) shift; break;;
+		-*) echo "unknown option: $1" >&2; usage; exit 1;;
+	esac
+done
+
+## Read positional args
+PLANG=$(clean_lang "$1")
+shift
+NAME="$1"
+shift
+
+## Check that test and gtest are exclusive
+if [ ! -z "$TEST" ] && [ ! -z "$GTEST" ]; then exit 1; fi
+
+## Check for required positional arg
+if [ -z "$PLANG" ]; then usage; exit 1; fi
+
+## Check for optional positional arg
+if [ -z "$NAME" ]
+then
+	# Use the current directory
+	NAME=$(basename $(pwd))
 else
-	copytest=false
-	name=$(basename $(pwd))
+	# Make project dir and move in
+	mkdir -p $NAME
+	cd $NAME
 fi
 
-# Check that we are not writing over a project
+
+## Check that a template exists
+PTYPE=$PLANG$LIBS$TEST$GTEST
+ARCHIVE=$TARDIR/$PTYPE.tar
+if [ ! -f "$ARCHIVE" ]; then echo "Unknown project type $PTYPE"; exit 1; fi
+
+echo Making new project $NAME in $PLANG
+
+## Check that we are not writing over a project
 if [[ -f .mk ]]; then
-	echo Project $name already exists!
+	echo Project $NAME already exists!
 	exit -1
 fi
 
-echo Making new project: $name
-echo "1.0" > .mk
+## Expand template into current workind directory
+tar -xf $ARCHIVE
 
-copy_template() {
-	if [[ $# == 2 ]]; then
-		cat ~/.scripts/templates/$1 > $2
-		echo $1 copy $2
-	else
-		cat ~/.scripts/templates/$1 > $1
-		echo copy $1
-	fi
-}
+## Run setup script if there is one
+if [ -f ".mk" ]; then ./.mk; fi
 
-mkdir -p src include
-copy_template build
+## Void setup script / place project marker
+echo "NAME=$NAME" > .mk
+echo "PLANG=$PLANG" >> .mk
+echo "ARCHIVE=$ARCHIVE" >> .mk
 
+## Initialize git repo
 git init
-
-if $copytest; then
-	copy_template makefile.test makefile
-	copy_template run.test run
-	copy_template name.cpp src/name.cpp
-	copy_template name.h include/name.h
-	mkdir -p tests tests/src tests/include
-	copy_template tests/makefile
-	copy_template tests/TestsMain.cpp tests/src/TestsMain.cpp
-	git submodule add https://github.com/abseil/googletest tests/gtest
-else
-	copy_template makefile
-	copy_template run
-	copy_template main.cpp src/main.cpp
-fi
-
-chmod +x build run
 git add .
 git commit -m "First Commit"
-
-if $copytest; then
-	cd tests/gtest
-	cmake .
-	make
-fi
 
