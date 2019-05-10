@@ -17,8 +17,12 @@ filetype indent on
 
 " Enable syntax highlighting
 syntax on
+set background=dark
+let base16colorspace=16
 
+" Text folding
 set foldmethod=syntax
+set foldlevel=20
 
 let g:jedi#auto_initialization=0
 "  ___      _   _   _              
@@ -30,7 +34,7 @@ let g:jedi#auto_initialization=0
 " Set tab size to 4 spaces
 set tabstop=4
 set shiftwidth=4
-set noexpandtab
+set expandtab
 
 " Enable mouse
 set mouse=a
