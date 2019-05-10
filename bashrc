@@ -69,6 +69,7 @@ alias merge='git merge'
 alias commit='git commit'
 alias checkout='git checkout'
 alias gsync='git checkout master && git pull && git merge local && git push'
+alias ca='git add . && git commit -a'
 
 #   ___     _            
 #  / __|___| |___ _ _ ___
