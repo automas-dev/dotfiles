@@ -2,7 +2,7 @@
 
 TODAY=$(date +%FT%H:%M:%SZ%z)
 VIDEOSIZE="1366x728"
-FRAMERATE="20"
+FRAMERATE="30"
 OUTPUT="$HOME/Recordings/$TODAY.mov"
 
 ffmpeg	-video_size $VIDEOSIZE -framerate $FRAMERATE -f x11grab -i :0.0+0,0 $OUTPUT
