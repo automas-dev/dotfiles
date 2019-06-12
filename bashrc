@@ -14,10 +14,7 @@
 ## umask for gi script
 umask 002
 
-#
 export PATH="$PATH:$HOME/.scripts"
-
-export LESS="--RAW-CONTROL-CHARS"
 
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
