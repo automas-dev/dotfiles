@@ -1,5 +1,5 @@
 #!/bin/bash
 
 ADDR="192.168.1.4"
-mount -t cifs //$ADDR/deepstorage /mnt/smb -o username=Thomas,gid=smb 
+mount -t cifs //$ADDR/deepstorage /mnt/smb -o username=Thomas,uid=thomas,gid=thomas
 
