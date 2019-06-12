@@ -40,7 +40,7 @@ for_window [title="^pdfpc - present"] border none floating enable
 #
 
 #font pango:ttf-inconsolata 8
-font pango:monospace 9
+font pango:monospace 10
 
 
 #  _                      _      ___ _         _ _              
@@ -322,21 +322,13 @@ mode "$audio_launcher" {
 # /_/ \_\ .__/ .__/ |___/\__\__,_|_|  \__|
 #       |_|  |_|                          
 
-exec --no-startup-id xmodmap -e "clear lock" #disable caps lock switch
-exec --no-startup-id xmodmap -e "keysym Caps_Lock = Escape" #set caps_lock as escape
 #exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper.png
 #exec --no-startup-id $HOME/.scripts/changewall
 exec --no-startup-id $HOME/.fehbg
-#exec --no-startup-id redshift-gtk
+exec --no-startup-id redshift-gtk
 exec --no-startup-id dunst
-#exec launchpolybar
-#exec --no-startup-id xmodmap ~/.xmodmap-`uname -n`
-#exec --no-startup-id discord
 exec --no-startup-id volumeicon
-#exec --no-startup-id xbindkeys
 exec --no-startup-id nm-applet
-exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
-#exec --no-startup-id xbacklight -set 25%
 exec --no-startup-id compton --xrender-sync-fence
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id udiskie -ant
