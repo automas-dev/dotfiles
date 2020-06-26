@@ -1,0 +1,5 @@
+*.o
+testmain
+
+.vscode/
+tags

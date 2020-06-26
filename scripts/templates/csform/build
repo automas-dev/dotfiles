@@ -1,0 +1,4 @@
+#!/bin/bash
+
+csc main.cs
+exit $?
