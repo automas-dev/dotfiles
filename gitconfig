@@ -28,3 +28,7 @@
 [push]
 	default = simple
 
+[core]
+	pager = less -F
+[merge "ours"]
+	driver = true

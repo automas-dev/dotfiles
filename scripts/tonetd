@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]]; then
+    echo 'Please run with sudo'
+    exit 1
+fi
+
+echo Stopping NetworkManager
+systemctl stop NetworkManager.service
+systemctl stop avahi-daemon.service
+
+echo Starting Networkd
+systemctl start wpa_supplicant@wlan0.service
+systemctl start dhcpcd.service
+#systemctl start systemd_resolved.service
+systemctl start systemd-networkd.service
+
+echo done

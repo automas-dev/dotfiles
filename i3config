@@ -13,7 +13,7 @@
 ## Set mod key to Win/Cmd
 set $mod Mod4
 set $term $TERMINAL
-
+set $screenshot $SCREENSHOT
 
 
 # __      ___         _            
@@ -29,8 +29,12 @@ gaps outer 0
 
 for_window [window_role="pop-up"] floating enabled
 for_window [window_role="task_dialog"] floating enable
-
+for_window [title="^Android Emulator *"] floating enabled
+for_window [title="^QEMU"] floating enable
+for_window [title="^Cgl"] floating enable
 for_window [title="^pdfpc - present"] border none floating enable
+
+no_focus [class="jetbrains-studio"]
 
 
 #  ___        _      
@@ -59,28 +63,43 @@ bindsym $mod+Shift+q kill
 bindsym --release $mod+Shift+x exec xkill
 
 # Open a browser
-
 bindsym $mod+b exec $BROWSER
 
 # open htop
 bindsym $mod+i exec $term -e htop
 
 # open nemo
-
 bindsym $mod+n exec nemo
 
 # change wallpaper
-
 bindsym $mod+c exec --no-startup-id changewall
 
 # i3lock
-
 bindsym $mod+Shift+Delete exec lock
+
+# Monitor standby
+bindsym $mod+s exec --no-startup-id xset dpms force suspend
+
+# Set keyboard rate
+bindsym $mod+x exec --no-startup-id xset r rate 200 30 && xmodmap .Xmodmap && notify-send "Keyboard" "Keyboard rate was updated"
+
+# autorandr -c
+bindsym $mod+Ctrl+b exec --no-startup-id autorandr -c
+
+# Switch workspace to another output
+bindsym $mod+Ctrl+Left move workspace to output left 
+bindsym $mod+Ctrl+Right move workspace to output right
+bindsym $mod+Ctrl+Up move workspace to output up
+bindsym $mod+Ctrl+Down move workspace to output down
 
 # scratchpad
 
 bindsym $mod+Shift+a move scratchpad
 bindsym $mod+a scratchpad show
+
+# printscreen
+bindsym Print exec $screenshot
+bindsym $mod+Print exec $screenshot
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -149,7 +168,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -260,6 +279,7 @@ bar {
         status_command i3status
 	position bottom
 	mode dock
+	#font pango:Inconsolata 8
 	font pango:DejaVu Sans Mono 8
 }
 
@@ -288,15 +308,16 @@ mode "$mode_launcher" {
 }
 
 # Screen Brightness
-set $brightness_launcher Launch: [1]0% [2]10% [3]25% [4]50% [5]100%
+set $brightness_launcher Launch: [1]0% [2]10% [3]20% [4]40% [5]75% [6]100%
 bindsym $mod+Shift+b mode "$brightness_launcher"
 
 mode "$brightness_launcher" {
-	bindsym 1 exec --no-startup-id xbacklight -set 0%; mode "default"
-	bindsym 2 exec --no-startup-id xbacklight -set 10%; mode "default"
-	bindsym 3 exec --no-startup-id xbacklight -set 25%; mode "default"
-	bindsym 4 exec --no-startup-id xbacklight -set 50%; mode "default"
-	bindsym 5 exec --no-startup-id xbacklight -set 100%; mode "default"
+	bindsym 1 exec --no-startup-id xbacklight -set 0%; exec --no-startup-id /home/thomas/.fehbg; mode "default"
+	bindsym 2 exec --no-startup-id xbacklight -set 10%; exec --no-startup-id /home/thomas/.fehbg; mode "default"
+	bindsym 3 exec --no-startup-id xbacklight -set 20%; exec --no-startup-id /home/thomas/.fehbg; mode "default"
+	bindsym 4 exec --no-startup-id xbacklight -set 40%; exec --no-startup-id /home/thomas/.fehbg; mode "default"
+	bindsym 5 exec --no-startup-id xbacklight -set 75%; exec --no-startup-id /home/thomas/.fehbg; mode "default"
+	bindsym 6 exec --no-startup-id xbacklight -set 100%; exec --no-startup-id /home/thomas/.fehbg; mode "default"
 
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
@@ -325,11 +346,13 @@ mode "$audio_launcher" {
 #exec --no-startup-id feh --bg-scale ~/Pictures/wallpaper.png
 #exec --no-startup-id $HOME/.scripts/changewall
 exec --no-startup-id $HOME/.fehbg
-exec --no-startup-id redshift-gtk
+##exec --no-startup-id redshift-gtk
 exec --no-startup-id dunst
 exec --no-startup-id volumeicon
 exec --no-startup-id nm-applet
 exec --no-startup-id compton --xrender-sync-fence
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id udiskie -ant
+exec --no-startup-id autorandr -c
+exec --no-startup-id flameshot
 exec $term

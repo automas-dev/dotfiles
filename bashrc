@@ -14,18 +14,34 @@
 ## umask for gi script
 umask 002
 
-export PATH="$PATH:$HOME/.scripts"
+export PATH="$PATH:$HOME/.scripts:$HOME/opt/cross/bin"
 
 [[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
 
 # disable rm, use trash
 alias rm='echo "rm is disabled, use trash or /bin/rm instead."'
 
+# ssh-agent auto-spawn
+if [[ ! -f $XDG_RUNTIME_DIR/ssh-agent.env ]]; then
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+fi
+
 #    _   _ _                 
 #   /_\ | (_)__ _ ___ ___ ___
 #  / _ \| | / _` (_-</ -_|_-<
 # /_/ \_\_|_\__,_/__/\___/__/
-                           
+
+
+## systemctl
+alias ss='sudo systemctl'
+
+## expressvpn
+alias evpn='expressvpn'
+alias exr='expressvpn disconnect && expressvpn connect'
+
 ## ls commands
 alias ls='ls -h --color=always'
 alias ll='ls -l'
@@ -64,9 +80,14 @@ alias push='git push'
 alias pull='git pull'
 alias merge='git merge'
 alias commit='git commit'
+alias c='git commit -am'
 alias checkout='git checkout'
 alias gsync='git checkout master && git pull && git merge local && git push'
 alias ca='git add . && git commit -a'
+alias gs='git status'
+
+# update with reboot check
+alias ya='yay; '
 
 #   ___     _            
 #  / __|___| |___ _ _ ___

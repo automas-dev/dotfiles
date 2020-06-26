@@ -19,6 +19,8 @@ filetype indent on
 syntax on
 set background=dark
 let base16colorspace=16
+"hi Visual term=reverse cterm=reverse guibg=Grey
+hi Visual term=reverse cterm=reverse
 
 " Text folding
 set foldmethod=syntax
