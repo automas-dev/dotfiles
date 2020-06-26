@@ -1,6 +1,6 @@
 
-CFLAGS=-O0 -g -Wall -Wextra -Werror
-CPPFLAGS=-O0 -g -Wall -Wextra -Werror -std=c++17
+CFLAGS=-O0 -g -Wall -Wextra
+CPPFLAGS=-O0 -g -Wall -Wextra -std=c++17
 LDFLAGS=
 
 TARGET=main

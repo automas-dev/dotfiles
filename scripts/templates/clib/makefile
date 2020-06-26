@@ -1,5 +1,5 @@
 
-CFLAGS=-O0 -g -fPIC -Wall -Wextra -Werror
+CFLAGS=-O0 -g -fPIC -Wall -Wextra
 LDFLAGS=-shared
 
 TARGET=libname

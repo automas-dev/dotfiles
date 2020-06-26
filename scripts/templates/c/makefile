@@ -1,5 +1,5 @@
 
-CFLAGS=-O0 -g -Wall -Wextra -Werror
+CFLAGS=-O0 -g -Wall -Wextra
 
 TARGET=main
 OBJECTS=main.o
