@@ -1,5 +1,2 @@
-*.o
-main
-
 .vscode/
-tags
+*.o

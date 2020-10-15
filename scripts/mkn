@@ -62,17 +62,11 @@ if [ ! -z "$TEST" ] && [ ! -z "$GTEST" ]; then exit 1; fi
 ## Check for required positional arg
 if [ -z "$PLANG" ]; then usage; exit 1; fi
 
-## Check for optional positional arg
-if [ -z "$NAME" ]
-then
-	# Use the current directory
-	NAME=$(basename $(pwd))
-else
-	# Make project dir and move in
-	mkdir -p $NAME
-	cd $NAME
-fi
+## Check for required positional arg
+if [ -z "$NAME" ]; then usage; exit 1; fi
 
+# Make sure directory does not exist
+if [ -d "$NAME" ]; then echo "Failed to create project, directory already exists."; exit 1; fi
 
 ## Check that a template exists
 PTYPE=$PLANG$LIBS$TEST$GTEST
@@ -88,7 +82,11 @@ if [[ -f .mk ]]; then
 fi
 
 ## Expand template into current workind directory
-cp -r $ARCHIVE/* ./
+#cp -r $ARCHIVE/* ./
+cp -r $ARCHIVE ./$NAME
+
+# Move into project directory
+cd $NAME
 
 ## Run setup script if there is one
 if [ -f ".mk" ]; then ./.mk; fi

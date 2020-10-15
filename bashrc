@@ -43,7 +43,7 @@ alias evpn='expressvpn'
 alias exr='expressvpn disconnect && expressvpn connect'
 
 ## ls commands
-alias ls='ls -h --color=always'
+alias ls='ls -h --color=always --group-directories-first'
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -al'
