@@ -1,0 +1,41 @@
+#!/bin/bash
+
+## Print usage message
+usage() {
+	echo "Usage: mkfreeze [options] name"
+	echo
+	echo "Options:"
+	echo "    -h|--help     Display this help message"
+}
+
+## GetOpt parse
+SHORT=h
+LONG=help
+OPTS=$(getopt -o $SHORT --long $LONG --name "$0" -- "$@")
+
+## Check for parse errors
+if [ $? != 0 ]; then echo "Parsing failed, exiting." >&2; exit 1; fi
+
+eval set -- "$OPTS"
+
+## Read optional args
+while true
+do
+	case "$1" in
+		-h|--help) usage; exit 0;;
+		--) shift; break;;
+		-*) echo "unknown option: $1" >&2; usage; exit 1;;
+	esac
+done
+
+NAME="$1"
+shift
+
+# Check for required positional arg
+if [ -z "$NAME" ]; then usage; exit 1; fi
+
+# Make sure directory does exist
+if [ ! -d "$NAME" ]; then echo "Failed to freeze project, directory does not exist."; exit 1; fi
+
+chmod -R -w $NAME
+
