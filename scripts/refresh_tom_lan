@@ -1,7 +1,0 @@
-#!/bin/bash
-
-expressvpn disconnect
-sleep 7
-ping -c 1 tom-lan.local
-expressvpn connect
-

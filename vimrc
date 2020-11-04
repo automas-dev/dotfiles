@@ -1,14 +1,3 @@
-"
-" ~/.vimrc
-"
-
-
-"  _____ _                                __     ___           ____   ____ 
-" |_   _| |__   ___  _ __ ___   __ _ ___  \ \   / (_)_ __ ___ |  _ \ / ___|
-"   | | | '_ \ / _ \| '_ ` _ \ / _` / __|  \ \ / /| | '_ ` _ \| |_) | |    
-"   | | | | | | (_) | | | | | | (_| \__ \  _\ V / | | | | | | |  _ <| |___ 
-"   |_| |_| |_|\___/|_| |_| |_|\__,_|___/ (_)\_/  |_|_| |_| |_|_| \_\\____|
-
 set nocompatible
 
 " Import file type plugins and indentation
@@ -17,21 +6,14 @@ filetype indent on
 
 " Enable syntax highlighting
 syntax on
-set background=dark
-let base16colorspace=16
+"set background=dark
+"let base16colorspace=16
 "hi Visual term=reverse cterm=reverse guibg=Grey
 hi Visual term=reverse cterm=reverse
 
 " Text folding
 set foldmethod=syntax
 set foldlevel=20
-
-let g:jedi#auto_initialization=0
-"  ___      _   _   _              
-" / __| ___| |_| |_(_)_ _  __ _ ___
-" \__ \/ -_)  _|  _| | ' \/ _` (_-<
-" |___/\___|\__|\__|_|_||_\__, /__/
-"                         |___/    
 
 " Set tab size to 4 spaces
 set tabstop=4
@@ -88,11 +70,8 @@ highlight ColorColumn ctermbg=darkgray guibg=darkgray
 set number
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
-"  _  __           __  __                _           
-" | |/ /___ _  _  |  \/  |__ _ _ __ _ __(_)_ _  __ _ 
-" | ' </ -_) || | | |\/| / _` | '_ \ '_ \ | ' \/ _` |
-" |_|\_\___|\_, | |_|  |_\__,_| .__/ .__/_|_||_\__, |
-"           |__/              |_|  |_|         |___/ 
+
+"" Key Mapping
 
 " Set a leader character used as <leader>
 let mapleader = ","

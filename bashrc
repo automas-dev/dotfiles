@@ -2,79 +2,47 @@
 # ~/.bashrc
 #
 
-#  _____ _                                   ____            _     ____   ____ 
-# |_   _| |__   ___  _ __ ___   __ _ ___    | __ )  __ _ ___| |__ |  _ \ / ___|
-#   | | | '_ \ / _ \| '_ ` _ \ / _` / __|   |  _ \ / _` / __| '_ \| |_) | |    
-#   | | | | | | (_) | | | | | | (_| \__ \  _| |_) | (_| \__ \ | | |  _ <| |___ 
-#   |_| |_| |_|\___/|_| |_| |_|\__,_|___/ (_)____/ \__,_|___/_| |_|_| \_\\____|
-                                                                            
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-## umask for gi script
-umask 002
+## SSH Auth
 
-export PATH="$PATH:$HOME/.scripts:$HOME/opt/cross/bin"
+export PATH="$PATH:$HOME/.scripts"
 
-[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP
-
-# disable rm, use trash
-alias rm='echo "rm is disabled, use trash or /bin/rm instead."'
-
-# ssh-agent auto-spawn
 if [[ ! -f $XDG_RUNTIME_DIR/ssh-agent.env ]]; then
-    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+	ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
+
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
-    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+	eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
 fi
 
-#    _   _ _                 
-#   /_\ | (_)__ _ ___ ___ ___
-#  / _ \| | / _` (_-</ -_|_-<
-# /_/ \_\_|_\__,_/__/\___/__/
+## Aliases
 
-
-## systemctl
 alias ss='sudo systemctl'
 
-## expressvpn
-alias evpn='expressvpn'
-alias exr='expressvpn disconnect && expressvpn connect'
-
-## ls commands
 alias ls='ls -h --color=always --group-directories-first'
 alias ll='ls -l'
 alias la='ls -a'
-alias lla='ls -al'
+alias lla='ls -la'
 
-## clear && ls commands
 alias cls='clear && ls'
 alias cll='clear && ll'
 alias cla='clear && la'
 alias clla='clear && lla'
 
-## ping commands
 alias ping4='ping -c 4'
 alias pingg='ping4 google.com'
 alias ping8='ping4 8.8.8.8'
-alias pingd='ping8'
 
-## Human Readable df and du
 alias df='df -h'
 alias du='du -h'
 
-# color grep
-alias cgrep='grep --color=always'
-
-# color less
 alias less='less -r'
 
-# color gcc and g++
 alias gcc='gcc -fdiagnostics-color=always'
 alias g++='g++ -fdiagnostics-color=always'
 
-# git helpers
 alias gl='git log --oneline --graph --decorate --branches'
 alias push='git push'
 alias pull='git pull'
@@ -83,17 +51,9 @@ alias commit='git commit'
 alias c='git commit -am'
 alias checkout='git checkout'
 alias gsync='git checkout master && git pull && git merge local && git push'
-alias ca='git add . && git commit -a'
+alias ca='git add . && git commit'
 alias gs='git status'
 
-# update with reboot check
-alias ya='yay; '
-
-#   ___     _            
-#  / __|___| |___ _ _ ___
-# | (__/ _ \ / _ \ '_(_-<
-#  \___\___/_\___/_| /__/
-                       
 ## Terminal Colors
 RED="\[\e[31m\]"
 GREEN="\[\e[32m\]"
@@ -104,14 +64,17 @@ CYAN="\[\e[36m\]"
 WHITE="\[\e[37m\]"
 RESET="\[\e[0m\]"
 
-## PS1 line
+## PS1 Line
+
 check_git() {
 	git branch 2>&1 | grep -i "^\*"
 }
+
 check_ssh() {
 	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-		echo SSH 
+		echo SSH
 	fi
 }
+
 export PS1="${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${YELLOW}\$(check_git)${RESET}\n${YELLOW}\$(check_ssh)${WHITE}\$ ${RESET}"
 

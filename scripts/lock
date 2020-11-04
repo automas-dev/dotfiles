@@ -1,7 +1,0 @@
-#!/bin/bash
-
-scrot i3lock-screenshot.png
-convert i3lock-screenshot.png -scale 10% -blur 0x1 -resize 1000% i3lock-screenshot-blur.png
-i3lock -i i3lock-screenshot-blur.png -e -f
-
-rm i3lock-screenshot.png i3lock-screenshot-blur.png
