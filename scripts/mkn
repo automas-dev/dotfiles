@@ -98,7 +98,8 @@ echo "ARCHIVE=$ARCHIVE" >> .mk
 
 ## Initialize git repo
 git init
-touch .gitignore
+touch gitignore
+mv gitignore .gitignore
 git add .
 git commit -m "First Commit"
 
