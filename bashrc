@@ -7,7 +7,7 @@
 
 ## SSH Auth
 
-export PATH="$PATH:$HOME/.scripts"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.scripts"
 
 if [[ ! -f $XDG_RUNTIME_DIR/ssh-agent.env ]]; then
 	ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
