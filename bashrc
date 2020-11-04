@@ -48,10 +48,10 @@ alias push='git push'
 alias pull='git pull'
 alias merge='git merge'
 alias commit='git commit'
-alias c='git commit -am'
 alias checkout='git checkout'
 alias gsync='git checkout master && git pull && git merge local && git push'
-alias ca='git add . && git commit'
+alias c='git commit -am'
+alias ca='git add . && git commit -m'
 alias gs='git status'
 
 ## Terminal Colors
