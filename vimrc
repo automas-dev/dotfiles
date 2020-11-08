@@ -1,5 +1,8 @@
 set nocompatible
 
+" Pathogen plugins
+execute pathogen#infect()
+
 " Import file type plugins and indentation
 filetype plugin on
 filetype indent on
@@ -150,6 +153,11 @@ set laststatus=2
 noremap <C-left> :bprev<CR>
 noremap <C-right> :bnext<CR>
 
+" vertical term
+nmap <C-w>t :vsplit<CR><C-w>r:term<CR><C-w><C-w>:q<CR>
+
+command! Vterm vsplit<CR><C-w><C-w>
+
 " Clang-format
 " map <C-f> :pyf /usr/share/clang/clang-format.py<CR>
 
@@ -173,5 +181,5 @@ autocmd FileType rust setlocal equalprg=rustfmt
 "autocmd FileType python map <C-M> <ESC>idef main():<CR>pass<CR><HOME><CR><CR>if __name__ == "__main__":<CR>try:<CR>main()<CR><BS>except KeyboardInterrupt:<CR>print("Exiting!")<CR><ESC>8k<END>v3hda
 
 " YCM
-let g:ycm_auto_trigger = 0
+let g:ycm_auto_trigger = 1
 
