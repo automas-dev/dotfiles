@@ -1,0 +1,54 @@
+{
+    "python.jediEnabled": false,
+    "coc.preferences.colorSupport": true,
+    "languageserver": {
+        //"clangd": {
+        //    "command": "clangd",
+        //    "rootPatterns": ["compile_commands.json", "compile_flags.txt"],
+        //    "filetypes": [
+        //        "c",
+        //        "cc",
+        //        "c++",
+        //        "cpp",
+        //        "objc",
+        //        "objcpp"
+        //    ]
+        //}
+        "ccls": {
+            "command": "ccls",
+            "args": [
+                "--log-file=/tmp/ccls.log",
+                "-v=1"
+            ],
+            "filetypes": [
+                "c",
+                "cc",
+                "c++",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                },
+                "client": {
+                    "snippetSupport": true
+                },
+                "index": {
+                    "onChange": true
+                },
+                "highlight": {
+                    "lsRanges": true
+                }
+            }
+        }
+    }
+}
