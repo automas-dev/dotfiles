@@ -20,6 +20,8 @@ call plug#begin("~/.vim/plugged")
     "Plug 'vhdirk/vim-cmake'
     Plug 'cdelledonne/vim-cmake'
     Plug 'raspine/vim-target'
+
+    Plug 'cespare/vim-toml'
 call plug#end()
 
 source ~/.config/nvim/base.vim
