@@ -1,25 +1,48 @@
 #!/bin/bash
 
 try_install() {
-	TO_INSTALL=$1
-	INSTALL_TO=$2
+    # Try to install a symbolic link to $TO_INSTALL at the path $INSTALL_TO
+    # if $INSTALL_TO is not provided, $HOME/.$TO_INSTALL is used as the default
 
-	if [ -z "$INSTALL_TO" ]; then
-		INSTALL_TO="$HOME/.$TO_INSTALL"
-	fi
+    # The file or directory from linuxconf to install
+    TO_INSTALL=$1
 
+    # Where to install the file or directory
+    INSTALL_TO=$2
+
+    # If $INSTALL_TO is not provided, use $HOME/.$TO_INSTALL as the default
+    if [ -z "$INSTALL_TO" ]; then
+        INSTALL_TO="$HOME/.$TO_INSTALL"
+    fi
+
+    # Make $TO_INSTALL an absolute path
     TO_INSTALL="$(pwd ./)/$TO_INSTALL"
 
-	if [ -L $INSTALL_TO ]; then
-		echo Warning: Symbolic link already exists: $INSTALL_TO
-	elif [ -d $INSTALL_TO ]; then
-		echo Warning: Directory already exists: $INSTALL_TO
-	elif [ -f $INSTALL_TO ]; then
-		echo Warning: File already exists: $INSTALL_TO
-	else
+    # Check if $INSTALL_TO already exists and is a symbolic link
+    if [ -L $INSTALL_TO ]; then
+
+        # Check if the symbolic link matches the install file
+        if [ $INSTAL_TO -ef $TO_INSTALL ]; then
+            echo "Already Installed: $TO_INSTALL to $INSTALL_TO"
+
+        # $INSTALL_TO is a symbolic link and does not link to $TO_INSTALL
+    else
+        echo Warning: Symbolic link already exists and does not match: $INSTALL_TO
+        fi
+
+    # Check if $INSTALL_TO already exists and is a directory
+    elif [ -d $INSTALL_TO ]; then
+        echo Warning: Directory already exists: $INSTALL_TO
+
+    # Check if $INSTALL_TO already exists and is a file
+    elif [ -f $INSTALL_TO ]; then
+        echo Warning: File already exists: $INSTALL_TO
+
+    # $INSTALL_TO does not exist, create a symbolic link to $TO_INSTALL
+    else
         ln -s $TO_INSTALL $INSTALL_TO
-		echo Link created for $TO_INSTALL at $INSTALL_TO
-	fi
+        echo Link created for $TO_INSTALL at $INSTALL_TO
+    fi
 }
 
 try_install bashrc
