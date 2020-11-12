@@ -1,0 +1,59 @@
+#!/bin/bash
+
+#SRC_DIR=/home/web
+SRC_DIR=/home
+BACKUP_DIR=backup@tom-lan.local:backups/tom-pc/
+SSH_KEY=/root/.ssh/backup_rsa
+EXCLUDE_FILE=/home/thomas/.backup_exclude
+
+
+function as_sudo {
+    sudo $0 $*
+    exit $?
+}
+
+if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root"
+
+    read -p "Lauch as root? [Y/n] " yn
+    case $yn in
+    	[Nn]* ) exit 0;;
+        * ) as_sudo
+    esac
+    exit 1
+fi
+
+function backup {
+    echo ""
+    echo cd to /
+    cd /
+    echo Backing up from $SRC_DIR to $BACKUP_DIR
+    
+    # step 4: rsync from src into the latest snapshot
+    # much like cp --remove-destination, removes links before replacing
+    start=$SECONDS
+    rsync -P -a --delete --delete-excluded --exclude-from=$EXCLUDE_FILE -e "ssh -i $SSH_KEY" $SRC_DIR/ $BACKUP_DIR
+    echo Backup completed in $(( SECONDS - start )) s
+}
+
+function rotate {
+    echo ""
+    echo Contacting the server to rotate files
+    
+    start=$SECONDS
+    ssh backup@tom-lan.local -i $SSH_KEY ./manager.sh
+    if [[ $? -ne 0 ]]; then
+        echo Failed in $(( SECONDS - start )) s
+    else
+        echo Success in $(( SECONDS - start )) s
+    fi
+}
+
+read -p "Rotate backup? [Y/n] " yn
+case $yn in
+	[Nn]* ) ;;
+    * ) rotate
+esac
+
+backup
+
