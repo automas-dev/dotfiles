@@ -57,7 +57,4 @@ try_install Xmodmap
 try_install config/nvim
 try_install backup_exclude
 try_install astylerc
-
-echo Done!
-exit 0
-
+try_install config/termite /home/thomas/.config/termite
