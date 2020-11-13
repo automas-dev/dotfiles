@@ -22,7 +22,7 @@ try_install() {
     if [ -L $INSTALL_TO ]; then
 
         # Check if the symbolic link matches the install file
-        if [ $INSTAL_TO -ef $TO_INSTALL ]; then
+        if [ "$INSTALL_TO" -ef "$TO_INSTALL" ]; then
             echo "Already Installed: $TO_INSTALL to $INSTALL_TO"
 
         # $INSTALL_TO is a symbolic link and does not link to $TO_INSTALL
