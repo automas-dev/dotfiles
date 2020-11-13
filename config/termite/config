@@ -1,43 +1,44 @@
 [options]
 font = Monospace 9
 
+# one dark
 [colors]
 
 # special
-foreground      = #dedede
-foreground_bold = #dedede
-cursor          = #dedede
-background      = #2b2b2b
+foreground      = #abb2bf
+foreground_bold = #abb2bf
+cursor          =
+background      = #282c34
 
 # black
-color0  = #2e3436
-color8  = #555753
+color0  = #282c34
+color8  = #5c6370
 
 # red
-color1  = #cc0000
-color9  = #ef2929
+color1  = #e06c75
+color9  = #be5046
 
 # green
-color2  = #4e9a06
-color10 = #8ae234
+color2  = #98c379
+color10 = #7a9f60
 
 # yellow
-color3  = #c4a000
-color11 = #fce94f
+color3  = #e5c07b
+color11 = #d19a66
 
 # blue
-color4  = #3465a4
-color12 = #729fcf
+color4  = #61afef
+color12 = #3b84c0
 
 # magenta
-color5  = #75507b
-color13 = #ad7fa8
+color5  = #c678dd
+color13 = #9a52af
 
 # cyan
-color6  = #06989a
-color14 = #34e2e2
+color6  = #56b6c2
+color14 = #3c909b
 
 # white
-color7  = #d3d7cf
-color15 = #eeeeec
+color7  = #abb2bf
+color15 = #828997
 
