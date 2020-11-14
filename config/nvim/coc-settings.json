@@ -1,5 +1,6 @@
 {
     "python.jediEnabled": false,
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
     "coc.preferences.colorSupport": true,
     "languageserver": {
         //"clangd": {

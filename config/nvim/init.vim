@@ -30,6 +30,7 @@ source ~/.config/nvim/keys.vim
 source ~/.config/nvim/openterm.vim
 source ~/.config/nvim/nerdtree.vim
 source ~/.config/nvim/cpp.vim
+source ~/.config/nvim/snip.vim
 
 set hidden
 
@@ -40,5 +41,5 @@ set updatetime=300
 
 set shortmess+=c
 
-let g:coc_global_extensions = ['coc-clangd', 'coc-cmake', 'coc-git', 'coc-json', 'coc-markdownlint', 'coc-python', 'coc-sh', 'coc-todolist', 'coc-xml', 'coc-yaml']
+let g:coc_global_extensions = ['coc-snippets', 'coc-lua', 'coc-clangd', 'coc-cmake', 'coc-git', 'coc-json', 'coc-python', 'coc-sh', 'coc-todolist', 'coc-xml', 'coc-yaml']
 
