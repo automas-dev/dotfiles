@@ -58,3 +58,4 @@ try_install config/nvim
 try_install backup_exclude
 try_install astylerc
 try_install config/termite /home/thomas/.config/termite
+try_install inputrc
