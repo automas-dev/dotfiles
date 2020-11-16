@@ -24,7 +24,11 @@ set splitbelow
 set ignorecase
 
 " Enable spell check
-set spell
+autocmd FileType markdown setlocal spell
+autocmd FileType c setlocal spell
+autocmd FileType cpp setlocal spell
+autocmd FileType cmake setlocal spell
+autocmd FileType python setlocal spell
 
 " Persistent  undo
 if has('persistent_undo')
