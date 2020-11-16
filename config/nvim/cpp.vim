@@ -63,14 +63,22 @@ autocmd FileType cpp setlocal equalprg=astyle
 autocmd FileType python setlocal equalprg=autopep8\ -
 autocmd FileType rust setlocal equalprg=rustfmt
 
-function! CMakeRun(target)
-    :CMakeBuild<CR>
-    exe '!cd build/' . a:target . ' && ./' . a:target
+function! CMakeBuild()
+    !cmake --build build
 endfunction
 
-nnoremap <C-k>b :CMakeBuild<CR><Esc>
-nnoremap <C-k><C-b> :CMakeBuild<CR>
-"nnoremap <F5> :CMakeBuild<CR> :CMakeRun()<CR>
-inoremap <F5> <Esc>:CMakeBuild<CR> <Esc>:exec . "!" . FindExeTarget()<CR>
-nnoremap <F5> :CMakeBuild<CR> <Esc>:exec . "!" . FindExeTarget()<CR>
+function! CMakeRun()
+    !cmake --build build
+    exec "!" . FindExeTarget()
+endfunction
+
+nnoremap <C-k>b :call CMakeBuild()<CR>
+nnoremap <C-k><C-b> :call CMakeBuild()<CR>
+nnoremap <F5> :call CMakeRun()<CR>
+"nnoremap <C-k>b :CMakeBuild<CR><Esc>
+"nnoremap <C-k><C-b> :CMakeBuild<CR>
+"nnoremap <F5> :call CMakeRun()<CR> 
+"nnoremap <F5> :CMakeBuild<CR> <Esc>:call CMakeRun()<CR>
+"inoremap <F5> <Esc>:CMakeBuild<CR> <Esc>:exec . "!" . FindExeTarget()<CR>
+"nnoremap <F5> :CMakeBuild<CR> <Esc>:exec . "!" . FindExeTarget()<CR>
 
