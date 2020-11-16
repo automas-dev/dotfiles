@@ -23,6 +23,9 @@ set splitbelow
 " Ignore case while searching
 set ignorecase
 
+" Enable spell check
+set spell
+
 " Persistent  undo
 if has('persistent_undo')
 	set undofile

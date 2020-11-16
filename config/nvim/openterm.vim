@@ -13,6 +13,5 @@ nnoremap <C-k>n :call OpenTerminal()<CR>
 function! OpenVTerminal()
     vsplit term://bash
 endfunction
-nnoremap <C-n> :call OpenVTerminal()<CR>
 nnoremap <C-k><C-n> : call OpenVTerminal()<CR>
 
