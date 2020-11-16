@@ -32,6 +32,13 @@ source ~/.config/nvim/nerdtree.vim
 source ~/.config/nvim/cpp.vim
 source ~/.config/nvim/snip.vim
 
+" Load lua code
+command! Scratch lua require'tools'.makeScratch()
+command! Scat luafile lua/tools.lua
+command! Rel w | source init.vim | Scat
+
+nnoremap <C-p> <Esc>:Rel<CR>
+
 set hidden
 
 set nobackup
