@@ -3,18 +3,6 @@
     "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
     "coc.preferences.colorSupport": true,
     "languageserver": {
-        //"clangd": {
-        //    "command": "clangd",
-        //    "rootPatterns": ["compile_commands.json", "compile_flags.txt"],
-        //    "filetypes": [
-        //        "c",
-        //        "cc",
-        //        "c++",
-        //        "cpp",
-        //        "objc",
-        //        "objcpp"
-        //    ]
-        //}
         "ccls": {
             "command": "ccls",
             "args": [
