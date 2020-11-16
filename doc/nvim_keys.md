@@ -35,7 +35,7 @@ key | command | name
 <kbd>Ctrl</kbd>+<kbd>f</kbd> | ... | Format File
 <kbd>Ctrl</kbd>+<kbd>f</kbd> <kbd>Esc</kbd> | ... | Format File
 <kbd>Ctrl</kbd>+<kbd>k</kbd> <kbd>Ctrl</kbd>+<kbd>d</kbd> | ... | Format File
-<kbd>Ctrl</kbd>+<kbd>b</kbd> | ... | CMake Build
+<kbd>Ctrl</kbd>+<kbd>k</kbd> b | ... | CMake Build
 <kbd>Ctrl</kbd>+<kbd>k</kbd> <kbd>Ctrl</kbd>+<kbd>b</kbd> | ... | CMake Build
 <kbd>F5</kbd> | ... | CMake Build
 <kbd>Ctrl</kbd>+<kbd>l</kbd> | (coc-snippets-expand) | Trigget snippet expand
