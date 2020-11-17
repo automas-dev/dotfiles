@@ -7,6 +7,10 @@ function string:ltrim()
     return self:gsub('^%s*', '')
 end
 
+-- TODO: search up to find root with .git/
+-- TODO; Parse CMakeLists.txt for set, add_executable and add_subdirectory
+-- TODO: replace target variables with variable values
+
 local function readfile(path, skipcomments)
     if skipcomments == nil then skipcomments = true end
     local fp = io.open(path, 'r')
