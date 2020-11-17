@@ -21,7 +21,11 @@ call plug#begin("~/.vim/plugged")
     Plug 'cdelledonne/vim-cmake'
     Plug 'raspine/vim-target'
 
+    " Toml
     Plug 'cespare/vim-toml'
+
+    " Lua
+    Plug 'twh2898/vim-lua'
 call plug#end()
 
 source ~/.config/nvim/base.vim
@@ -31,6 +35,9 @@ source ~/.config/nvim/openterm.vim
 source ~/.config/nvim/nerdtree.vim
 source ~/.config/nvim/cpp.vim
 source ~/.config/nvim/snip.vim
+
+let g:lua_syntax_nosymboloperator=1
+let g:lua_syntax_fancynotequal=0
 
 " Load lua code
 command! Scratch lua require'tools'.makeScratch()
