@@ -4,8 +4,6 @@ local cmd = vim.api.nvim_command
 local M = {}
 
 -- TODO: search up to find root with .git/
--- TODO; Parse CMakeLists.txt for set, add_executable and add_subdirectory
--- TODO: replace target variables with variable values
 
 local function copy(obj)
     if type(obj) ~= 'table' then
