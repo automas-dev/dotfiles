@@ -178,8 +178,8 @@ function M.findCMakeExeTarget(path, vars)
     return targets
 end
 
-local res = M.findCMakeExeTarget()
-print(vim.inspect(res))
+-- local res = M.findCMakeExeTarget()
+-- print(vim.inspect(res))
 
 return M
 
