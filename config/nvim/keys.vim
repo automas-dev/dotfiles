@@ -34,3 +34,9 @@ cnoremap w! w !sudo tee > /dev/null %
 noremap <C-left> :bprev<CR>
 noremap <C-right> :bnext<CR>
 
+command! Rewrap normal {v}gq
+
+" Re-wrap paragraph
+noremap <A-q> :Rewrap<CR>
+noremap <C-k><C-q> :Rewrap<CR>
+
