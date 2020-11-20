@@ -40,3 +40,6 @@ command! Rewrap normal {v}gq
 noremap <A-q> :Rewrap<CR>
 noremap <C-k><C-q> :Rewrap<CR>
 
+" Map :W to :w
+command! W w
+
