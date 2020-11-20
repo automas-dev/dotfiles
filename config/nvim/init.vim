@@ -18,8 +18,8 @@ call plug#begin("~/.vim/plugged")
     Plug 'neoclide/coc.nvim'
     Plug 'jackguo380/vim-lsp-cxx-highlight'
     "Plug 'vhdirk/vim-cmake'
-    Plug 'cdelledonne/vim-cmake'
-    Plug 'raspine/vim-target'
+    "Plug 'cdelledonne/vim-cmake'
+    "Plug 'raspine/vim-target'
 
     " Toml
     Plug 'cespare/vim-toml'

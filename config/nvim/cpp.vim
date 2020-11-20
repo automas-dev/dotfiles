@@ -63,22 +63,25 @@ autocmd FileType cpp setlocal equalprg=astyle
 autocmd FileType python setlocal equalprg=autopep8\ -
 autocmd FileType rust setlocal equalprg=rustfmt
 
+function! CMakeGenerate()
+    !mkdir -p build; cd build; cmake .. -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+endfunction
+
 function! CMakeBuild()
     !cmake --build build
 endfunction
 
 function! CMakeRun()
     !cmake --build build
-    exec "!" . FindExeTarget()
+    let l:targets = CMakeFindExeTargets()
+    exec "!cd build/" . l:targets[0] . ";./" . l:targets[0]
 endfunction
+
+command! CMakeGenerate call CMakeGenerate()
+command! CMakeBuildRun call CMakeBuild() | call CMakeRun()
+command! CMakeConfig e CMakeLists.txt
 
 nnoremap <C-k>b :call CMakeBuild()<CR>
 nnoremap <C-k><C-b> :call CMakeBuild()<CR>
-nnoremap <F5> :call CMakeRun()<CR>
-"nnoremap <C-k>b :CMakeBuild<CR><Esc>
-"nnoremap <C-k><C-b> :CMakeBuild<CR>
-"nnoremap <F5> :call CMakeRun()<CR> 
-"nnoremap <F5> :CMakeBuild<CR> <Esc>:call CMakeRun()<CR>
-"inoremap <F5> <Esc>:CMakeBuild<CR> <Esc>:exec . "!" . FindExeTarget()<CR>
-"nnoremap <F5> :CMakeBuild<CR> <Esc>:exec . "!" . FindExeTarget()<CR>
+nnoremap <F5> :CMakeBuildRun<CR>
 
