@@ -36,6 +36,9 @@ source ~/.config/nvim/nerdtree.vim
 source ~/.config/nvim/cpp.vim
 source ~/.config/nvim/snip.vim
 source ~/.config/nvim/lua.vim
+source ~/.config/nvim/format.vim
+source ~/.config/nvim/rust.vim
+source ~/.config/nvim/coc.vim
 
 set hidden
 
