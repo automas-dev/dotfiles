@@ -68,6 +68,7 @@ function! CMakeGenerate()
 endfunction
 
 function! CMakeBuild()
+    :wa
     !cmake --build build
 endfunction
 
