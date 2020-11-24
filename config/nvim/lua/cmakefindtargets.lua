@@ -63,7 +63,7 @@ local function readfile(path)
 end
 
 local p_space = "%s*"
-local p_name = p_space.."(%w[%w_]*)"..p_space
+local p_name = p_space.."(%w[%w_-]*)"..p_space
 local p_varname = p_space.."(%${" .. p_name .. "})"..p_space
 
 local p_add_executable = "^add_executable%("
