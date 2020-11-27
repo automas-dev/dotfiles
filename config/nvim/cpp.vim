@@ -15,7 +15,6 @@ function! CMakeBuild()
 endfunction
 
 function! CMakeRun()
-    !cmake --build build
     let l:targets = CMakeFindExeTargets()
     exec "!cd build; [ -d " . l:targets[0] . " ] && cd " . l:targets[0] . "; ./" . l:targets[0]
 endfunction
