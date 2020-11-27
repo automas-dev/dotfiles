@@ -26,6 +26,9 @@ call plug#begin("~/.vim/plugged")
 
     " Lua
     Plug 'twh2898/vim-lua'
+
+    " GLSL
+    Plug 'tikhomirov/vim-glsl'
 call plug#end()
 
 source ~/.config/nvim/base.vim
