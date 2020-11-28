@@ -23,6 +23,9 @@ set splitbelow
 " Ignore case while searching
 set ignorecase
 
+" Ignore case while completing file paths
+set wildignorecase
+
 " Enable spell check
 autocmd FileType markdown setlocal spell
 autocmd FileType c setlocal spell
