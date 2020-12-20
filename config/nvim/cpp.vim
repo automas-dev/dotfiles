@@ -11,17 +11,24 @@ endfunction
 
 function! CMakeBuild()
     :wa
-    !cmake --build build
+    exec "!cmake --build build"
+    return v:shell_error
 endfunction
 
 function! CMakeRun()
     let l:targets = CMakeFindExeTargets()
     exec "!cd build; [ -d " . l:targets[0] . " ] && cd " . l:targets[0] . "; ./" . l:targets[0]
+    return v:shell_error
 endfunction
 
 function! CMakeBuildRun()
-    call CMakeBuild()
-    call CMakeRun()
+    let l:build_error = CMakeBuild()
+    if l:build_error != 0
+        echo "build_error ".l:build_error
+        return l:build_error
+    endif
+    let l:run_error = CMakeRun()
+    return l:run_error
 endfunction
 
 command! CMakeGenerate call CMakeGenerate()
