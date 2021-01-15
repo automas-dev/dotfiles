@@ -43,3 +43,11 @@ CONFIGDIR
 CMakePackageConfigHelpers
 AnyNewerVersion
 CMakeFindDependencyMacro
+dateArray
+dateObject
+yyyy
+dd
+getDayAndMonth
+finalDate
+getDate
+outputDay
