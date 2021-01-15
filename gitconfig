@@ -12,7 +12,7 @@
 	email = twh2898@vt.edu
 
 [credential]
-	helper = store
+	helper = cache
 
 [push]
 	default = simple
