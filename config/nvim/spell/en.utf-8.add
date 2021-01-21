@@ -51,3 +51,6 @@ getDayAndMonth
 finalDate
 getDate
 outputDay
+Keymap
+fmt
+isKeyPressed
