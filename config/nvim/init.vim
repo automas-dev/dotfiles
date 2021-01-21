@@ -42,6 +42,7 @@ source ~/.config/nvim/lua.vim
 source ~/.config/nvim/format.vim
 source ~/.config/nvim/rust.vim
 source ~/.config/nvim/coc.vim
+source ~/.config/nvim/python.vim
 
 set hidden
 
