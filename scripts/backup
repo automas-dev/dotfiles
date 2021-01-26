@@ -32,7 +32,7 @@ function backup {
     # step 4: rsync from src into the latest snapshot
     # much like cp --remove-destination, removes links before replacing
     start=$SECONDS
-    rsync -P -a --delete --delete-excluded --exclude-from=$EXCLUDE_FILE -e "ssh -i $SSH_KEY" $SRC_DIR/ $BACKUP_DIR
+    rsync -P -a --delete --delete-excluded --chmod=o-rwx,Fug=rw,Dug=rwx --exclude-from=$EXCLUDE_FILE -e "ssh -i $SSH_KEY" $SRC_DIR/ $BACKUP_DIR
     echo Backup completed in $(( SECONDS - start )) s
 }
 
