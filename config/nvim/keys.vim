@@ -43,3 +43,6 @@ noremap <C-k><C-q> :Rewrap<CR>
 " Map :W to :w
 command! W w
 
+" Toggle wrap with ,w
+nnoremap <leader>w :set wrap!<CR>
+

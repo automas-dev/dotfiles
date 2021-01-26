@@ -42,6 +42,7 @@ source ~/.config/nvim/lua.vim
 source ~/.config/nvim/format.vim
 source ~/.config/nvim/rust.vim
 source ~/.config/nvim/coc.vim
+source ~/.config/nvim/python.vim
 
 set hidden
 
@@ -52,5 +53,5 @@ set updatetime=300
 
 set shortmess+=c
 
-let g:coc_global_extensions = ['coc-python', 'coc-rls', 'coc-snippets', 'coc-lua', 'coc-clangd', 'coc-cmake', 'coc-git', 'coc-json', 'coc-python', 'coc-sh', 'coc-xml', 'coc-html', 'coc-css', 'coc-yaml']
+let g:coc_global_extensions = ['coc-python', 'coc-rls', 'coc-snippets', 'coc-lua', 'coc-cmake', 'coc-git', 'coc-json', 'coc-python', 'coc-sh', 'coc-xml', 'coc-html', 'coc-css', 'coc-yaml']
 
