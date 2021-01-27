@@ -29,6 +29,9 @@ call plug#begin("~/.vim/plugged")
 
     " GLSL
     Plug 'tikhomirov/vim-glsl'
+
+    " Scarpet
+    Plug 'twh2898/vim-scarpet'
 call plug#end()
 
 source ~/.config/nvim/base.vim
