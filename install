@@ -1,5 +1,11 @@
 #!/bin/bash
 
+## Terminal Colors
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+YELLOW="\033[0;33m"
+CYAN="\033[0;36m"
+RESET="\033[0;0m"
 
 try_link() {
     TO_INSTALL=$1
@@ -9,17 +15,17 @@ try_link() {
     if [ -L $INSTALL_TO ]; then
         # Check if the symbolic link matches the install file
         if [ "$INSTALL_TO" -ef "$TO_INSTALL" ]; then
-            echo "Already Installed: $TO_INSTALL to $INSTALL_TO"
+            echo -e "${GREEN}Already Installed${RESET}: ${CYAN}$TO_INSTALL${RESET} -> $INSTALL_TO"
         else
-            echo Warning: Symbolic link already exists and does not match: $INSTALL_TO expected $TO_INSTALL
+            echo -e "${RED}Warning${RESET}: Symbolic link already exists and does not match: ${CYAN}$INSTALL_TO${RESET} -> $(readlink $INSTALL_TO) expected $TO_INSTALL"
         fi
     elif [ -d $INSTALL_TO ]; then
-        echo Warning: Directory already exists: $INSTALL_TO
+        echo -e "${RED}Warning${RESET}: Directory already exists: $INSTALL_TO"
     elif [ -f $INSTALL_TO ]; then
-        echo Warning: File already exists: $INSTALL_TO
+        echo -e "${RED}Warning${RESET}: File already exists: $INSTALL_TO"
     else
         ln -s $TO_INSTALL $INSTALL_TO
-        echo Link created for $TO_INSTALL at $INSTALL_TO
+        echo -e "${YELLOW}Link created${RESET} for ${CYAN}$INSTALL_TO${RESET} -> $TO_INSTALL"
     fi
 }
 
