@@ -56,5 +56,5 @@ set updatetime=300
 
 set shortmess+=c
 
-let g:coc_global_extensions = ['coc-pyright', 'coc-rls', 'coc-snippets', 'coc-lua', 'coc-cmake', 'coc-git', 'coc-json', 'coc-python', 'coc-sh', 'coc-xml', 'coc-html', 'coc-css', 'coc-yaml']
+let g:coc_global_extensions = ['coc-pyright', 'coc-rls', 'coc-snippets', 'coc-lua', 'coc-cmake', 'coc-git', 'coc-json', 'coc-sh', 'coc-xml', 'coc-html', 'coc-css', 'coc-yaml']
 
