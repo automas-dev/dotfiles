@@ -78,3 +78,9 @@ overworld
 params
 args
 s
+baudrate
+ReadTimeout
+CRLF
+InitializeError
+WXT536
+aXZR
