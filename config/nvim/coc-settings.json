@@ -1,7 +1,15 @@
 {
-    "python.jediEnabled": false,
     "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
     "coc.preferences.colorSupport": true,
+    "python.linting.mypyEnabled": false,
+    "python.linting.mypyArgs": [
+        "--ignore-missing-imports",
+        "--follow-imports=silent",
+        "--show-column-numbers",
+        "--strict-optional"
+    ],
+    "python.linting.pydocstyleEnabled": true,
+    "python.linting.pylintEnabled": true,
     "languageserver": {
         "ccls": {
             "command": "ccls",
