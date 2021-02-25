@@ -39,3 +39,6 @@ if has('persistent_undo')
 	set undodir=$HOME/.vim/undo
 endif
 
+" Yank to system clipboard
+set clipboard=unnamedplus
+
