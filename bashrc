@@ -5,10 +5,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-## SSH Auth
+
+## Path
 
 export PATH="$PATH:$HOME/.local/bin:$HOME/.scripts"
 
+## SSH Auth
 if [[ ! -f $XDG_RUNTIME_DIR/ssh-agent.env ]]; then
 	ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
@@ -16,6 +18,24 @@ fi
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
 	eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
 fi
+
+## Theme and Background
+
+if [[ ! -f ~/.last_background ]]; then
+    echo light > ~/.last_background
+fi
+
+function light() {
+    . ~/.scripts/change_theme light
+}
+
+function dark() {
+    . ~/.scripts/change_theme dark
+}
+
+export BACKGROUND=$(cat ~/.last_background)
+export -f light
+export -f dark
 
 ## Aliases
 

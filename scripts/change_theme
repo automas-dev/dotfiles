@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <l/d>"
+    echo ""
+    echo "    l | light   light mode"
+    echo "    d | dark    dark mode"
+    exit 0
+fi
+
+case $1 in
+    l|light) CURRENT=light;;
+    d|dark) CURRENT=dark;;
+    *) exit 1;;
+esac
+
+echo $CURRENT > ~/.last_background
+cinnamon_theme $CURRENT
+ln -sf ~/.config/termite/one$CURRENT ~/.config/termite/config
+source ~/.bashrc
+killall -USR1 termite
+

@@ -9,7 +9,7 @@ syntax enable
 colorscheme one
 "colorscheme carbonized-dark
 
-set background=dark
+exec "set background=".$BACKGROUND
 
 set cc=81
 
