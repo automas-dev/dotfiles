@@ -22,6 +22,10 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
+" Open new split / vsplit
+nnoremap <leader>n :split<CR>
+nnoremap <leader>v :vsplit<CR>
+
 " Figlet banners
 nnoremap <leader>fb :read !figlet -f big 
 nnoremap <leader>fn :read !figlet -f standard 
