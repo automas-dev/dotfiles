@@ -5,8 +5,18 @@ nnoremap <leader>ss :setlocal spell!<CR>
 nnoremap <leader>st :syntax spell toplevel<CR>
 
 " Line Movement
-nnoremap <C-down> <End>vk<End>xj<End>pj<End>
-nnoremap <C-up> <End>vk<End>xk<End>pj<End>
+function! ShiftLineUp()
+    if line('.') > 1
+        normal ddkP
+    endif
+endfunction
+
+function! ShiftLineDown()
+    normal ddp
+endfunction
+
+nnoremap <C-down> :call ShiftLineDown()<CR>
+nnoremap <C-up> :call ShiftLineUp()<CR>
 
 " Smart Home
 inoremap <Home> <Esc>^i
