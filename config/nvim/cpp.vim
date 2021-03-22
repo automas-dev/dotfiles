@@ -1,5 +1,6 @@
 
 let g:cmake_generate_options=['-DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE', '-GNinja']
+let s:cmake_last_executable = 0
 
 let g:cpp_class_scope_highlight=1
 let g:cpp_member_variable_highlight=1
@@ -15,9 +16,24 @@ function! CMakeBuild()
     return v:shell_error
 endfunction
 
+function! CMakeSelectExecutable()
+    let l:targets = CMakeFindExeTargets()
+    let l:i = 0
+    for target in l:targets
+        echo l:i . ") " . target
+        let l:i = l:i + 1
+    endfor
+    let l:select = input("Select an executable(" . s:cmake_last_executable . "): ")
+    if len(l:select) == 0
+        let l:select = s:cmake_last_executable
+    endif
+    let s:cmake_last_executable = str2nr(l:select)
+endfunction
+
 function! CMakeRun()
     let l:targets = CMakeFindExeTargets()
-    exec "!cd build; [ -d " . l:targets[0] . " ] && cd " . l:targets[0] . "; ./" . l:targets[0]
+    let l:target = l:targets[s:cmake_last_executable]
+    exec "!cd build; [ -d " . l:target . " ] && cd " . l:target . "; ./" . l:target
     return v:shell_error
 endfunction
 
@@ -33,6 +49,7 @@ endfunction
 
 command! CMakeGenerate call CMakeGenerate()
 command! CMakeBuild call CMakeBuild()
+command! CMakeSelectExecutable call CMakeSelectExecutable()
 command! CMakeRun call CMakeRun()
 command! CMakeBuildRun call CMakeBuildRun()
 command! CMakeConfig e CMakeLists.txt
