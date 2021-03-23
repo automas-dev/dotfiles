@@ -189,3 +189,14 @@ img
 devTexture
 z
 ccw
+enum
+ip
+ethernet
+Lum
+GPS
+CCF
+Lidar
+ao0
+Spectroradiometer
+ini
+stoi
