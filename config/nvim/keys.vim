@@ -60,3 +60,9 @@ command! W w
 " Toggle wrap with ,w
 nnoremap <leader>w :set wrap!<CR>
 
+command! RemoveWhitespace :%s/\s\+$//e
+
+" Remove trailing whitespace
+nnoremap <leader>s :RemoveWhitespace<CR>
+nnoremap <C-k><C-s> :RemoveWhitespace<CR>
+
