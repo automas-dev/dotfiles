@@ -200,3 +200,17 @@ ao0
 Spectroradiometer
 ini
 stoi
+LvxFileParser
+defs
+livox
+imu
+lidar
+wxwidget
+wxWidgets
+myapp
+threadloader
+CPack
+vscode
+README
+md
+threadedloader
