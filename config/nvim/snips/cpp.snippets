@@ -10,3 +10,13 @@ snippet pointer "typedef Ptr" i
 typedef std::shared_ptr<$1> Ptr;
 typedef std::shared_ptr<const $1> ConstPtr;
 endsnippet
+
+snippet benchmark "static void BM_fn(benchmark::State & state) {" i
+static void BM_$1(benchmark::State & state) {
+	for (auto _ : state) {
+		$2
+	}
+}
+BENCHMARK(BM_$1);
+endsnippet
+
