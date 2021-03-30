@@ -7,7 +7,8 @@ let g:cpp_member_variable_highlight=1
 let g:cpp_class_decl_highlight=1
 
 function! CMakeGenerate()
-    !mkdir -p build; cd build; cmake .. -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+    "!mkdir -p build; cd build; cmake .. -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+    !cmake -S . -B build -G Ninja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
 endfunction
 
 function! CMakeBuild()
