@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Create two virtual devices (eg. /dev/pty/4 and /dev/pty/5) which are piped
+# into each other. This is usefull for emulating devices such as a serial port.
+
+socat -d -d pty,raw,echo=0 pty,raw,echo=0
+
