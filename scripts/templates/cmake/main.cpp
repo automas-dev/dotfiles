@@ -1,8 +1,7 @@
-#include <iostream>
-using namespace std;
+#include <fmt/core.h>
 
 int main() {
-	cout << "Hello World" << endl;
+    fmt::print("Hello World\n");
 	return 0;
 }
 
