@@ -57,6 +57,7 @@ try_install scripts
 try_install LESS_TERMCAP
 try_install backup_exclude
 try_install astylerc
+try_install clang-format
 try_install config/nvim
 try_install config/termite
 try_install inputrc
