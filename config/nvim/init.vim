@@ -32,6 +32,9 @@ call plug#begin("~/.vim/plugged")
 
     " Scarpet
     Plug 'twh2898/vim-scarpet'
+
+    " Fugitive
+    Plug 'tpope/vim-fugitive'
 call plug#end()
 
 source ~/.config/nvim/base.vim
