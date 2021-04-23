@@ -37,20 +37,6 @@ call plug#begin("~/.vim/plugged")
     Plug 'tpope/vim-fugitive'
 call plug#end()
 
-source ~/.config/nvim/base.vim
-source ~/.config/nvim/colors.vim
-source ~/.config/nvim/keys.vim
-source ~/.config/nvim/openterm.vim
-source ~/.config/nvim/nerdtree.vim
-source ~/.config/nvim/cpp.vim
-source ~/.config/nvim/snip.vim
-source ~/.config/nvim/lua.vim
-source ~/.config/nvim/format.vim
-source ~/.config/nvim/rust.vim
-source ~/.config/nvim/coc.vim
-source ~/.config/nvim/python.vim
-source ~/.config/nvim/macro.vim
-
 set hidden
 
 set nobackup
@@ -60,5 +46,26 @@ set updatetime=300
 
 set shortmess+=c
 
-let g:coc_global_extensions = ['coc-pyright', 'coc-rls', 'coc-snippets', 'coc-lua', 'coc-cmake', 'coc-git', 'coc-json', 'coc-sh', 'coc-xml', 'coc-html', 'coc-css', 'coc-yaml']
+let g:coc_global_extensions = ['coc-pyright', 'coc-rls', 'coc-snippets', 'coc-lua', 'coc-cmake', 'coc-git', 'coc-json', 'coc-sh', 'coc-xml', 'coc-html', 'coc-css', 'coc-yaml', 'coc-vimlsp']
+
+let s:cwd = expand('<sfile>:p:h')
+let s:deps = [
+            \'base',
+            \'colors',
+            \'keys',
+            \'macro',
+            \'openterm',
+            \'nerdtree',
+            \'coc',
+            \'snip',
+            \'format',
+            \'cpp',
+            \'lua',
+            \'rust',
+            \'python',
+            \]
+
+for dep in s:deps
+    call util#Requires(s:cwd, dep)
+endfor
 
