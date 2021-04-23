@@ -59,6 +59,7 @@ try_install backup_exclude
 try_install astylerc
 try_install clang-format
 try_install config/nvim
+try_link $HOME/.vim/init.vim $HOME/.vimrc
 try_install config/termite
 try_install inputrc
 try_install Xdefaults
