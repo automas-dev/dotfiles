@@ -1,11 +1,41 @@
 #!/bin/bash
 
+while test $# -gt 0; do
+    case "$1" in
+        -h|--help) echo "Usage: $0 [-h|--help] [-f|--force] [-d|--dry-run]"; exit 0;;
+        -f|--force) FORCE=1;;
+        -d|--dry-run) DRY=1;;
+        *);;
+    esac
+    shift
+done
+
+if [ ! -z "$DRY" ]; then
+    echo "Dry Run"
+    unset FORCE
+fi
+
+if [ ! -z "$FORCE" ]; then
+    echo "Forcing install"
+fi
+
 ## Terminal Colors
 RED="\033[0;31m"
 GREEN="\033[0;32m"
 YELLOW="\033[0;33m"
 CYAN="\033[0;36m"
 RESET="\033[0;0m"
+
+make_link() {
+    TO_INSTALL=$1
+    INSTALL_TO=$2
+
+    if [ -z "$DRY" ]; then
+        ln -s -f $TO_INSTALL $INSTALL_TO
+    fi
+
+    echo -e "${YELLOW}Link created${RESET} for ${CYAN}$INSTALL_TO${RESET} -> $TO_INSTALL"
+}
 
 try_link() {
     TO_INSTALL=$1
@@ -17,15 +47,18 @@ try_link() {
         if [ "$INSTALL_TO" -ef "$TO_INSTALL" ]; then
             echo -e "${GREEN}Already Installed${RESET}: ${CYAN}$TO_INSTALL${RESET} -> $INSTALL_TO"
         else
-            echo -e "${RED}Warning${RESET}: Symbolic link already exists and does not match: ${CYAN}$INSTALL_TO${RESET} -> $(readlink $INSTALL_TO) expected $TO_INSTALL"
+            if [ -z "$FORCE" ]; then
+                echo -e "${RED}Warning${RESET}: Symbolic link already exists and does not match: ${CYAN}$INSTALL_TO${RESET} -> $(readlink $INSTALL_TO) expected $TO_INSTALL"
+            else
+                make_link $TO_INSTALL $INSTALL_TO
+            fi
         fi
     elif [ -d $INSTALL_TO ]; then
         echo -e "${RED}Warning${RESET}: Directory already exists: $INSTALL_TO"
     elif [ -f $INSTALL_TO ]; then
         echo -e "${RED}Warning${RESET}: File already exists: $INSTALL_TO"
     else
-        ln -s $TO_INSTALL $INSTALL_TO
-        echo -e "${YELLOW}Link created${RESET} for ${CYAN}$INSTALL_TO${RESET} -> $TO_INSTALL"
+        make_link $TO_INSTALL $INSTALL_TO
     fi
 }
 
