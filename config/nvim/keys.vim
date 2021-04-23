@@ -37,9 +37,9 @@ nnoremap <leader>n :split<CR>
 nnoremap <leader>v :vsplit<CR>
 
 " Figlet banners
-nnoremap <leader>fb :read !figlet -f big 
-nnoremap <leader>fn :read !figlet -f standard 
-nnoremap <leader>fs :read !figlet -f small 
+nnoremap <leader>fb :read !figlet -f big
+nnoremap <leader>fn :read !figlet -f standard
+nnoremap <leader>fs :read !figlet -f small
 
 " Write as sudo
 cnoremap w! w !sudo tee > /dev/null %
@@ -63,6 +63,6 @@ nnoremap <leader>w :set wrap!<CR>
 command! RemoveWhitespace :%s/\s\+$//e
 
 " Remove trailing whitespace
-nnoremap <leader>s :RemoveWhitespace<CR>
+nnoremap <leader>sw :RemoveWhitespace<CR>
 nnoremap <C-k><C-s> :RemoveWhitespace<CR>
 
