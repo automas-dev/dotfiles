@@ -1,8 +1,6 @@
 #!/bin/bash
 
-mkdir -p build/
-ln -s build/compile_commands.json
+cmake -S . -B build -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
 
-cd build
-cmake .. -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE
+ln -s build/compile_commands.json
 
