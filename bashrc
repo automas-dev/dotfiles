@@ -70,16 +70,19 @@ alias less='less -r'
 alias gcc='gcc -fdiagnostics-color=always'
 alias g++='g++ -fdiagnostics-color=always'
 
-alias gl='git log --oneline --graph --decorate --branches'
 alias push='git push'
 alias pull='git pull'
 alias merge='git merge'
 alias commit='git commit'
 alias checkout='git checkout'
 alias gsync='git checkout master && git pull && git merge local && git push'
+alias gl='git log --oneline --graph --decorate --branches'
+alias gs='git status'
+alias gd='git diff'
+alias ga='git add'
 alias c='git commit -am'
 alias ca='git add . && git commit -m'
-alias gs='git status'
+alias gc='git commit'
 
 ## Terminal Colors
 RED="\[\e[31m\]"
