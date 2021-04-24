@@ -11,33 +11,35 @@ find_package(fmt REQUIRED)
 ################################################################################
 # lib targets section
 
-add_library(lib)
-target_sources(lib
+set(COMPONENT lib)
+set(TARGET lib)
+
+add_library(${TARGET})
+target_sources(${TARGET}
 PRIVATE
     lib/lib.cpp
     lib/include/lib.hpp
     ${CMAKE_CURRENT_BINARY_DIR}/include/config.h
 )
 
-target_include_directories(lib
+target_include_directories(${TARGET}
 PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/lib/include/>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${TARGET}/include/>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
-target_compile_features(lib PRIVATE cxx_std_17)
-target_link_libraries(lib PUBLIC fmt::fmt)
+target_compile_features(${TARGET} PRIVATE cxx_std_17)
+target_link_libraries(${TARGET} PUBLIC fmt::fmt)
 
-# add lib target to lib component
-install(TARGETS lib
-        EXPORT lib-config
+install(TARGETS ${TARGET}
+        EXPORT ${COMPONENT}-config
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
-install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib/include/
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/lib)
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/${TARGET}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/${COMPONENT}/${TARGET})
 
 ################################################################################
 # lib component section
 
-install(EXPORT lib-config
+install(EXPORT ${COMPONENT}-config
         NAMESPACE ${PROJECT_NAME}::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 

@@ -398,3 +398,6 @@ GLSL
 Toml
 CoC
 NERDTree
+NDEBUG
+log_
+GLU
