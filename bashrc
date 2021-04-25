@@ -83,6 +83,7 @@ alias ga='git add'
 alias c='git commit -am'
 alias ca='git add . && git commit -m'
 alias gc='git commit'
+alias gcm='git commit -m'
 
 ## Terminal Colors
 RED="\[\e[31m\]"
