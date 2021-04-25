@@ -401,3 +401,16 @@ NERDTree
 NDEBUG
 log_
 GLU
+asSeconds
+moveSpeed
+moveDolly
+mouseSensitivity
+mouseDelta
+isVisible
+SetMouseGrab
+pushGLStates
+popGLStates
+uiFont
+glewInit
+glewExperimental
+MenuItem
