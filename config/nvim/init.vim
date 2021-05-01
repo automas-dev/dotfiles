@@ -56,7 +56,12 @@ let g:coc_global_extensions = [
             \'coc-tsserver',
             \]
 
-let s:cwd = '~/.vim'
+" neovim uses stdpath('config') while vim uses ~/.vim
+if exists("*stdpath")
+    let s:cwd = stdpath('config')
+else
+    let s:cwd = '~/.vim'
+endif
 let s:deps = [
             \'colors',
             \'keys',
