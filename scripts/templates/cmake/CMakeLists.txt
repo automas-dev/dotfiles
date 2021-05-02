@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.15)
 project(project VERSION 1.0.0 LANGUAGES CXX)
 
 find_package(fmt REQUIRED)
