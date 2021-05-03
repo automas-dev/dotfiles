@@ -1,7 +1,7 @@
-*.o
-main
-
 .vscode/
 tags
 
 build/
+install/
+Release/
+Debug/

@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.15)
-project(project VERSION 1.0.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.15...3.20)
+project(project VERSION 0.0.0 LANGUAGES CXX)
 
 find_package(fmt REQUIRED)
 
-add_executable(app main.cpp)
-target_compile_features(app PRIVATE cxx_std_17)
+set(TARGET app)
+add_executable(${TARGET} main.cpp)
+target_compile_features(${TARGET} PRIVATE cxx_std_17)
 
-target_link_libraries(app fmt::fmt)
+target_link_libraries(${TARGET} PRIVATE fmt::fmt)
 
