@@ -474,3 +474,5 @@ MakeAvailable
 endif
 STREQUAL
 STREQUAL
+Nmap
+LvxUtils
