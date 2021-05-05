@@ -37,6 +37,9 @@ call plug#begin('~/.vim/plugged')
 
     " Fugitive
     Plug 'tpope/vim-fugitive'
+
+    " MdBook live preview
+    Plug 'twh2898/vim-mdbook'
 call plug#end()
 
 let g:coc_global_extensions = [
