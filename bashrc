@@ -44,8 +44,6 @@ export -f dark
 
 ## Aliases
 
-alias vim='nvim'
-
 alias ss='sudo systemctl'
 
 alias ls='ls -h --color=always --group-directories-first'
