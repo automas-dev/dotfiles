@@ -16,6 +16,7 @@
 
 [push]
 	default = simple
+	followTags = true
 
 [core]
 	pager = less -F
