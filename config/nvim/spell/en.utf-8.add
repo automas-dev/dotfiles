@@ -641,3 +641,7 @@ glEnd
 glColor3f
 mvp
 libfreenect
+PyPI
+Boids
+qs
+ProjectConfig
