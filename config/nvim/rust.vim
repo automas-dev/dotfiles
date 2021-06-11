@@ -1,17 +1,17 @@
 
 function! CargoBuild()
     :wa
-    te cargo build
+    !cargo build
 endfunction
 
 function! CargoBuildRun()
     :wa
-    te cargo build && cargo run
+    !cargo build && cargo run
 endfunction
 
 command! CargoBuild call CargoBuild()
-command! CargoRun te cargo run
-command! CargoBuildRun te cargo build && cargo run
+command! CargoRun !cargo run
+command! CargoBuildRun !cargo build && cargo run
 command! CargoConfig e Cargo.toml
 
 autocmd FileType rust nnoremap <C-k>b :CargoBuild<CR>
