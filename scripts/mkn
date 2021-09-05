@@ -6,6 +6,8 @@ TARDIR=$(dirname "$0")/templates
 usage() {
 	echo "Usage: mkn [options] language name"
 	echo
+    ls -1 $TARDIR
+    echo
 	echo "Options:"
 	echo "    -h|--help     Display this help message"
 	echo "    -l|--library  Use a library template"

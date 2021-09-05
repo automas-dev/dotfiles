@@ -76,3 +76,48 @@ nnoremap <C-k>b :wa <CR> :GenBuild<CR>
 nnoremap <C-k><C-b> :wa<CR> :GenBuild<CR>
 nnoremap <F5> :wa<CR> :GenBuildRun<CR>
 
+" Auto close
+
+"function! AutoClose(close)
+"    let l:next = strcharpart(getline('.')[col('.'):], 0, 1)
+"    if l:next == a:close
+"        exec "normal! la"
+"    else
+"        exec "normal! a".a:close
+"    endif
+"endfunction
+"
+"inoremap "<ESC> "
+"inoremap " ""<left>
+"inoremap '<ESC> '
+"inoremap ' ''<left>
+"inoremap (<Esc> (
+"inoremap ( ()<left>
+"inoremap ) <ESC>:call AutoClose(")")<CR>a
+"inoremap () ()
+"inoremap [<Esc> [
+"inoremap [ []<left>
+"inoremap ] <ESC>:call AutoClose("]")<CR>a
+"inoremap [] []
+"inoremap {<Esc> {
+"inoremap { {}<left>
+"inoremap } <ESC>:call AutoClose("}")<CR>a
+"inoremap {} {}
+"inoremap {<CR> {<CR>}<ESC>O
+"inoremap {;<CR> {<CR>};<ESC>O
+
+"inoremap "<ESC> "
+"inoremap " <ESC>:call AutoClose( "\"")<CR>a
+"inoremap '<ESC> '
+"inoremap ' <ESC>:call AutoClose("'")<CR>a
+"inoremap (<Esc> (
+"inoremap ( ()<left>
+"inoremap ) <ESC>:call AutoClose(")")<CR>a
+"inoremap [<Esc> [
+"inoremap [ []<left>
+"inoremap ] <ESC>:call AutoClose("]")<CR>a
+"inoremap {<Esc> {
+"inoremap { {}<left>
+"inoremap } <ESC>:call AutoClose("}")<CR>a
+"inoremap {<CR> {<CR>}<ESC>O
+"inoremap {;<CR> {<CR>};<ESC>O

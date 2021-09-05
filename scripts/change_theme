@@ -19,6 +19,7 @@ esac
 echo $TERM > ~/.last_background
 cinnamon_theme $WIN
 ln -sf ~/.config/termite/one$TERM ~/.config/termite/config
+#ln -sf ~/.config/termite/termite-colors-solarized/solarized-$TERM ~/.config/termite/config
 source ~/.bashrc
 killall -USR1 termite
 

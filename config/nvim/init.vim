@@ -44,7 +44,7 @@ call plug#end()
 
 let g:coc_global_extensions = [
             \'coc-pyright',
-            \'coc-rls',
+            \'coc-rust-analyzer',
             \'coc-snippets',
             \'coc-lua',
             \'coc-cmake',
@@ -57,6 +57,7 @@ let g:coc_global_extensions = [
             \'coc-yaml',
             \'coc-vimlsp',
             \'coc-tsserver',
+            \'coc-angular',
             \]
 
 " neovim uses stdpath('config') while vim uses ~/.vim
