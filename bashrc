@@ -12,11 +12,11 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/.scripts"
 
 ## SSH Auth
 if [[ ! -f $XDG_RUNTIME_DIR/ssh-agent.env ]]; then
-	ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
 
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
-	eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
+    eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
 fi
 
 ## Theme and Background
@@ -150,14 +150,14 @@ BG_WHITE=$(escaped 107)
 ## PS1 Line
 
 check_git() {
-	git branch 2>&1 | grep -i "^\*"
+    git branch 2>&1 | grep -i "^\*"
 }
 
 check_ssh() {
-	if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-		#echo SSH
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        #echo SSH
         echo -e "${GRAY}\u@\h "
-	fi
+    fi
 }
 
 # Full PS1 line
