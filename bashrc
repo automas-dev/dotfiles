@@ -105,5 +105,8 @@ check_ssh() {
 	fi
 }
 
-export PS1="${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${YELLOW}\$(check_git)${RESET}\n${YELLOW}\$(check_ssh)${WHITE}\$ ${RESET}"
+# Full PS1 line
+#export PS1="${RED}[${YELLOW}\u${GREEN}@${CYAN}\h ${MAGENTA}\w${RED}]${YELLOW}\$(check_git)${RESET}\n${YELLOW}\$(check_ssh)${WHITE}\$ ${RESET}"
 
+# Minimal PS1 line
+export PS1="${RED}[${MAGENTA}\w${RED}]${YELLOW}\$(check_git) \$(check_ssh)${WHITE}\$ ${RESET}"
