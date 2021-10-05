@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+
+import os
+import wx
+
+ROOT_DIR = '/home/thomas/projects'
+
+
+class ProjectFrame(wx.Frame):
+    def __init__(self, parent, title, items, lang):
+        super().__init__(parent, title=title, size=(450, 300))
+
+        self.lang = lang
+
+        self.m_sizer = wx.BoxSizer(wx.VERTICAL)
+
+        pane = wx.ScrolledWindow(self, wx.ID_ANY)
+
+        self.m_pane_sizer = wx.WrapSizer()
+
+        for item in items:
+            button = wx.Button(pane, label=item)
+            self.m_pane_sizer.Add(button, 0, wx.ALL, 5)
+            button.Bind(wx.EVT_BUTTON, self.handle)
+
+        pane.SetSizer(self.m_pane_sizer)
+        pane.FitInside()
+        pane.SetScrollRate(5, 5)
+
+        self.m_sizer.Add(pane, 1, wx.ALL | wx.EXPAND, 0)
+
+        self.SetSizer(self.m_sizer)
+        self.Layout()
+
+    def handle(self, e: wx.CommandEvent):
+        global final
+        item = e.EventObject.Label
+        final = os.path.join(self.lang, item)
+        self.Destroy()
+
+
+class LanguageFrame(wx.Frame):
+    def __init__(self, parent, title, items):
+        super().__init__(parent, title=title, size=(450, 300))
+
+        self.m_sizer = wx.BoxSizer(wx.VERTICAL)
+
+        pane = wx.ScrolledWindow(self, wx.ID_ANY)
+
+        self.m_pane_sizer = wx.WrapSizer()
+
+        for item in items:
+            button = wx.Button(pane, label=item)
+            self.m_pane_sizer.Add(button, 0, wx.ALL, 5)
+            button.Bind(wx.EVT_BUTTON, self.handle)
+
+        pane.SetSizer(self.m_pane_sizer)
+        pane.FitInside()
+        pane.SetScrollRate(5, 5)
+
+        self.m_sizer.Add(pane, 1, wx.ALL | wx.EXPAND, 0)
+
+        self.SetSizer(self.m_sizer)
+        self.Layout()
+
+    def handle(self, e: wx.CommandEvent):
+        item = e.EventObject.Label
+        frame = ProjectFrame(self.Parent, "Select Project", projects[item], item)
+        frame.Show()
+        self.Destroy()
+
+
+def is_language(path):
+    if path.startswith('.'):
+        return False
+    full_path = os.path.join(ROOT_DIR, path)
+    return os.path.isdir(full_path)
+
+
+languages = list(filter(is_language, os.listdir(ROOT_DIR)))
+projects = {}
+final = None
+
+for lang in languages:
+    lang_path = os.path.join(ROOT_DIR, lang)
+    if os.path.isdir(lang_path):
+        projects[lang] = os.listdir(lang_path)
+
+
+app = wx.App()
+frame = LanguageFrame(None, "Language", languages)
+frame.Show()
+app.MainLoop()
+
+if final:
+    pid = os.fork()
+    
+    if pid == 0:
+        from subprocess import run
+        print('Opening', final)
+        run(['termite', '-d', os.path.join(ROOT_DIR, final)])
+    
