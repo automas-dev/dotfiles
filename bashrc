@@ -21,26 +21,9 @@ fi
 
 ## Theme and Background
 
-if [[ ! -f ~/.last_background ]]; then
-    echo light > ~/.last_background
+if [[ -f "~/.themerc" ]]; then
+    . ~/.themerc
 fi
-
-function light() {
-    . ~/.scripts/change_theme light
-}
-
-function gray() {
-    . ~/.scripts/change_theme gray
-}
-
-function dark() {
-    . ~/.scripts/change_theme dark
-}
-
-export BACKGROUND=$(cat ~/.last_background)
-export -f light
-export -f gray
-export -f dark
 
 ## Aliases
 
