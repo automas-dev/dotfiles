@@ -84,7 +84,7 @@ try_install() {
 }
 
 try_install bashrc
-try_install themerc
+#try_install themerc
 try_install gdbinit
 try_install gitconfig
 try_install scripts
