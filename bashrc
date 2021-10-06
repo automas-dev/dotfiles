@@ -2,15 +2,15 @@
 # ~/.bashrc
 #
 
+## Environment
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-
-## Path
-
+# Path
 export PATH="$PATH:$HOME/.local/bin:$HOME/.scripts"
 
-## SSH Auth
+# SSH Auth
 if [[ ! -f $XDG_RUNTIME_DIR/ssh-agent.env ]]; then
     ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
@@ -19,38 +19,43 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     eval "$(<"$XDG_RUNTIME_DIR/ssh-agent.env")"
 fi
 
-## Theme and Background
-
+# Theme and Background
 if [[ -f "~/.themerc" ]]; then
     . ~/.themerc
 fi
 
 ## Aliases
 
+# Execute systemctl as sudo
 alias ss='sudo systemctl'
 
+# ls with human redable, color and directories first
 alias ls='ls -h --color=always --group-directories-first'
+
+# ls shorthand
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 
+# Clear and ls shorthand
 alias cls='clear && ls'
 alias cll='clear && ll'
 alias cla='clear && la'
 alias clla='clear && lla'
 
-alias ping4='ping -c 4'
-alias pingg='ping4 google.com'
-alias ping8='ping4 8.8.8.8'
-
+# Human redable df and du
 alias df='df -h'
 alias du='du -h'
 
+# Less use raw control caracters (allow color)
 alias less='less -r'
 
+# gcc and g++ color output
 alias gcc='gcc -fdiagnostics-color=always'
 alias g++='g++ -fdiagnostics-color=always'
 
+# Quick sync local branch with remote branch
+# eg. gsync local master
 gsync() {
     FROM=$1
     TO=$2
@@ -65,6 +70,8 @@ gsync() {
         git merge $TO
 }
 export -f gsync
+
+# Git shorthand
 alias gl='git log --oneline --graph --decorate --branches'
 alias gs='git status'
 alias gd='git diff'
@@ -140,13 +147,15 @@ BG_WHITE=$(escaped 107)
 
 ## PS1 Line
 
+# Display git branch if in repo
 check_git() {
     git branch 2>&1 | grep -i "^\*"
 }
 
+# Display ssh user and hostname if in ssh session
+# This must be on the machine being ssh'd into
 check_ssh() {
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-        #echo SSH
         echo -e " ${GRAY}\u@\h"
     fi
 }
