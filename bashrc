@@ -51,12 +51,20 @@ alias less='less -r'
 alias gcc='gcc -fdiagnostics-color=always'
 alias g++='g++ -fdiagnostics-color=always'
 
-#alias push='git push'
-#alias pull='git pull'
-#alias merge='git merge'
-#alias commit='git commit'
-#alias checkout='git checkout'
-#alias gsync='git checkout master && git pull && git merge local && git push'
+gsync() {
+    FROM=$1
+    TO=$2
+    if [ -z "$TO" ]; then
+        TO=master
+    fi
+    git checkout $TO &&
+        git pull &&
+        git merge $FROM &&
+        git push &&
+        git checkout $FROM &&
+        git merge $TO
+}
+export -f gsync
 alias gl='git log --oneline --graph --decorate --branches'
 alias gs='git status'
 alias gd='git diff'
@@ -139,7 +147,7 @@ check_git() {
 check_ssh() {
     if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
         #echo SSH
-        echo -e " ${GRAY}\u@\h "
+        echo -e " ${GRAY}\u@\h"
     fi
 }
 
