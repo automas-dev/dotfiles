@@ -50,6 +50,7 @@
         "Doxygen",
         "endmacro",
         "Fbuff",
+        "framebuffer",
         "gbuff",
         "GLAPIENTRY",
         "GLEW",
