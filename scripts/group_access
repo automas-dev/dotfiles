@@ -11,13 +11,20 @@ fi
 GROUP_IN=$1
 PATH_IN=$2
 
-read -p "Reset permissions to rw-rw----? [Y/n] " yn
+read -p "Reset acl for $PATH_IN? [y/N] " yn
 case $yn in
-	[Nn]* ) ;;
-    * ) sudo chmod -R u=rw,g=rw,o= $PATH_IN
+	[Yy]* ) sudo setfacl -Rb $PATH_IN;;
+    * ) ;;
+esac
+
+read -p "Reset x for $PATH_IN? [y/N] " yn
+case $yn in
+	[Yy]* ) sudo chmod -R u-x,g-x $PATH_IN;;
+    * ) ;;
 esac
 
 sudo chown -R :$GROUP_IN $PATH_IN
-sudo find $PATH_IN -type d -exec chmod u=rwx,g=rwx,g+s "{}" ";"
+sudo chmod -R u+rw,g+rw,o= $PATH_IN
+sudo find $PATH_IN -type d -exec chmod u+x,g+xs "{}" ";"
 sudo setfacl -Rdm o:0 $PATH_IN
 
