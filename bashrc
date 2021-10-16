@@ -54,22 +54,31 @@ alias less='less -r'
 alias gcc='gcc -fdiagnostics-color=always'
 alias g++='g++ -fdiagnostics-color=always'
 
+# color grep
+alias grep="grep --color=auto"
+
 # Quick sync local branch with remote branch
 # eg. gsync local master
 gsync() {
-    FROM=$1
-    TO=$2
-    if [ -z "$TO" ]; then
-        TO=master
+    if [ $# -eq 0 ]; then
+        echo "Usage: gsync <from> [to=master]"
+    else
+        FROM=$1
+        TO=$2
+        if [ -z "$TO" ]; then
+            TO=master
+        fi
+        git checkout $TO &&
+            git pull &&
+            git checkout $FROM &&
+            git rebase $TO &&
+            git checkout $FROM &&
+            git merge $TO &&
+            git push &&
+            git checkout $FROM
     fi
-    git checkout $TO &&
-        git pull &&
-        git merge $FROM &&
-        git push &&
-        git checkout $FROM &&
-        git merge $TO
 }
-export -f gsync
+#export -f gsync
 
 # Git shorthand
 alias gl='git log --oneline --graph --decorate --branches'
