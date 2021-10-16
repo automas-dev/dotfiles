@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <group> <path>"
+    echo "This program converts a file structure at path to be owned by a group."
+    echo "It also removes permissions for other users and set the default acl"
+    echo "for other users to 0."
+    exit 1
+fi
+
+GROUP_IN=$1
+PATH_IN=$2
+
+read -p "Reset permissions to rw-rw----? [Y/n] " yn
+case $yn in
+	[Nn]* ) ;;
+    * ) sudo chmod -R u=rw,g=rw,o= $PATH_IN
+esac
+
+sudo chown -R :$GROUP_IN $PATH_IN
+sudo find $PATH_IN -type d -exec chmod u=rwx,g=rwx,g+s "{}" ";"
+sudo setfacl -Rdm o:0 $PATH_IN
+
