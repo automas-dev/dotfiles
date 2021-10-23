@@ -82,6 +82,7 @@ gsync() {
 
 # Git shorthand
 alias gl='git log --oneline --graph --decorate --branches'
+alias gla='gl --all'
 alias gs='git status'
 alias gd='git diff'
 alias ga='git add'
