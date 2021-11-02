@@ -9,7 +9,9 @@
     "workbench.startupEditor": "none",
     "workbench.iconTheme": "vscode-icons",
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
+        "*.ipynb": "jupyter-notebook",
+        "*.obj": "default",
+        "*.dae": "default"
     },
     "editor.minimap.enabled": false,
     "editor.rulers": [
@@ -30,6 +32,7 @@
     "cSpell.userWords": [
         "amesh",
         "antialiasing",
+        "attrlink",
         "bigdecimal",
         "BINDIR",
         "binop",
@@ -47,6 +50,7 @@
         "COPYONLY",
         "curr",
         "dataclasses",
+        "DCMAKE",
         "Doxygen",
         "endmacro",
         "Fbuff",
@@ -90,6 +94,7 @@
         "pyglet",
         "pyperclip",
         "Quickstart",
+        "rapidxml",
         "RCON",
         "rgba",
         "rgbaf",
@@ -100,6 +105,7 @@
         "Shaderiv",
         "spdlog",
         "stof",
+        "stoi",
         "stoul",
         "STREQUAL",
         "struct",
@@ -113,7 +119,9 @@
         "Verts",
         "vlist",
         "voxel",
-        "winfo"
+        "winfo",
+        "zfar",
+        "znear"
     ],
     "python.showStartPage": false,
     "explorer.confirmDragAndDrop": false,
@@ -158,5 +166,9 @@
     "python.languageServer": "Pylance",
     "python.analysis.memory.keepLibraryAst": true,
     "python.linting.mypyEnabled": true,
-    "docker.showStartPage": false
+    "docker.showStartPage": false,
+    "git.ignoreSubmodules": true,
+    "git.autoRepositoryDetection": "openEditors",
+    "git.detectSubmodules": false,
+    "git.confirmSync": false
 }
