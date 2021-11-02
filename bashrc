@@ -91,6 +91,10 @@ alias ca='git add . && git commit -m'
 alias gc='git commit'
 alias gcm='git commit -m'
 
+## mkn bash complete
+
+complete -W "$(ls --color=never ~/.scripts/templates/)" mkn
+
 ## Terminal Colors
 escaped() {
     echo -e "\001\e[$1m\002"
