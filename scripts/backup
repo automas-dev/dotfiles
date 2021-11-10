@@ -1,59 +1,35 @@
 #!/bin/bash
 
-#SRC_DIR=/home/web
-SRC_DIR=/home
-BACKUP_DIR=backup@tom-lan.local:backups/tom-pc/
-SSH_KEY=/root/.ssh/backup_rsa
-EXCLUDE_FILE=/home/thomas/.backup_exclude
+# Exit on failure with status code of failed command
+set -e
 
-
-function as_sudo {
-    sudo $0 $*
-    exit $?
-}
-
-if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root"
-
-    read -p "Lauch as root? [Y/n] " yn
-    case $yn in
-    	[Nn]* ) exit 0;;
-        * ) as_sudo
-    esac
+if [ -z "$HOSTNAME" ]; then
+    echo "environment variable HOSTNAME is empty, cannot continue"
     exit 1
 fi
 
-function backup {
-    echo ""
-    echo cd to /
-    cd /
-    echo Backing up from $SRC_DIR to $BACKUP_DIR
-    
-    # step 4: rsync from src into the latest snapshot
-    # much like cp --remove-destination, removes links before replacing
-    start=$SECONDS
-    rsync -P -a --delete --delete-excluded --chmod=o-rwx,Fug=rw,Dug=rwx --exclude-from=$EXCLUDE_FILE -e "ssh -i $SSH_KEY" $SRC_DIR/ $BACKUP_DIR
-    echo Backup completed in $(( SECONDS - start )) s
-}
+restic_remote="restic -v -p $HOME/.restic_pass -r sftp:tom-lan.local:/home/deepstorage/restic"
+START_SECONDS=$SECONDS
 
-function rotate {
-    echo ""
-    echo Contacting the server to rotate files
-    
-    start=$SECONDS
-    ssh backup@tom-lan.local -i $SSH_KEY ./manager.sh
-    if [[ $? -ne 0 ]]; then
-        echo Failed in $(( SECONDS - start )) s
-    else
-        echo Success in $(( SECONDS - start )) s
-    fi
-}
+RED="\e[0;31m"
+GREEN="\e[0;32m"
+YELLOW="\e[0;33m"
+CYAN="\e[0;36m"
+WHITE="\e[1;97m"
+RESET="\e[0;0m"
 
-read -p "Rotate backup? [Y/n] " yn
-case $yn in
-	[Nn]* ) ;;
-    * ) rotate
-esac
+echo -e "${CYAN}:: ${WHITE}Backing up\
+    ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
+    to ${YELLOW}tom-lan${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
 
-backup
+notify-send -u low "Backup has started..."
+
+$restic_remote backup\
+    --exclude-file $HOME/.restic_exclude\
+    $HOME\
+    --tag $HOSTNAME
+
+echo -e ${CYAN}:: ${WHITE}Finished in $(( SECONDS - START_SECONDS ))s!${RESET}
+
+notify-send -u low "Backup has finished!"
 
