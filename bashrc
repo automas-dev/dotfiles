@@ -20,11 +20,11 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
 fi
 
 # Theme and Background
-if [[ -f "~/.themerc" ]]; then
+if [[ -f ~/.themerc ]]; then
     . ~/.themerc
 fi
 
-if [[ -f "~/.bash_aliases" ]]; then
+if [[ -f ~/.bash_aliases ]]; then
     . ~/.bash_aliases
 fi
 
