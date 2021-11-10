@@ -1,9 +1,5 @@
 #!/bin/bash
 
-if [[ ! -f ~/.last_background ]]; then
-    echo light > ~/.last_background
-fi
-
 function light() {
     . ~/.scripts/change_theme light
 }
