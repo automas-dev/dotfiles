@@ -26,6 +26,10 @@ fi
 
 ## Aliases
 
+# restic backup
+alias rrestic="RESTIC_PASSWORD_FILE=$HOME/.restic_pass restic -r sftp:tom-lan.local:/home/deepstorage/restic"
+alias rbackup="rrestic -v backup --exclude-file $HOME/.restic_exclude $HOME --tag tom-pc"
+
 # Execute systemctl as sudo
 alias ss='sudo systemctl'
 
