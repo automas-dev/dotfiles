@@ -8,7 +8,7 @@
 [[ $- != *i* ]] && return
 
 # Path
-export PATH="$PATH:$HOME/.local/bin:$HOME/.scripts"
+export PATH="$HOME/.local/bin:$HOME/.scripts:$PATH"
 
 # SSH Auth
 if [[ ! -f $XDG_RUNTIME_DIR/ssh-agent.env ]]; then
@@ -20,13 +20,10 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
 fi
 
 # Theme and Background
-if [[ -f ~/.themerc ]]; then
-    . ~/.themerc
-fi
+[[ -f ~/.themerc ]] && . ~/.themerc
 
-if [[ -f ~/.bash_aliases ]]; then
-    . ~/.bash_aliases
-fi
+# Aliases
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
 ## mkn bash complete
 
