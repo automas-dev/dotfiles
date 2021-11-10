@@ -18,5 +18,27 @@
 			"$1 & operator=($1 && other) = default;",
 		],
 		"description": "Default copy and move constructor and assignment operators"
+	},
+	"Switch": {
+		"prefix": "switch",
+		"body": [
+			"switch ($1) {",
+			"    case $2: {",
+			"        $0",
+			"    } break;",
+			"    default:",
+			"        break;",
+			"}",
+		],
+		"description": "Emtpy switch with default case"
+	},
+	"Case": {
+		"prefix": "case",
+		"body": [
+			"case $1: {",
+			"    $0",
+			"} break;",
+		],
+		"description": "Case for a switch"
 	}
 }

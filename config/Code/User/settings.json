@@ -65,6 +65,7 @@
         "hinj",
         "illum",
         "INCLUDEDIR",
+        "INTERPROCEDURAL",
         "itzg",
         "Keymap",
         "Lbitfield",
