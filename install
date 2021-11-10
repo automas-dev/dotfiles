@@ -84,6 +84,7 @@ try_install() {
 }
 
 try_install bashrc
+try_install bash_aliases
 #try_install themerc
 try_install gdbinit
 try_install gitconfig
