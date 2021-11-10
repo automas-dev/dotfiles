@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily backup
+After=network.target
+OnFailure=failure-handler@%N.service
+
+[Service]
+Type=simple
+WorkingDirectory=%h
+ExecStart=/bin/bash %h/.local/bin/backup
+# vi: ft=systemd
