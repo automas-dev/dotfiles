@@ -5,6 +5,7 @@ alias rrestic="RESTIC_PASSWORD_FILE=$HOME/.restic_pass restic -r sftp:tom-lan.lo
 
 # Execute systemctl as sudo
 alias ss='sudo systemctl'
+alias userctl='systemctl --user'
 
 # ls with human redable, color and directories first
 alias ls='ls -h --color=always --group-directories-first'
@@ -34,34 +35,12 @@ alias g++='g++ -fdiagnostics-color=always'
 # color grep
 alias grep="grep --color=auto"
 
-# Quick sync local branch with remote branch
-# eg. gsync local master
-gsync() {
-    if [ $# -eq 0 ]; then
-        echo "Usage: gsync <from> [to=master]"
-    else
-        FROM=$1
-        TO=$2
-        if [ -z "$TO" ]; then
-            TO=master
-        fi
-        git checkout $TO &&
-            git pull &&
-            git checkout $FROM &&
-            git rebase $TO &&
-            git checkout $FROM &&
-            git merge $TO &&
-            git push &&
-            git checkout $FROM
-    fi
-}
-#export -f gsync
-
 # Git shorthand
 alias gl='git log --oneline --graph --decorate --branches'
 alias gla='gl --all'
 alias gs='git status'
 alias gd='git diff'
+alias gds='git diff --staged'
 alias ga='git add'
 alias c='git commit -am'
 alias ca='git add . && git commit -m'
