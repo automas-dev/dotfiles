@@ -27,7 +27,7 @@ fi
 
 ## mkn bash complete
 
-complete -W "$(ls --color=never ~/.scripts/templates/)" mkn
+complete -W "$(ls --color=never ~/dotfiles/templates/)" mkn
 
 ## Terminal Colors
 escaped() {

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TARDIR=$(dirname "$0")/templates
+TARDIR=$HOME/dotfiles/templates
 
 ## Print usage message
 usage() {
@@ -10,9 +10,6 @@ usage() {
     echo
 	echo "Options:"
 	echo "    -h|--help     Display this help message"
-	echo "    -l|--library  Use a library template"
-	echo "    -t|--test     Add tests to the project"
-	echo "    -g|--gtest    Add google tests to the project (for c/c++ only)"
 }
 
 ## Clean the language string
@@ -30,8 +27,8 @@ clean_lang() {
 }
 
 ## GetOpt parse
-SHORT=hltg
-LONG=help,lib,test,gtest
+SHORT=h
+LONG=help
 OPTS=$(getopt -o $SHORT --long $LONG --name "$0" -- "$@")
 
 ## Check for parse errors
@@ -44,9 +41,6 @@ while true
 do
 	case "$1" in
 		-h|--help) usage; exit 0;;
-		-l|--lib|--library) LIB="lib"; shift;;
-		-t|--test) TEST="test"; shift;;
-		-g|--gtest) GTEST="gtest"; shift;;
 		--) shift; break;;
 		-*) echo "unknown option: $1" >&2; usage; exit 1;;
 	esac
@@ -58,9 +52,6 @@ shift
 NAME="$1"
 shift
 
-## Check that test and gtest are exclusive
-if [ ! -z "$TEST" ] && [ ! -z "$GTEST" ]; then exit 1; fi
-
 ## Check for required positional arg
 if [ -z "$PLANG" ]; then usage; exit 1; fi
 
@@ -71,7 +62,7 @@ if [ -z "$NAME" ]; then usage; exit 1; fi
 if [ -d "$NAME" ]; then echo "Failed to create project, directory already exists."; exit 1; fi
 
 ## Check that a template exists
-PTYPE=$PLANG$LIBS$TEST$GTEST
+PTYPE=$PLANG
 ARCHIVE=$TARDIR/$PTYPE
 if [ ! -d "$ARCHIVE" ]; then echo "Unknown project type $PTYPE"; exit 1; fi
 
@@ -97,11 +88,6 @@ if [ -f ".mk" ]; then
     ## Remove setup script to reset permissions
     rm ./.mk
 fi
-
-## Void setup script / place project marker
-echo "NAME=$NAME" > .mk
-echo "PLANG=$PLANG" >> .mk
-echo "ARCHIVE=$ARCHIVE" >> .mk
 
 ## Initialize git repo
 git init
