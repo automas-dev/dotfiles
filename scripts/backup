@@ -8,7 +8,11 @@ if [ -z "$HOSTNAME" ]; then
     exit 1
 fi
 
-restic_remote="restic -v -p $HOME/.restic_pass -r sftp:tom-lan.local:/home/deepstorage/restic"
+if [ -z "$REMOTE_HOST" ]; then
+    REMOTE_HOST="tom-lan.local"
+fi
+
+restic_remote="restic -v -p $HOME/.restic_pass -r sftp:$REMOTE_HOST:/home/deepstorage/restic"
 START_SECONDS=$SECONDS
 
 RED="\e[0;31m"
@@ -20,9 +24,9 @@ RESET="\e[0;0m"
 
 echo -e "${CYAN}:: ${WHITE}Backing up\
     ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
-    to ${YELLOW}tom-lan${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
+    to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
 
-notify-send -u low "Backup has started..."
+notify-send -u low -t 30000 "Backup has started..."
 
 $restic_remote backup\
     --exclude-file $HOME/.restic_exclude\
