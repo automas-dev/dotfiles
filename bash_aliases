@@ -54,6 +54,8 @@ alias ca='git add . && git commit -m'
 alias gc='git commit'
 alias gcm='git commit -m'
 
+alias submoduleupdate="git submodule update --init --recursive"
+
 gt() {
     tag="$1"
     git tag -a "$tag" -m "$tag"
