@@ -102,6 +102,3 @@ try_install Xdefaults
 try_link $HOME/.Xdefaults $HOME/.Xresources 
 try_link $HOME/.config/nvim $HOME/.vim
 mkdir -p $HOME/.config/Code/User
-try_install config/Code/User/settings.json
-try_install config/Code/User/keybindings.json
-try_install config/Code/User/snippets
