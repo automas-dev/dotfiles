@@ -13,25 +13,25 @@ PATH_IN=$2
 
 read -p "Reset acl for $PATH_IN? [y/N] " yn
 case $yn in
-    [Yy]* ) sudo setfacl -Rb $PATH_IN;;
+    [Yy]* ) setfacl -Rb $PATH_IN;;
     * ) ;;
 esac
 
 read -p "Reset x for $PATH_IN? [y/N] " yn
 case $yn in
-    [Yy]* ) sudo chmod -R u-x,g-x $PATH_IN;;
+    [Yy]* ) chmod -R u-x,g-x $PATH_IN;;
     * ) ;;
 esac
 
 echo "chown -R :$GROUP_IN $PATH_IN"
-sudo chown -R :$GROUP_IN $PATH_IN
+chown -R :$GROUP_IN $PATH_IN
 
 echo "chmod -R u+rw,g+rw,o= $PATH_IN"
-sudo chmod -R u+rw,g+rw,o= $PATH_IN
+chmod -R u+rw,g+rw,o= $PATH_IN
 
 echo "find $PATH_IN -type d -exec chmod u+x,g+xs \"{}\" \";\""
-sudo find $PATH_IN -type d -exec chmod u+x,g+xs "{}" ";"
+find $PATH_IN -type d -exec chmod u+x,g+xs "{}" ";"
 
 echo "setfacl -Rdm o:0 $PATH_IN"
-sudo setfacl -Rdm o:0 $PATH_IN
+setfacl -Rdm o:0 $PATH_IN
 
