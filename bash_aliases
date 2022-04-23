@@ -1,5 +1,8 @@
 ## Aliases
 
+alias dc="docker compose"
+alias dcf="dc -f"
+
 # restic backup
 alias rrestic="RESTIC_PASSWORD_FILE=$HOME/.restic_pass restic -r sftp:tom-lan.local:/home/deepstorage/restic"
 
