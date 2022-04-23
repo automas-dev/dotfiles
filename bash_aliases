@@ -1,5 +1,6 @@
 ## Aliases
 
+alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dc="docker compose"
 alias dcf="dc -f"
 
