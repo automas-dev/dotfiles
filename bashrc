@@ -113,3 +113,5 @@ check_ssh() {
 
 # Minimal PS1 line
 export PS1="${RED}[${MAGENTA}\w${RED}]${YELLOW}\$(check_git)$(check_ssh)${WHITE}\$ ${RESET}"
+
+export ANSIBLE_NOCOWS=1
