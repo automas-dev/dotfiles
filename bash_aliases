@@ -4,6 +4,9 @@ alias dps='docker ps -a --format="table {{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias dc="docker compose"
 alias dcf="dc -f"
 
+# xclip to clipboard
+alias clip="xclip -selection clipboard"
+
 # restic backup
 alias rrestic="RESTIC_PASSWORD_FILE=$HOME/.restic_pass restic -r sftp:tom-lan.local:/home/deepstorage/restic"
 
@@ -50,5 +53,10 @@ alias c='git commit -am'
 alias ca='git add . && git commit -m'
 alias gc='git commit'
 alias gcm='git commit -m'
+
+gt() {
+    tag="$1"
+    git tag -a "$tag" -m "$tag"
+}
 
 # vi: ft=sh
