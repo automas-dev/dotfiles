@@ -12,7 +12,10 @@ if [ -z "$REMOTE_HOST" ]; then
     REMOTE_HOST="tom-lan.local"
 fi
 
-restic_remote="restic -v -p $HOME/.restic_pass -r sftp:$REMOTE_HOST:/home/deepstorage/restic"
+if [ -z "$REMOTE_PATH" ]; then
+    REMOTE_PATH="/home/deepstorage/restic"
+fi
+
 START_SECONDS=$SECONDS
 
 RED="\e[0;31m"
@@ -28,10 +31,21 @@ echo -e "${CYAN}:: ${WHITE}Backing up\
 
 notify-send -u low -t 30000 "Backup has started..."
 
-$restic_remote backup\
-    --exclude-file $HOME/.restic_exclude\
-    $HOME\
-    --tag $HOSTNAME
+tries=3
+
+while [ $tries > 3 ] && !\
+    restic -v\
+        -p $HOME/.restic_pass\
+        -r sftp:$REMOTE_HOST:$REMOTE_PATH\
+        backup\
+        --exclude-file $HOME/.restic_exclude\
+        $HOME\
+        --tag $HOSTNAME
+do
+    echo "Failed, retrying"
+    sleep 1
+    let tries-=1
+done
 
 echo -e ${CYAN}:: ${WHITE}Finished in $(( SECONDS - START_SECONDS ))s!${RESET}
 
