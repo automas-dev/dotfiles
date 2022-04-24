@@ -13,7 +13,7 @@ if [ -z "$REMOTE_HOST" ]; then
 fi
 
 if [ -z "$REMOTE_PATH" ]; then
-    REMOTE_PATH="/home/deepstorage/restic"
+    REMOTE_PATH="/home/deepraid/restic"
 fi
 
 START_SECONDS=$SECONDS
