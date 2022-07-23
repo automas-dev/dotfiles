@@ -8,6 +8,8 @@
       - git
       - vim
       - neofetch
+      - xclip
+      - fzf
     snap_packages:
       - firefox
       - gimp
