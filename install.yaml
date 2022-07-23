@@ -1,0 +1,37 @@
+#!/usr/bin/env ansible-playbook
+- name: Install
+  hosts: localhost
+  vars:
+    apt_packages:
+      - wget
+      - curl
+      - git
+      - vim
+      - neofetch
+    snap_packages:
+      - firefox
+      - gimp
+      - vlc
+      - spotify
+    snap_classic_packages:
+      - code
+      - htop
+      - nvim
+  tasks:
+    - name: Install apt packages
+      become: true
+      package:
+        state: latest
+        name: "{{ apt_packages }}"
+
+    - name: Install snap packages
+      snap:
+        state: present
+        name: "{{ snap_packages }}"
+
+    - name: Install snap classic packages
+      snap:
+        state: present
+        classic: true
+        name: "{{ snap_classic_packages }}"
+
