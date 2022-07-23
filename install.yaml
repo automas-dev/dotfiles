@@ -44,3 +44,10 @@
       shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
       args:
         creates: ~/.ssh/id_rsa
+
+    - name: Disable sudo for current user
+      become: true
+      lineinfile:
+        path: "/etc/sudoers.d/{{ ansible_user_id }}"
+        create: yes
+        line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL"
