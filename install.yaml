@@ -19,6 +19,7 @@
       - code
       - htop
       - nvim
+
   tasks:
     - name: Install apt packages
       become: true
@@ -39,3 +40,7 @@
         classic: true
         name: "{{ snap_classic_packages }}"
 
+    - name: Generate SSH Key
+      shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
+      args:
+        creates: ~/.ssh/id_rsa
