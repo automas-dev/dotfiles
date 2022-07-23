@@ -27,11 +27,13 @@
         name: "{{ apt_packages }}"
 
     - name: Install snap packages
+      become: true
       snap:
         state: present
         name: "{{ snap_packages }}"
 
     - name: Install snap classic packages
+      become: true
       snap:
         state: present
         classic: true
