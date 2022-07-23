@@ -1,0 +1,32 @@
+- tags:
+    - packages
+    - node
+  block:
+    - name: install nvm
+      shell: curl -o- {{ nvm_url }} | bash
+      args:
+        chdir: "{{ ansible_env.HOME }}"
+        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+    - name: install node
+      shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 16
+      args:
+        chdir: "{{ ansible_env.HOME }}"
+        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+
+    - name: set node version
+      shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use default 16
+      args:
+        executable: /bin/bash
+
+    - name: neovim plugin setup
+      block:
+        - name: Plugged Install
+          shell: "nvim +'PlugInstall --sync' +qa"
+          args:
+            creates: "{{ ansible_env.HOME }}/.config/nvim/plugged"
+
+        - name: CoC Install
+          shell: "nvim +'CocInstall' +qa"
+          args:
+            creates: "{{ ansible_env.HOME }}/.config/nvim/plugged/coc.nvim/node_modules/"

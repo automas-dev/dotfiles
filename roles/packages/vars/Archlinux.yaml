@@ -1,0 +1,8 @@
+os_packages:
+  - python
+  
+os_pip_packages: []
+
+os_snap_packages: []
+
+os_snap_classic_packages: []

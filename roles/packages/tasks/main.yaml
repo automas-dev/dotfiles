@@ -1,0 +1,52 @@
+- tags: packages
+  block:
+    - name: Gather OS Specific Variables
+      include_vars: "{{ item }}"
+      with_first_found:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yaml"
+        - "{{ ansible_distribution }}.yaml"
+
+    - set_fact:
+        sys_packages: "{{ packages + os_packages }}"
+        sys_pip_packages: "{{ pip_packages + os_pip_packages }}"
+        sys_snap_packages: "{{ snap_packages + os_snap_packages }}"
+        sys_snap_classic_packages: "{{ snap_classic_packages + os_snap_classic_packages }}"
+
+    - name: Update Apt Repositories
+      become: true
+      apt:
+        update_cache: true
+      changed_when: False
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install System Packages
+      become: true
+      package:
+        state: latest
+        name: "{{ sys_packages }}"
+
+    - name: Install Pip Packages
+      pip:
+        state: present
+        name: "{{ sys_pip_packages }}"
+
+    - tags: desktop
+      block:
+        - name: Install Snap Apps
+          become: true
+          community.general.snap:
+            state: present
+            name: "{{ sys_snap_packages }}"
+
+        - name: Install Snap Classic Apps
+          become: true
+          community.general.snap:
+            state: present
+            classic: true
+            name: "{{ sys_snap_classic_packages }}"
+
+        - name: Install Google Chrome
+          become: true
+          apt:
+            deb: "{{ google_chrome_deb }}"
+          when: ansible_distribution == "Ubuntu"
