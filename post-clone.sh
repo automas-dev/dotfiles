@@ -9,24 +9,42 @@ is_distro() {
 }
 
 if is_distro Ubuntu; then
+    echo Detected Ubuntu Distro
     sudo apt-get update
     sudo apt-get -y upgrade
-elif is_distro Arch; then
+    sudo apt-get -y install ansible
+elif is_distro Archlinux; then
+    echo Detected Archlinux Distro
     sudo pacman -Syu
+    sudo pacman -Sy ansible
 else
     echo "Unknown linux distro"
     exit 1
 fi
 
-sudo apt-get -y install ansible
+# ansible-playbook install.yaml
 
-ansible-playbook install.yaml
-gio trash ~/.bashrc
-./install
+while true; do
+    read -p "Do you wish to install dotfiles? " yn
+    case $yn in
+        [Yy]* ) gio trash ~/.bashrc; ./install; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+while true; do
+    read -p "Do you wish to update your SSH key in Github? " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 xclip -sel clipboard <~/.ssh/id_rsa.pub
 echo "SSH Key copied to clipboard"
-read -p "Press return after adding your SSH key to https://github.com/settinsg/keys"
+read -rp "Press return after adding your SSH key to https://github.com/settinsg/keys"
 
 git remote set-url origin git@github.com:twh2898/dotfiles.git
 git pull
