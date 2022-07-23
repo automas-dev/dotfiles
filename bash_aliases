@@ -61,4 +61,10 @@ gt() {
     git tag -a "$tag" -m "$tag"
 }
 
+launch() {
+    bash -c "$* & disown"
+}
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s[;&|]\s*alert$//'\'')"'
+
 # vi: ft=sh
