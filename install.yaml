@@ -10,6 +10,9 @@
       - neofetch
       - xclip
       - fzf
+      - python3
+      - python-is-python3
+      - python3-psutil
     snap_packages:
       - firefox
       - gimp
@@ -59,5 +62,17 @@
         path: "/etc/sudoers.d/{{ ansible_user_id }}"
         create: yes
         line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL"
+      tags:
+        - user
+
+    - name: Keyboard repeat interval
+      shell: |
+        gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 30
+      tags:
+        - user
+
+    - name: Keyboard repeat delay
+      shell: |
+        gsettings set org.gnome.desktop.peripherals.keyboard delay 270
       tags:
         - user
