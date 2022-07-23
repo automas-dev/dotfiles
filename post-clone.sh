@@ -22,7 +22,7 @@ else
     exit 1
 fi
 
-# ansible-playbook install.yaml
+ansible-playbook install.yaml
 
 while true; do
     read -p "Do you wish to install dotfiles? " yn
