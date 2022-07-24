@@ -1,6 +1,3 @@
-[submodule "config/termite/termite-colors-solarized"]
-	path = config/termite/termite-colors-solarized
-	url = https://github.com/alpha-omega/termite-colors-solarized.git
 [submodule "templates"]
 	path = templates
 	url = https://github.com/twh2898/dotfiles_templates
