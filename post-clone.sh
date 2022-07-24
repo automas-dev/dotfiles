@@ -41,7 +41,7 @@ ansible-playbook install.yaml
 while true; do
     read -p "Do you wish to install dotfiles [yn]? " yn
     case $yn in
-        [Yy]* ) gio trash ~/.bashrc; ./install; break;;
+        [Yy]* ) gio trash ~/.bashrc; ./install_dotfiles.sh; break;;
         [Nn]* ) break;;
         * ) echo_yellow "Please answer yes or no.";;
     esac

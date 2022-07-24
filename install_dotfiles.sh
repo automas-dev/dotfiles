@@ -74,17 +74,15 @@ try_install() {
 
     # If $INSTALL_TO is not provided, use $HOME/.$TO_INSTALL as the default
     if [ -z "$INSTALL_TO" ]; then
-        INSTALL_TO="$HOME/files/.$TO_INSTALL"
+        INSTALL_TO="$HOME/.$TO_INSTALL"
     fi
 
     # Make $TO_INSTALL an absolute path
-    TO_INSTALL="$(pwd ./)/$TO_INSTALL"
+    TO_INSTALL="$(pwd)/files/$TO_INSTALL"
 
     try_link $TO_INSTALL $INSTALL_TO
 }
 
-try_install astylerc
-try_install backup_exclude
 try_install bash_aliases
 try_install bashrc
 try_install clang-format
@@ -96,7 +94,6 @@ try_install restic_exclude
 try_install Xdefaults
 
 try_install config/nvim
-try_install config/termite
 try_install scripts
 
 try_link $HOME/.vim/init.vim $HOME/.vimrc
