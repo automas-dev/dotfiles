@@ -41,6 +41,8 @@ pip_packages:
   - autopep8
   - pyautogui
   - numba
+  - jedi
+  - pynvim
 
 snap_packages:
   - firefox
