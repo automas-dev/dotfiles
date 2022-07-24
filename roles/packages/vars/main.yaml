@@ -27,6 +27,7 @@ packages:
   - lsb-release
   - snap
   - libreoffice
+  - trash-cli
 
 pip_packages:
   - matplotlib

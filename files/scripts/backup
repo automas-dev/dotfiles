@@ -1,0 +1,150 @@
+#!/bin/bash
+
+# Exit on failure with status code of failed command
+set -e
+
+if [ -z "$HOSTNAME" ]; then
+    echo "environment variable HOSTNAME is empty, cannot continue"
+    exit 1
+fi
+
+if [ -z "$REMOTE_HOST" ]; then
+    REMOTE_HOST="tom-lan.local"
+fi
+
+if [ -z "$REMOTE_PATH" ]; then
+    REMOTE_PATH="/home/deepraid/restic"
+fi
+
+START_SECONDS=$SECONDS
+
+RED="\e[0;31m"
+GREEN="\e[0;32m"
+YELLOW="\e[0;33m"
+CYAN="\e[0;36m"
+WHITE="\e[1;97m"
+RESET="\e[0;0m"#!/bin/bash
+
+TARDIR=$HOME/dotfiles/templates
+
+## Print usage message
+usage() {
+	echo "Usage: mkn [options] language name"
+	echo
+    ls -1 $TARDIR
+    echo
+	echo "Options:"
+	echo "    -h|--help     Display this help message"
+}
+
+## Clean the language string
+clean_lang() {
+	local LANG=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+	if [ "cpp" == "$LANG" ] || [ "c++" == "$LANG" ] || [ "cxx" == "$LANG" ]
+	then
+		echo "cpp"
+	elif [ "python" == "$LANG" ] || [ "py" == "$LANG" ]
+	then
+		echo "py"
+	else
+		echo "$LANG"
+	fi
+}
+
+## GetOpt parse
+SHORT=h
+LONG=help
+OPTS=$(getopt -o $SHORT --long $LONG --name "$0" -- "$@")
+
+## Check for parse errors
+if [ $? != 0 ]; then echo "Parsing failed, exiting." >&2; exit 1; fi
+
+eval set -- "$OPTS"
+
+## Read optional args
+while true
+do
+	case "$1" in
+		-h|--help) usage; exit 0;;
+		--) shift; break;;
+		-*) echo "unknown option: $1" >&2; usage; exit 1;;
+	esac
+done
+
+## Read positional args
+PLANG=$(clean_lang "$1")
+shift
+NAME="$1"
+shift
+
+## Check for required positional arg
+if [ -z "$PLANG" ]; then usage; exit 1; fi
+
+## Check for required positional arg
+if [ -z "$NAME" ]; then usage; exit 1; fi
+
+# Make sure directory does not exist
+if [ -d "$NAME" ]; then echo "Failed to create project, directory already exists."; exit 1; fi
+
+## Check that a template exists
+PTYPE=$PLANG
+ARCHIVE=$TARDIR/$PTYPE
+if [ ! -d "$ARCHIVE" ]; then echo "Unknown project type $PTYPE"; exit 1; fi
+
+echo Making new project $NAME in $PLANG
+
+## Check that we are not writing over a project
+if [[ -f .mk ]]; then
+	echo Project $NAME already exists!
+	exit -1
+fi
+
+## Expand template into current workind directory
+#cp -r $ARCHIVE/* ./
+cp -r $ARCHIVE ./$NAME
+
+# Move into project directory
+cd $NAME
+
+if [ -f ".mk" ]; then
+    ## Run setup script if there is one
+    ./.mk
+
+    ## Remove setup script to reset permissions
+    rm ./.mk
+fi
+
+## Initialize git repo
+git init
+touch gitignore
+mv gitignore .gitignore
+git add .
+git commit -m "First Commit"
+
+
+
+echo -e "${CYAN}:: ${WHITE}Backing up\
+    ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
+    to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
+
+notify-send -u low -t 30000 "Backup has started..."
+
+tries=3
+
+while [ $tries > 3 ] && !\
+    restic -v\
+        -p $HOME/.restic_pass\
+        -r sftp:$REMOTE_HOST:$REMOTE_PATH\
+        backup\
+        --exclude-file $HOME/.restic_exclude\
+        $HOME\
+        --tag $HOSTNAME
+do
+    echo "Failed, retrying"
+    sleep 1
+    let tries-=1
+done
+
+echo -e ${CYAN}:: ${WHITE}Finished in $(( SECONDS - START_SECONDS ))s!${RESET}
+
+notify-send -u low "Backup has finished!"

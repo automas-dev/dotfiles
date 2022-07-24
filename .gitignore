@@ -1,3 +1,2 @@
-config/nvim/undo/
-config/nvim/plugged/
-config/termite/config
+files/config/nvim/undo/
+files/config/nvim/plugged/

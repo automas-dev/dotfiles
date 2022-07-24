@@ -1,7 +1,0 @@
-__pycache__/
-*.pyc
-
-.vscode/
-tags
-
-.mypy_cache/

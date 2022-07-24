@@ -1,4 +1,0 @@
-#!/bin/bash
-
-ssh -D 8123 -C -N twh2898@rlogin.cs.vt.edu
-

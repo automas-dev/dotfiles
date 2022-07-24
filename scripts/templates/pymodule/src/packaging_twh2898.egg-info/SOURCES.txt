@@ -1,9 +1,0 @@
-LICENSE
-README.md
-pyproject.toml
-setup.cfg
-src/example_pkg/__init__.py
-src/packaging_twh2898.egg-info/PKG-INFO
-src/packaging_twh2898.egg-info/SOURCES.txt
-src/packaging_twh2898.egg-info/dependency_links.txt
-src/packaging_twh2898.egg-info/top_level.txt
