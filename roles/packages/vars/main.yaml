@@ -53,6 +53,7 @@ snap_packages:
   - spotify
   - inkscape
   - kdenlive
+  - darktable
 
 snap_classic_packages:
   - code
