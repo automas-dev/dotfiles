@@ -21,6 +21,7 @@ packages:
   - openconnect
   - sshpass
   - ca-certificates
+  - gnupg
   - gnupg-agent
   - gnome-tweaks
   - gnupg2
