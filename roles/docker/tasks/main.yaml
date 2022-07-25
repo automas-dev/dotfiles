@@ -1,0 +1,64 @@
+- tags:
+    - packages
+    - docker
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Install apt dependencies
+      become: true
+      package:
+        state: latest
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+
+    - name: Get DEB architecture
+      shell: dpkg --print-architecture
+      register: deb_architecture
+      changed_when: false
+
+    - name: Get DEB release
+      shell: lsb_release -cs
+      register: deb_release
+      changed_when: false
+    
+    - name: Create keyrings directory
+      become: true
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+
+    - name: Install GPG key
+      become: true
+      shell: |
+        curl -fsSL {{ docker_key_url }} | gpg --dearmor -o {{ docker_key_path }}
+      args:
+        creates: "{{ docker_key_path }}"
+
+    - name: Add deb source
+      become: true
+      lineinfile:
+        line: "deb [arch={{ deb_architecture.stdout }} signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu {{ deb_release.stdout }} stable"
+        path: "{{ docker_source_path }}"
+        create: true
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Update Apt Repositories
+      become: true
+      apt:
+        update_cache: true
+      changed_when: false
+
+    - name: Install Docker
+      become: true
+      package:
+        state: latest
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
