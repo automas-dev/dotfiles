@@ -16,7 +16,7 @@
       become: true
       apt:
         update_cache: true
-      changed_when: False
+      changed_when: false
       when: ansible_distribution == "Ubuntu"
 
     - name: Install System Packages
