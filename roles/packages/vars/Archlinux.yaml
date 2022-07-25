@@ -1,6 +1,7 @@
 os_packages:
   - python
   - docker
+  - docker-compose
   
 os_pip_packages: []
 
