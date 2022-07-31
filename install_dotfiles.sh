@@ -87,14 +87,15 @@ try_install bash_aliases
 try_install bashrc
 try_install clang-format
 try_install gdbinit
-try_install gitconfig
+#try_install gitconfig
 try_install inputrc
 try_install LESS_TERMCAP
-try_install restic_exclude
+#try_install restic_exclude
 try_install Xdefaults
 
 try_install config/nvim
 try_install scripts
+try_install templates
 
 try_link $HOME/.vim/init.vim $HOME/.vimrc
 try_link $HOME/.config/nvim $HOME/.vim
