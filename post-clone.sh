@@ -16,49 +16,88 @@ echo_red() { echo -e "${RED}$*${NC}"; }
 echo_green() { echo -e "${GREEN}$*${NC}"; }
 echo_yellow() { echo -e "${YELLOW}$*${NC}"; }
 
-git submodule update --init --recursive
-
-is_distro() {
-    grep "$1" </proc/version
+usage() {
+    echo "Usage: post-clone.sh [options]"
+    echo "Options:"
+    echo "    -h | --help       show this help message"
+    echo "    -d | --dry-run    echo action instead of executing them"
+    echo "    -v | --verbose    echo more information"
+    echo ""
+    echo "    --skip-origin     skip updating the origin url"
+    echo "    --skip-submodule  skip submodule update"
+    echo "    --skip-updates    skip installing updates"
+    echo "    --skip-dotfiles   skip installing dotfiles"
+    echo "    --skip-copy-key   skip copying ssh key to clipboard"
 }
 
-if is_distro Ubuntu; then
-    echo_green Detected Ubuntu Distro
-    sudo apt-get update
-    sudo apt-get -y upgrade
-    sudo apt-get -y install ansible
-elif is_distro Archlinux; then
-    echo_green Detected Archlinux Distro
-    sudo pacman -Syu
-    sudo pacman -Sy ansible
-else
-    echo_red "Unknown linux distro"
-    exit 1
+for arg in "$@"; do
+    case "$arg" in
+        -h|--help) usage; exit 0;;
+        -d|--dry-run) DRY_RUN=true;;
+        -v|--verbose) VERBOSE=true;;
+        --skip-origin) SKIP_ORIGIN=true;;
+        --skip-submodule) SKIP_SUBMODULE=true;;
+        --skip-updates) SKIP_UPDATES=true;;
+        --skip-dotfiles) SKIP_DOTFILES=true;;
+        --skip-copy-key) SKIP_COPY_KEY=true;;
+    esac
+done
+
+run() {
+    if [ $DRY_RUN ]; then
+        echo "$ $*"
+    else
+        eval "$*"
+    fi
+}
+
+if [ $DRY_RUN ]; then
+    echo_yellow "This is a dry run, actions will be echoed instead of performed"
 fi
 
-ansible-playbook install.yaml
+if [ ! $SKIP_SUBMODULE ]; then
+    echo "Updating git submodules"
+    run git submodule update --init --recursive
+fi
 
-while true; do
-    read -p "Do you wish to install dotfiles [yn]? " yn
-    case $yn in
-        [Yy]* ) gio trash ~/.bashrc; ./install_dotfiles.sh; break;;
-        [Nn]* ) break;;
-        * ) echo_yellow "Please answer yes or no.";;
-    esac
-done
+is_distro() {
+    grep -i "$1" </proc/version >/dev/null
+}
 
-while true; do
-    read -p "Do you wish to update your SSH key in Github [yn]? " yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit;;
-        * ) echo_yellow "Please answer yes or no.";;
-    esac
-done
+if [ ! $SKIP_UPDATES ]; then
+    echo "Updateing base system"
+    if is_distro ubuntu; then
+        echo_green "Detected Ubuntu Distro"
+        run sudo apt-get update
+        run sudo apt-get -y upgrade
+        run sudo apt-get -y install ansible
+    elif is_distro archlinux; then
+        echo_green "Detected Archlinux Distro"
+        run sudo pacman -Syu
+        run sudo pacman -Sy ansible
+    else
+        echo_red "Unknown linux distro"
+        echo "Exiting!"
+        exit 1
+    fi
+fi
 
-xclip -sel clipboard <~/.ssh/id_rsa.pub
-echo "SSH Key copied to clipboard"
-read -rp "Press return after adding your SSH key to https://github.com/settinsg/keys"
+run ansible-playbook install.yaml
 
-git remote set-url origin git@github.com:twh2898/dotfiles.git
-git pull
+if [ ! $SKIP_DOTFILES ]; then
+    echo "Installing dotfiles"
+    run gio trash ~/.bashrc
+    run ./install_dotfiles.sh
+fi
+
+if [ ! $SKIP_COPY_KEY ]; then
+    echo "Copying ~/.ssh/id_rsa.pub to clipboard"
+    run "xclip -sel clipboard <~/.ssh/id_rsa"
+    [ ! $DRY_RUN ] && echo "SSH Key copied to clipboard"
+    [ ! $DRY_RUN ] && read -rp "Press return after adding your SSH key to https://github.com/settinsg/keys"
+fi
+
+if [ ! $SKIP_ORIGIN ]; then
+    run git remote set-url origin git@github.com:twh2898/dotfiles.git
+    run git pull
+fi
