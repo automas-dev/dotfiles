@@ -1,6 +1,12 @@
 - tags:
     - user
   block:
+  - name: Create ~/.ssh directory
+    file:
+      path: "{{ ansible_env.HOME }}"
+      state: directory
+      mode: '0700'
+
   - name: Generate SSH Key
     shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
     args:

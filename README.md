@@ -1,0 +1,32 @@
+
+## TODO
+
+- Desktop Install
+- Select System
+  - Server
+  - Ubuntu
+  - Arch
+  - Laptop?
+- Select Profile
+  - Home
+  - World
+  - Other?
+- Select Window Manager
+  - plasma
+  - cinnamon
+  - i3?
+- Settings
+  - Keyboard / Mouse
+  - Show battery percentage
+  - Power mode
+    - When to sleep / dim
+  - Default Application
+    - Browser
+- Enable Desktop manager
+  - sddm
+- Blender Settings / Plugins
+  - Easy HDRI
+  - Hard ops
+  - Box cutter
+  - Lilly
+  - Lux core

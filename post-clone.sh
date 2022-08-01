@@ -73,14 +73,19 @@ if [ ! $SKIP_UPDATES ]; then
         run sudo apt-get -y install ansible
     elif is_distro archlinux; then
         echo_green "Detected Archlinux Distro"
-        run sudo pacman -Syu
-        run sudo pacman -Sy ansible
+        run sudo pacman -Syu --noconfirm
+        run sudo pacman -Sy --noconfirm ansible
     else
         echo_red "Unknown linux distro"
         echo "Exiting!"
         exit 1
     fi
 fi
+
+for ((i=0; i<5; i++)); do
+    echo_yellow "YOU HAVE DISABLE EVERYTHING PAST HERE! REMEMBER TO FIX THIS BEFORE YOU COMMIT CHANGES!"
+done
+exit 0
 
 run ansible-playbook install.yaml
 
@@ -101,3 +106,16 @@ if [ ! $SKIP_ORIGIN ]; then
     run git remote set-url origin git@github.com:twh2898/dotfiles.git
     run git pull
 fi
+
+echo """
+Post Install Steps
+------------------
+
+Install is finished but there are still manual steps remaining. Try some of the
+following.
+
+- Sign in to VSCode
+- Set wallpaper
+- Add known_hosts
+- Configure git
+"""
