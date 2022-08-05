@@ -9,3 +9,9 @@
   package:
     name: kde-applications
     state: latest
+
+- name: Enable SDDM
+  become: true
+  systemd:
+    name: sddm.service
+    enabled: true
