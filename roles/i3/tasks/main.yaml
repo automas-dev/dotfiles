@@ -1,0 +1,11 @@
+- name: Install Desktop
+  become: true
+  package:
+    name: i3
+    state: latest
+
+- name: Install Apps
+  become: true
+  package:
+    name: dmenu
+    state: latest
