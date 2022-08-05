@@ -52,4 +52,5 @@
     deb: "{{ google_chrome_deb }}"
   when: ansible_distribution == "Ubuntu"
 
-- include_role: neovim
+- include_role:
+    name: neovim
