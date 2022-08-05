@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+- import_playbook: install_base.yaml
+
+- name: Install Home
+  hosts: localhost
+  roles:
+    - plasma
+    - desktop_apps
+    - user_config

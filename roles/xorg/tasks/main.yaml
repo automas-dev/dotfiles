@@ -1,0 +1,7 @@
+- name: Install
+  become: true
+  package:
+    state: latest
+    name:
+      - xorg
+      - xorg-xinit
