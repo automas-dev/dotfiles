@@ -1,7 +1,14 @@
-- tags:
-    - packages
-    - docker
-  when: ansible_distribution == "Ubuntu"
+- when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install docker
+      become: true
+      package:
+        state: present
+        name:
+          - docker
+          - docker-compose
+
+- when: ansible_distribution == "Ubuntu"
   block:
     - name: Install apt dependencies
       become: true
@@ -22,13 +29,13 @@
       shell: lsb_release -cs
       register: deb_release
       changed_when: false
-    
+
     - name: Create keyrings directory
       become: true
       file:
         path: /etc/apt/keyrings
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Install GPG key
       become: true
@@ -45,7 +52,7 @@
         create: true
         owner: root
         group: root
-        mode: '0644'
+        mode: "0644"
 
     - name: Update Apt Repositories
       become: true
@@ -70,7 +77,3 @@
     name: "{{ ansible_user_id }}"
     groups: docker
     append: true
-  tags:
-    - packages
-    - docker
-    - user

@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+- name: Install Base
+  hosts: localhost
+  roles:
+    - packages
+    - docker
+    - python
+    - node
+    - rust

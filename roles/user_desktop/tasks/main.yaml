@@ -1,0 +1,14 @@
+- name: Keyboard repeat interval
+  gsetting:
+    settings:
+      org.gnome.desktop.peripherals.keyboard.repeat-interval: "{{ keyboard.repeat | int }}"
+
+- name: Keyboard repeat delay
+  gsetting:
+    settings:
+      org.gnome.desktop.peripherals.keyboard.delay: "{{ keyboard.delay | int }}"
+
+- name: Touchpad Speed
+  gsetting:
+    settings:
+      org.gnome.desktop.peripherals.touchpad.speed: "{{ mouse.speed | float }}"
