@@ -26,6 +26,7 @@ packages:
     - restic
     - trash-cli
     - figlet
+    - lolcat
     - sl
 
   ubuntu:
