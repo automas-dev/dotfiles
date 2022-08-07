@@ -1,8 +1,18 @@
+- name: Remove i3-wm
+  become: true
+  package:
+    name: i3-wm
+    state: absent
+
 - name: Install Desktop
   become: true
   package:
-    name: i3
     state: latest
+    name:
+      - i3-gaps
+      - i3blocks
+      - i3lock
+      - i3status
 
 - name: Install Apps
   become: true
