@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pacman -Sy --noconfirm --needd archlinux-keyring
+pacman -Sy --noconfirm --needed archlinux-keyring
 
 pacstrap /mnt base linux linux-firmware base-devel git vi vim networkmanager sudo
 
