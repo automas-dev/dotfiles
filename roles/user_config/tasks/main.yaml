@@ -30,3 +30,9 @@
     gsetting:
       settings:
         org.gnome.desktop.peripherals.touchpad.speed: "{{ mouse.speed | float }}"
+
+  - name: Remove ~/.bashrc
+    shell: gio trash ~/.bashrc
+
+  - name: Install dotfiles
+    shell: bash install_dotfiles.sh
