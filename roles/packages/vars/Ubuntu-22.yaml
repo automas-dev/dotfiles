@@ -9,9 +9,16 @@ os_packages:
   - software-properties-common
   - libopencv-dev
   - python3-opencv
+  - tmuxinator
+  - build-essential
+  - gnupg-agent
+  - gnupg2
+  - snap
 
 os_pip_packages: []
 
-os_snap_packages: []
+os_snap_packages:
+  - htop
+  - nvim
 
 os_snap_classic_packages: []

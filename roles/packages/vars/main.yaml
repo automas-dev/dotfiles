@@ -6,7 +6,6 @@ packages:
   - tree
   - screen
   - tmux
-  - tmuxinator
   - vim
   - neofetch
   - xclip
@@ -15,18 +14,14 @@ packages:
   - extra-cmake-modules
   - httpie
   - restic
-  - build-essential
   - ranger
   - bmon
   - openconnect
   - sshpass
   - ca-certificates
   - gnupg
-  - gnupg-agent
   - gnome-tweaks
-  - gnupg2
   - lsb-release
-  - snap
   - libreoffice
   - trash-cli
   - figlet
@@ -58,7 +53,5 @@ snap_packages:
 
 snap_classic_packages:
   - code
-  - htop
-  - nvim
 
 google_chrome_deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
