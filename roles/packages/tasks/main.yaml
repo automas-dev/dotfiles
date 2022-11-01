@@ -30,6 +30,25 @@
         state: present
         name: "{{ sys_pip_packages }}"
 
+    - block:
+      - name: Clone Yay
+        git:
+          repo: "{{ yay_git_url }}"
+          dest: "{{ ansible_remote_tmp }}/yay-build"
+
+      - name: Build and Install Yay
+        become: true
+        shell: makepkg -si
+        args:
+          chdir: "{{ ansible_remote_tmp }}/yay-build"
+          creates: "/usr/bin/yay"
+
+      - name: Install Yay Packages
+        yay:
+          name: "{{ aur_packages }}"
+          state: present
+      when: ansible_distribution == "Archlinux"
+
     - tags: desktop
       block:
         - name: Install Snap Apps
@@ -49,4 +68,4 @@
           become: true
           apt:
             deb: "{{ google_chrome_deb }}"
-      when: ansible_distribution == "Ubuntu"
+          when: ansible_distribution == "Ubuntu"

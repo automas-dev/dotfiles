@@ -43,7 +43,6 @@ pip_packages:
   - pynvim
 
 snap_packages:
-  - firefox
   - gimp
   - vlc
   - spotify

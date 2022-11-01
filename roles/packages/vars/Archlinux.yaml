@@ -8,6 +8,13 @@ os_packages:
 
 os_pip_packages: []
 
+aur_packages:
+  - snapd
+  - downgrade
+  - google-chrome
+
 os_snap_packages: []
 
 os_snap_classic_packages: []
+
+yay_git_url: https://aur.archlinux.org/yay.git
