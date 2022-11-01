@@ -10,11 +10,15 @@ set -e
 RED='\033[1;31m'
 GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
+WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
 echo_red() { echo -e "${RED}$*${NC}"; }
 echo_green() { echo -e "${GREEN}$*${NC}"; }
 echo_yellow() { echo -e "${YELLOW}$*${NC}"; }
+echo_white() { echo -e "${WHITE}$*${NC}"; }
+
+echo_white "Git Submodule Update"
 
 git submodule update --init --recursive
 
@@ -22,43 +26,64 @@ is_distro() {
     grep "$1" </proc/version
 }
 
+echo_white "Install ansible"
+
 if is_distro Ubuntu; then
     echo_green Detected Ubuntu Distro
     sudo apt-get update
     sudo apt-get -y upgrade
     sudo apt-get -y install ansible
-elif is_distro Archlinux; then
+elif is_distro archlinux; then
     echo_green Detected Archlinux Distro
     sudo pacman -Syu
-    sudo pacman -Sy ansible
+    sudo pacman -S --noconfirm ansible
 else
-    echo_red "Unknown linux distro"
+    echo_red "Unknown linux distro '$(cat /proc/version)'"
     exit 1
 fi
 
+echo -e """
+================================================================================
+                                 Setup Complete                                 
+================================================================================
+
+But, this is only this repo. To setup the system, use these steps.
+
+==========
+${WHITE}Install${NC}
+----------
+All
+
 ansible-playbook install.yaml
 
-while true; do
-    read -p "Do you wish to install dotfiles [yn]? " yn
-    case $yn in
-        [Yy]* ) gio trash ~/.bashrc; ./install_dotfiles.sh; break;;
-        [Nn]* ) break;;
-        * ) echo_yellow "Please answer yes or no.";;
-    esac
-done
+This will also install all of the following, which can be installed separately.
 
-while true; do
-    read -p "Do you wish to update your SSH key in Github [yn]? " yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit;;
-        * ) echo_yellow "Please answer yes or no.";;
-    esac
-done
+----------
+System Base
+
+ansible-playbook install_system.yaml
+
+----------
+User Config
+
+ansible-playbook install_user.yaml
+
+----------
+You can also choose to only install dotfiles, and no other user configurations.
+
+gio trash ~/.bashrc
+./install_dotfiles.sh
+
+==========
+${WHITE}Add SSH key to Github${NC}
 
 xclip -sel clipboard <~/.ssh/id_rsa.pub
-echo "SSH Key copied to clipboard"
-read -rp "Press return after adding your SSH key to https://github.com/settinsg/keys"
+
+Add ssh key to Github using https://github.com/settinsg/keys
+
+---------
+Update remote to use ssh
 
 git remote set-url origin git@github.com:twh2898/dotfiles.git
 git pull
+"""
