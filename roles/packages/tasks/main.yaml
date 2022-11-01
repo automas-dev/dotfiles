@@ -49,4 +49,4 @@
           become: true
           apt:
             deb: "{{ google_chrome_deb }}"
-          when: ansible_distribution == "Ubuntu"
+      when: ansible_distribution == "Ubuntu"
