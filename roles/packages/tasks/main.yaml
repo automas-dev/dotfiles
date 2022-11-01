@@ -43,29 +43,21 @@
           chdir: "{{ ansible_remote_tmp }}/yay-build"
           creates: "/usr/bin/yay"
 
-      - name: Install Yay Packages
+      - name: Install AUR Packages
         yay:
           name: "{{ aur_packages }}"
           state: present
       when: ansible_distribution == "Archlinux"
 
-    - tags: desktop
-      block:
-        - name: Install Snap Apps
-          become: true
-          community.general.snap:
-            state: present
-            name: "{{ sys_snap_packages }}"
+    - name: Install Snap Apps
+      become: true
+      community.general.snap:
+        state: present
+        name: "{{ sys_snap_packages }}"
 
-        - name: Install Snap Classic Apps
-          become: true
-          community.general.snap:
-            state: present
-            classic: true
-            name: "{{ sys_snap_classic_packages }}"
-
-        - name: Install Google Chrome
-          become: true
-          apt:
-            deb: "{{ google_chrome_deb }}"
-          when: ansible_distribution == "Ubuntu"
+    - name: Install Snap Classic Apps
+      become: true
+      community.general.snap:
+        state: present
+        classic: true
+        name: "{{ sys_snap_classic_packages }}"

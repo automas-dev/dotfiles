@@ -18,7 +18,6 @@ os_packages:
 os_pip_packages: []
 
 os_snap_packages:
-  - firefox
   - htop
   - nvim
 

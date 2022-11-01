@@ -42,15 +42,7 @@ pip_packages:
   - jedi
   - pynvim
 
-snap_packages:
-  - gimp
-  - vlc
-  - spotify
-  - inkscape
-  - kdenlive
-  - darktable
+snap_packages: []
 
-snap_classic_packages:
-  - code
+snap_classic_packages: []
 
-google_chrome_deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

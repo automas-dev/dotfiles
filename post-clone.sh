@@ -74,6 +74,11 @@ You can also choose to only install dotfiles, and no other user configurations.
 gio trash ~/.bashrc
 ./install_dotfiles.sh
 
+----------
+Desktop Apps
+
+ansible-playbook install_desktop.yaml
+
 ==========
 ${WHITE}Add SSH key to Github${NC}
 
