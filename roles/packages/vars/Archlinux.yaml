@@ -4,7 +4,8 @@ os_packages:
   - docker-compose
   - neovim
   - htop
-  
+  - base-devel
+
 os_pip_packages: []
 
 os_snap_packages: []
