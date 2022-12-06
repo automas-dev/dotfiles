@@ -1,0 +1,17 @@
+- when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install Packages
+      become: true
+      package:
+        state: latest
+        name:
+          - bluez
+          - bluez-utils
+    
+    - name: Start Snap Service
+      become: true
+      systemd:
+        name: bluetooth.service
+        state: started
+        enabled: true
+
