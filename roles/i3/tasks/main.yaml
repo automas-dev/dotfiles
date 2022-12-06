@@ -13,6 +13,7 @@
       - i3blocks
       - i3lock
       - i3status
+      - ttf-dejavu
 
 - name: Install Apps
   become: true
