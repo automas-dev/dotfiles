@@ -11,7 +11,7 @@
     recurse: true
 
 - name: Generate SSH Key
-  shell: ssh-keygen -b 2048 -t rsa -f ~/.ssh/id_rsa -q -N ""
+  shell: ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -q -N ""
   args:
     creates: ~/.ssh/id_rsa
 
