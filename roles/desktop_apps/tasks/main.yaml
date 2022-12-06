@@ -33,11 +33,11 @@
         owner: root
         group: root
 
-- name: Install Snap Apps
-  become: true
-  community.general.snap:
-    state: present
-    name: "{{ snap_packages }}"
+          #- name: Install Snap Apps
+          #  become: true
+          #  community.general.snap:
+          #    state: present
+          #    name: "{{ snap_packages }}"
 
 - name: Install Snap Classic Apps
   become: true
@@ -52,5 +52,5 @@
     deb: "{{ google_chrome_deb }}"
   when: ansible_distribution == "Ubuntu"
 
-- include_role:
-    name: neovim
+    #- include_role:
+    #    name: neovim

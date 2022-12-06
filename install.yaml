@@ -4,6 +4,7 @@
   roles:
     - packages
     - docker
-    - node
+    - python
+      #- node
     - rust
     - user_config
