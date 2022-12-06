@@ -26,6 +26,11 @@ alias ca='git add . && git commit -m'
 alias gc='git commit'
 alias gcm='git commit -m'
 
+gt() {
+    local tag="$1"
+    git tag -a "$tag" -m "$tag"
+}
+
 # Trash alias
 alias trash="gio trash"
 
