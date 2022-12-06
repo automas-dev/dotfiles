@@ -1,3 +1,8 @@
+arch_packages:
+  - python
+  - python-pip
+  - python-setuptools
+
 ubuntu_packages:
   - python3
   - python-is-python3

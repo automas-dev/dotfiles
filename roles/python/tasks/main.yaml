@@ -3,7 +3,7 @@
   become: true
   package:
     state: latest
-    name: python
+    name: "{{ arch_packages }}"
 
 - name: Install Python
   when: ansible_distribution == "Ubuntu"
