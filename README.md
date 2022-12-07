@@ -41,8 +41,7 @@
   - Spotify
 - packages
   - shellcheck
-  - ansible-lint
-
+- backup_client restic password
 - git config
 
 ## Errors
