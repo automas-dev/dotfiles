@@ -1,0 +1,10 @@
+[Unit]
+Description=Notify %u when %i fails
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/notify-send -u critical -t 30000 "%i has failed!"
+
+[Install]
+WantedBy=multi-user.target
+# vi: ft=systemd
