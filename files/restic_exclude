@@ -7,3 +7,7 @@
 /home/thomas/.android/avd/
 /home/thomas/.gradle/caches
 /home/thomas/.restic_pass
+/home/thomas/.config/Code/Cache/
+/home/thomas/.config/Code/User/workspaceStorage/
+/home/thomas/.local/share/baloo/index
+/home/thomas/.local/share/baloo/index-lock
