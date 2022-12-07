@@ -1,0 +1,5 @@
+- name: Install Packages
+  become: true
+  package:
+    state: latest
+    name: "{{ packages }}"
