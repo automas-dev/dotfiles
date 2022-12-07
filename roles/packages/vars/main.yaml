@@ -20,6 +20,7 @@ packages:
     - ca-certificates
     - gnupg
     - lsb-release
+    - usbutils
 
   extra:
     - neofetch
