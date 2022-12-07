@@ -26,5 +26,9 @@ pip_packages:
   - pyautogui
   - numba
   - jedi
+  - pylance
+  - autopep8
+  - pydocstyle
+  - pycodestyle
   - pynvim
   - jupyter
