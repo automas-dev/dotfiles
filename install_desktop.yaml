@@ -8,6 +8,7 @@
     - i3
     - plasma
     - desktop_apps
-    - user_desktop
     - bluetooth
     - fonts
+    - user_config
+    - desktop_config
