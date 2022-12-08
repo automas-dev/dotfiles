@@ -1,4 +1,5 @@
-- when: ansible_distribution == "Archlinux"
+- name: Install Yay
+  when: ansible_distribution == "Archlinux"
   block:
     - name: Clone Yay AUR
       git:
