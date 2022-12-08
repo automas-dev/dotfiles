@@ -34,12 +34,24 @@
 - configure pacman
   - color
   - verbose package list
-- flatpak
+- flatpak (only ones that aren't system packages?)
   - Spotify
+  - ~~Gimp~~
+  - ~~Inkscape~~
+  - ~~vlc~~
+  - ~~kdenlive~~
+  - ~~darktable~~
 - packages
   - shellcheck
 - backup_client restic password
-- git config
+- Replace ubuntu node nvm with ppa
+- Move neovim config files to role
+- Move dotfiles to role
+  - most to user config?
+- Git role
+  - install
+  - git config
+- Wallpaper in desktop config
 
 ## Errors
 
