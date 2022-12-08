@@ -13,7 +13,7 @@
         dest: "{{ snapd_build_path }}"
 
     - name: Build Snap AUR
-      ansible.builtin.shell: makepkg -si --noconfirm
+      ansible.builtin.command: makepkg -si --noconfirm
       args:
         chdir: "{{ snapd_build_path }}"
 

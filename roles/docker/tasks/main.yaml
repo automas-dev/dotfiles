@@ -23,12 +23,12 @@
           - lsb-release
 
     - name: Get DEB architecture
-      ansible.builtin.shell: dpkg --print-architecture
+      ansible.builtin.command: dpkg --print-architecture
       register: deb_architecture
       changed_when: false
 
     - name: Get DEB release
-      ansible.builtin.shell: lsb_release -cs
+      ansible.builtin.command: lsb_release -cs
       register: deb_release
       changed_when: false
 
@@ -45,6 +45,8 @@
         curl -fsSL {{ docker_key_url }} | gpg --dearmor -o {{ docker_key_path }}
       args:
         creates: "{{ docker_key_path }}"
+      tags:
+        - skip_ansible_lint
 
     - name: Add deb source
       become: true

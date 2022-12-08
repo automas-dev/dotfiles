@@ -20,14 +20,20 @@
       args:
         chdir: "{{ ansible_env.HOME }}"
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+      tags:
+        - skip_ansible_lint
 
     - name: install node
       ansible.builtin.shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 16
       args:
         chdir: "{{ ansible_env.HOME }}"
         creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+      tags:
+        - skip_ansible_lint
 
     - name: set node version
       ansible.builtin.shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use default 16
       args:
         executable: /bin/bash
+      tags:
+        - skip_ansible_lint

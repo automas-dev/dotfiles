@@ -7,6 +7,6 @@
         dest: "{{ yay_build_path }}"
 
     - name: Build Yay AUR
-      ansible.builtin.shell: makepkg -si --noconfirm
+      ansible.builtin.command: makepkg -si --noconfirm
       args:
         chdir: "{{ yay_build_path }}"
