@@ -22,18 +22,15 @@
     - When to sleep / dim
   - Default Application
     - Browser
+    - Terminal
 - Blender Settings / Plugins
   - Easy HDRI
   - Hard ops
   - Box cutter
   - Lilly
   - Lux core
-- Fonts
 - Terminal for i3
 - htop through pacman
-- python packages
-  - pylance
-  - autopep8
 - configure pacman
   - color
   - verbose package list
