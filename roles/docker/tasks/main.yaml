@@ -1,3 +1,9 @@
+- name: Remove old docker-compose
+  become: true
+  ansible.builtin.package:
+    state: absent
+    name: docker-compose
+
 - name: Install Docker Archlinux
   when: ansible_distribution == "Archlinux"
   block:
@@ -5,9 +11,7 @@
       become: true
       ansible.builtin.package:
         state: present
-        name:
-          - docker
-          - docker-compose
+        name: docker
 
 - name: Install Docker Ubuntu
   when: ansible_distribution == "Ubuntu"
@@ -70,12 +74,11 @@
     - name: Install Docker
       become: true
       ansible.builtin.package:
-        state: present
+        state: latest
         name:
           - docker-ce
           - docker-ce-cli
           - containerd.io
-          - docker-compose
           - docker-compose-plugin
 
 - name: Add user to docker group
