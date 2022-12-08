@@ -2,7 +2,7 @@
 - import_playbook: install_base.yaml
 - import_playbook: install_desktop.yaml
 
-- name: Install
+- name: Install User
   hosts: localhost
   roles:
     - user_config
