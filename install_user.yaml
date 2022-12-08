@@ -1,6 +1,9 @@
 #!/usr/bin/env ansible-playbook
-- import_playbook: install_base.yaml
-- import_playbook: install_desktop.yaml
+- name: Import Install Base
+  import_playbook: install_base.yaml
+
+- name: Import Install Desktop
+  import_playbook: install_desktop.yaml
 
 - name: Install User
   hosts: localhost
