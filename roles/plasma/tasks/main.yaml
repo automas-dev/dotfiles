@@ -1,17 +1,17 @@
 - name: Install Desktop
   become: true
-  package:
+  ansible.builtin.package:
     name: plasma
-    state: latest
+    state: present
 
 - name: Install Apps
   become: true
-  package:
+  ansible.builtin.package:
     name: kde-applications
-    state: latest
+    state: present
 
 - name: Enable SDDM
   become: true
-  systemd:
+  ansible.builtin.package:
     name: sddm.service
     enabled: true

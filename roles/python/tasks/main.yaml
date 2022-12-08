@@ -1,18 +1,18 @@
 - name: Install Python
   when: ansible_distribution == "Archlinux"
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ arch_packages }}"
 
 - name: Install Python
   when: ansible_distribution == "Ubuntu"
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ ubuntu_packages }}"
 
 - name: Install Pip Packages
-  pip:
+  ansible.builtin.pip:
     state: present
     name: "{{ pip_packages }}"

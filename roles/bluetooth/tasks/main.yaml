@@ -1,17 +1,17 @@
-- when: ansible_distribution == "Archlinux"
+- name: Install Bluetooth
+  when: ansible_distribution == "Archlinux"
   block:
     - name: Install Packages
       become: true
-      package:
-        state: latest
+      ansible.builtin.package:
+        state: present
         name:
           - bluez
           - bluez-utils
-    
+
     - name: Start Bluetooth Service
       become: true
-      systemd:
+      ansible.builtin.systemd:
         name: bluetooth.service
         state: started
         enabled: true
-

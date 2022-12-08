@@ -1,8 +1,8 @@
 - name: Install neovim
   become: true
-  package:
+  ansible.builtin.package:
     name: neovim
-    state: latest
+    state: present
   when: ansible_distribution == "Archlinux"
 
 - name: Install neovim

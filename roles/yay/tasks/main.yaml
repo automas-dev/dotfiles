@@ -2,11 +2,11 @@
   when: ansible_distribution == "Archlinux"
   block:
     - name: Clone Yay AUR
-      git:
+      ansible.builtin.package:
         repo: "{{ yay_aur_url }}"
         dest: "{{ yay_build_path }}"
 
     - name: Build Yay AUR
-      shell: makepkg -si --noconfirm
+      ansible.builtin.shell: makepkg -si --noconfirm
       args:
         chdir: "{{ yay_build_path }}"

@@ -1,5 +1,5 @@
 - name: Install Packages
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ packages }}"

@@ -1,19 +1,21 @@
-- when: ansible_distribution == "Archlinux"
+- name: Install Docker Archlinux
+  when: ansible_distribution == "Archlinux"
   block:
     - name: Install docker
       become: true
-      package:
+      ansible.builtin.package:
         state: present
         name:
           - docker
           - docker-compose
 
-- when: ansible_distribution == "Ubuntu"
+- name: Install Docker Ubuntu
+  when: ansible_distribution == "Ubuntu"
   block:
     - name: Install apt dependencies
       become: true
-      package:
-        state: latest
+      ansible.builtin.package:
+        state: present
         name:
           - ca-certificates
           - curl
@@ -21,33 +23,36 @@
           - lsb-release
 
     - name: Get DEB architecture
-      shell: dpkg --print-architecture
+      ansible.builtin.shell: dpkg --print-architecture
       register: deb_architecture
       changed_when: false
 
     - name: Get DEB release
-      shell: lsb_release -cs
+      ansible.builtin.shell: lsb_release -cs
       register: deb_release
       changed_when: false
 
     - name: Create keyrings directory
       become: true
-      file:
+      ansible.builtin.package:
         path: /etc/apt/keyrings
         state: directory
         mode: "0755"
 
     - name: Install GPG key
       become: true
-      shell: |
+      ansible.builtin.shell: |
         curl -fsSL {{ docker_key_url }} | gpg --dearmor -o {{ docker_key_path }}
       args:
         creates: "{{ docker_key_path }}"
 
     - name: Add deb source
       become: true
-      lineinfile:
-        line: "deb [arch={{ deb_architecture.stdout }} signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu {{ deb_release.stdout }} stable"
+      ansible.builtin.lineinfile:
+        line: >
+          "deb [arch={{ deb_architecture.stdout }}"
+          "signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu"
+          "{{ deb_release.stdout }} stable"
         path: "{{ docker_source_path }}"
         create: true
         owner: root
@@ -56,14 +61,14 @@
 
     - name: Update Apt Repositories
       become: true
-      apt:
+      ansible.builtin.package:
         update_cache: true
       changed_when: false
 
     - name: Install Docker
       become: true
-      package:
-        state: latest
+      ansible.builtin.package:
+        state: present
         name:
           - docker-ce
           - docker-ce-cli
@@ -73,7 +78,7 @@
 
 - name: Add user to docker group
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     groups: docker
     append: true

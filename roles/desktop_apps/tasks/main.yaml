@@ -1,31 +1,32 @@
 - name: Install Packages
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ packages }}"
 
-- when: ansible_distribution == "Archlinux"
+- name: Install Snap Archlinux
+  when: ansible_distribution == "Archlinux"
   block:
     - name: Clone Snap AUR
-      git:
+      ansible.builtin.package:
         repo: "{{ snapd_aur_url }}"
         dest: "{{ snapd_build_path }}"
 
     - name: Build Snap AUR
-      shell: makepkg -si --noconfirm
+      ansible.builtin.shell: makepkg -si --noconfirm
       args:
         chdir: "{{ snapd_build_path }}"
 
     - name: Start Snap Service
       become: true
-      systemd:
+      ansible.builtin.package:
         name: snapd.socket
         state: started
         enabled: true
 
     - name: Link /snap
       become: true
-      file:
+      ansible.builtin.package:
         src: /var/lib/snapd/snap
         dest: /snap
         state: link
@@ -33,11 +34,11 @@
         owner: root
         group: root
 
-          #- name: Install Snap Apps
-          #  become: true
-          #  community.general.snap:
-          #    state: present
-          #    name: "{{ snap_packages }}"
+    # - name: Install Snap Apps
+    #   become: true
+    #   community.general.snap:
+    #     state: present
+    #     name: "{{ snap_packages }}"
 
 - name: Install Snap Classic Apps
   become: true
@@ -48,9 +49,9 @@
 
 - name: Install Google Chrome
   become: true
-  apt:
+  ansible.builtin.package:
     deb: "{{ google_chrome_deb }}"
   when: ansible_distribution == "Ubuntu"
 
-    #- include_role:
-    #    name: neovim
+  # - include_role:
+  #    name: neovim

@@ -1,11 +1,11 @@
 - name: Create ~/.ssh directory
-  file:
+  ansible.builtin.package:
     path: "{{ ansible_env.HOME }}"
     state: directory
     mode: "0700"
 
 - name: Create ~/.local/bin
-  file:
+  ansible.builtin.package:
     path: "{{ ansible_env.HOME }}/.local/bin"
     state: directory
     recurse: true

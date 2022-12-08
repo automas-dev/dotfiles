@@ -1,13 +1,13 @@
 - name: Remove i3-wm
   become: true
-  package:
+  ansible.builtin.package:
     name: i3-wm
     state: absent
 
 - name: Install Desktop
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name:
       - i3-gaps
       - i3blocks
@@ -17,6 +17,6 @@
 
 - name: Install Apps
   become: true
-  package:
+  ansible.builtin.package:
     name: dmenu
-    state: latest
+    state: present

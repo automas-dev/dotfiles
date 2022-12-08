@@ -1,33 +1,33 @@
 - name: Update Apt Repositories
   become: true
-  apt:
+  ansible.builtin.package:
     update_cache: true
   changed_when: false
   when: ansible_distribution == "Ubuntu"
 
 - name: Install Base Packages
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ packages.base }}"
 
 - name: Install Extra Packages
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ packages.extra }}"
   tags: extra
 
 - name: Install Ubuntu Packages
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ packages.ubuntu }}"
   when: ansible_distribution == "Ubuntu"
 
 - name: Install Archlinux Packages
   become: true
-  package:
-    state: latest
+  ansible.builtin.package:
+    state: present
     name: "{{ packages.archlinux }}"
   when: ansible_distribution == "Archlinux"
