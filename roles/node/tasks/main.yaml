@@ -13,27 +13,39 @@
 - name: Install NodeJS Ubuntu
   when: ansible_distribution == "Ubuntu"
   block:
-    - name: install nvm
-      ansible.builtin.shell: curl -o- {{ nvm_url }} | bash
-      environment:
-        NVM_DIR: ""
-      args:
-        chdir: "{{ ansible_env.HOME }}"
-        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
-      tags:
-        - skip_ansible_lint
+    - name: Remove nodesource apt source
+      become: true
+      ansible.builtin.file:
+        path: /etc/apt/sources.list.d/nodesource.list
+        state: absent
 
-    - name: install node
-      ansible.builtin.shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 16
-      args:
-        chdir: "{{ ansible_env.HOME }}"
-        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
-      tags:
-        - skip_ansible_lint
+    - name: Update Apt Repositories
+      become: true
+      ansible.builtin.package:
+        update_cache: true
+      changed_when: false
 
-    - name: set node version
-      ansible.builtin.shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use default 16
-      args:
-        executable: /bin/bash
-      tags:
-        - skip_ansible_lint
+    - name: Remove old node version
+      become: true
+      ansible.builtin.package:
+        state: absent
+        name:
+          - nodejs
+          - nodejs-doc
+
+    - name: Download installer
+      ansible.builtin.get_url:
+        url: "https://deb.nodesource.com/setup_{{ node_version }}.x"
+        dest: /tmp/node_setup.sh
+        mode: 0755
+        force: true
+
+    - name: Add node apt repo
+      become: true
+      ansible.builtin.command: /tmp/node_setup.sh
+
+    - name: Install node
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: nodejs
