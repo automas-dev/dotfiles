@@ -94,7 +94,7 @@ try_install LESS_TERMCAP
 try_install Xdefaults
 
 try_install config/nvim
-try_install scripts
+# try_install scripts
 try_install templates
 
 try_link $HOME/.vim/init.vim $HOME/.vimrc
