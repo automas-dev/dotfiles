@@ -1,3 +1,60 @@
+# Dotfiles
+
+My linux configuration files + some helpful scripts.
+
+## Usage
+
+While this repo can be cloned anywhere, some features depend on it being
+`~/dotfiles`.
+
+```sh
+git clone https://github.com/twh2898/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./post-clone.sh
+```
+
+### Install Dotfiles
+
+Create sym links for dotfiles and config files.
+
+```sh
+./install_dotfiles.sh
+```
+
+### Install Everything
+
+This includes
+
+- Base packages
+- Desktop environments
+- User configuration
+
+```sh
+./install_user.yaml
+```
+
+### Partial Install
+
+#### Base Packages
+
+This includes
+
+- Base packages
+
+```sh
+./install_base.yaml
+```
+
+#### Desktop
+
+This includes
+
+- Base packages
+- Desktop environments
+
+```sh
+./install_desktop.yaml
+```
 
 ## TODO
 
