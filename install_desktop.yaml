@@ -4,9 +4,10 @@
 - name: Install Home
   hosts: localhost
   roles:
+    - xorg
     - i3
     - plasma
     - desktop_apps
-    - user_config
     - user_desktop
     - bluetooth
+    - fonts
