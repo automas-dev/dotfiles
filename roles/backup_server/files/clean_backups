@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Exit on failure with status code of failed command
+set -e
+
+if [ -z "$HOSTNAME" ]; then
+    echo "environment variable HOSTNAME is empty, cannot continue"
+    exit 1
+fi
+
+[ -z "$RESTIC_REPO_PATH" ] && RESTIC_REPO_PATH="/home/deepraid/restic"
+[ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
+
+[ -z "$KEEP_HOURLY" ] && KEEP_HOURLY=3
+[ -z "$KEEP_DAILY" ] && KEEP_DAILY=7
+[ -z "$KEEP_WEEKLY" ] && KEEP_WEEKLY=5
+[ -z "$KEEP_MONTHLY" ] && KEEP_MONTHLY=12
+[ -z "$KEEP_YEARLY" ] && KEEP_YEARLY=50
+
+START_SECONDS=$SECONDS
+
+RED="\e[0;31m"
+GREEN="\e[0;32m"
+YELLOW="\e[0;33m"
+CYAN="\e[0;36m"
+WHITE="\e[1;97m"
+RESET="\e[0;0m"
+
+echo -e "${CYAN}:: ${WHITE}Cleaning backups for" \
+    "${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE} to " \
+    "${GREEN}$RESTIC_REPO_PATH${RESET}"
+
+echo -e "Keep" \
+    "${RED}$KEEP_HOURLY${WHITE} hourly" \
+    "${RED}$KEEP_DAILY${WHITE} daily" \
+    "${RED}$KEEP_WEEKLY${WHITE} weekly" \
+    "${RED}$KEEP_MONTHLY${WHITE} monthly" \
+    "${RED}$KEEP_YEARLY${WHITE} yearly" \
+    "${RESET}"
+
+restic -v \
+    -p "$RESTIC_PASSWORD_PATH" \
+    -r "$RESTIC_REPO_PATH" \
+    forget \
+    --tag "$HOSTNAME" \
+    --keep-hourly $KEEP_HOURLY \
+    --keep-daily $KEEP_DAILY \
+    --keep-weekly $KEEP_WEEKLY \
+    --keep-monthly $KEEP_MONTHLY \
+    --keep-yearly $KEEP_YEARLY
+
+restic -v \
+    -p "$RESTIC_PASSWORD_PATH" \
+    -r "$RESTIC_REPO_PATH" \
+    prune
+
+echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
