@@ -8,7 +8,7 @@
           - bluez
           - bluez-utils
     
-    - name: Start Snap Service
+    - name: Start Bluetooth Service
       become: true
       systemd:
         name: bluetooth.service
