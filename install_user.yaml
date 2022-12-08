@@ -1,5 +1,7 @@
 #!/usr/bin/env ansible-playbook
+- import_playbook: install_base.yaml
+
 - name: Install
   hosts: localhost
   roles:
-    - desktop_apps
+    - user_config
