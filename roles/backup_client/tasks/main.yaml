@@ -8,21 +8,17 @@
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.config/systemd/user"
     state: directory
+    mode: 0755
 
-- name: Copy backup service
+- name: Copy service files
   ansible.builtin.copy:
-    src: backup.service
-    dest: "{{ ansible_env.HOME }}/.config/systemd/user/backup.service"
-
-- name: Copy backup timer
-  ansible.builtin.copy:
-    src: backup.timer
-    dest: "{{ ansible_env.HOME }}/.config/systemd/user/backup.timer"
-
-- name: Copy failure handler service
-  ansible.builtin.copy:
-    src: backup.service
-    dest: "{{ ansible_env.HOME }}/.config/systemd/user/failure-handler@.service"
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
+    mode: 0644
+  loop:
+    - backup.service
+    - backup.timer
+    - "failure-handler@.service"
 
 - name: Link restic excludes
   ansible.builtin.file:
@@ -34,6 +30,7 @@
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.local/bin"
     state: directory
+    mode: 0755
 
 - name: Copy backup script
   ansible.builtin.copy:
