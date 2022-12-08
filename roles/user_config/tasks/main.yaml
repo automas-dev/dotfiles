@@ -12,7 +12,7 @@
     mode: "0755"
 
 - name: Generate SSH Key
-  shell: ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -q -N ""
+  shell: "ssh-keygen -b {{ ssh_key_size }} -t {{ ssh_key_type }} -f {{ ssh_key_path }} -q -N ''"
   args:
     creates: ~/.ssh/id_rsa
 

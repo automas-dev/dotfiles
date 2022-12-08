@@ -1,0 +1,4 @@
+ssh_key_size: 4096
+ssh_key_type: id_rsa
+ssh_key_path: ~/.ssh/id_rsa
+ssh_key_name: id_rsa
