@@ -9,6 +9,7 @@
     path: "{{ ansible_env.HOME }}/.local/bin"
     state: directory
     recurse: true
+    mode: "0755"
 
 - name: Generate SSH Key
   shell: ssh-keygen -b 4096 -t rsa -f ~/.ssh/id_rsa -q -N ""
