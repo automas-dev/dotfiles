@@ -12,8 +12,6 @@ packages:
     - fzf
     - cmake
     - extra-cmake-modules
-    - httpie
-    - ranger
     - bmon
     - openconnect
     - sshpass
@@ -23,6 +21,8 @@ packages:
     - usbutils
 
   extra:
+    - httpie
+    - ranger
     - neofetch
     - restic
     - trash-cli
