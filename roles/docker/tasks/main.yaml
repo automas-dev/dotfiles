@@ -38,7 +38,7 @@
 
     - name: Create keyrings directory
       become: true
-      ansible.builtin.package:
+      ansible.builtin.file:
         path: /etc/apt/keyrings
         state: directory
         mode: "0755"
@@ -52,18 +52,25 @@
       tags:
         - skip_ansible_lint
 
-    - name: Add deb source
+    - name: Apt source
       become: true
-      ansible.builtin.lineinfile:
-        line: >
-          "deb [arch={{ deb_architecture.stdout }}"
-          "signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu"
-          "{{ deb_release.stdout }} stable"
-        path: "{{ docker_source_path }}"
-        create: true
-        owner: root
-        group: root
-        mode: "0644"
+      block:
+        - name: Remove docker source file
+          ansible.builtin.file:
+            state: absent
+            path: "{{ docker_source_path }}"
+
+        - name: Add docker source file
+          ansible.builtin.lineinfile:
+            line: >
+              deb [arch={{ deb_architecture.stdout }}
+              signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu
+              {{ deb_release.stdout }} stable
+            path: "{{ docker_source_path }}"
+            create: true
+            owner: root
+            group: root
+            mode: "0644"
 
     - name: Update Apt Repositories
       become: true
@@ -80,6 +87,8 @@
           - docker-ce-cli
           - containerd.io
           - docker-compose-plugin
+      tags:
+        - skip_ansible_lint
 
 - name: Add user to docker group
   become: true
