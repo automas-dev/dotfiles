@@ -3,7 +3,10 @@
   hosts: localhost
   roles:
     - packages
+    - yay
     - docker
     - python
-    - node
     - rust
+    - node
+    - ansible
+    - neovim
