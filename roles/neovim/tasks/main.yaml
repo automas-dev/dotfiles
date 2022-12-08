@@ -13,15 +13,11 @@
   when: ansible_distribution == "Ubuntu"
 
 - name: Plugged Install
-  shell: "nvim +'PlugInstall --sync' +qa"
+  ansible.builtin.shell: "nvim +'PlugInstall --sync' +qa"
   args:
     creates: "{{ ansible_env.HOME }}/.config/nvim/plugged"
 
 - name: CoC Install
-  shell: "nvim +'CocInstall' +qa"
+  ansible.builtin.shell: "nvim +'CocInstall' +qa"
   args:
     creates: "{{ ansible_env.HOME }}/.config/nvim/plugged/coc.nvim/node_modules/"
-
-- name: NPM install
-  community.general.npm:
-    path: "{{ ansible_env.HOME }}/.config/nvim/plugged/coc.nvim/"
