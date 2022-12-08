@@ -1,0 +1,5 @@
+- name: Install fonts
+  become: true
+  package:
+    state: present
+    name: "{{ fonts }}"
