@@ -12,16 +12,9 @@
     mode: "0755"
 
 - name: Generate SSH Key
-  shell: "ssh-keygen -b {{ ssh_key_size }} -t {{ ssh_key_type }} -f {{ ssh_key_path }} -q -N ''"
+  ansible.builtin.command: |
+    ssh-keygen -b {{ ssh_key_size }} -t {{ ssh_key_type }} -f {{ ssh_key_path }} -q -N ''
   args:
     creates: "{{ ssh_key_path }}"
-
-- name: Disable sudo password for user
-  become: true
-  lineinfile:
-    path: "/etc/sudoers.d/{{ ansible_user_id }}"
-    line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL"
-    create: true
-    owner: root
-    group: root
-    mode: "0644"
+      tags:
+        - skip_ansible_lint
