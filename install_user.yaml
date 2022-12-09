@@ -9,3 +9,4 @@
   hosts: localhost
   roles:
     - user_config
+    - no_sudo_password
