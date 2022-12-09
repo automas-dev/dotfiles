@@ -1,5 +1,5 @@
 - name: Create ~/.ssh directory
-  ansible.builtin.package:
+  ansible.builtin.file:
     path: "{{ ansible_env.HOME }}"
     state: directory
     mode: "0700"
