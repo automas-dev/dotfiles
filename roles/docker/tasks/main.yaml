@@ -96,3 +96,9 @@
     name: "{{ ansible_user_id }}"
     groups: docker
     append: true
+
+- name: Start docker service
+  ansible.builtin.systemd:
+    state: started
+    name: docker
+    enabled: true
