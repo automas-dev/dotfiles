@@ -1,0 +1,31 @@
+- name: Clone templates
+  ansible.builtin.git:
+    repo: https://github.com/twh2898/dotfiles_templates
+    dest: "{{ ansible_env.HOME }}/.templates"
+
+- name: Create ~/.local/bin
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    recurse: true
+    mode: "0755"
+
+- name: Install mkn
+  ansible.builtin.copy:
+    src: mkn
+    dest: "{{ ansible_env.HOME }}/.local/bin/mkn"
+    mode: "0755"
+
+- name: Add templates path to bashrc
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: export MKN_TEMPLATES=$HOME/.templates
+    create: true
+    mode: "0644"
+
+- name: Add mkn bash completion
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: complete -W "$(ls --color=never $MKN_TEMPLATES)" mkn
+    create: true
+    mode: "0644"
