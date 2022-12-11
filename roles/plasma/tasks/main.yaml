@@ -12,6 +12,6 @@
 
 - name: Enable SDDM
   become: true
-  ansible.builtin.package:
+  ansible.builtin.systemd:
     name: sddm.service
     enabled: true

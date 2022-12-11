@@ -2,7 +2,7 @@
   when: ansible_distribution == "Archlinux"
   block:
     - name: Clone Yay AUR
-      ansible.builtin.package:
+      ansible.builtin.git:
         repo: "{{ yay_aur_url }}"
         dest: "{{ yay_build_path }}"
 
