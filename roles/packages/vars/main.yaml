@@ -20,6 +20,7 @@ packages:
     - lsb-release
     - usbutils
     - sshfs
+    - rsync
 
   extra:
     - httpie
