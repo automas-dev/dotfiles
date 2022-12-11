@@ -2,6 +2,7 @@
   ansible.builtin.git:
     repo: "{{ templates_git_url }}"
     dest: "{{ ansible_env.HOME }}/.templates"
+    version: master
 
 - name: Install mkn
   ansible.builtin.copy:

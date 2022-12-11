@@ -43,9 +43,13 @@
     - name: Add node apt repo
       become: true
       ansible.builtin.command: /tmp/node_setup.sh
+      tags:
+        - skip_ansible_lint
 
     - name: Install node
       become: true
       ansible.builtin.package:
         state: latest
         name: nodejs
+      tags:
+        - skip_ansible_lint

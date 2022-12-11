@@ -11,11 +11,14 @@
       ansible.builtin.git:
         repo: "{{ snapd_aur_url }}"
         dest: "{{ snapd_build_path }}"
+        version: master
 
     - name: Build Snap AUR
       ansible.builtin.command: makepkg -si --noconfirm
       args:
         chdir: "{{ snapd_build_path }}"
+      tags:
+        - skip_ansible_lint
 
     - name: Start Snap Service
       become: true
