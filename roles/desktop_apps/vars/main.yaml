@@ -8,6 +8,7 @@ packages:
   - kdenlive
   - darktable
   - vlc
+  - xournalpp
 
 snapd_aur_url: https://aur.archlinux.org/snapd.git
 
