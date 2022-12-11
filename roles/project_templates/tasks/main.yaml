@@ -1,6 +1,6 @@
 - name: Clone templates
   ansible.builtin.git:
-    repo: https://github.com/twh2898/dotfiles_templates
+    repo: "{{ templates_git_url }}"
     dest: "{{ ansible_env.HOME }}/.templates"
 
 - name: Install mkn
