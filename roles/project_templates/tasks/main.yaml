@@ -10,15 +10,9 @@
     mode: "0755"
 
 - name: Add templates path to bashrc
-  ansible.builtin.lineinfile:
+  ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
-    line: '[ -z "$MKN_TEMPLATES" ] && export MKN_TEMPLATES="$HOME/.templates"'
-    create: true
-    mode: "0644"
-
-- name: Add mkn bash completion
-  ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
-    line: complete -W "$(ls --color=never $MKN_TEMPLATES)" mkn
+    block: "{{ lookup('file', 'bashrc') }}"
+    marker: "# {mark} ANSIBLE PROJECT TEMPLATES BLOCK"
     create: true
     mode: "0644"
