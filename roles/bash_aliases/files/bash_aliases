@@ -1,0 +1,70 @@
+# ls shorthand
+alias ls='ls -h --group-directories-first --color=auto'
+alias ll='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+
+# Clear and ls shorthand
+alias cls='clear && ls'
+alias cll='clear && ll'
+alias cla='clear && la'
+alias clla='clear && lla'
+
+# git shorthand
+alias gl='git log --oneline --graph --decorate --branches'
+alias gla='gl --all'
+alias gs='git status'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gb='git branch'
+alias gba='git branch -a'
+alias ga='git add'
+alias c='git commit -am'
+alias ca='git add . && git commit -m'
+alias gc='git commit'
+alias gcm='git commit -m'
+
+gt() {
+    local tag="$1"
+    git tag -a "$tag" -m "$tag"
+}
+
+## Git
+alias gitupdate="git remote prune origin && git pull && git submodule update --init --recursive"
+alias gitpull="git pull --rebase --recurse-submodules"
+alias submoduleupdate="git submodule update --init --recursive"
+alias submoduleresetall="git clean -xfd && git submodule foreach --recursive git clean -xfd && git reset --hard && git submodule foreach --recursive git reset --hard && git submodule update --init --recursive"
+
+# Trash alias
+alias trash="gio trash"
+
+# sudo apt
+alias sa='sudo apt'
+
+# Execute systemctl as sudo
+alias ss='sudo systemctl'
+alias userctl="systemctl --user"
+
+# Human readable df and du
+alias df='df -h | grep -v loop'
+alias du='du -h'
+
+# Less use raw control characters (allow color)
+alias less='less -r'
+
+# gcc and g++ color output
+alias gcc='gcc -fdiagnostics-color=always'
+alias g++='g++ -fdiagnostics-color=always'
+
+# xclip shorthand
+alias clip="xclip -sel clipboard"
+
+# Clean snap mounts form lsblk and df
+alias lsblk="lsblk | grep -v snap"
+alias df="df -h | grep -v snap"
+alias disk_free="df -h | grep --color=never -e root -e Filesystem"
+alias dir_size="du -sh * .[^.]* | sort -h"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
