@@ -1,0 +1,13 @@
+- name: Create ~/.local/bin
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    recurse: true
+    mode: "0755"
+
+- name: Add ~/.local/bin to PATH
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: export PATH="$HOME/.local/bin:$PATH"
+    create: true
+    mode: "0644"

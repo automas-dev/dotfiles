@@ -3,13 +3,6 @@
     repo: https://github.com/twh2898/dotfiles_templates
     dest: "{{ ansible_env.HOME }}/.templates"
 
-- name: Create ~/.local/bin
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/bin"
-    state: directory
-    recurse: true
-    mode: "0755"
-
 - name: Install mkn
   ansible.builtin.copy:
     src: mkn
@@ -19,7 +12,7 @@
 - name: Add templates path to bashrc
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
-    line: export MKN_TEMPLATES=$HOME/.templates
+    line: '[ -z "$MKN_TEMPLATES" ] && export MKN_TEMPLATES="$HOME/.templates"'
     create: true
     mode: "0644"
 

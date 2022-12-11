@@ -4,13 +4,6 @@
     state: directory
     mode: "0700"
 
-- name: Create ~/.local/bin
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/bin"
-    state: directory
-    recurse: true
-    mode: "0755"
-
 - name: Generate SSH Key
   ansible.builtin.command: |
     ssh-keygen -b {{ ssh_key_size }} -t {{ ssh_key_type }} -f {{ ssh_key_path }} -q -N ''
