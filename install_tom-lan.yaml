@@ -1,0 +1,8 @@
+#!/usr/bin/env ansible-playbook
+- name: Install tom-lan
+  hosts: tom-lan
+  vars:
+    clean_tag: tom-t470p
+
+  roles:
+    - backup_server
