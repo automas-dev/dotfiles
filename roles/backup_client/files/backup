@@ -39,12 +39,17 @@ notify-send -u low -t 30000 "Backup has started..."
 
 tries=3
 
-while [ $((--tries)) -ge 0 ]; do
+while [ $((tries--)) -gt 0 ]; do
     if ! run_backup; then
         echo "Failed, retrying"
         sleep 1
     fi
 done
+
+if [ "$tries" -le 0 ]; then
+    echo "Unable to backup, failed all retries"
+    exit 1
+fi
 
 echo -e ${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}
 
