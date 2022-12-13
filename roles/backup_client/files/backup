@@ -51,6 +51,6 @@ if [ "$tries" -le 0 ]; then
     exit 1
 fi
 
-echo -e ${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}
+echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
 
 notify-send -u low "Backup has finished!"
