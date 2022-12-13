@@ -58,34 +58,38 @@ This includes
 
 ## TODO
 
-- Desktop Install
-- Select System
-  - Server
-  - Ubuntu
-  - Arch
-  - Laptop?
-- Select Profile
-  - Home
-  - World
-  - Other?
-- Select Window Manager
-  - plasma
-  - cinnamon
-  - i3?
+- Install options
+  - Select System
+    - Server
+    - Ubuntu
+    - Arch
+    - Laptop?
+  - Select Profile
+    - Home
+    - World
+    - Work
+    - Other?
+  - Select Window Manager
+    - plasma
+    - cinnamon
+    - i3?
 - Settings
-  - Keyboard / Mouse
-  - Show battery percentage
-  - Power mode
-    - When to sleep / dim
-  - Default Application
-    - Browser
-    - Terminal
-- Blender Settings / Plugins
-  - Easy HDRI
-  - Hard ops
-  - Box cutter
-  - Lilly
-  - Lux core
+  - Plasma
+    - Keyboard / Mouse
+    - Show battery percentage
+    - Power mode
+      - When to sleep / dim
+    - Default Application
+      - Browser
+      - Terminal
+  - Blender
+    - Key bindings
+    - Plugins
+      - Easy HDRI
+      - Hard ops
+      - Box cutter
+      - Lilly
+      - Lux core
 - Terminal for i3
 - htop through pacman
 - configure pacman
@@ -108,6 +112,8 @@ This includes
   - install
   - git config
 - Wallpaper in desktop config
+- Fix backup script
+- Use handlers in roles (eg. to restart service if changes to config)
 
 ## Errors
 
