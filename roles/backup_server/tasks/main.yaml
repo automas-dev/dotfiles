@@ -12,7 +12,7 @@
 
 - name: Remove old service files
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
     state: absent
   loop:
     - clean_backups.service
