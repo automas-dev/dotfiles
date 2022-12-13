@@ -1,0 +1,16 @@
+- name: Install termite
+  yay:
+    state: present
+    name: termite
+
+- name: Create termite config folder
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/termite"
+    state: directory
+    mode: "0755"
+
+- name: Configure termite
+  ansible.builtin.copy:
+    src: config
+    dest: "{{ ansible_env.HOME }}/.config/termite/config"
+    mode: "0644"
