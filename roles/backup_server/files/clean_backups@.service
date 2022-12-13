@@ -5,6 +5,6 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=%h
-Environment="CLEAN_TA=%i"
+Environment="CLEAN_TAG=%i"
 ExecStart=/bin/bash %h/.local/bin/clean_backups
 # vi: ft=systemd
