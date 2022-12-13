@@ -39,8 +39,8 @@
     dest: "{{ ansible_env.HOME }}/.local/bin/"
     mode: 0755
 
-# - name: Enable clean_backups timer
-#   ansible.builtin.systemd:
-#     name: clean_backups@.timer
-#     enabled: true
-#     scope: user
+- name: Enable clean_backups timer
+  ansible.builtin.systemd:
+    name: "clean_backups@{{ clean_tag }}.timer"
+    enabled: true
+    scope: user
