@@ -101,7 +101,6 @@ This includes
 - packages
   - shellcheck
 - backup_client restic password
-- Replace ubuntu node nvm with ppa
 - Move neovim config files to role
 - Move dotfiles to role
   - most to user config?
