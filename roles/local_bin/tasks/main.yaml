@@ -4,6 +4,8 @@
     state: directory
     recurse: true
     mode: "0755"
+  tags:
+    - user_config
 
 - name: Add ~/.local/bin to PATH
   ansible.builtin.lineinfile:
@@ -11,3 +13,5 @@
     line: export PATH="$HOME/.local/bin:$PATH"
     create: true
     mode: "0644"
+  tags:
+    - user_config

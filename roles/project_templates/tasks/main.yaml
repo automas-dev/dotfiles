@@ -17,3 +17,5 @@
     marker: "# {mark} ANSIBLE PROJECT TEMPLATES BLOCK"
     create: true
     mode: "0644"
+  tags:
+    - user_config

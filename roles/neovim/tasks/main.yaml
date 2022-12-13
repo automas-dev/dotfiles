@@ -16,8 +16,12 @@
   ansible.builtin.command: "nvim +'PlugInstall --sync' +qa"
   args:
     creates: "{{ ansible_env.HOME }}/.config/nvim/plugged"
+  tags:
+    - user_config
 
 - name: CoC Install
   ansible.builtin.command: "nvim +'CocInstall' +qa"
   args:
     creates: "{{ ansible_env.HOME }}/.config/nvim/plugged/coc.nvim/node_modules/"
+  tags:
+    - user_config

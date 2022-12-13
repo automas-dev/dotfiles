@@ -5,3 +5,5 @@
     marker: "# {mark} ANSIBLE ALIASES BLOCK"
     create: true
     mode: "0644"
+  tags:
+    - user_config

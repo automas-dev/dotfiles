@@ -3,6 +3,8 @@
     path: "{{ ansible_env.HOME }}"
     state: directory
     mode: "0700"
+  tags:
+    - user_config
 
 - name: Generate SSH Key
   ansible.builtin.command: |
@@ -11,3 +13,4 @@
     creates: "{{ ssh_key_path }}"
   tags:
     - skip_ansible_lint
+    - user_config
