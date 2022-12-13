@@ -3,8 +3,8 @@
 # Exit on failure with status code of failed command
 set -e
 
-if [ -z "$HOSTNAME" ]; then
-    echo "environment variable HOSTNAME is empty, cannot continue"
+if [ -z "$CLEAN_TAG" ]; then
+    echo "environment variable CLEAN_TAG is empty, cannot continue"
     exit 1
 fi
 
@@ -27,8 +27,7 @@ WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
 echo -e "${CYAN}:: ${WHITE}Cleaning backups for" \
-    "${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE} to " \
-    "${GREEN}$RESTIC_REPO_PATH${RESET}"
+    "${YELLOW}$CLEAN_TAG${WHITE}from ${GREEN}$RESTIC_REPO_PATH${RESET}"
 
 echo -e "Keep" \
     "${RED}$KEEP_HOURLY${WHITE} hourly" \
@@ -42,7 +41,7 @@ restic -v \
     -p "$RESTIC_PASSWORD_PATH" \
     -r "$RESTIC_REPO_PATH" \
     forget \
-    --tag "$HOSTNAME" \
+    --tag "$CLEAN_TAG" \
     --keep-hourly $KEEP_HOURLY \
     --keep-daily $KEEP_DAILY \
     --keep-weekly $KEEP_WEEKLY \
