@@ -112,7 +112,6 @@ This includes
   - install
   - git config
 - Wallpaper in desktop config
-- Fix backup script
 - Use handlers in roles (eg. to restart service if changes to config)
 
 ## Errors
