@@ -2,6 +2,7 @@
 - name: Install Base
   hosts: localhost
   roles:
+    - update_keyring
     - packages
     - yay
     - docker
@@ -10,3 +11,4 @@
     - node
     - ansible
     - neovim
+    - bash

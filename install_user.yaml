@@ -8,8 +8,10 @@
 - name: Install User
   hosts: localhost
   roles:
+    - local_bin
     - ssh_keygen
     - no_sudo_password
-    - bash
+    - bash_config
     - project_templates
     - gitprompt
+    - backup_client

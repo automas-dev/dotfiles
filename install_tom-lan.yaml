@@ -1,8 +1,13 @@
 #!/usr/bin/env ansible-playbook
+- name: Import Install Base
+  hosts: server
+  import_playbook: install_base.yaml
+
 - name: Install tom-lan
   hosts: server
   vars:
     clean_tag: tom-t470p
 
   roles:
+    - ssh_keygen
     - backup_server
