@@ -10,6 +10,5 @@
   roles:
     - ssh_keygen
     - no_sudo_password
-    - bashrc
-    - bash_aliases
+    - bash
     - project_templates
