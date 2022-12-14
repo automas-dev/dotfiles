@@ -1,9 +1,19 @@
 #!/usr/bin/env ansible-playbook
-- name: Import Install Base
+- name: Install Base
   hosts: server
-  import_playbook: install_base.yaml
+  roles:
+    - update_keyring
+    - packages
+    - yay
+    - docker
+    - python
+    - rust
+    - node
+    - ansible
+    - neovim
+    - bash
 
-- name: Install tom-lan
+- name: Configure
   hosts: server
   vars:
     clean_tag: tom-t470p
