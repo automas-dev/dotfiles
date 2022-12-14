@@ -1,0 +1,11 @@
+- name: Install gitprompt
+  ansible.builtin.copy:
+    src: gitprompt.sh
+    dest: "{{ ansible_env.HOME }}/gitprompt.sh"
+    backup: true
+
+- name: Enable gitprompt
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: |
+      source "$HOME/gitprompt.sh"
