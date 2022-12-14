@@ -86,7 +86,7 @@ try_install() {
 try_install clang-format
 try_install gdbinit
 #try_install gitconfig
-try_install inputrc
+# try_install inputrc
 try_install LESS_TERMCAP
 #try_install restic_exclude
 try_install Xdefaults

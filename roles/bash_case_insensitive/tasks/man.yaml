@@ -1,0 +1,5 @@
+- name: Make bash tab complete case insensitive
+  ansible.builtin.copy:
+    src: inputrc
+    dest: "{{ ansible_env.HOME }}/.inputrc"
+    backup: true
