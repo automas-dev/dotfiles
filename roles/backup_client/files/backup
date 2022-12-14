@@ -26,12 +26,12 @@ echo -e "${CYAN}:: ${WHITE}Backing up\
     to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
 
 run_backup() {
-    sudo restic -v \
+    restic -v \
         -p "$RESTIC_PASSWORD_PATH" \
         -r "sftp:$REMOTE_HOST:$REMOTE_PATH" \
         backup \
         --exclude-file "$RESTIC_EXCLUDE_PATH" \
-        / \
+        /home/thomas \
         --tag "$HOSTNAME"
 }
 
