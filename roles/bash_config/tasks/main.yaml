@@ -1,0 +1,27 @@
+- name: Create ~/.bashrc
+  ansible.builtin.copy:
+    src: bashrc
+    dest: "{{ ansible_env.HOME }}/.bashrc"
+    create: true
+    mode: "0644"
+    force: false # force false instead of backup true so user changes persist
+  tags:
+    - user_config
+
+- name: Configure ~/.bash_aliases
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bash_aliases"
+    block: "{{ lookup('file', 'bash_aliases') }}"
+    marker: "# {mark} ANSIBLE ALIASES BLOCK"
+    create: true
+    mode: "0644"
+  tags:
+    - user_config
+
+- name: Make bash tab complete case insensitive
+  ansible.builtin.copy:
+    src: inputrc
+    dest: "{{ ansible_env.HOME }}/.inputrc"
+    backup: true
+  tags:
+    - user_config
