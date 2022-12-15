@@ -6,4 +6,4 @@
 
 - name: Make bash default shell
   become: true
-  ansible.builtin.command: chsh /bin/bash
+  ansible.builtin.command: chsh -s /bin/bash
