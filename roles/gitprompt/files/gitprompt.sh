@@ -1,3 +1,5 @@
+COLOR_GRAY="\033[0;90m"
+COLOR_LIGHT_GRAY="\033[0;37m"
 COLOR_RED="\033[0;31m"
 COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
@@ -7,6 +9,12 @@ COLOR_WHITE="\033[0;37m"
 # 256 color orange
 COLOR_ORANGE="\e[38;5;214m"
 COLOR_RESET="\033[0m"
+
+function ssh_session {
+  if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    echo -e "${COLOR_GRAY}ssh"
+  fi
+}
 
 function git_color {
   local git_status="$(git status 2> /dev/null)"
@@ -36,8 +44,8 @@ function git_branch {
   fi
 }
 
-
-PS1="\[$COLOR_GREEN\][\w]"          # basename of pwd
+PS1="\[$(ssh_session)\]"
+PS1+="\[$COLOR_GREEN\][\w]"          # basename of pwd
 PS1+="\[\$(git_color)\]"        # colors git status
 PS1+="\$(git_branch)"           # prints current branch
 PS1+="\[$COLOR_ORANGE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
