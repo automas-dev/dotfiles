@@ -1,5 +1,3 @@
-COLOR_GRAY="\033[0;90m"
-COLOR_LIGHT_GRAY="\033[0;37m"
 COLOR_RED="\033[0;31m"
 COLOR_YELLOW="\033[0;33m"
 COLOR_GREEN="\033[0;32m"
@@ -12,7 +10,7 @@ COLOR_RESET="\033[0m"
 
 function ssh_session {
   if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    echo -e "${COLOR_GRAY}ssh"
+    echo -e "${COLOR_WHITE}ssh"
   fi
 }
 
