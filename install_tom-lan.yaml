@@ -20,4 +20,5 @@
 
   roles:
     - ssh_keygen
+    - gitprompt
     - backup_server
