@@ -37,7 +37,7 @@
       ansible.builtin.get_url:
         url: "https://deb.nodesource.com/setup_{{ node_version }}.x"
         dest: /tmp/node_setup.sh
-        mode: 0755
+        mode: "0755"
         force: true
 
     - name: Add node apt repo
