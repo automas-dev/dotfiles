@@ -115,6 +115,10 @@ This includes
 - Use handlers in roles (eg. to restart service if changes to config)
 - Fail when clean tag var is not defined for backup_server
 
+### Tom Lan
+
+- mdadm for raid
+
 ## Errors
 
 User desktop keyboard interval fails when desktop is installed at same time.
