@@ -2,6 +2,7 @@
   ansible.builtin.copy:
     src: gitprompt.sh
     dest: "{{ ansible_env.HOME }}/gitprompt.sh"
+    mode: "0644"
     backup: true
 
 - name: Enable gitprompt
