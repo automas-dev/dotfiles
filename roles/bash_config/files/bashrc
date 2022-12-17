@@ -63,5 +63,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 export ROS_HOSTNAME=$(hostname)
 export ROS_MASTER_URI=http://$(hostname):11311/
 
+export PATH="$HOME/.local/bin:$PATH"
+
 export ANSIBLE_NOCOWS=1
 export MOZ_USE_XINPUT2=1
