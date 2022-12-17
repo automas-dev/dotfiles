@@ -4,6 +4,12 @@
     name: bash
     state: present
 
+- name: Install bash tab completion
+  become: true
+  ansible.builtin.package:
+    name: bash-completion
+    state: present
+
 - name: Get default shell
   ansible.builtin.command: echo "$SHELL"
   changed_when: false
