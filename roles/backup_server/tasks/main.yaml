@@ -44,6 +44,7 @@
 - name: Enable clean_backups timer
   ansible.builtin.systemd:
     name: "clean_backups@{{ clean_tag }}.timer"
+    daemon_reload: true
     enabled: true
     scope: user
   tags:

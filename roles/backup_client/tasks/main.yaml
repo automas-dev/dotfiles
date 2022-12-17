@@ -43,6 +43,7 @@
 - name: Enable backup timer
   ansible.builtin.systemd:
     name: backup.timer
+    daemon_reload: true
     enabled: true
     scope: user
   tags:
