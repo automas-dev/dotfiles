@@ -2,10 +2,14 @@
 Description=Daily backup
 After=network.target
 OnFailure=failure-handler@%N.service
+StartLimitInterval=3600
+StartLimitBurst=2
 
 [Service]
 Type=simple
 WorkingDirectory=%h
 ExecStart=/bin/bash %h/.local/bin/backup
+Restart=on-failure
+RestartSec=30
 
 # vi: ft=systemd
