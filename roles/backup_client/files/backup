@@ -25,31 +25,15 @@ echo -e "${CYAN}:: ${WHITE}Backing up\
     ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
     to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
 
-run_backup() {
-    restic -v \
-        -p "$RESTIC_PASSWORD_PATH" \
-        -r "sftp:$REMOTE_HOST:$REMOTE_PATH" \
-        backup \
-        --exclude-file "$RESTIC_EXCLUDE_PATH" \
-        /home/thomas \
-        --tag "$HOSTNAME"
-}
-
 notify-send -u low -t 30000 "Backup has started..."
 
-tries=3
-
-while [ $((tries--)) -gt 0 ]; do
-    if ! run_backup; then
-        echo "Failed, retrying"
-        sleep 1
-    fi
-done
-
-if [ "$tries" -le 0 ]; then
-    echo "Unable to backup, failed all retries"
-    exit 1
-fi
+restic -v \
+    -p "$RESTIC_PASSWORD_PATH" \
+    -r "sftp:$REMOTE_HOST:$REMOTE_PATH" \
+    backup \
+    --exclude-file "$RESTIC_EXCLUDE_PATH" \
+    /home/thomas \
+    --tag "$HOSTNAME"
 
 echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
 
