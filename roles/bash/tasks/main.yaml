@@ -10,12 +10,7 @@
     name: bash-completion
     state: present
 
-- name: Get default shell
-  ansible.builtin.command: echo "$SHELL"
-  changed_when: false
-  register: shell
-
 - name: Make bash default shell
-  become: true
-  ansible.builtin.command: chsh -s /bin/bash
-  when: shell.stdout != "/bin/bash"
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/bash
