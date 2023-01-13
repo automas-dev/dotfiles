@@ -1,5 +1,4 @@
-# one dark - https://github.com/flxy0/onedark-termite
-# I've flipped the colors, since they were reversed
+# one dark
 [colors]
 
 # special
@@ -9,36 +8,36 @@ cursor          =
 background      = #282c34
 
 # black
-color8  = #282c34
-color0  = #5c6370
+color0  = #282c34
+color8  = #5c6370
 
 # red
-color9  = #e06c75
-color1  = #be5046
+color1  = #e06c75
+color9  = #be5046
 
 # green
-color10  = #98c379
-color2 = #7a9f60
+color2  = #98c379
+color10 = #7a9f60
 
 # yellow
-color11  = #e5c07b
-color3 = #d19a66
+color3  = #e5c07b
+color11 = #d19a66
 
 # blue
-color12  = #61afef
-color4 = #3b84c0
+color4  = #61afef
+color12 = #3b84c0
 
 # magenta
-color13  = #c678dd
-color5 = #9a52af
+color5  = #c678dd
+color13 = #9a52af
 
 # cyan
-color14  = #56b6c2
-color6 = #3c909b
+color6  = #56b6c2
+color14 = #3c909b
 
 # white
-color15  = #abb2bf
-color7 = #828997
+color7  = #abb2bf
+color15 = #828997
 
 vim: ft=dosini cms=#%s
 
