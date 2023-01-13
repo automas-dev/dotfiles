@@ -4,6 +4,16 @@
     state: present
     name: "{{ packages }}"
 
+- name: Install Flatpak
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: flatpak
+
+- name: Install Flatpak Apps
+  community.general.flatpak:
+    name: "{{ flatpak_packages }}"
+
 - name: Install Snap Archlinux
   when: ansible_distribution == "Archlinux"
   block:
