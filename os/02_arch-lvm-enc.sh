@@ -20,6 +20,12 @@ do_confirm() {
     esac
 }
 
+read_swap() {
+    free -h
+    echo -n "Enter swap size: "
+    read SWAP_SIZE
+}
+
 setup_vg() {
     cryptsetup luksFormat --type luks1 --use-random -S 1 -s 512 -h sha512 -i 5000 "$PARTITION"
     cryptsetup open "$PARTITION" cryptlvm
@@ -27,16 +33,8 @@ setup_vg() {
     vgcreate vg /dev/mapper/cryptlvm
 }
 
-get_mem_size() {
-    cat /proc/meminfo  | grep MemTotal | awk '{print $2}'
-}
-
 setup_lv() {
-    local memsize swapsize
-    memsize="$(get_mem_size)"
-    swapsize=$(( memsize / 2 ))
-    echo "Swap size is $swapsize"
-    lvcreate -L "$swapsize" vg -n swap
+    lvcreate -L "$SWAP_SIZE" vg -n swap
     lvcreate -l 100%FREE vg -n root
 }
 
@@ -54,6 +52,8 @@ echo YOU ARE ABOUT TO MODIFY $PARTITION
 echo
 
 do_confirm
+
+read_swap
 
 setup_vg
 
