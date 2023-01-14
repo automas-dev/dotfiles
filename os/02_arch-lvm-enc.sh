@@ -20,28 +20,46 @@ do_confirm() {
     esac
 }
 
+setup_vg() {
+    cryptsetup luksFormat --type luks1 --use-random -S 1 -s 512 -h sha512 -i 5000 "$PARTITION"
+    cryptsetup open "$PARTITION" cryptlvm
+    pvcreate /dev/mapper/cryptlvm
+    vgcreate vg /dev/mapper/cryptlvm
+}
+
+get_mem_size() {
+    cat /proc/meminfo  | grep MemTotal | awk '{print $2}'
+}
+
+setup_lv() {
+    local memsize swapsize
+    memsize="$(get_mem_size)"
+    swapsize=$(( memsize / 2 ))
+    echo "Swap size is $swapsize"
+    lvcreate -L "$swapsize" vg -n swap
+    lvcreate -l 100%FREE vg -n root
+}
+
+do_format() {
+    mkfs.ext4 /dev/vg/root
+    mkswap /dev/vg/swap
+}
+
+do_mount() {
+    mount /dev/vg/root /mnt
+    swapon /dev/vg/swap
+}
+
 echo YOU ARE ABOUT TO MODIFY $PARTITION
 echo
 
 do_confirm
 
-cryptsetup luksFormat --type luks1 --use-random -S 1 -s 512 -h sha512 -i 5000 "$PARTITION"
-cryptsetup open "$PARTITION" cryptlvm
-pvcreate /dev/mapper/cryptlvm
-vgcreate vg /dev/mapper/cryptlvm
+setup_vg
 
-lvcreate -L 8G vg -n swap
-lvcreate -L 32G vg -n root
-lvcreate -l 100%FREE vg -n home
+do_format
 
-mkfs.ext4 /dev/vg/root
-mkfs.ext4 /dev/vg/home
-mkswap /dev/vg/swap
-
-mount /dev/vg/root /mnt
-mkdir /mnt/home
-mount /dev/vg/home /mnt/home
-swapon /dev/vg/swap
+do_mount
 
 echo Done
 
