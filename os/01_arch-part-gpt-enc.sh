@@ -41,9 +41,7 @@ do_partition() {
     # Clear the disk
     sgdisk -Z "$DISK"
 
-    #sgdisk -n 0:0:+1M -t 0:ef02 -c 0:"bios_boot" "$DISK"
-    sgdisk -n 0:0:+100M -t 0:ef00 -c 0:"efi_system" "$DISK"
-    sgdisk -n 0:0:+250M -t 0:8300 -c 0:"boot" "$DISK"
+    sgdisk -n 0:0:+512M -t 0:ef00 -c 0:"boot" "$DISK"
     sgdisk -n 0:0:0 -t 0:8300 -c 0:"linux" "$DISK"
 
     sgdisk -p "$DISK"

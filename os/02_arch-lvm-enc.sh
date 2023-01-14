@@ -26,19 +26,17 @@ read_swap() {
     read SWAP_SIZE
 }
 
-setup_vg() {
-    cryptsetup luksFormat --type luks1 --use-random -S 1 -s 512 -h sha512 -i 5000 "$PARTITION"
+setup_crypt() {
+    cryptsetup luksFormat --type luks1 "$PARTITION"
     cryptsetup open "$PARTITION" cryptlvm
-    pvcreate /dev/mapper/cryptlvm
-    vgcreate vg /dev/mapper/cryptlvm
 }
 
 setup_lv() {
+    pvcreate /dev/mapper/cryptlvm
+    vgcreate vg /dev/mapper/cryptlvm
     lvcreate -L "$SWAP_SIZE" vg -n swap
     lvcreate -l 100%FREE vg -n root
-}
 
-do_format() {
     mkfs.ext4 /dev/vg/root
     mkswap /dev/vg/swap
 }
@@ -55,11 +53,9 @@ do_confirm
 
 read_swap
 
-setup_vg
+setup_crypt
 
 setup_lv
-
-do_format
 
 do_mount
 
