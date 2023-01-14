@@ -57,6 +57,8 @@ do_confirm
 
 setup_vg
 
+setup_lv
+
 do_format
 
 do_mount
