@@ -129,8 +129,8 @@ setup_boot() {
     disk="$1"
     part="$2"
     mnt="$3"
-    echo "HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems fsck)" > "$mnt/etc/mkinitcpio.conf"
-    echo "MODULES=(ext4)" > "$mnt/etc/mkinitcpio.conf"
+    echo "HOOKS=(base udev autodetect modconf kms keyboard keymap consolefont block encrypt lvm2 filesystems fsck)" >> "$mnt/etc/mkinitcpio.conf"
+    echo "MODULES=(ext4)" >> "$mnt/etc/mkinitcpio.conf"
     arch-chroot "$mnt" mkinitcpio -p linux
     PART_UUID="$(blkid -o value -s UUID "$part")"
     arch-chroot "$mnt" efibootmgr --create --disk "$disk" --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode "cryptdevice=UUID=$PART_UUID:cryptlvm root=/dev/cryptlvm/root resume=/dev/cryptlvm/swap rw initrd=\\initramfs-linux.img"
