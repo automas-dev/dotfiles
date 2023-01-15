@@ -3,6 +3,13 @@
 # Exit if any command fails
 set -e
 
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 <disk>"
+    exit 1
+fi
+
+DISK="$1"
+
 header() {
     echo "--------------------"
     echo -e "\033[1m$*\033[0m"
@@ -156,8 +163,6 @@ setup_installer
 echo Setup complete
 
 header "Disk partition"
-lsblk
-read -rp "Enter the host disk: " DISK
 echo "You are about to modify $DISK"
 do_confirm
 
