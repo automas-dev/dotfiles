@@ -182,7 +182,7 @@ header "Setup encryption"
 setup_crypt "$root"
 
 header "Setup lvm"
-free
+free -h
 read -rp "Enter the swap volume size(eg. 2*mem): " SWAP
 
 setup_lvm "$root" vg
