@@ -166,7 +166,7 @@ part_disk "$DISK"
 
 readarray -t PARTS < <(sudo fdisk -l | grep -e "s^$disk" | awk '{print $1}')
 echo "Partitions are ${PARTS[*]}"
-read -rp "Press enter to continue:"
+read -rp "Press enter to continue..."
 
 if [ ${#PARTS[@]} -ne 2 ]; then
     echo "Unexpected partitions ${PARTS[*]}"
