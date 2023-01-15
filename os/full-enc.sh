@@ -164,7 +164,7 @@ do_confirm
 backup_disk "$DISK"
 part_disk "$DISK"
 
-readarray -t PARTS < <(sudo fdisk -l | grep -e "s^$disk" | awk '{print $1}')
+readarray -t PARTS < <(sudo fdisk -l | grep -e "^$disk" | awk '{print $1}')
 echo "Partitions are ${PARTS[*]}"
 read -rp "Press enter to continue..."
 
