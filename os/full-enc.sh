@@ -133,7 +133,8 @@ setup_boot() {
     echo "MODULES=(ext4)" >> "$mnt/etc/mkinitcpio.conf"
     arch-chroot "$mnt" mkinitcpio -p linux
     PART_UUID="$(blkid -o value -s UUID "$part")"
-    arch-chroot "$mnt" efibootmgr --create --disk "$disk" --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode "cryptdevice=UUID=$PART_UUID:cryptlvm root=/dev/cryptlvm/root resume=/dev/cryptlvm/swap rw initrd=\\initramfs-linux.img"
+    echo PART_UUID is $PART_UUID
+    arch-chroot "$mnt" efibootmgr --create --disk "$disk" --part 1 --label "Arch Linux" --loader /vmlinuz-linux --unicode "cryptdevice=UUID=$PART_UUID:cryptlvm root=/dev/vg/root resume=/dev/vg/swap rw initrd=\\initramfs-linux.img"
 }
 
 setup_system() {
