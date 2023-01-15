@@ -186,8 +186,8 @@ free -h
 read -rp "Enter the swap volume size(eg. 2*mem): " SWAP
 
 setup_lvm "$root" vg
-setup_swap vg "$SWAP"
-setup_root vg
+create_swap vg "$SWAP"
+create_root vg
 mount_lvm vg "$boot" /mnt
 
 header "Install system"
