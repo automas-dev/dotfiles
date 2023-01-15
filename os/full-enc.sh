@@ -153,6 +153,15 @@ setup_system() {
     arch-chroot "$root" passwd
 }
 
+setup_user() {
+    local root user
+    root="$1"
+    user="$2"
+    arch-chroot "$root" useradd -m -G "sudo" -s /bin/bash "$user"
+    echo "Set the password for thomas"
+    arch-chroot "$root" passwd thomas
+}
+
 echo Remember to connect to the internet first. You will need to use
 echo Ethernet -- plug in the cable
 echo Wi-Fi -- connect to the network using iwctl
@@ -200,4 +209,5 @@ read -rp "Enter a hostname: " HOSTNAME
 install_system /mnt
 setup_boot "$DISK" "$root" /mnt
 setup_system /mnt "$HOSTNAME"
+setup_user /mnt thomas
 
