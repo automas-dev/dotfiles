@@ -2,7 +2,6 @@
   ansible.builtin.copy:
     src: bashrc
     dest: "{{ ansible_env.HOME }}/.bashrc"
-    create: true
     mode: "0644"
     force: false # force false instead of backup true so user changes persist
   tags:
