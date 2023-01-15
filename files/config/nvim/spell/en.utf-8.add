@@ -755,3 +755,7 @@ deepstorage
 lan
 sftp
 restic
+lvm
+mem
+fstab
+conf
