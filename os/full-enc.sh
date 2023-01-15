@@ -120,7 +120,7 @@ install_system() {
     local root
     root="$1"
     pacman -Sy --noconfirm --needed archlinux-keyring
-    pacstrap "$root" base linux linux-firmware base-devel git vi vim networkmanager sudo lvm2
+    pacstrap "$root" base linux linux-firmware base-devel git vi vim networkmanager sudo lvm2 efibootmgr
     genfstab -U "$root" >> "$root/etc/fstab"
 }
 
