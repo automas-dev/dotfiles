@@ -98,6 +98,7 @@
     append: true
 
 - name: Start docker service
+  become: true
   ansible.builtin.systemd:
     state: started
     name: docker
