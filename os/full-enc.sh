@@ -148,7 +148,7 @@ setup_system() {
     echo "en_US.UTF-8 UTF-8" >> "$root/etc/locale.gen"
     arch-chroot "$root" locale-gen
     echo "LANG=en_US.UTF-8" > "$root/etc/locale.conf"
-    echo "$hostname" > /etc/hostname
+    echo "$hostname" > "$root/etc/hostname"
     echo "Set the root password"
     arch-chroot "$root" passwd
 }
