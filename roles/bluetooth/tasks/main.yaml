@@ -8,6 +8,7 @@
         name:
           - bluez
           - bluez-utils
+          - pulseaudio-bluetooth
 
     - name: Start Bluetooth Service
       become: true
