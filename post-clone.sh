@@ -18,10 +18,6 @@ echo_green() { echo -e "${GREEN}$*${NC}"; }
 echo_yellow() { echo -e "${YELLOW}$*${NC}"; }
 echo_white() { echo -e "${WHITE}$*${NC}"; }
 
-echo_white "Git Submodule Update"
-
-git submodule update --init --recursive
-
 is_distro() {
     grep -i "$1" </proc/version >/dev/null
 }
