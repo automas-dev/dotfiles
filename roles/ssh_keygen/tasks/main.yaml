@@ -12,19 +12,12 @@
     name: openssh-client
     state: present
 
-- name: Create ~/.ssh directory
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}"
-    state: directory
-    mode: "0700"
-  tags:
-    - user_config
-
 - name: Generate SSH Key
-  ansible.builtin.command: |
-    ssh-keygen -b {{ ssh_key_size }} -t {{ ssh_key_type }} -f {{ ssh_key_path }} -q -N ''
-  args:
-    creates: "{{ ssh_key_path }}"
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    generate_ssh_key: yes
+    ssh_key_type: "{{ ssh_key_type }}"
+    ssh_key_bits: "{{ ssh_key_size }}"
+    ssh_key_file: "{{ ssh_key_path }}"
   tags:
-    - skip_ansible_lint
     - user_config
