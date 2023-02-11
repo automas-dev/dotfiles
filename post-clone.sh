@@ -10,11 +10,15 @@ set -e
 RED='\033[1;31m'
 GREEN='\033[1;32m'
 YELLOW='\033[1;33m'
+WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
 echo_red() { echo -e "${RED}$*${NC}"; }
 echo_green() { echo -e "${GREEN}$*${NC}"; }
 echo_yellow() { echo -e "${YELLOW}$*${NC}"; }
+echo_white() { echo -e "${WHITE}$*${NC}"; }
+
+echo_white "Git Submodule Update"
 
 git submodule update --init --recursive
 

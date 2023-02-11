@@ -26,12 +26,14 @@ YELLOW="\033[0;33m"
 CYAN="\033[0;36m"
 RESET="\033[0;0m"
 
+DOTFILES_FAIL=0
+
 make_link() {
     TO_INSTALL=$1
     INSTALL_TO=$2
 
     if [ -z "$DRY" ]; then
-        ln -s -f $TO_INSTALL $INSTALL_TO
+        ln -s -f $TO_INSTALL $INSTALL_TO || DOTFILES_FAIL=1
     fi
 
     echo -e "${YELLOW}Link created${RESET} for ${CYAN}$INSTALL_TO${RESET} -> $TO_INSTALL"
@@ -95,6 +97,11 @@ try_install config/nvim
 # try_install config/termite
 # try_install scripts
 
+mkdir -p $HOME/.config/termite
+try_link $(pwd)/files/config/termite/onedark $HOME/.config/termite/config
+
 try_link $HOME/.vim/init.vim $HOME/.vimrc
 try_link $HOME/.config/nvim $HOME/.vim
 try_link $HOME/.Xdefaults $HOME/.Xresources 
+
+exit $DOTFILES_FAIL

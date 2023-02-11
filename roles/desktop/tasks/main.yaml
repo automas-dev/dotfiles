@@ -1,0 +1,40 @@
+- tags: desktop
+  block:
+    - name: Update Apt Repositories
+      become: true
+      apt:
+        update_cache: true
+      changed_when: false
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install Snap Apps
+      become: true
+      community.general.snap:
+        state: present
+        name: "{{ snap_packages }}"
+
+    - name: Install Snap Classic Apps
+      become: true
+      community.general.snap:
+        state: present
+        classic: true
+        name: "{{ snap_classic_packages }}"
+
+    - name: Install Ubuntu Snap Apps
+      become: true
+      community.general.snap:
+        state: present
+        name: "{{ ubuntu_snap_packages }}"
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install AUR Packages
+      yay:
+        name: "{{ aur_packages }}"
+        state: present
+      when: ansible_distribution == "Archlinux"
+
+    - name: Install Google Chrome
+      become: true
+      apt:
+        deb: "{{ google_chrome_deb }}"
+      when: ansible_distribution == "Ubuntu"
