@@ -1,6 +1,17 @@
 #!/usr/bin/env ansible-playbook
-- name: Install
+- name: Import Install Base
+  import_playbook: install_base.yaml
+
+- name: Import Install Desktop
+  import_playbook: install_desktop.yaml
+
+- name: Install User
   hosts: localhost
   roles:
-    - user_config
-    - desktop
+    - local_bin
+    - ssh_keygen
+    - no_sudo_password
+    - bash_config
+    - project_templates
+    - gitprompt
+    - backup_client

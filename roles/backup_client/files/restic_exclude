@@ -1,0 +1,14 @@
+/home/lost+found/
+/home/.__*.db
+/home/games/
+$HOME/.mozilla/
+$HOME/.local/share/Trash/
+$HOME/.local/share/Steam/
+$HOME/.cache/
+$HOME/.android/avd/
+$HOME/.gradle/caches
+$HOME/.restic_pass
+$HOME/.config/Code/Cache/
+$HOME/.config/Code/User/workspaceStorage/
+$HOME/.local/share/baloo/index
+$HOME/.local/share/baloo/index-lock

@@ -1,0 +1,15 @@
+- name: Install Yay
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Clone Yay AUR
+      ansible.builtin.git:
+        repo: "{{ yay_aur_url }}"
+        dest: "{{ yay_build_path }}"
+        version: master
+
+    - name: Build Yay AUR
+      ansible.builtin.command: makepkg -si --noconfirm
+      args:
+        chdir: "{{ yay_build_path }}"
+      tags:
+        - skip_ansible_lint

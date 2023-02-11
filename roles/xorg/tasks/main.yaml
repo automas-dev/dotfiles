@@ -1,0 +1,7 @@
+- name: Install
+  become: true
+  ansible.builtin.package:
+    state: present
+    name:
+      - xorg
+      - xorg-xinit

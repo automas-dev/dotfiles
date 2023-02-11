@@ -1,0 +1,8 @@
+- name: Create ~/.local/bin
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bin"
+    state: directory
+    recurse: true
+    mode: "0755"
+  tags:
+    - user_config

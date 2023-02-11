@@ -17,7 +17,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ryanoasis/vim-devicons'
 
     " CoC
-    Plug 'neoclide/coc.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
     " C++
     Plug 'jackguo380/vim-lsp-cxx-highlight'

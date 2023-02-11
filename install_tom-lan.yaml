@@ -1,0 +1,24 @@
+#!/usr/bin/env ansible-playbook
+- name: Install Base
+  hosts: server
+  roles:
+    - update_keyring
+    - packages
+    - yay
+    - docker
+    - python
+    - rust
+    - node
+    - ansible
+    - neovim
+    - bash
+
+- name: Configure
+  hosts: server
+  vars:
+    clean_tag: tom-t470p
+
+  roles:
+    - ssh_keygen
+    - gitprompt
+    - backup_server

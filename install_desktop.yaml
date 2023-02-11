@@ -1,5 +1,15 @@
 #!/usr/bin/env ansible-playbook
-- name: Install
+- name: Import Install Base
+  import_playbook: install_base.yaml
+
+- name: Install Desktop
   hosts: localhost
   roles:
-    - desktop
+    - xorg
+    - i3
+    - plasma
+    - desktop_apps
+    - bluetooth
+    - fonts
+    - desktop_config
+    - termite

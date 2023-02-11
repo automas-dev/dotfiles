@@ -1,0 +1,18 @@
+- name: Install Bluetooth
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install Packages
+      become: true
+      ansible.builtin.package:
+        state: present
+        name:
+          - bluez
+          - bluez-utils
+          - pulseaudio-bluetooth
+
+    - name: Start Bluetooth Service
+      become: true
+      ansible.builtin.systemd:
+        name: bluetooth.service
+        state: started
+        enabled: true

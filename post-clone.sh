@@ -23,72 +23,21 @@ echo_white "Git Submodule Update"
 git submodule update --init --recursive
 
 is_distro() {
-    grep "$1" </proc/version
+    grep -i "$1" </proc/version >/dev/null
 }
 
-echo_white "Install ansible"
-
-if is_distro Ubuntu; then
-    echo_green Detected Ubuntu Distro
+echo "Updating base system"
+if is_distro ubuntu; then
+    echo_green "Detected Ubuntu Distro"
     sudo apt-get update
     sudo apt-get -y upgrade
     sudo apt-get -y install ansible
 elif is_distro archlinux; then
-    echo_green Detected Archlinux Distro
-    sudo pacman -Syu
-    sudo pacman -S --noconfirm ansible
+    echo_green "Detected Archlinux Distro"
+    sudo pacman -Syu --noconfirm
+    sudo pacman -Sy --noconfirm ansible
 else
-    echo_red "Unknown linux distro '$(cat /proc/version)'"
+    echo_red "Unknown linux distro"
+    echo "Exiting!"
     exit 1
 fi
-
-echo -e """
-================================================================================
-                                 Setup Complete                                 
-================================================================================
-
-But, this is only this repo. To setup the system, use these steps.
-
-==========
-${WHITE}Install${NC}
-----------
-All
-
-ansible-playbook install.yaml
-
-This will also install all of the following, which can be installed separately.
-
-----------
-System Base
-
-ansible-playbook install_system.yaml
-
-----------
-User Config
-
-ansible-playbook install_user.yaml
-
-----------
-You can also choose to only install dotfiles, and no other user configurations.
-
-gio trash ~/.bashrc
-./install_dotfiles.sh
-
-----------
-Desktop Apps
-
-ansible-playbook install_desktop.yaml
-
-==========
-${WHITE}Add SSH key to Github${NC}
-
-xclip -sel clipboard <~/.ssh/id_rsa.pub
-
-Add ssh key to Github using https://github.com/settinsg/keys
-
----------
-Update remote to use ssh
-
-git remote set-url origin git@github.com:twh2898/dotfiles.git
-git pull
-"""

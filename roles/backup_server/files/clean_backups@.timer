@@ -1,0 +1,11 @@
+[Unit]
+Description=Timer for cleaning backups of %i
+
+[Timer]
+# Daily at 4:00 AM
+OnCalendar=*-*-* 4:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+# vi: ft=systemd

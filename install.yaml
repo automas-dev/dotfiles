@@ -1,12 +1,8 @@
 #!/usr/bin/env ansible-playbook
-- name: Install
+
+- name: Install Test
   hosts: localhost
   vars:
     ansible_remote_tmp: /tmp
   roles:
-    - packages
-    - docker
-    - node
-    - rust
-    - user_config
-    - desktop
+    - gitprompt

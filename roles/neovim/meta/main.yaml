@@ -1,0 +1,3 @@
+dependencies:
+  - role: node
+  - role: update_keyring

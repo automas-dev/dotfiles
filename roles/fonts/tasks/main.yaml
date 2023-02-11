@@ -1,0 +1,5 @@
+- name: Install fonts
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ fonts }}"

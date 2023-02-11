@@ -1,0 +1,2 @@
+[ -z "$MKN_TEMPLATES" ] && export MKN_TEMPLATES="$HOME/.templates"
+complete -W "$(ls --color=never $MKN_TEMPLATES)" mkn

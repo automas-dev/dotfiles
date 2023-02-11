@@ -1,38 +1,55 @@
-- tags:
-    - packages
-    - node
+- name: Install NodeJS Archlinux
+  when: ansible_distribution == "Archlinux"
   block:
-    - name: install nvm
-      shell: curl -o- {{ nvm_url }} | bash
-      environment:
-        NVM_DIR: ""
-      args:
-        chdir: "{{ ansible_env.HOME }}"
-        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    - name: Install packages
+      become: true
+      ansible.builtin.package:
+        state: present
+        name:
+          - nodejs
+          - npm
+          - yarn
 
-    - name: install node
-      shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 16
-      args:
-        chdir: "{{ ansible_env.HOME }}"
-        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+- name: Install NodeJS Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Remove nodesource apt source
+      become: true
+      ansible.builtin.file:
+        path: /etc/apt/sources.list.d/nodesource.list
+        state: absent
 
-    - name: set node version
-      shell: . {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm use default 16
-      args:
-        executable: /bin/bash
+    - name: Update Apt Repositories
+      become: true
+      ansible.builtin.package:
+        update_cache: true
+      changed_when: false
 
-    - name: neovim plugin setup
-      block:
-        - name: Plugged Install
-          shell: "nvim +'PlugInstall --sync' +qa"
-          args:
-            creates: "{{ ansible_env.HOME }}/.config/nvim/plugged"
+    - name: Remove old node version
+      become: true
+      ansible.builtin.package:
+        state: absent
+        name:
+          - nodejs
+          - nodejs-doc
 
-        - name: CoC Install
-          shell: "nvim +'CocInstall' +qa"
-          args:
-            creates: "{{ ansible_env.HOME }}/.config/nvim/plugged/coc.nvim/node_modules/"
+    - name: Download installer
+      ansible.builtin.get_url:
+        url: "https://deb.nodesource.com/setup_{{ node_version }}.x"
+        dest: /tmp/node_setup.sh
+        mode: "0755"
+        force: true
 
-        - name: NPM install
-          community.general.npm:
-            path: "{{ ansible_env.HOME }}/.config/nvim/plugged/coc.nvim/"
+    - name: Add node apt repo
+      become: true
+      ansible.builtin.command: /tmp/node_setup.sh
+      tags:
+        - skip_ansible_lint
+
+    - name: Install node
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: nodejs
+      tags:
+        - skip_ansible_lint

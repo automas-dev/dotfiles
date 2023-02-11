@@ -1,0 +1,14 @@
+#!/usr/bin/env ansible-playbook
+- name: Install Base
+  hosts: localhost
+  roles:
+    - update_keyring
+    - packages
+    - yay
+    - docker
+    - python
+    - rust
+    - node
+    - ansible
+    - neovim
+    - bash

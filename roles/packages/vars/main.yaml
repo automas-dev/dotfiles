@@ -1,48 +1,46 @@
 packages:
-  - wget
-  - curl
-  - git
-  - git-lfs
-  - tree
-  - screen
-  - tmux
-  - vim
-  - neofetch
-  - xclip
-  - fzf
-  - cmake
-  - extra-cmake-modules
-  - httpie
-  - restic
-  - ranger
-  - bmon
-  - openconnect
-  - sshpass
-  - ca-certificates
-  - gnupg
-  - gnome-tweaks
-  - lsb-release
-  - libreoffice
-  - trash-cli
-  - figlet
-  - sl
+  base:
+    - wget
+    - curl
+    - git
+    - git-lfs
+    - tree
+    - screen
+    - tmux
+    - vim
+    - xclip
+    - fzf
+    - cmake
+    - extra-cmake-modules
+    - bmon
+    - openconnect
+    - sshpass
+    - ca-certificates
+    - gnupg
+    - lsb-release
+    - usbutils
+    - sshfs
+    - rsync
 
-pip_packages:
-  - matplotlib
-  - numpy
-  - scipy
-  - pyautogui
-  - pyperclip
-  - pycodestyle
-  - pydocstyle
-  - mypy
-  - autopep8
-  - pyautogui
-  - numba
-  - jedi
-  - pynvim
+  extra:
+    - httpie
+    - ranger
+    - neofetch
+    - restic
+    - trash-cli
+    - figlet
+    - lolcat
+    - sl
+    - nmap
 
-snap_packages: []
+  ubuntu:
+    - apt-transport-https
+    - software-properties-common
+    - libopencv-dev
+    - tmuxinator
+    - build-essential
+    - gnupg-agent
+    - gnupg2
 
-snap_classic_packages: []
-
+  archlinux:
+    - inetutils

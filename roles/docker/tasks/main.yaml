@@ -1,12 +1,25 @@
-- tags:
-    - packages
-    - docker
+- name: Remove old docker-compose
+  become: true
+  ansible.builtin.package:
+    state: absent
+    name: docker-compose
+
+- name: Install Docker Archlinux
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install docker
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: docker
+
+- name: Install Docker Ubuntu
   when: ansible_distribution == "Ubuntu"
   block:
     - name: Install apt dependencies
       become: true
-      package:
-        state: latest
+      ansible.builtin.package:
+        state: present
         name:
           - ca-certificates
           - curl
@@ -14,63 +27,79 @@
           - lsb-release
 
     - name: Get DEB architecture
-      shell: dpkg --print-architecture
+      ansible.builtin.command: dpkg --print-architecture
       register: deb_architecture
       changed_when: false
 
     - name: Get DEB release
-      shell: lsb_release -cs
+      ansible.builtin.command: lsb_release -cs
       register: deb_release
       changed_when: false
-    
+
     - name: Create keyrings directory
       become: true
-      file:
+      ansible.builtin.file:
         path: /etc/apt/keyrings
         state: directory
-        mode: '0755'
+        mode: "0755"
 
     - name: Install GPG key
       become: true
-      shell: |
+      ansible.builtin.shell: |
         curl -fsSL {{ docker_key_url }} | gpg --dearmor -o {{ docker_key_path }}
       args:
         creates: "{{ docker_key_path }}"
+      tags:
+        - skip_ansible_lint
 
-    - name: Add deb source
+    - name: Apt source
       become: true
-      lineinfile:
-        line: "deb [arch={{ deb_architecture.stdout }} signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu {{ deb_release.stdout }} stable"
-        path: "{{ docker_source_path }}"
-        create: true
-        owner: root
-        group: root
-        mode: '0644'
+      block:
+        - name: Remove docker source file
+          ansible.builtin.file:
+            state: absent
+            path: "{{ docker_source_path }}"
+
+        - name: Add docker source file
+          ansible.builtin.lineinfile:
+            line: >
+              deb [arch={{ deb_architecture.stdout }}
+              signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu
+              {{ deb_release.stdout }} stable
+            path: "{{ docker_source_path }}"
+            create: true
+            owner: root
+            group: root
+            mode: "0644"
 
     - name: Update Apt Repositories
       become: true
-      apt:
+      ansible.builtin.package:
         update_cache: true
       changed_when: false
 
     - name: Install Docker
       become: true
-      package:
+      ansible.builtin.package:
         state: latest
         name:
           - docker-ce
           - docker-ce-cli
           - containerd.io
-          - docker-compose
           - docker-compose-plugin
+      tags:
+        - skip_ansible_lint
 
 - name: Add user to docker group
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ ansible_user_id }}"
     groups: docker
     append: true
-  tags:
-    - packages
-    - docker
-    - user
+
+- name: Start docker service
+  become: true
+  ansible.builtin.systemd:
+    state: started
+    name: docker
+    enabled: true

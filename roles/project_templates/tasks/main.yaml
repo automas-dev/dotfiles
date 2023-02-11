@@ -1,0 +1,21 @@
+- name: Clone templates
+  ansible.builtin.git:
+    repo: "{{ templates_git_url }}"
+    dest: "{{ ansible_env.HOME }}/.templates"
+    version: master
+
+- name: Install mkn
+  ansible.builtin.copy:
+    src: mkn
+    dest: "{{ ansible_env.HOME }}/.local/bin/mkn"
+    mode: "0755"
+
+- name: Add templates path to bashrc
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: "{{ lookup('file', 'bashrc') }}"
+    marker: "# {mark} ANSIBLE PROJECT TEMPLATES BLOCK"
+    create: true
+    mode: "0644"
+  tags:
+    - user_config

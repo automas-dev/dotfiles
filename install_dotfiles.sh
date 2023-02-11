@@ -85,18 +85,17 @@ try_install() {
     try_link $TO_INSTALL $INSTALL_TO
 }
 
-try_install bash_aliases
-try_install bashrc
 try_install clang-format
 try_install gdbinit
-try_install gitconfig
-try_install inputrc
+#try_install gitconfig
+# try_install inputrc
 try_install LESS_TERMCAP
-try_install restic_exclude
+#try_install restic_exclude
 try_install Xdefaults
 
 try_install config/nvim
-try_install scripts
+# try_install config/termite
+# try_install scripts
 
 mkdir -p $HOME/.config/termite
 try_link $(pwd)/files/config/termite/onedark $HOME/.config/termite/config

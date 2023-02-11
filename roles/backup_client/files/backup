@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Exit on failure with status code of failed command
+set -e
+
+if [ -z "$HOSTNAME" ]; then
+    echo "environment variable HOSTNAME is empty, cannot continue"
+    exit 1
+fi
+
+[ -z "$REMOTE_HOST" ] && REMOTE_HOST="tom-lan"
+[ -z "$REMOTE_PATH" ] && REMOTE_PATH="/home/deepraid/restic"
+[ -z "$RESTIC_EXCLUDE_PATH" ] && RESTIC_EXCLUDE_PATH="$HOME/.restic_exclude"
+[ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
+
+START_SECONDS=$SECONDS
+
+GREEN="\e[0;32m"
+YELLOW="\e[0;33m"
+CYAN="\e[0;36m"
+WHITE="\e[1;97m"
+RESET="\e[0;0m"
+
+echo -e "${CYAN}:: ${WHITE}Backing up\
+    ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
+    to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
+
+notify-send -u low -t 30000 "Backup has started..."
+
+restic -v \
+    -p "$RESTIC_PASSWORD_PATH" \
+    -r "sftp:$REMOTE_HOST:$REMOTE_PATH" \
+    backup \
+    --exclude-file "$RESTIC_EXCLUDE_PATH" \
+    /home/thomas \
+    --tag "$HOSTNAME"
+
+echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
+
+notify-send -u low "Backup has finished!"

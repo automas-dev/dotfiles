@@ -1,0 +1,30 @@
+- name: Install openssh
+  when: ansible_distribution == "Archlinux"
+  become: true
+  ansible.builtin.package:
+    name: openssh
+    state: present
+
+- name: Install openssh
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  ansible.builtin.package:
+    name: openssh-client
+    state: present
+
+- name: Create ~/.ssh directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}"
+    state: directory
+    mode: "0700"
+  tags:
+    - user_config
+
+- name: Generate SSH Key
+  ansible.builtin.command: |
+    ssh-keygen -b {{ ssh_key_size }} -t {{ ssh_key_type }} -f {{ ssh_key_path }} -q -N ''
+  args:
+    creates: "{{ ssh_key_path }}"
+  tags:
+    - skip_ansible_lint
+    - user_config
