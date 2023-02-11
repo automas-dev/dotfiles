@@ -3,6 +3,7 @@
 /home/games/
 $HOME/.mozilla/
 $HOME/.local/share/Trash/
+$HOME/.local/share/Steam/
 $HOME/.cache/
 $HOME/.android/avd/
 $HOME/.gradle/caches
