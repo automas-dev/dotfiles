@@ -1,6 +1,8 @@
 packages:
   - gnome-tweaks
   - libreoffice
+  - hunspell
+  - hunspell-en_us
   - firefox
   - gimp
   - inkscape
