@@ -1,5 +1,13 @@
+- name: Check if Yay is installed
+  ansible.builtin.command: yay --version
+  register: yay_exists
+  changed_when: false
+  ignore_errors: true
+  tags:
+    - skip_ansible_lint
+
 - name: Install Yay
-  when: ansible_distribution == "Archlinux"
+  when: yay_exists is failed and ansible_distribution == "Archlinux"
   block:
     - name: Clone Yay AUR
       ansible.builtin.git:
