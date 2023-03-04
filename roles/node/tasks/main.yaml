@@ -13,43 +13,70 @@
 - name: Install NodeJS Ubuntu
   when: ansible_distribution == "Ubuntu"
   block:
-    - name: Remove nodesource apt source
-      become: true
-      ansible.builtin.file:
-        path: /etc/apt/sources.list.d/nodesource.list
-        state: absent
+    - name: Empty fact
+      set_fact:
+        curr_node_version:
+        has_node_version: false
 
-    - name: Update Apt Repositories
-      become: true
-      ansible.builtin.package:
-        update_cache: true
+    - name: Get node version
+      ansible.builtin.command: node --version
+      register: read_node_version
       changed_when: false
-
-    - name: Remove old node version
-      become: true
-      ansible.builtin.package:
-        state: absent
-        name:
-          - nodejs
-          - nodejs-doc
-
-    - name: Download installer
-      ansible.builtin.get_url:
-        url: "https://deb.nodesource.com/setup_{{ node_version }}.x"
-        dest: /tmp/node_setup.sh
-        mode: "0755"
-        force: true
-
-    - name: Add node apt repo
-      become: true
-      ansible.builtin.command: /tmp/node_setup.sh
+      ignore_errors: true
       tags:
         - skip_ansible_lint
 
-    - name: Install node
-      become: true
-      ansible.builtin.package:
-        state: latest
-        name: nodejs
-      tags:
-        - skip_ansible_lint
+    - name: Parser output
+      set_fact:
+        curr_node_version: "{{ read_node_version.stdout | regex_search(version_re, '\\1') }}"
+      vars:
+        version_re: "v([0-9]+)"
+      when: read_node_version is not failed
+
+    - name: Compare version
+      set_fact:
+        has_node_version: "{{ curr_node_version | first == node_version | string }}"
+      when: curr_node_version
+
+    - when: not has_node_version
+      block:
+        - name: Remove nodesource apt source
+          become: true
+          ansible.builtin.file:
+            path: /etc/apt/sources.list.d/nodesource.list
+            state: absent
+
+        - name: Update Apt Repositories
+          become: true
+          ansible.builtin.package:
+            update_cache: true
+          changed_when: false
+
+        - name: Remove old node version
+          become: true
+          ansible.builtin.package:
+            state: absent
+            name:
+              - nodejs
+              - nodejs-doc
+
+        - name: Download installer
+          ansible.builtin.get_url:
+            url: "{{ node_installer_url }}"
+            dest: "{{ node_installer }}"
+            mode: "0755"
+            force: true
+
+        - name: Add node apt repo
+          become: true
+          ansible.builtin.command: "{{ node_installer }}"
+          tags:
+            - skip_ansible_lint
+
+        - name: Install node
+          become: true
+          ansible.builtin.package:
+            state: latest
+            name: nodejs
+          tags:
+            - skip_ansible_lint
