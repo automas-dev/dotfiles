@@ -21,6 +21,18 @@
     src: one_light
     dest: "{{ ansible_env.HOME }}/.config/termite/one_light"
 
+- name: Copy light script
+  ansible.builtin.copy:
+    src: termite_light
+    dest: "{{ ansible_env.HOME }}/.local/bin/termite_light"
+    mode: "0755"
+
+- name: Copy dark script
+  ansible.builtin.copy:
+    src: termite_dark
+    dest: "{{ ansible_env.HOME }}/.local/bin/termite_dark"
+    mode: "0755"
+
 - name: Configure dark theme
   ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/.config/termite/one_dark"

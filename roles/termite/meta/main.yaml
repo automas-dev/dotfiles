@@ -1,3 +1,5 @@
 dependencies:
   - role: xorg
   - role: yay
+  - role: local_bin
+
