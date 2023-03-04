@@ -1,44 +1,42 @@
-# https://github.com/ynj0/onedark-termite/blob/master/onedark.colors
-
 # one light
 [colors]
 
 # special
-foreground      = #383a42
-foreground_bold = #383a42
-cursor          = #383a42
-background      = #fafafa
+foreground      = #2a2c33
+foreground_bold = #2a2c33
+cursor          = #2a2c33
+background      = #f9f9f9
 
 # black
-color0  = #fafafa
-color8  = #474d57
+color0  = #000000
+color8  = #2a2c33
 
 # red
-color1  = #c75f68
-color9  = #a6463d
+color1  = #db3f39
+color9  = #db3f39
 
 # green
-color2  = #83a868
-color10 = #668550
+color2  = #42933e
+color10 = #42933e
 
 # yellow
-color3  = #ccab6e
-color11 = #b8875a
+color3  = #855504
+color11 = #855504
 
 # blue
-color4  = #589dd6
-color12 = #3372a6
+color4  = #325eee
+color12 = #325eee
 
 # magenta
-color5  = #af6ac4
-color13 = #844796
+color5  = #930093
+color13 = #930093
 
 # cyan
-color6  = #4a9da8
-color14 = #337982
+color6  = #0e70ae
+color14 = #0e70ae
 
 # white
-color7  = #383a42
-color15 = #090a0b
+color7  = #8f9096
+color15 = #ffffff
 
 vim: ft=dosini cms=#%s
