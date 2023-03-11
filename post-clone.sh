@@ -37,3 +37,13 @@ else
     echo "Exiting!"
     exit 1
 fi
+
+# TODO:
+
+# Configure installation
+# - Base / OS / System
+# - User
+# - User Config
+# - Desktop
+# - User Desktop Config
+# - Server?
