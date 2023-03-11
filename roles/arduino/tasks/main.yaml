@@ -1,0 +1,11 @@
+- name: Install Arduino
+  become: true
+  ansible.builtin.package:
+    state: present
+    name:
+      - arduino
+      - arduino-avr-core
+      - arduino-builder
+      - arduino-cli
+      - arduino-docs
+      - arduino-language-server
