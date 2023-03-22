@@ -11,7 +11,9 @@
       become: true
       ansible.builtin.package:
         state: present
-        name: docker
+        name:
+          - docker
+          - docker-compose
 
 - name: Install Docker Ubuntu
   when: ansible_distribution == "Ubuntu"
