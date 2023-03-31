@@ -12,3 +12,12 @@ $HOME/.config/Code/Cache/
 $HOME/.config/Code/User/workspaceStorage/
 $HOME/.local/share/baloo/index
 $HOME/.local/share/baloo/index-lock
+$HOME/.config/google-chrome/BrowserMetrics/
+$HOME/.config/google-chrome/GrShaderCache/
+$HOME/.config/google-chrome/ShaderCache/
+$HOME/.config/google-chrome/Profile 1/DawnCache/
+$HOME/.config/google-chrome/Profile 1/GPUCache/
+$HOME/.config/google-chrome/Profile 1/Service Worker/
+$HOME/.config/google-chrome/
+$HOME/snap/
+
