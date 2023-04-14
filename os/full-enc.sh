@@ -151,10 +151,6 @@ systemctl enable NetworkManager.service
 ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
 locale-gen
 EOF
-    #arch-chroot "$root" systemctl enable NetworkManager.service
-    #arch-chroot "$root" ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
-    #arch-chroot "$root" locale-gen
-
     echo "Set the root password"
     arch-chroot "$root" passwd
 }
@@ -168,52 +164,52 @@ setup_user() {
     arch-chroot "$root" passwd thomas
 }
 
-#echo Remember to connect to the internet first. You will need to use
-#echo Ethernet -- plug in the cable
-#echo Wi-Fi -- connect to the network using iwctl
-#read -rp "Press enter to continue..."
-#
-#header "Setup"
-#test_network
-#setup_installer
-#echo Setup complete
-#
-#header "Disk partition"
-#echo "You are about to modify $DISK"
-#do_confirm
-#
-#backup_disk "$DISK"
-#part_disk "$DISK"
-#
-#readarray -t PARTS < <(sudo fdisk -l | grep -e "^$DISK" | awk '{print $1}')
-#echo "Partitions are ${PARTS[*]}"
-#
-#if [ ${#PARTS[@]} -ne 2 ]; then
-#    echo "Unexpected partitions ${PARTS[*]}"
-#    echo "Need 2"
-#    exit 2
-#fi
-#
-#boot="${PARTS[0]}"
-#root="${PARTS[1]}"
-#make_fs "$boot" "$root"
-#
-#header "Setup encryption"
-#setup_crypt "$root"
-#
-#header "Setup lvm"
-#free -h
-#read -rp "Enter the swap volume size(eg. 2*mem): " SWAP
-#
-#setup_lvm "$root" vg
-#create_swap vg "$SWAP"
-#create_root vg
-#mount_lvm vg "$boot" /mnt
+echo Remember to connect to the internet first. You will need to use
+echo Ethernet -- plug in the cable
+echo Wi-Fi -- connect to the network using iwctl
+read -rp "Press enter to continue..."
+
+header "Setup"
+test_network
+setup_installer
+echo Setup complete
+
+header "Disk partition"
+echo "You are about to modify $DISK"
+do_confirm
+
+backup_disk "$DISK"
+part_disk "$DISK"
+
+readarray -t PARTS < <(sudo fdisk -l | grep -e "^$DISK" | awk '{print $1}')
+echo "Partitions are ${PARTS[*]}"
+
+if [ ${#PARTS[@]} -ne 2 ]; then
+    echo "Unexpected partitions ${PARTS[*]}"
+    echo "Need 2"
+    exit 2
+fi
+
+boot="${PARTS[0]}"
+root="${PARTS[1]}"
+make_fs "$boot" "$root"
+
+header "Setup encryption"
+setup_crypt "$root"
+
+header "Setup lvm"
+free -h
+read -rp "Enter the swap volume size(eg. 2*mem): " SWAP
+
+setup_lvm "$root" vg
+create_swap vg "$SWAP"
+create_root vg
+mount_lvm vg "$boot" /mnt
 
 header "Install system"
 read -rp "Enter a hostname: " HOSTNAME
-#install_system /mnt
-#setup_boot "$DISK" "$root" /mnt
+install_system /mnt
+setup_boot "$DISK" "$root" /mnt
 setup_system /mnt "$HOSTNAME"
 setup_user /mnt thomas
 
