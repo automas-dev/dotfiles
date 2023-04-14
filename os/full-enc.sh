@@ -157,7 +157,7 @@ setup_user() {
     local root user
     root="$1"
     user="$2"
-    arch-chroot "$root" useradd -m -G "sudo" -s /bin/bash "$user"
+    arch-chroot "$root" useradd -m -G "wheel" -s /bin/bash "$user"
     echo "Set the password for thomas"
     arch-chroot "$root" passwd thomas
 }
