@@ -10,7 +10,7 @@ COLOR_RESET="\033[0m"
 
 function ssh_session {
   if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    echo -e "${COLOR_WHITE}ssh"
+    echo -e "ssh"
   fi
 }
 
@@ -42,10 +42,10 @@ function git_branch {
   fi
 }
 
-PS1="\[$(ssh_session)\]"
+PS1="\[${COLOR_WHITE}\]"
+PS1+="\$(ssh_session)"
 PS1+="\[$COLOR_GREEN\][\w]"          # basename of pwd
 PS1+="\[\$(git_color)\]"        # colors git status
 PS1+="\$(git_branch)"           # prints current branch
 PS1+="\[$COLOR_ORANGE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
 export PS1
-
