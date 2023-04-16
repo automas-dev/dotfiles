@@ -3,8 +3,8 @@
   hosts: localhost
   roles:
     - pacman_conf
-    - update_keyring
     - packages
+    - git
     - yay
     - docker
     - python
