@@ -6,55 +6,59 @@
 
 - name: Install Flatpak
   become: true
+  when: ansible_distribution == "Archlinux"
   ansible.builtin.package:
     state: present
     name: flatpak
 
 - name: Install Flatpak Apps
+  when: ansible_distribution == "Archlinux"
   community.general.flatpak:
     name: "{{ flatpak_packages }}"
 
-- name: Install Snap Archlinux
-  when: ansible_distribution == "Archlinux"
-  block:
-    - name: Clone Snap AUR
-      ansible.builtin.git:
-        repo: "{{ snapd_aur_url }}"
-        dest: "{{ snapd_build_path }}"
-        version: master
+# - name: Install Snap Archlinux
+#   when: ansible_distribution == "Archlinux"
+#   block:
+#     - name: Clone Snap AUR
+#       ansible.builtin.git:
+#         repo: "{{ snapd_aur_url }}"
+#         dest: "{{ snapd_build_path }}"
+#         version: master
 
-    - name: Build Snap AUR
-      ansible.builtin.command: makepkg -si --noconfirm
-      args:
-        chdir: "{{ snapd_build_path }}"
-      tags:
-        - skip_ansible_lint
+#     - name: Build Snap AUR
+#       ansible.builtin.command: makepkg -si --noconfirm
+#       args:
+#         chdir: "{{ snapd_build_path }}"
+#       tags:
+#         - skip_ansible_lint
 
-    - name: Start Snap Service
-      become: true
-      ansible.builtin.systemd:
-        name: snapd.socket
-        state: started
-        enabled: true
+#     - name: Start Snap Service
+#       become: true
+#       ansible.builtin.systemd:
+#         name: snapd.socket
+#         state: started
+#         enabled: true
 
-    - name: Link /snap
-      become: true
-      ansible.builtin.file:
-        src: /var/lib/snapd/snap
-        dest: /snap
-        state: link
-        mode: "0777"
-        owner: root
-        group: root
+#     - name: Link /snap
+#       become: true
+#       ansible.builtin.file:
+#         src: /var/lib/snapd/snap
+#         dest: /snap
+#         state: link
+#         mode: "0777"
+#         owner: root
+#         group: root
 
-    # - name: Install Snap Apps
-    #   become: true
-    #   community.general.snap:
-    #     state: present
-    #     name: "{{ snap_packages }}"
+- name: Install Snap Apps
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  community.general.snap:
+    state: present
+    name: "{{ snap_packages }}"
 
 - name: Install Snap Classic Apps
   become: true
+  when: ansible_distribution == "Ubuntu"
   community.general.snap:
     state: present
     classic: true

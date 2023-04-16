@@ -23,16 +23,16 @@ snapd_aur_url: https://aur.archlinux.org/snapd.git
 snapd_build_path: "{{ ansible_env.HOME }}/.cache/snap_aur"
 
 snap_packages:
-  # - firefox
-  # - gimp
-  # - vlc
-  # - spotify
-  # - inkscape
-  # - kdenlive
-  # - darktable
+  - firefox
+  - gimp
+  - vlc
+  - spotify
+  - inkscape
+  - kdenlive
+  - darktable
 
 snap_classic_packages:
   - code
-  # - htop
+  - htop
 
 google_chrome_deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
