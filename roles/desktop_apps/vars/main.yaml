@@ -17,6 +17,7 @@ flatpak_packages:
   - com.discordapp.Discord
   - com.spotify.Client
   - us.zoom.Zoom
+  - com.spotify.Client
 
 snapd_aur_url: https://aur.archlinux.org/snapd.git
 
