@@ -41,5 +41,6 @@
     daemon_reload: true
     enabled: true
     scope: user
+  failed_when: clean_tag is not defined
   tags:
     - user_config
