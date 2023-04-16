@@ -1,0 +1,13 @@
+- name: Install Blender Archlinux
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: blender
+  when: ansible_distribution == "Archlinux"
+
+- name: Install Blender Ubuntu
+  become: true
+  ansible.builtin.snap:
+    state: present
+    name: blender
+  when: ansible_distribution == "Ubuntu"
