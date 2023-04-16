@@ -5,29 +5,37 @@
   changed_when: false
   when: ansible_distribution == "Ubuntu"
 
-- name: Install Base Packages
+- name: Install All Base Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.base }}"
+    name: "{{ packages.all.base }}"
 
-- name: Install Extra Packages
+- name: Install All Extra Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.extra }}"
+    name: "{{ packages.all.extra }}"
   tags: extra
 
-- name: Install Ubuntu Packages
+- name: Install Ubuntu Base Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.ubuntu }}"
+    name: "{{ packages.ubuntu.base }}"
   when: ansible_distribution == "Ubuntu"
 
-- name: Install Archlinux Packages
+- name: Install Ubuntu Extra Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.archlinux }}"
+    name: "{{ packages.ubuntu.extra }}"
+  when: ansible_distribution == "Ubuntu"
+  tags: extra
+
+- name: Install Archlinux Base Packages
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ packages.archlinux.base }}"
   when: ansible_distribution == "Archlinux"

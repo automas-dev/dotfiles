@@ -1,47 +1,51 @@
 packages:
-  base:
-    - wget
-    - curl
-    - git
-    - git-lfs
-    - tree
-    - screen
-    - tmux
-    - vim
-    - xclip
-    - fzf
-    - cmake
-    - extra-cmake-modules
-    - bmon
-    - openconnect
-    - sshpass
-    - ca-certificates
-    - gnupg
-    - lsb-release
-    - usbutils
-    - sshfs
-    - rsync
+  all:
+    base:
+      - wget
+      - curl
+      - git
+      - git-lfs
+      - tree
+      - screen
+      - tmux
+      - vim
+      - xclip
+      - fzf
+      - cmake
+      - extra-cmake-modules
+      - bmon
+      - openconnect
+      - sshpass
+      - ca-certificates
+      - gnupg
+      - lsb-release
+      - usbutils
+      - sshfs
+      - rsync
 
-  extra:
-    - httpie
-    - ranger
-    - neofetch
-    - restic
-    - trash-cli
-    - figlet
-    - lolcat
-    - sl
-    - nmap
-    - cbonsai
+    extra:
+      - httpie
+      - ranger
+      - neofetch
+      - restic
+      - trash-cli
+      - figlet
+      - lolcat
+      - sl
+      - nmap
 
   ubuntu:
-    - apt-transport-https
-    - software-properties-common
-    - libopencv-dev
-    - tmuxinator
-    - build-essential
-    - gnupg-agent
-    - gnupg2
+    base:
+      - apt-transport-https
+      - software-properties-common
+      - libopencv-dev
+      - tmuxinator
+      - build-essential
+      - gnupg-agent
+      - gnupg2
+    extra:
+      - cbonsai
 
   archlinux:
-    - inetutils
+    base:
+      - inetutils
