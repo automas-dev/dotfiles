@@ -23,7 +23,9 @@
 
 [merge "ours"]
 	driver = true
+
 [pull]
 	rebase = false
+
 [init]
-	defaultBranch = master
+	defaultBranch = main

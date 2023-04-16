@@ -1,0 +1,15 @@
+- name: Install git
+  become: true
+  ansible.builtin.package:
+    state: present
+    name:
+      - git
+      - git-lfs
+
+- name: Install gitconfig
+  ansible.builtin.copy:
+    src: gitconfig
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    backup: true
+  tags:
+    - user_config
