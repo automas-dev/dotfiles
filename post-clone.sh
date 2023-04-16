@@ -38,12 +38,8 @@ else
     exit 1
 fi
 
-# TODO:
-
-# Configure installation
-# - Base / OS / System
-# - User
-# - User Config
-# - Desktop
-# - User Desktop Config
-# - Server?
+echo
+echo Done!
+echo
+echo "Don't forget to run ./install.yaml next"
+echo
