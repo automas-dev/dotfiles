@@ -3,8 +3,6 @@ packages:
     base:
       - wget
       - curl
-      - git
-      - git-lfs
       - tree
       - screen
       - tmux
