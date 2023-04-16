@@ -8,12 +8,12 @@ While this repo can be cloned anywhere, some features depend on it being
 `~/dotfiles`.
 
 ```sh
-git clone https://github.com/twh2898/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+git clone https://github.com/twh2898/dotfiles.git dotfiles
+cd dotfiles
 ./post-clone.sh
 ```
 
-### Install Dotfiles
+### Install Dotfiles (deprecated)
 
 Create sym links for dotfiles and config files.
 
@@ -26,35 +26,39 @@ Create sym links for dotfiles and config files.
 This includes
 
 - Base packages
+- System packages
 - Desktop environments
 - User configuration
 
 ```sh
-./install_user.yaml
+./install.yaml --ask-become-pass -u $USER
 ```
+
+**NOTE:** If you wan't to install packages but skip user configuration, append
+`--skip-tags user_config` to the install command.
 
 ### Partial Install
 
-#### Base Packages
+ | name                         | script                   |
+ | ---------------------------- | ------------------------ |
+ | Base packages                | `./install_base.yaml`    |
+ | System Packages              | `./install_system.yaml`  |
+ | Desktop Environment and Apps | `./install_desktop.yaml` |
+ | User Config                  | `./install_user.yaml`    |
 
-This includes
+Running `./install.yaml`, it will include all of these.
 
-- Base packages
+## Server Install
 
-```sh
-./install_base.yaml
-```
-
-#### Desktop
-
-This includes
-
-- Base packages
-- Desktop environments
+This section is specific to `tom-lan` but could be applicable to any server
+in the hosts file.
 
 ```sh
-./install_desktop.yaml
+./install_server.yaml --ask-become-pass
 ```
+
+**NOTE:** Remember to update the `clean_tag` variable in this playbook before
+running.
 
 ## TODO
 
@@ -91,29 +95,12 @@ This includes
       - Lilly
       - Lux core
 - Terminal for i3
-- htop through pacman
-- configure pacman
-  - color
-  - verbose package list
-- flatpak (only ones that aren't system packages?)
-  - Spotify
-  - ~~Gimp~~
-  - ~~Inkscape~~
-  - ~~vlc~~
-  - ~~kdenlive~~
-  - ~~darktable~~
-- packages
-  - shellcheck
 - backup_client restic password
 - Move neovim config files to role
 - Move dotfiles to role
   - most to user config?
-- Git role
-  - install
-  - git config
 - Wallpaper in desktop config
 - Use handlers in roles (eg. to restart service if changes to config)
-- Fail when clean tag var is not defined for backup_server
 
 ### Tom Lan
 
