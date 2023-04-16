@@ -1,4 +1,5 @@
 dependencies:
-  - role: xorg
-  - role: yay
   - role: update_keyring
+  - role: package_cache
+  - role: yay
+  - role: xorg

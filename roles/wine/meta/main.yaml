@@ -1,3 +1,4 @@
 dependencies:
   - role: update_keyring
   - role: pacman_conf
+  - role: package_cache
