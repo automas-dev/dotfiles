@@ -167,6 +167,7 @@ setup_user() {
 echo Remember to connect to the internet first. You will need to use
 echo Ethernet -- plug in the cable
 echo Wi-Fi -- connect to the network using iwctl
+echo Remember to update /etc/pacman.conf to enable parallel downloads
 read -rp "Press enter to continue..."
 
 header "Setup"
