@@ -2,6 +2,7 @@
 - name: Install Base
   hosts: localhost
   roles:
+    - pacman_conf
     - update_keyring
     - packages
     - yay
