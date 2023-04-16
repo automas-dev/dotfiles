@@ -31,6 +31,7 @@ packages:
       - lolcat
       - sl
       - nmap
+      - shellcheck
 
   ubuntu:
     base:
@@ -47,3 +48,5 @@ packages:
   archlinux:
     base:
       - inetutils
+    extra:
+      - htop

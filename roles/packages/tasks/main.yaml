@@ -39,3 +39,10 @@
     state: present
     name: "{{ packages.archlinux.base }}"
   when: ansible_distribution == "Archlinux"
+
+- name: Install Archlinux Extra Packages
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ packages.archlinux.extra }}"
+  when: ansible_distribution == "Archlinux"
