@@ -2,9 +2,14 @@
 - name: Install Base
   hosts: server
   roles:
-    - update_keyring
+    - pacman_conf
     - packages
+    - git
     - yay
+
+- name: Install System
+  hosts: server
+  roles:
     - docker
     - python
     - rust
@@ -12,6 +17,7 @@
     - ansible
     - neovim
     - bash
+    - wine
 
 - name: Configure
   hosts: server
