@@ -60,6 +60,21 @@ in the hosts file.
 **NOTE:** Remember to update the `clean_tag` variable in this playbook before
 running.
 
+## OS Install
+
+The `./os` directory includes scripts for installing the base Archlinux OS.
+This can be used directly with the Archlinux setup media. After booting to
+your usb drive, connect to the interned and run the following commands. Follow
+all prompts and pay attention, they will appear throughout the install process,
+potentially with large gaps of time between.
+
+```sh
+pacman -Sy archlinux-keyring git
+git clone https://github.com/twh2898/dotfiles.git
+cd dotfiles/os
+./full-encrypted.sh
+```
+
 ## TODO
 
 - Install options
