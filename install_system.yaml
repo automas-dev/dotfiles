@@ -1,5 +1,5 @@
 #!/usr/bin/env ansible-playbook
-- name: Install
+- name: Install System
   hosts: localhost
   roles:
     - docker
