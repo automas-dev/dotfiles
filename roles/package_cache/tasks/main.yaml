@@ -2,3 +2,4 @@
   become: true
   ansible.builtin.package:
     update_cache: true
+  changed_when: false
