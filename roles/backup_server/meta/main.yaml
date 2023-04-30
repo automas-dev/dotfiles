@@ -1,5 +1,5 @@
 dependencies:
   - role: local_bin
+  - role: pacman_conf
   - role: update_keyring
   - role: package_cache
-  - role: restic
