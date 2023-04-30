@@ -34,7 +34,7 @@ This includes
 ./install.yaml --ask-become-pass -u $USER
 ```
 
-**NOTE:** If you wan't to install packages but skip user configuration, append
+**NOTE:** If you want to install packages but skip user configuration, append
 `--skip-tags user_config` to the install command.
 
 ### Partial Install
@@ -54,7 +54,7 @@ This section is specific to `tom-lan` but could be applicable to any server
 in the hosts file.
 
 ```sh
-./install_server.yaml --ask-become-pass
+./install_server.yaml --ask-become-pass -u thomas
 ```
 
 **NOTE:** Remember to update the `clean_tag` variable in this playbook before
