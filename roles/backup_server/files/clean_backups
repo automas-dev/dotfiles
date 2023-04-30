@@ -8,7 +8,7 @@ if [ -z "$CLEAN_TAG" ]; then
     exit 1
 fi
 
-[ -z "$RESTIC_REPO_PATH" ] && RESTIC_REPO_PATH="/home/deepraid/restic"
+[ -z "$RESTIC_REPO_PATH" ] && RESTIC_REPO_PATH="/data/deepraid/restic"
 [ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
 
 [ -z "$KEEP_HOURLY" ] && KEEP_HOURLY=3

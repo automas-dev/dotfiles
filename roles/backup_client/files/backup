@@ -9,7 +9,7 @@ if [ -z "$HOSTNAME" ]; then
 fi
 
 [ -z "$REMOTE_HOST" ] && REMOTE_HOST="tom-lan"
-[ -z "$REMOTE_PATH" ] && REMOTE_PATH="/home/deepraid/restic"
+[ -z "$REMOTE_PATH" ] && REMOTE_PATH="/data/deepraid/restic"
 [ -z "$RESTIC_EXCLUDE_PATH" ] && RESTIC_EXCLUDE_PATH="$HOME/.restic_exclude"
 [ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
 
@@ -23,7 +23,7 @@ RESET="\e[0;0m"
 
 echo -e "${CYAN}:: ${WHITE}Backing up\
     ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
-    to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}/home/deepstorage/restic${RESET}"
+    to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}$REMOTE_PATH${RESET}"
 
 notify-send -u low -t 30000 "Backup has started..."
 
