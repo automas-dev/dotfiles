@@ -59,12 +59,7 @@ setup_boot() {
 echo Remember to connect to the internet first. You will need to use
 echo Ethernet -- plug in the cable
 echo Wi-Fi -- connect to the network using iwctl
-echo Remember to update /etc/pacman.conf to enable parallel downloads
 read -rp "Press enter to continue..."
-
-header "Setup"
-test_network
-echo Setup complete
 
 header "Disk partition"
 echo "You are about to modify $DISK"
