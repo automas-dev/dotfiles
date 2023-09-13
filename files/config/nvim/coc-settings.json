@@ -47,5 +47,6 @@
                 }
             }
         }
-    }
+    },
+    "snippets.ultisnips.pythonPrompt": false
 }
