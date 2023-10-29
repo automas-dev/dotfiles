@@ -93,15 +93,15 @@ try_install LESS_TERMCAP
 #try_install restic_exclude
 try_install Xdefaults
 
-try_install config/nvim
+# try_install config/nvim
 # try_install config/termite
 # try_install scripts
 
 mkdir -p $HOME/.config/termite
 try_link $(pwd)/files/config/termite/onedark $HOME/.config/termite/config
 
-try_link $HOME/.vim/init.vim $HOME/.vimrc
 try_link $HOME/.config/nvim $HOME/.vim
+try_link $HOME/.vim/init.vim $HOME/.vimrc
 try_link $HOME/.Xdefaults $HOME/.Xresources 
 
 exit $DOTFILES_FAIL
