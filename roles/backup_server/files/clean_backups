@@ -3,12 +3,7 @@
 # Exit on failure with status code of failed command
 set -e
 
-if [ -z "$CLEAN_TAG" ]; then
-    echo "environment variable CLEAN_TAG is empty, cannot continue"
-    exit 1
-fi
-
-[ -z "$RESTIC_REPO_PATH" ] && RESTIC_REPO_PATH="/data/deepraid/restic"
+[ -z "$RESTIC_REPO_PATH" ] && RESTIC_REPO_PATH="/data/restic"
 [ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
 
 [ -z "$KEEP_HOURLY" ] && KEEP_HOURLY=3
@@ -16,6 +11,31 @@ fi
 [ -z "$KEEP_WEEKLY" ] && KEEP_WEEKLY=5
 [ -z "$KEEP_MONTHLY" ] && KEEP_MONTHLY=12
 [ -z "$KEEP_YEARLY" ] && KEEP_YEARLY=50
+
+[ -z "$CLEAN_TAG" ] && CLEAN_TAG="auto"
+
+if [ $# -lt 1 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "Usage: $0 [-h|--help] <hostname>"
+    echo
+    echo "Clean old snapshots for the given hostname. The snapshots will be"
+    echo "filtered by tags using the CLEAN_TAG environment variable. The default"
+    echo "tag is auto. See the script file for the environment variables and"
+    echo "and their default values."
+    echo
+    echo "Current variables are"
+    echo
+    echo "RESTIC_REPO_PATH is $RESTIC_REPO_PATH"
+    echo "RESTIC_PASSWORD_PATH is $RESTIC_PASSWORD_PATH"
+    echo "KEEP_HOURLY is $KEEP_HOURLY"
+    echo "KEEP_DAILY is $KEEP_DAILY"
+    echo "KEEP_WEEKLY is $KEEP_WEEKLY"
+    echo "KEEP_MONTHLY is $KEEP_MONTHLY"
+    echo "KEEP_YEARLY is $KEEP_YEARLY"
+
+    exit 1
+fi
+
+CLEAN_HOSTNAME="$1"
 
 START_SECONDS=$SECONDS
 
@@ -26,27 +46,30 @@ CYAN="\e[0;36m"
 WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
-echo -e "${CYAN}:: ${WHITE}Cleaning backups for" \
-    "${YELLOW}$CLEAN_TAG${WHITE}from ${GREEN}$RESTIC_REPO_PATH${RESET}"
+echo -e "${CYAN}:: ${RESET}Cleaning backups for\
+    ${WHITE}Hostname ${YELLOW}$CLEAN_HOSTNAME${RESET}\
+    ${WHITE}Tag ${YELLOW}$CLEAN_TAG${WHITE}\
+    ${WHITE}Repo ${GREEN}$RESTIC_REPO_PATH${RESET}"
 
-echo -e "Keep" \
-    "${RED}$KEEP_HOURLY${WHITE} hourly" \
-    "${RED}$KEEP_DAILY${WHITE} daily" \
-    "${RED}$KEEP_WEEKLY${WHITE} weekly" \
-    "${RED}$KEEP_MONTHLY${WHITE} monthly" \
-    "${RED}$KEEP_YEARLY${WHITE} yearly" \
+echo -e "${CYAN}:: ${RESET}Keeping last" \
+    "${RED}$KEEP_HOURLY${RESET} hourly" \
+    "${RED}$KEEP_DAILY${RESET} daily" \
+    "${RED}$KEEP_WEEKLY${RESET} weekly" \
+    "${RED}$KEEP_MONTHLY${RESET} monthly" \
+    "${RED}$KEEP_YEARLY${RESET} yearly" \
     "${RESET}"
 
 restic -v \
     -p "$RESTIC_PASSWORD_PATH" \
     -r "$RESTIC_REPO_PATH" \
     forget \
+    --host "$CLEAN_HOST" \
     --tag "$CLEAN_TAG" \
-    --keep-hourly $KEEP_HOURLY \
-    --keep-daily $KEEP_DAILY \
-    --keep-weekly $KEEP_WEEKLY \
-    --keep-monthly $KEEP_MONTHLY \
-    --keep-yearly $KEEP_YEARLY
+    --keep-hourly "$KEEP_HOURLY" \
+    --keep-daily "$KEEP_DAILY" \
+    --keep-weekly "$KEEP_WEEKLY" \
+    --keep-monthly "$KEEP_MONTHLY" \
+    --keep-yearly "$KEEP_YEARLY"
 
 restic -v \
     -p "$RESTIC_PASSWORD_PATH" \
