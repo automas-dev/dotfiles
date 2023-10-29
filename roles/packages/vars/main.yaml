@@ -20,6 +20,7 @@ packages:
       - usbutils
       - sshfs
       - rsync
+      - man
 
     extra:
       - httpie
