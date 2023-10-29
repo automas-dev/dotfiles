@@ -23,6 +23,8 @@ alias c='git commit -am'
 alias ca='git add . && git commit -m'
 alias gc='git commit'
 alias gcm='git commit -m'
+alias gr='git remote'
+alias grv='git remote -v'
 
 gt() {
     local tag="$1"
