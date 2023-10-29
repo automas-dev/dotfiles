@@ -14,7 +14,7 @@
   when: ansible_distribution == "Ubuntu"
   block:
     - name: Empty fact
-      set_fact:
+      ansible.builtin.set_fact:
         curr_node_version:
         has_node_version: false
 
@@ -27,18 +27,19 @@
         - skip_ansible_lint
 
     - name: Parser output
-      set_fact:
+      ansible.builtin.set_fact:
         curr_node_version: "{{ read_node_version.stdout | regex_search(version_re, '\\1') }}"
       vars:
         version_re: "v([0-9]+)"
       when: read_node_version is not failed
 
     - name: Compare version
-      set_fact:
+      ansible.builtin.set_fact:
         has_node_version: "{{ curr_node_version | first == node_version | string }}"
       when: curr_node_version
 
-    - when: not has_node_version
+    - name: Perform install
+      when: not has_node_version
       block:
         - name: Remove nodesource apt source
           become: true

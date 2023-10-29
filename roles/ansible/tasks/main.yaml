@@ -2,4 +2,4 @@
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages }}"
+    name: "{{ ansible_packages }}"

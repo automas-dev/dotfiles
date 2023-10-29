@@ -9,27 +9,27 @@
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.all.base }}"
+    name: "{{ packages_all.base }}"
 
 - name: Install All Extra Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.all.extra }}"
+    name: "{{ packages_all.extra }}"
   tags: extra
 
 - name: Install Ubuntu Base Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.ubuntu.base }}"
+    name: "{{ packages_ubuntu.base }}"
   when: ansible_distribution == "Ubuntu"
 
 - name: Install Ubuntu Extra Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.ubuntu.extra }}"
+    name: "{{ packages_ubuntu.extra }}"
   when: ansible_distribution == "Ubuntu"
   tags: extra
 
@@ -37,12 +37,12 @@
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.archlinux.base }}"
+    name: "{{ packages_archlinux.base }}"
   when: ansible_distribution == "Archlinux"
 
 - name: Install Archlinux Extra Packages
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ packages.archlinux.extra }}"
+    name: "{{ packages_archlinux.extra }}"
   when: ansible_distribution == "Archlinux"

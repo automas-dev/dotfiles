@@ -3,17 +3,17 @@
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ arch_packages }}"
+    name: "{{ python_arch_packages }}"
 
 - name: Install Python
   when: ansible_distribution == "Ubuntu"
   become: true
   ansible.builtin.package:
     state: present
-    name: "{{ ubuntu_packages }}"
+    name: "{{ python_ubuntu_packages }}"
 
 - name: Install Pip Packages
   when: ansible_distribution == "Ubuntu"
   ansible.builtin.pip:
     state: present
-    name: "{{ pip_packages }}"
+    name: "{{ python_pip_packages }}"

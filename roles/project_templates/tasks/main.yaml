@@ -1,6 +1,6 @@
 - name: Clone templates
   ansible.builtin.git:
-    repo: "{{ templates_git_url }}"
+    repo: "{{ project_templates_git_url }}"
     dest: "{{ ansible_env.HOME }}/.templates"
     version: master
 

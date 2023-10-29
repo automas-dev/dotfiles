@@ -1,4 +1,4 @@
-arch_packages:
+python_arch_packages:
   - python
   - python-pip
   - python-setuptools
@@ -15,7 +15,7 @@ arch_packages:
   - autopep8
   - mypy
 
-ubuntu_packages:
+python_ubuntu_packages:
   - python3
   - python-is-python3
   - python3-psutil
@@ -25,7 +25,7 @@ ubuntu_packages:
   - libopencv-dev
   - python3-opencv
 
-pip_packages:
+python_pip_packages:
   - matplotlib
   - numpy
   - scipy

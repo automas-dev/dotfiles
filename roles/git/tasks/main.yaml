@@ -11,5 +11,6 @@
     src: gitconfig
     dest: "{{ ansible_env.HOME }}/.gitconfig"
     backup: true
+    mode: "0644"
   tags:
     - user_config

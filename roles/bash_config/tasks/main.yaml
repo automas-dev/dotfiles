@@ -22,5 +22,6 @@
     src: inputrc
     dest: "{{ ansible_env.HOME }}/.inputrc"
     backup: true
+    mode: "0644"
   tags:
     - user_config

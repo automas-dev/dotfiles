@@ -18,6 +18,7 @@
     dest: "{{ neovim_config_path }}"
   tags:
     - user_config
+    - skip_ansible_lint
 
 - name: Plugged Install
   ansible.builtin.command: "nvim +'PlugInstall --sync' +qa"
