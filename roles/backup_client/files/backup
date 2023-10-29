@@ -33,7 +33,7 @@ restic -v \
     backup \
     --exclude-file "$RESTIC_EXCLUDE_PATH" \
     "$HOME" \
-    --tag home,auto
+    --tag auto,home
 
 echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
 
