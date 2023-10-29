@@ -9,7 +9,7 @@ if [ -z "$HOSTNAME" ]; then
 fi
 
 [ -z "$REMOTE_HOST" ] && REMOTE_HOST="tom-lan"
-[ -z "$REMOTE_PATH" ] && REMOTE_PATH="/data/deepraid/restic"
+[ -z "$REMOTE_PATH" ] && REMOTE_PATH="/data/restic"
 [ -z "$RESTIC_EXCLUDE_PATH" ] && RESTIC_EXCLUDE_PATH="$HOME/.restic_exclude"
 [ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
 
@@ -32,7 +32,7 @@ restic -v \
     -r "sftp:$REMOTE_HOST:$REMOTE_PATH" \
     backup \
     --exclude-file "$RESTIC_EXCLUDE_PATH" \
-    /home/thomas \
+    "$HOME" \
     --tag home,auto
 
 echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
