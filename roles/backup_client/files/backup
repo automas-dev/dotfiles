@@ -33,7 +33,7 @@ restic -v \
     backup \
     --exclude-file "$RESTIC_EXCLUDE_PATH" \
     /home/thomas \
-    --tag "$HOSTNAME"
+    --tag home,auto
 
 echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
 
