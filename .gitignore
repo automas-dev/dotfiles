@@ -4,3 +4,5 @@ ansible.log
 
 __pycache__/
 *.pyc
+
+os/*.part.bak
