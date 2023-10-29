@@ -3,6 +3,7 @@ alias ls='ls -h --group-directories-first --color=auto'
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
+alias l='ls -al --color=always'
 
 # Clear and ls shorthand
 alias cls='clear && ls'
