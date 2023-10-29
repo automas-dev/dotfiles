@@ -2,6 +2,18 @@ arch_packages:
   - python
   - python-pip
   - python-setuptools
+  # System packages for pip packages
+  - python-matplotlib
+  - python-numpy
+  - python-scipy
+  - python-pyperclip
+  - python-pycodestyle
+  - python-pydocstyle
+  - python-numba
+  - python-jedi
+  - python-pynvim
+  - autopep8
+  - mypy
 
 ubuntu_packages:
   - python3
@@ -23,12 +35,8 @@ pip_packages:
   - pydocstyle
   - mypy
   - autopep8
-  - pyautogui
   - numba
   - jedi
   - pylance
-  - autopep8
-  - pydocstyle
-  - pycodestyle
   - pynvim
   - jupyter
