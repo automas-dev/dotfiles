@@ -46,7 +46,7 @@ alias ss='sudo systemctl'
 alias userctl="systemctl --user"
 
 # Human readable df and du
-alias df='df -h | grep -v loop'
+alias df='df -h | grep -v loop | grep -v tmpfs | grep -v run | grep -v efivarfs'
 alias du='du -h'
 
 # Less use raw control characters (allow color)
