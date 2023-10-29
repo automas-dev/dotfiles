@@ -12,16 +12,23 @@
     state: present
   when: ansible_distribution == "Ubuntu"
 
+- name: Install Config
+  ansible.builtin.git:
+    repo: "{{ neovim_config_git_url }}"
+    dest: "{{ neovim_config_path }}"
+  tags:
+    - user_config
+
 - name: Plugged Install
   ansible.builtin.command: "nvim +'PlugInstall --sync' +qa"
   args:
-    creates: "{{ ansible_env.HOME }}/.config/nvim/plugged"
+    creates: "{{ neovim_config_path }}/plugged"
   tags:
     - user_config
 
 - name: CoC Install
   ansible.builtin.command: "nvim +'CocInstall' +qa"
   args:
-    creates: "{{ ansible_env.HOME }}/.config/nvim/plugged/coc.nvim/node_modules/"
+    creates: "{{ neovim_config_path }}/plugged/coc.nvim/node_modules/"
   tags:
     - user_config
