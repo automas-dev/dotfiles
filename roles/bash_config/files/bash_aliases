@@ -46,7 +46,7 @@ alias ss='sudo systemctl'
 alias userctl="systemctl --user"
 
 # Human readable df and du
-alias df='df -h | grep -v loop | grep -v tmpfs | grep -v run | grep -v efivarfs'
+alias df='df -h | grep -v loop | grep -v tmpfs | grep -v run | grep -v efivarfs | grep -v snap'
 alias du='du -h'
 
 # Less use raw control characters (allow color)
@@ -60,11 +60,18 @@ alias g++='g++ -fdiagnostics-color=always'
 alias clip="xclip -sel clipboard"
 
 # Clean snap mounts form lsblk and df
-alias lsblk="lsblk | grep -v snap"
-alias df="df -h | grep -v snap"
+
+# disable for conflict with above alias
+# alias lsblk="lsblk | grep -v snap"
+# alias df="df -h | grep -v snap"
+
 alias disk_free="df -h | grep --color=never -e root -e Filesystem"
 alias dir_size="du -sh * .[^.]* | sort -h"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Docker commands
+alias dps="docker ps --format 'table {{ .Image }}\t{{ .Names }}\t{{ .Command }}\t{{ .Status }}'"
+alias dc="docker compose"
