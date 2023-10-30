@@ -60,6 +60,16 @@ in the hosts file.
 **NOTE:** Remember to update the `clean_tag` variable in this playbook before
 running.
 
+### Post Install
+
+#### Enable Clean Backups
+
+Replace `hostname` with the hostname of the backup.
+
+```sh
+systemctl --user enable clean_backup@hostname.time
+```
+
 ## OS Install
 
 The `./os` directory includes scripts for installing the base Archlinux OS.
