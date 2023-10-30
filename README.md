@@ -72,7 +72,7 @@ potentially with large gaps of time between.
 pacman -Sy archlinux-keyring git
 git clone https://github.com/twh2898/dotfiles.git
 cd dotfiles/os
-./full-encrypted.sh
+./full-encrypted.sh /dev/sda
 ```
 
 ## TO FIX
