@@ -57,9 +57,6 @@ in the hosts file.
 ./install_server.yaml --ask-become-pass -u thomas
 ```
 
-**NOTE:** Remember to update the `clean_tag` variable in this playbook before
-running.
-
 ### Post Install
 
 #### Enable Clean Backups

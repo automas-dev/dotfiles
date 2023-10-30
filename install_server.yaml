@@ -21,9 +21,6 @@
 
 - name: Configure
   hosts: server
-  vars:
-    clean_tag: tom-t470p
-
   roles:
     - ssh_keygen
     - gitprompt
