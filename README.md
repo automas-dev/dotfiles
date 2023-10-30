@@ -77,7 +77,6 @@ cd dotfiles/os
 
 ## TO FIX
 
-- Archlinux python no longer uses pip
 - Yay fails to build with makepkg
   - Fails if run as root, prompts for sudo password and times out
 
