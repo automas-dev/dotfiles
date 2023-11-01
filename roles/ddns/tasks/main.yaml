@@ -1,0 +1,24 @@
+- name: Install ddclient
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: ddclient
+
+- name: Configure /etc/ddclient/ddclient.conf
+  become: true
+  ansible.builtin.blockinfile:
+    path: "/etc/ddclient/ddclient.conf"
+    block: "{{ lookup('file', 'ddclient.conf') }}"
+    create: true
+    mode: "0600"
+    owner: root
+    group: root
+  tags:
+    - user_config
+
+- name: Start ddclient Service
+  become: true
+  ansible.builtin.systemd:
+    name: ddclient.service
+    state: started
+    enabled: true
