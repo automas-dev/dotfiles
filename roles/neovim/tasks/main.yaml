@@ -33,3 +33,21 @@
     creates: "{{ neovim_config_path }}/plugged/coc.nvim/node_modules/"
   tags:
     - user_config
+
+- name: Override .vim
+  ansible.builtin.file:
+    src: "{{ neovim_config_path }}"
+    dest: "{{ ansible_env.HOME }}/.vim"
+    state: link
+    mode: 0755
+  tags:
+    - user_config
+
+- name: Override .vimrc
+  ansible.builtin.file:
+    src: "{{ neovim_config_path }}/init.vim"
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    state: link
+    mode: 0755
+  tags:
+    - user_config
