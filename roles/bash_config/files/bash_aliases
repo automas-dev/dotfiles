@@ -78,3 +78,5 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Docker commands
 alias dps="docker ps --format 'table {{ .Image }}\t{{ .Names }}\t{{ .Command }}\t{{ .Status }}'"
 alias dc="docker compose"
+
+# vi: ft=bash
