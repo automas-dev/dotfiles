@@ -12,7 +12,7 @@ Examples:
   $0 dest_host my_role
   $0 custom_host my_role -i 'custom_host,' -vv --check
 HELP
-  exit
+  exit 1
 fi
 
 HOST_PATTERN=$1
