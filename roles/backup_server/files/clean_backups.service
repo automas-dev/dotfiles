@@ -1,10 +1,10 @@
 [Unit]
-Description=Clean backups for %i
+Description=Clean backups
 After=network.target
 
 [Service]
 Type=simple
 WorkingDirectory=%h
-ExecStart=/bin/bash %h/.local/bin/clean_backups %i
+ExecStart=/bin/bash %h/.local/bin/clean_backups
 
 # vi: ft=systemd

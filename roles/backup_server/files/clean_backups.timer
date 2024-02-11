@@ -1,5 +1,5 @@
 [Unit]
-Description=Timer for cleaning backups of %i
+Description=Timer for cleaning backups
 
 [Timer]
 # Daily at 4:00 AM

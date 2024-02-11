@@ -14,10 +14,10 @@ set -e
 
 [ -z "$CLEAN_TAG" ] && CLEAN_TAG="auto"
 
-if [ $# -lt 1 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    echo "Usage: $0 [-h|--help] <hostname>"
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "Usage: $0 [-h|--help]"
     echo
-    echo "Clean old snapshots for the given hostname. The snapshots will be"
+    echo "Clean old snapshots for the given tag. The snapshots will be"
     echo "filtered by tags using the CLEAN_TAG environment variable. The default"
     echo "tag is auto. See the script file for the environment variables and"
     echo "and their default values."
@@ -35,8 +35,6 @@ if [ $# -lt 1 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
     exit 1
 fi
 
-CLEAN_HOSTNAME="$1"
-
 START_SECONDS=$SECONDS
 
 RED="\e[0;31m"
@@ -47,7 +45,6 @@ WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
 echo -e "${CYAN}:: ${RESET}Cleaning backups for\
-    ${WHITE}Hostname ${YELLOW}$CLEAN_HOSTNAME${RESET}\
     ${WHITE}Tag ${YELLOW}$CLEAN_TAG${WHITE}\
     ${WHITE}Repo ${GREEN}$RESTIC_REPO_PATH${RESET}"
 
@@ -63,7 +60,6 @@ restic -v \
     -p "$RESTIC_PASSWORD_PATH" \
     -r "$RESTIC_REPO_PATH" \
     forget \
-    --host "$CLEAN_HOST" \
     --tag "$CLEAN_TAG" \
     --keep-hourly "$KEEP_HOURLY" \
     --keep-daily "$KEEP_DAILY" \
