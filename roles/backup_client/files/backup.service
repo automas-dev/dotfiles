@@ -8,6 +8,7 @@ StartLimitBurst=3
 [Service]
 Type=simple
 WorkingDirectory=%h
+ExecStartPre=/bin/sleep 60
 ExecStart=/bin/bash %h/.local/bin/backup
 Restart=on-failure
 RestartSec=30
