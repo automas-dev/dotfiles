@@ -19,5 +19,7 @@ $HOME/.config/google-chrome/Profile 1/DawnCache/
 $HOME/.config/google-chrome/Profile 1/GPUCache/
 $HOME/.config/google-chrome/Profile 1/Service Worker/
 $HOME/.config/google-chrome/
+$HOME/.npm/_cacache
+$HOME/.npm/_logs
 $HOME/snap/
 
