@@ -28,7 +28,7 @@
     - user_config
 
 - name: CoC Install
-  ansible.builtin.command: "nvim +'CocInstall' +qa"
+  ansible.builtin.command: "nvim +'CocUpdate' +qa"
   args:
     creates: "{{ neovim_config_path }}/plugged/coc.nvim/node_modules/"
   tags:
