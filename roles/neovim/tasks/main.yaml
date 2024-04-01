@@ -1,9 +1,3 @@
-- name: Uninstall snap neovim
-  become: true
-  community.general.snap:
-    name: nvim
-    state: absent
-
 - name: Install neovim Archlinux
   become: true
   ansible.builtin.package:
