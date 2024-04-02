@@ -19,7 +19,7 @@
         src: one_dark
         dest: "{{ ansible_env.HOME }}/.config/termite/one_dark"
 
-    - name: Copy ligh theme
+    - name: Copy light theme
       ansible.builtin.copy:
         src: one_light
         dest: "{{ ansible_env.HOME }}/.config/termite/one_light"
