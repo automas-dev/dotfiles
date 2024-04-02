@@ -1,12 +1,13 @@
 - name: Install termite
   when: ansible_distribution == "Archlinux"
   block:
-    - name: Install termite
+    - name: Install alacritty
+      become: true
       ansible.builtin.package:
         state: present
         name: alacritty
 
-    - name: Create termite config folder
+    - name: Create alacritty config folder
       ansible.builtin.file:
         path: "{{ ansible_env.HOME }}/.config/alacritty"
         state: directory
