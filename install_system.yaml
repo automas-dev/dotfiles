@@ -11,3 +11,4 @@
     - bash
     - wine
     - bazel
+    - reflector
