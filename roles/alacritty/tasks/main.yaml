@@ -1,4 +1,4 @@
-- name: Install termite
+- name: Install alacritty
   when: ansible_distribution == "Archlinux"
   block:
     - name: Install alacritty
