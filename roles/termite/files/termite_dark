@@ -1,3 +1,0 @@
-#!/bin/bash
-ln -sf /home/thomas/.config/termite/one_dark /home/thomas/.config/termite/config
-killall -USR1 termite
