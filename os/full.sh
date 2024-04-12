@@ -187,5 +187,6 @@ read -rp "Enter a hostname: " HOSTNAME
 install_system /mnt
 setup_boot "$DISK" "$root" "$swap" /mnt
 setup_system /mnt "$HOSTNAME"
-setup_user /mnt thomas
+read -rp "Enter a username: " USERNAME
+setup_user /mnt "$USERNAME"
 
