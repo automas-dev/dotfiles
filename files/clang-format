@@ -3,13 +3,13 @@ BasedOnStyle: Google
 AccessModifierOffset: '-4'
 AlignEscapedNewlines: Left
 AlignTrailingComments: 'false'
-AllowAllArgumentsOnNextLine: 'false'
+AllowAllArgumentsOnNextLine: 'true'
 AllowShortBlocksOnASingleLine: 'false'
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: Empty
 AlwaysBreakTemplateDeclarations: 'Yes'
-BinPackArguments: 'true'
+BinPackArguments: 'false'
 BinPackParameters: 'false'
 BraceWrapping:
   AfterEnum: 'false'
