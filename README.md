@@ -46,6 +46,8 @@ This includes
  | Desktop Environment and Apps | `./install_desktop.yaml` |
  | User Config                  | `./install_user.yaml`    |
 
+ _Remember to include `--ask-become-pass -u $USER` in each of the above commands_
+
 Running `./install.yaml`, it will include all of these.
 
 ## Server Install
@@ -79,8 +81,11 @@ potentially with large gaps of time between.
 pacman -Sy archlinux-keyring git
 git clone https://github.com/twh2898/dotfiles.git
 cd dotfiles/os
-./full-encrypted.sh /dev/sda
+./install_encrypted.sh /dev/sda
 ```
+
+To install the os without encrypting the hard drive, run `install.sh` in place of
+`install_encrypted.sh`
 
 ## TO FIX
 
@@ -123,7 +128,6 @@ cd dotfiles/os
       - Lux core
 - Terminal for i3
 - backup_client restic password
-- Move neovim config files to role
 - Move dotfiles to role
   - most to user config?
 - Wallpaper in desktop config
