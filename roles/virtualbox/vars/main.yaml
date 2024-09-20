@@ -1,0 +1,3 @@
+virtualbox_key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+virtualbox_key_path: /etc/apt/keyrings/oracle-virtualbox-2016.gpg
+virtualbox_source_path: /etc/apt/sources.list.d/virtualbox.list
