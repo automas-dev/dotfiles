@@ -1,0 +1,25 @@
+- name: Install Go Archlinux
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install docker
+      become: true
+      apt.builtin.package:
+        state: present
+        name: go
+
+- name: Install Go Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Apt source
+      become: true
+      ansible.builtin.apt_repository:
+        repo: "{{ go_repository }}"
+        update_cache: true
+
+    - name: Install Go
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: golang-go
+      tags:
+        - skip_ansible_lint
