@@ -14,6 +14,13 @@ function ssh_session {
   fi
 }
 
+function ros_version {
+  local ros_version="$(printenv ROS_DISTRO 2> /dev/null)"
+  if [ -f /.dockerenv ] && [ -n "$ros_version" ]; then
+    echo "$ros_version"
+  fi
+}
+
 function git_color {
   local git_status="$(git status 2> /dev/null)"
 
@@ -43,9 +50,11 @@ function git_branch {
 }
 
 PS1="\[${COLOR_WHITE}\]"
-PS1+="\$(ssh_session)"
-PS1+="\[$COLOR_GREEN\][\w]"          # basename of pwd
-PS1+="\[\$(git_color)\]"        # colors git status
-PS1+="\$(git_branch)"           # prints current branch
+PS1+="$(ssh_session)"
+PS1+="\[$COLOR_ORANGE\]"
+PS1+="$(ros_version)"
+PS1+="\[$COLOR_GREEN\][\w]"  # basename of pwd
+PS1+="\[\$(git_color)\]"     # colors git status
+PS1+="\$(git_branch)"        # prints current branch
 PS1+="\[$COLOR_ORANGE\]\$\[$COLOR_RESET\] "   # '#' for root, else '$'
 export PS1
