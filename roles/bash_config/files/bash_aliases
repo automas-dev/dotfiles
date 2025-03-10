@@ -39,6 +39,13 @@ alias gitpull="git pull --rebase --recurse-submodules"
 alias submoduleupdate="git submodule update --init --recursive"
 alias submoduleresetall="git clean -xfd && git submodule foreach --recursive git clean -xfd && git reset --hard && git submodule foreach --recursive git reset --hard && git submodule update --init --recursive"
 
+after_pr() {
+    git remote update
+    git prune origin
+    git checkout main
+    git pull
+}
+
 # Trash alias
 alias trash="gio trash"
 
