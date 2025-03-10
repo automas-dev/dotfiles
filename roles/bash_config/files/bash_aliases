@@ -41,7 +41,7 @@ alias submoduleresetall="git clean -xfd && git submodule foreach --recursive git
 
 after_pr() {
     git remote update
-    git prune origin
+    git remote prune origin
     git checkout main
     git pull
 }
