@@ -46,6 +46,8 @@ after_pr() {
     git pull
 }
 
+alias branch="git checkout -b"
+
 # Trash alias
 alias trash="gio trash"
 
