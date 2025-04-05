@@ -6,7 +6,7 @@
 
 - name: Copy service file
   ansible.builtin.copy:
-    src: "failure-handler@.service"
+    src: "notify-failure@.service"
     dest: "{{ ansible_env.HOME }}/.config/systemd/user/notify-failure@.service"
     mode: "0644"
 
