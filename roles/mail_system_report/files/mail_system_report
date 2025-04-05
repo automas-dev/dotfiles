@@ -22,15 +22,13 @@ $(date) $(uptime -p)
 <pre>$(df -h)</pre>
 <h2>RAID</h2>
 <pre>$(cat /proc/mdstat 2>/dev/null)</pre>
-<h2>SSH Daemon</h2>
-<pre>$(journalctl --since -1day -u sshd)</pre>
 <h2>Docker Df</h2>
 <pre>$(docker system df)</pre>
 <h2>SSH Daemon</h2>
-<h3>$SSH_ACCEPTED_WCL invalid connections</h3>
-<pre>$SSH_INVALID</pre>
-<h3>$SSH_INVALID_WCL connections accepted</h3>
+<h3>$SSH_ACCEPTED_WCL connections accepted</h3>
 <pre>$SSH_ACCEPTED</pre>
+<h3>$SSH_INVALID_WCL invalid connections</h3>
+<pre>$SSH_INVALID</pre>
 <h3>1 Day of Logs</h3>
 <pre>$SSH_DETAILED</pre>
 EOF
