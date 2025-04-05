@@ -1,0 +1,10 @@
+[Unit]
+Description=Mail Status
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h
+ExecStart=/bin/bash %h/.local/bin/mail_stats
+
+# vi: ft=systemd
