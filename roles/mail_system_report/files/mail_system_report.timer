@@ -1,5 +1,5 @@
 [Unit]
-Description=Timer for Mail Status
+Description=Timer for Mail System Report
 
 [Timer]
 # Daily at 4:00 AM
