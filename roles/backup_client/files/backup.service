@@ -1,7 +1,7 @@
 [Unit]
 Description=Daily backup
 After=network.target
-OnFailure=failure-handler@%N.service
+OnFailure=notify-failure@%N.service
 StartLimitIntervalSec=3600
 StartLimitBurst=3
 
