@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mail_stats status title <<EOF
+$HOME/.local/bin/mail_stats status title <<EOF
 <b>something</b><ul><li>one</li><li>two</li></ul>
 EOF
