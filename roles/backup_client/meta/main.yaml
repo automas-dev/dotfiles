@@ -2,3 +2,4 @@ dependencies:
   - role: local_bin
   - role: update_keyring
   - role: package_cache
+  - role: systemd_notify_failure
