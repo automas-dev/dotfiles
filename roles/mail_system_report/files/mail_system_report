@@ -31,4 +31,6 @@ $(date) $(uptime -p)
 <pre>$SSH_INVALID</pre>
 <h3>1 Day of Logs</h3>
 <pre>$SSH_DETAILED</pre>
+<h2>User Login History</h2>
+<pre>$(last -s -1day)</pre>
 EOF
