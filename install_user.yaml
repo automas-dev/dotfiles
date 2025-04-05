@@ -9,3 +9,5 @@
     - project_templates
     - gitprompt
     - backup_client
+  tags:
+    - user_config
