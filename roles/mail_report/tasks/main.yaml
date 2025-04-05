@@ -4,6 +4,9 @@
     state: present
     name: apprise
 
+- name: Install mail_stats
+  ansible.builtin.command: pipx install git+https://github.com/automas-dev/mail_status.git
+
 - name: Create user systemd folder
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.config/systemd/user"
@@ -21,9 +24,11 @@
 
 - name: Copy script
   ansible.builtin.copy:
-    src: mail_stats
+    src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/.local/bin/"
     mode: "0755"
+  loop:
+    - mail_system_report
 
 - name: Enable service timer
   ansible.builtin.systemd:

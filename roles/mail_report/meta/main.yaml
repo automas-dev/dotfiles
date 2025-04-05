@@ -1,0 +1,5 @@
+dependencies:
+  - role: update_keyring
+  - role: package_cache
+  - role: local_bin
+  - role: pipx

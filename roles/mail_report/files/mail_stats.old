@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <alert|status> <title> [message]"
+    exit 1
+fi
+
+TYPE_LOWER=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+TYPE_UPPER=$(echo "$1" | tr '[:lower:]' '[:upper:]')
+
+GMAIL_PASSWD=$(cat "$HOME/.ssh/apprise_passwd.txt")
+
+if [ -z "$GMAIL_PASSWD" ]; then
+    echo Gmail password is empty, cannot send emails!
+    exit 1
+fi
+
+APPRISE_TARGET="mailto://theharrisoncrafter+$TYPE_LOWER:$GMAIL_PASSWD@gmail.com"
+
+message="${@:3}"
+if [ -n "$message" ]; then
+    apprise -vv --title "[$TYPE_UPPER] $HOSTNAME $2" "$APPRISE_TARGET" --body "$message"
+else
+    apprise -vv --title "[$TYPE_UPPER] $HOSTNAME $2" "$APPRISE_TARGET"
+fi
