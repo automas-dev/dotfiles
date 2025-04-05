@@ -6,11 +6,11 @@ SSH_ACCEPTED_WCL=$(echo "$SSH_ACCEPTED" | wc -l)
 SSH_INVALID=$(journalctl --since -1day -u sshd | grep -e "invalid format" -e "banner exchange")
 SSH_INVALID_WCL=$(echo "$SSH_INVALID" | wc -l)
 
-if [ -z $SSH_ACCEPTED ]; then
+if [ -z "$SSH_ACCEPTED" ]; then
     SSH_ACCEPTED_WCL=0
 fi
 
-if [ -z $SSH_INVALID ]; then
+if [ -z "$SSH_INVALID" ]; then
     SSH_INVALID_WCL=0
 fi
 
