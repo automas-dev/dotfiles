@@ -23,7 +23,7 @@
   host: server
   roles:
     - backup_server
-    - mail_stats
+    - mail_system_report
 
 - name: Configure
   hosts: server
