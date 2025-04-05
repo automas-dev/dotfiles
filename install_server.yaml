@@ -19,10 +19,16 @@
     - bash
     - wine
 
+- name: Install Extra
+  host: server
+  roles:
+    - backup_server
+    - mail_stats
+
 - name: Configure
   hosts: server
   roles:
-    - ssh_keygen
     - gitprompt
-    - backup_server
     - bash_config
+  tags:
+    - user_config
