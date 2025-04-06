@@ -1,5 +1,3 @@
-# ls shorthand
-alias ls='ls -h --group-directories-first --color=auto'
 alias ll='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
@@ -45,6 +43,8 @@ after_pr() {
     git checkout main
     git pull
 }
+
+alias branch="git checkout -b"
 
 # Trash alias
 alias trash="gio trash"
