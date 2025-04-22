@@ -21,7 +21,7 @@ $HOME/.local/bin/mail_stats status "System Report" << EOF
 $(date) $(uptime -p)
 <pre>$(timedatectl --all status)</pre>
 <h2>Disk Use</h2>
-<pre>$(df -h | grep -v tmpfs)</pre>
+<pre>$(df -h | grep -v tmpfs -v /dev -v /run -v efivarfs)</pre>
 <h2>RAID</h2>
 <pre>$(cat /proc/mdstat 2>/dev/null)</pre>
 <h2>Docker Df</h2>
