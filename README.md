@@ -8,7 +8,7 @@ While this repo can be cloned anywhere, some features depend on it being
 `~/dotfiles`.
 
 ```sh
-git clone https://github.com/twh2898/dotfiles.git dotfiles
+git clone https://github.com/automas-dev/dotfiles.git dotfiles
 cd dotfiles
 ./post-clone.sh
 ```
@@ -79,7 +79,7 @@ potentially with large gaps of time between.
 
 ```sh
 pacman -Sy archlinux-keyring git
-git clone https://github.com/twh2898/dotfiles.git
+git clone https://github.com/automas-dev/dotfiles.git
 cd dotfiles/os
 ./install_encrypted.sh /dev/sda
 ```
