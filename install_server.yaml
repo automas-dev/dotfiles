@@ -9,11 +9,12 @@
     - python
     - bash
 
-# - name: Install Extra
-#   host: server
-#   roles:
-#     - backup_server
-#     - mail_system_report
+- name: Install Extra
+  host: server
+  roles:
+    # - backup_server
+    # - mail_system_report
+    - server_user_github
 
 - name: Configure
   hosts: server

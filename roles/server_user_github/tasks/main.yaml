@@ -1,0 +1,14 @@
+- name: Create Github Use
+  become: true
+  ansible.builtin.user:
+    name: github
+    password_lock: true
+    state: present
+
+- name: Copy ssh keygen script
+  become: true
+  ansible.builtin.copy:
+    src: gen_github_ssh_key.sh
+    dest: "/home/github/gen_github_ssh_key.sh"
+    backup: true
+    mode: "0644"
