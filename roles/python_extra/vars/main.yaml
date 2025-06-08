@@ -1,0 +1,35 @@
+python_arch_packages:
+  # System packages for pip packages
+  - python-matplotlib
+  - python-numpy
+  - python-scipy
+  - python-pyperclip
+  - python-pycodestyle
+  - python-pydocstyle
+  - python-numba
+  - python-jedi
+  - python-pynvim
+  - autopep8
+  - mypy
+
+python_ubuntu_packages:
+  - python3-psutil
+  - python3-tk
+  - libopencv-dev
+  - python3-opencv
+
+python_pip_packages:
+  - matplotlib
+  - numpy
+  - scipy
+  - pyautogui
+  - pyperclip
+  - pycodestyle
+  - pydocstyle
+  - mypy
+  - autopep8
+  - numba
+  - jedi
+  - pylance
+  - pynvim
+  - jupyter

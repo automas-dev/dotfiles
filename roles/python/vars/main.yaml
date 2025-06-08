@@ -1,42 +1,11 @@
 python_arch_packages:
   - python
   - python-pip
+  - python-virtualenv
   - python-setuptools
-  # System packages for pip packages
-  - python-matplotlib
-  - python-numpy
-  - python-scipy
-  - python-pyperclip
-  - python-pycodestyle
-  - python-pydocstyle
-  - python-numba
-  - python-jedi
-  - python-pynvim
-  - autopep8
-  - mypy
 
 python_ubuntu_packages:
   - python3
   - python-is-python3
-  - python3-psutil
-  - python3-tk
   - python3-pip
   - python3-venv
-  - libopencv-dev
-  - python3-opencv
-
-python_pip_packages:
-  - matplotlib
-  - numpy
-  - scipy
-  - pyautogui
-  - pyperclip
-  - pycodestyle
-  - pydocstyle
-  - mypy
-  - autopep8
-  - numba
-  - jedi
-  - pylance
-  - pynvim
-  - jupyter

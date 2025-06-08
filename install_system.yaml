@@ -4,6 +4,7 @@
   roles:
     - docker
     - python
+    - python_extra
     - rust
     - node
     - ansible

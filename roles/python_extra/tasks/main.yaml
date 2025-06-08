@@ -11,3 +11,9 @@
   ansible.builtin.package:
     state: present
     name: "{{ python_ubuntu_packages }}"
+
+- name: Install Pip Packages
+  when: ansible_distribution == "Ubuntu"
+  ansible.builtin.pip:
+    state: present
+    name: "{{ python_pip_packages }}"
