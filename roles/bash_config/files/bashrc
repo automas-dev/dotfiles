@@ -58,12 +58,9 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
-[ -d "/opt/ros/melodic" ] && source /opt/ros/melodic/setup.bash
-[ -d "/opt/ros/noetic" ] && source /opt/ros/noetic/setup.bash
-export ROS_HOSTNAME=$(hostname)
-export ROS_MASTER_URI=http://$(hostname):11311/
-
 export PATH="$HOME/.local/bin:$PATH"
+
+export EDITOR=vim
 
 export ANSIBLE_NOCOWS=1
 export MOZ_USE_XINPUT2=1
