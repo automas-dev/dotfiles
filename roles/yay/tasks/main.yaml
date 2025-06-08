@@ -3,6 +3,7 @@
   register: yay_exists
   changed_when: false
   ignore_errors: true
+  when: ansible_distribution == "Archlinux"
   tags:
     - skip_ansible_lint
 
