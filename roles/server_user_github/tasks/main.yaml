@@ -10,5 +10,6 @@
   ansible.builtin.copy:
     src: gen_github_ssh_key.sh
     dest: "/home/github/gen_github_ssh_key.sh"
-    backup: true
+    owner: github
+    group: github
     mode: "0644"
