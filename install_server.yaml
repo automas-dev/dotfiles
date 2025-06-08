@@ -1,34 +1,23 @@
 #!/usr/bin/env ansible-playbook
-- name: Install Base
-  hosts: server
-  roles:
-    - pacman_conf
-    - packages
-    - git
-    - yay
-
 - name: Install System
   hosts: server
   roles:
+    - server_packages
+    - git
+    - yay
     - docker
     - python
-    - rust
-    - node
-    - ansible
-    - neovim
     - bash
-    - wine
 
-- name: Install Extra
-  host: server
-  roles:
-    - backup_server
-    - mail_system_report
+# - name: Install Extra
+#   host: server
+#   roles:
+#     - backup_server
+#     - mail_system_report
 
 - name: Configure
   hosts: server
   roles:
-    - gitprompt
     - bash_config
   tags:
     - user_config
