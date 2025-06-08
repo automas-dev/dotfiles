@@ -1,5 +1,8 @@
 [server]
 tom-lan
 
+[server2]
+tom-lan2
+
 [remote]
 home.twhps.net
