@@ -12,9 +12,10 @@
 - name: Install Extra
   host: server
   roles:
+    - ddns
+    - server_user_github
     # - backup_server
     # - mail_system_report
-    - server_user_github
 
 - name: Configure
   hosts: server
