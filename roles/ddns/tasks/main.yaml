@@ -13,19 +13,16 @@
 
 - name: Configure /etc/ddclient/ddclient.conf
   become: true
-  ansible.builtin.blockinfile:
-    path: "/etc/ddclient.conf"
-    block: "{{ lookup('ansible.builtin.template', 'ddclient.conf') }}"
-    create: true
+  ansible.builtin.template:
+    src: ddclient.conf.j2
+    dest: /etc/ddclient.conf
     mode: "0600"
     owner: root
     group: root
-  tags:
-    - user_config
 
-# - name: Start ddclient Service
-#   become: true
-#   ansible.builtin.systemd:
-#     name: ddclient.service
-#     state: started
-#     enabled: true
+- name: Start ddclient Service
+  become: true
+  ansible.builtin.systemd:
+    name: ddclient.service
+    state: started
+    enabled: true

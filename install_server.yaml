@@ -1,4 +1,5 @@
 #!/usr/bin/env ansible-playbook
+
 - name: Install System
   hosts: server
   roles:
@@ -10,12 +11,26 @@
     - bash
 
 - name: Install Extra
-  host: server
+  hosts: server2
   roles:
-    - ddns
     - server_user_github
     # - backup_server
     # - mail_system_report
+
+- name: Install DDNS
+  hosts: server
+  vars:
+    ddclient_zone: twhps.net
+    ddclient_hosts:
+      - twhps.net
+      - api.twhps.net
+      # - home.twhps.net
+      # - minecraft.twhps.net
+      - public.twhps.net
+      # - torc.twhps.net
+      - souprfood.com
+  roles:
+    - ddns
 
 - name: Configure
   hosts: server
