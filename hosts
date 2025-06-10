@@ -1,8 +1,5 @@
 [server]
-tom-lan
-
-[server2]
-tom-lan2
+tom-lan ansible_become_pass='{{ tom_lan_become_pass }}' vault_identity_list=tom-lan
 
 [remote]
 home.twhps.net

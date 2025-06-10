@@ -1,3 +1,10 @@
+- name: "Check mandatory variables are defined"
+  assert:
+    that:
+      - ddclient_zone is defined
+      - ddclient_password is defined
+      - ddclient_hosts is defined
+
 - name: Install ddclient
   become: true
   ansible.builtin.package:
@@ -7,8 +14,8 @@
 - name: Configure /etc/ddclient/ddclient.conf
   become: true
   ansible.builtin.blockinfile:
-    path: "/etc/ddclient/ddclient.conf"
-    block: "{{ lookup('file', 'ddclient.conf') }}"
+    path: "/etc/ddclient.conf"
+    block: "{{ lookup('ansible.builtin.template', 'ddclient.conf') }}"
     create: true
     mode: "0600"
     owner: root
@@ -16,9 +23,9 @@
   tags:
     - user_config
 
-- name: Start ddclient Service
-  become: true
-  ansible.builtin.systemd:
-    name: ddclient.service
-    state: started
-    enabled: true
+# - name: Start ddclient Service
+#   become: true
+#   ansible.builtin.systemd:
+#     name: ddclient.service
+#     state: started
+#     enabled: true
