@@ -1,12 +1,49 @@
 #!/usr/bin/env ansible-playbook
-- name: Import Install Base
-  import_playbook: install_base.yaml
+- name: Install Base
+  hosts: localhost
+  roles:
+    - pacman_conf
+    - packages
+    - git
+    - yay
 
-- name: Import Install System
-  import_playbook: install_system.yaml
+- name: Install System
+  hosts: localhost
+  roles:
+    - docker
+    - python
+    - python_extra
+    - rust
+    - node
+    - ansible
+    - neovim
+    - bash
+    - wine
+    - bazel
+    - reflector
 
-- name: Import Install Desktop
-  import_playbook: install_desktop.yaml
+- name: Install Desktop
+  hosts: localhost
+  roles:
+    - xorg
+    - i3
+    - plasma
+    - desktop_apps
+    - bluetooth
+    - fonts
+    - desktop_config
+    - alacritty
+    - blender
 
-- name: Import Install User
-  import_playbook: install_user.yaml
+- name: Install User
+  hosts: localhost
+  roles:
+    - local_bin
+    - ssh_keygen
+    - no_sudo_password
+    - bash_config
+    - project_templates
+    - gitprompt
+    - backup_client
+  tags:
+    - user_config
