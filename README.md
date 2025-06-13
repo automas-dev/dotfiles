@@ -8,17 +8,9 @@ While this repo can be cloned anywhere, some features depend on it being
 `~/dotfiles`.
 
 ```sh
-git clone https://github.com/automas-dev/dotfiles.git dotfiles
+git clone https://github.com/automas-dev/dotfiles.git
 cd dotfiles
 ./post-clone.sh
-```
-
-### Install Dotfiles (deprecated)
-
-Create sym links for dotfiles and config files.
-
-```sh
-./install_dotfiles.sh
 ```
 
 ### Install Everything
@@ -36,19 +28,6 @@ This includes
 
 **NOTE:** If you want to install packages but skip user configuration, append
 `--skip-tags user_config` to the install command.
-
-### Partial Install
-
- | name                         | script                   |
- | ---------------------------- | ------------------------ |
- | Base packages                | `./install_base.yaml`    |
- | System Packages              | `./install_system.yaml`  |
- | Desktop Environment and Apps | `./install_desktop.yaml` |
- | User Config                  | `./install_user.yaml`    |
-
- _Remember to include `--ask-become-pass -u $USER` in each of the above commands_
-
-Running `./install.yaml`, it will include all of these.
 
 ## Server Install
 
