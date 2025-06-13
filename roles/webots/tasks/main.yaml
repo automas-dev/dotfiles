@@ -40,7 +40,7 @@
     - name: Install GPG key
       become: true
       ansible.builtin.shell: >
-        curl -fsSL {{ cyberbotics_key_url }} | 
+        curl -fsSL {{ cyberbotics_key_url }} |
         gpg --dearmor -o {{ cyberbotics_key_path }}
       args:
         creates: "{{ cyberbotics_key_path }}"
