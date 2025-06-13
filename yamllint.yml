@@ -1,7 +1,7 @@
 extends: default
 
 rules:
-  document-start: disable  # don't bother me with this rule
+  document-start: disable
   comments: disable
   line-length: disable
   truthy: disable

@@ -1,8 +1,0 @@
-#!/usr/bin/env ansible-playbook
-- name: Install Base
-  hosts: localhost
-  roles:
-    - pacman_conf
-    - packages
-    - git
-    - yay
