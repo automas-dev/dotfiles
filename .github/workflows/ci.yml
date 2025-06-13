@@ -30,7 +30,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     secrets: inherit
 
-    needs: [lint_test]
+    needs: [lint]
 
     permissions:
       contents: write
