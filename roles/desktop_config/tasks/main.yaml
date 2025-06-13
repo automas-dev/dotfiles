@@ -2,6 +2,7 @@
   gsetting:
     settings:
       org.gnome.desktop.peripherals.keyboard.repeat-interval: "{{ keyboard.repeat | int }}"
+  changed_when: false
   tags:
     - user_config
 
@@ -9,6 +10,7 @@
   gsetting:
     settings:
       org.gnome.desktop.peripherals.keyboard.delay: "{{ keyboard.delay | int }}"
+  changed_when: false
   tags:
     - user_config
 
@@ -16,5 +18,6 @@
   gsetting:
     settings:
       org.gnome.desktop.peripherals.touchpad.speed: "{{ mouse.speed | float }}"
+  changed_when: false
   tags:
     - user_config

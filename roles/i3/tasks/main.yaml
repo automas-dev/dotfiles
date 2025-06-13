@@ -3,6 +3,7 @@
   ansible.builtin.package:
     name: i3-wm
     state: absent
+  changed_when: false
 
 - name: Install Desktop
   become: true
