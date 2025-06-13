@@ -1,0 +1,8 @@
+- name: Update arch keyring
+  when: ansible_distribution == "Archlinux"
+  become: true
+  ansible.builtin.package:
+    name: archlinux-keyring
+    state: latest
+  tags:
+    - skip_ansible_lint

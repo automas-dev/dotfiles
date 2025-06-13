@@ -1,0 +1,8 @@
+files/config/nvim/undo/
+files/config/nvim/plugged/
+ansible.log
+
+__pycache__/
+*.pyc
+
+os/*.part.bak

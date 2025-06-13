@@ -1,0 +1,12 @@
+#!/usr/bin/env ansible-playbook
+- name: Import Install Base
+  import_playbook: install_base.yaml
+
+- name: Import Install System
+  import_playbook: install_system.yaml
+
+- name: Import Install Desktop
+  import_playbook: install_desktop.yaml
+
+- name: Import Install User
+  import_playbook: install_user.yaml

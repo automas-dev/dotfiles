@@ -1,0 +1,19 @@
+- name: Install All Packages
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ packages_all }}"
+
+- name: Install Ubuntu Packages
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ packages_ubuntu }}"
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install Archlinux Packages
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ packages_archlinux }}"
+  when: ansible_distribution == "Archlinux"

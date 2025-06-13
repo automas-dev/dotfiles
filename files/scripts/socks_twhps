@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ssh -D 8123 -C home.twhps.net

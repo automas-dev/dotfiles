@@ -1,0 +1,39 @@
+- name: Install Restic
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: restic
+
+- name: Create user systemd folder
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/systemd/user"
+    state: directory
+    mode: "0755"
+
+- name: Copy service files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
+    mode: "0644"
+  loop:
+    - backup.service
+    - backup.timer
+
+- name: Link restic excludes
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/restic_exclude"
+    dest: "{{ ansible_env.HOME }}/.restic_exclude"
+    state: link
+
+- name: Copy backup script
+  ansible.builtin.copy:
+    src: backup
+    dest: "{{ ansible_env.HOME }}/.local/bin/"
+    mode: "0755"
+
+- name: Enable backup timer
+  ansible.builtin.systemd:
+    name: backup.timer
+    daemon_reload: true
+    enabled: true
+    scope: user

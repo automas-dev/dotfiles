@@ -1,0 +1,32 @@
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+	ui = true
+	pager = true
+	commit = true
+
+[user]
+	name = Thomas Harrison
+	email = theharrisoncrafter@gmail.com
+
+[credential]
+	helper = cache
+
+[push]
+	default = simple
+	followTags = true
+	autoSetupRemote = true
+
+[core]
+	pager = less -F
+
+[merge "ours"]
+	driver = true
+
+[pull]
+	rebase = false
+
+[init]
+	defaultBranch = main

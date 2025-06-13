@@ -1,0 +1,112 @@
+#!/bin/bash
+
+if [ -z "${MKN_TEMPLATES}" ]; then
+    echo "Please set the MKN_TEMPLATES environment variable to point to the templates folder"
+    exit 1
+fi
+
+## Print usage message
+usage() {
+    echo "Usage: mkn [options] language name"
+    echo
+    ls -1 "$MKN_TEMPLATES"
+    echo
+    echo "Options:"
+    echo "    -h|--help     Display this help message"
+}
+
+## Clean the language string
+clean_lang() {
+    local LANG
+    LANG=$(echo "$1" | tr '[:upper:]' '[:lower:]')
+    if [ "cpp" == "$LANG" ] || [ "c++" == "$LANG" ] || [ "cxx" == "$LANG" ]
+    then
+        echo "cpp"
+    elif [ "python" == "$LANG" ] || [ "py" == "$LANG" ]
+    then
+        echo "py"
+    else
+        echo "$LANG"
+    fi
+}
+
+## GetOpt parse
+SHORT=h
+LONG=help
+OPTS=$(getopt -o $SHORT --long $LONG --name "$0" -- "$@")
+
+## Check for parse errors
+if [ $? != 0 ]; then echo "Parsing failed, exiting." >&2; exit 1; fi
+
+eval set -- "$OPTS"
+
+## Read optional args
+while true
+do
+    case "$1" in
+        -h|--help) usage; exit 0;;
+        --) shift; break;;
+        -*) echo "unknown option: $1" >&2; usage; exit 1;;
+    esac
+done
+
+## Read positional args
+PLANG=$(clean_lang "$1")
+shift
+export NAME="$1"
+shift
+
+## Check for required positional arg
+if [ -z "$PLANG" ]; then usage; exit 1; fi
+
+## Check for required positional arg
+if [ -z "$NAME" ]; then usage; exit 1; fi
+
+# Make sure directory does not exist
+if [ -d "$NAME" ]; then echo "Failed to create project, directory already exists."; exit 1; fi
+
+## Check that a template exists
+PTYPE=$PLANG
+ARCHIVE=$MKN_TEMPLATES/$PTYPE
+if [ ! -d "$ARCHIVE" ]; then echo "Unknown project type $PTYPE"; exit 1; fi
+
+echo Making new project $NAME in $PLANG
+
+## Check that we are not writing over a project
+if [ -e "$NAME/.mk" ]; then
+    echo Project $NAME already exists!
+    exit 1
+fi
+
+## Expand template into current working directory
+#cp -r $ARCHIVE/* ./
+cp -r "$ARCHIVE" "$NAME"
+
+# Move into project directory
+cd $NAME
+
+envsubst_rm() {
+    envsubst < "$1"
+    rm "$1"
+}
+
+## Check for setup script
+if [ -f ".mk" ]; then
+    DOLLAR="$"
+    export NAME PLANG PTYPE ARCHIVE DOLLAR
+    export -f envsubst_rm
+
+    ## Run setup script if there is one
+    ./.mk
+
+    ## Remove setup script to reset permissions
+    rm ./.mk
+fi
+
+## Initialize git repo
+touch gitignore
+mv gitignore .gitignore
+
+git init
+git add .
+git commit -m "First Commit"

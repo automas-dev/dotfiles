@@ -1,0 +1,48 @@
+[env]
+TERM = "xterm-256color"
+
+[scrolling]
+history = 1000
+
+[font]
+size = 6.0
+
+[font.normal]
+family = "hack"
+style = "Regular"
+
+[font.bold]
+family = "hack"
+style = "Bold"
+
+[font.bold_italic]
+family = "hack"
+style = "Bold Italic"
+
+[font.italic]
+family = "hack"
+style = "Italic"
+
+[colors.primary]
+background = '#282c34'
+foreground = '#abb2bf'
+
+[colors.normal]
+black   = '#1e2127'
+red     = '#e06c75'
+green   = '#97c276'
+yellow  = '#e5c07b'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#828997'
+
+[colors.bright]
+black   = '#5c6370'
+red     = '#be5046'
+green   = '#82a768'
+yellow  = '#d19a66'
+blue    = '#5394cb'
+magenta = '#ad69c1'
+cyan    = '#4ea4af'
+white   = '#abb2bf'

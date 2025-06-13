@@ -1,0 +1,3 @@
+ssh_keygen_size: 4096
+ssh_keygen_type: rsa
+ssh_keygen_path: .ssh/id_rsa

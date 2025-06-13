@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+	echo "Usage: mountiso <source> <directory>"
+	exit 0
+fi
+
+mount -t iso9660 -o loop $1 $2

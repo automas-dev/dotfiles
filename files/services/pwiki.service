@@ -1,0 +1,18 @@
+[Unit]
+Description=Personal Wiki
+After=network.target
+AssertPathExists=%h/Documents/personal_wiki
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Documents/personal_wiki
+ExecStart=/usr/bin/hugo serve
+ProtectSystem=yes
+ProtectHome=no
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=default.target
+
+# vi: ft=systemd

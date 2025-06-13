@@ -1,0 +1,17 @@
+fonts:
+  - adobe-source-code-pro-fonts
+  - gnu-free-fonts
+  - noto-fonts
+  - ttf-anonymous-pro
+  - ttf-cascadia-code
+  - ttf-dejavu
+  - ttf-droid
+  - ttf-fira-code
+  - ttf-fira-mono
+  - ttf-hack
+  - ttf-inconsolata
+  - ttf-jetbrains-mono
+  - ttf-liberation
+  - ttf-linux-libertine
+  - ttf-roboto
+  - ttf-ubuntu-font-family

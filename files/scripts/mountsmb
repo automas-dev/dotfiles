@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]; then
+    echo "Usage: mountsmb <network_path> <local_path>"
+    exit 0
+fi
+
+mount -t cifs $1 $2 -o username=Thomas,uid=thomas,gid=thomas

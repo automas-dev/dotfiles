@@ -1,0 +1,13 @@
+#!/usr/bin/env ansible-playbook
+- name: Install Desktop
+  hosts: localhost
+  roles:
+    - xorg
+    - i3
+    - plasma
+    - desktop_apps
+    - bluetooth
+    - fonts
+    - desktop_config
+    - alacritty
+    - blender

@@ -1,0 +1,5 @@
+- name: Install Packages
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ ansible_packages }}"

@@ -1,0 +1,21 @@
+- name: Install alacritty
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install alacritty
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: alacritty
+
+    - name: Create alacritty config folder
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.config/alacritty"
+        state: directory
+        mode: "0755"
+      tags:
+        - user_config
+
+    - name: Copy config
+      ansible.builtin.copy:
+        src: alacritty.toml
+        dest: "{{ ansible_env.HOME }}/.config/alacritty/alacritty.toml"

@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+import csv
+
+
+def to_csv(in_path, out_path=None, clear_empty=True):
+    if out_path is None:
+        out_path = in_path + '.csv'
+
+    with open(in_path, 'r', newline='') as fin, open(out_path, 'w') as fout:
+        reader = csv.reader(fin, delimiter='\t')
+        writer = csv.writer(fout)
+
+        for row in reader:
+            if clear_empty and len(row) == 0:
+                continue
+
+            writer.writerow(row)
+
+
+def _usage():
+    print('Usage:', sys.argv[0], '<filenames>')
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        _usage()
+        exit(1)
+    else:
+        files = []
+        for arg in sys.argv[1:]:
+            if arg == '-h' or arg == '--help':
+                _usage()
+                exit(0)
+            else:
+                files.append(arg)
+        for file in files:
+            to_csv(file)

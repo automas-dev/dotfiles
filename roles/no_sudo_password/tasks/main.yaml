@@ -1,0 +1,11 @@
+- name: Disable sudo password for user
+  become: true
+  ansible.builtin.lineinfile:
+    path: "/etc/sudoers.d/{{ ansible_user_id }}"
+    line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: ALL"
+    create: true
+    owner: root
+    group: root
+    mode: "0644"
+  tags:
+    - user_config

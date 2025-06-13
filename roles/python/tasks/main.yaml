@@ -1,0 +1,13 @@
+- name: Install Python
+  when: ansible_distribution == "Archlinux"
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ python_arch_packages }}"
+
+- name: Install Python
+  when: ansible_distribution == "Ubuntu"
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: "{{ python_ubuntu_packages }}"

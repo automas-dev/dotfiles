@@ -1,0 +1,16 @@
+- name: Create user systemd folder
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/systemd/user"
+    state: directory
+    mode: "0755"
+
+- name: Copy service file
+  ansible.builtin.copy:
+    src: "notify-failure@.service"
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/notify-failure@.service"
+    mode: "0644"
+
+- name: Remove old service file
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/systemd/user/failure-handler@.service"
+    state: absent

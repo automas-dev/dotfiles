@@ -1,0 +1,38 @@
+packages:
+  - gnome-tweaks
+  - libreoffice
+  - hunspell
+  - hunspell-en_us
+  - firefox
+  - gimp
+  - inkscape
+  - kdenlive
+  - darktable
+  - vlc
+  - xournalpp
+  - flatpak
+
+flatpak_packages:
+  - com.discordapp.Discord
+  - com.spotify.Client
+  - us.zoom.Zoom
+  - com.spotify.Client
+
+snapd_aur_url: https://aur.archlinux.org/snapd.git
+
+snapd_build_path: "{{ ansible_env.HOME }}/.cache/snap_aur"
+
+snap_packages:
+  - firefox
+  - gimp
+  - vlc
+  - spotify
+  - inkscape
+  - kdenlive
+  - darktable
+
+snap_classic_packages:
+  - code
+  - htop
+
+google_chrome_deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

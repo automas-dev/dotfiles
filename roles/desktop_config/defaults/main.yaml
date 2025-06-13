@@ -1,0 +1,5 @@
+keyboard:
+  repeat: 30
+  delay: 270
+mouse:
+  speed: 0.3

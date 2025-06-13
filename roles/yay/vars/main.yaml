@@ -1,0 +1,2 @@
+yay_aur_url: https://aur.archlinux.org/yay-bin.git
+yay_build_path: "{{ ansible_env.HOME }}/.cache/yay_aur"

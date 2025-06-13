@@ -1,0 +1,20 @@
+- name: Check if cargo is installed
+  ansible.builtin.shell: command -v cargo
+  register: cargo_exists
+  ignore_errors: true
+  changed_when: false
+  tags:
+    - skip_ansible_lint
+
+- name: Download installer
+  when: cargo_exists is failed
+  ansible.builtin.get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/sh.rustup.rs
+    mode: "0755"
+    force: true
+
+- name: Install rust/cargo
+  when: cargo_exists is failed
+  ansible.builtin.command: /tmp/sh.rustup.rs -y
+  changed_when: true

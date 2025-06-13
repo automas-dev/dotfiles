@@ -1,0 +1,38 @@
+#!/bin/bash
+
+SINCE=-1.1days
+
+SSH_DETAILED=$(journalctl --since $SINCE -u sshd)
+SSH_ACCEPTED=$(journalctl --since $SINCE -u sshd | grep Accepted)
+SSH_ACCEPTED_WCL=$(echo "$SSH_ACCEPTED" | wc -l)
+SSH_INVALID=$(journalctl --since $SINCE -u sshd | grep -e "invalid format" -e "banner exchange")
+SSH_INVALID_WCL=$(echo "$SSH_INVALID" | wc -l)
+
+if [ -z "$SSH_ACCEPTED" ]; then
+    SSH_ACCEPTED_WCL=0
+fi
+
+if [ -z "$SSH_INVALID" ]; then
+    SSH_INVALID_WCL=0
+fi
+
+$HOME/.local/bin/mail_stats status "System Report" << EOF
+<h1>System Report</h1>
+$(date) $(uptime -p)
+<pre>$(timedatectl --all status)</pre>
+<h2>Disk Use</h2>
+<pre>$(df -h | grep -v tmpfs | grep -v /run | grep -v efivarfs)</pre>
+<h2>RAID</h2>
+<pre>$(cat /proc/mdstat 2>/dev/null)</pre>
+<h2>Docker Df</h2>
+<pre>$(docker system df)</pre>
+<h2>SSH Daemon</h2>
+<h3>$SSH_ACCEPTED_WCL connections accepted</h3>
+<pre>$SSH_ACCEPTED</pre>
+<h3>$SSH_INVALID_WCL invalid connections</h3>
+<pre>$SSH_INVALID</pre>
+<h3>$SINCE of Logs</h3>
+<pre>$SSH_DETAILED</pre>
+<h2>User Login History</h2>
+<pre>$(last -s -1day)</pre>
+EOF

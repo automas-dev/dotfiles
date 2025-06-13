@@ -1,0 +1,16 @@
+- name: Install bash
+  become: true
+  ansible.builtin.package:
+    name: bash
+    state: present
+
+- name: Install bash tab completion
+  become: true
+  ansible.builtin.package:
+    name: bash-completion
+    state: present
+
+- name: Make bash default shell
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/bash
