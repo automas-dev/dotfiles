@@ -9,6 +9,7 @@ if [ -z "$HOSTNAME" ]; then
 fi
 
 [ -z "$REMOTE_HOST" ] && REMOTE_HOST="tom-lan"
+[ -z "$REMOTE_USER" ] && REMOTE_USER="restic"
 [ -z "$REMOTE_PATH" ] && REMOTE_PATH="/data/restic"
 [ -z "$RESTIC_EXCLUDE_PATH" ] && RESTIC_EXCLUDE_PATH="$HOME/.restic_exclude"
 [ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
@@ -22,9 +23,7 @@ CYAN="\e[0;36m"
 WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
-echo -e "${CYAN}:: ${WHITE}Backing up\
-    ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
-    to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}$REMOTE_PATH${RESET}"
+echo -e "${CYAN}:: ${WHITE}Backing up ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE} to ${YELLOW}$REMOTE_USER${WHITE}@${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}$REMOTE_PATH${RESET}"
 
 notify-send -u low -t 30000 "Backup has started..."
 
