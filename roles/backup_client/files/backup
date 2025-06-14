@@ -23,7 +23,9 @@ CYAN="\e[0;36m"
 WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
-echo -e "${CYAN}:: ${WHITE}Backing up ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE} to ${YELLOW}$REMOTE_USER${WHITE}@${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}$REMOTE_PATH${RESET}"
+echo -e "${CYAN}:: ${WHITE}Backing up" \
+    "${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}" \
+    "to ${YELLOW}$REMOTE_USER${WHITE}@${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}$REMOTE_PATH${RESET}"
 
 notify-send -u low -t 30000 "Backup has started..."
 

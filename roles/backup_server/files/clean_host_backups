@@ -47,10 +47,10 @@ CYAN="\e[0;36m"
 WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
-echo -e "${CYAN}:: ${RESET}Cleaning backups for\
-    ${WHITE}Tag ${YELLOW}$CLEAN_TAG${WHITE}\
-    ${WHITE}Host ${YELLOW}$CLEAN_HOST${WHITE}\
-    ${WHITE}Repo ${GREEN}$RESTIC_REPO_PATH${RESET}"
+echo -e "${CYAN}:: ${RESET}Cleaning backups for" \
+    "${WHITE}Tag ${YELLOW}$CLEAN_TAG${WHITE}" \
+    "${WHITE}Host ${YELLOW}$CLEAN_HOST${WHITE}" \
+    "${WHITE}Repo ${GREEN}$RESTIC_REPO_PATH${RESET}"
 
 echo -e "${CYAN}:: ${RESET}Keeping last" \
     "${RED}$KEEP_HOURLY${RESET} hourly" \
