@@ -4,11 +4,42 @@
     state: present
     name: restic
 
-- name: Install fuse
+- name: Install fuse Arch
   become: true
   ansible.builtin.package:
     state: present
     name: fuse2
+  when: ansible_distribution == "Archlinux"
+
+- name: Install fuse Ubuntu
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: libfuse2
+  when: ansible_distribution == "Ubuntu"
+
+- name: Create Restic User
+  become: true
+  ansible.builtin.user:
+    name: restic
+    password_lock: true
+    state: present
+
+- name: Add user to restic group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: restic
+    append: true
+
+- name: Create backups dir
+  become: true
+  ansible.builtin.file:
+    path: /data/restic
+    state: directory
+    owner: restic
+    group: restic
+    mode: "0750"
 
 - name: Create user systemd folder
   ansible.builtin.file:
