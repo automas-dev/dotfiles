@@ -29,6 +29,10 @@ This includes
 **NOTE:** If you want to install packages but skip user configuration, append
 `--skip-tags user_config` to the install command.
 
+Available tags, to skip or keep, are `base`, `system`, `desktop`, `user_config`,
+and `enable_backups` (skip by default). These can be used inclusive `--tags` or
+exclusive `--skip-tags`
+
 ## Server Install
 
 This section is specific to `tom-lan` but could be applicable to any server
