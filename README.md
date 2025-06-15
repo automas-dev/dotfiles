@@ -38,6 +38,10 @@ in the hosts file.
 ./install_server.yaml --ask-become-pass -u thomas
 ```
 
+## Using Vaults
+
+Vaults can be included with `-e@vaults/vault_name.yml --ask-vault-pass`
+
 ### Post Install
 
 #### Enable Clean Backups

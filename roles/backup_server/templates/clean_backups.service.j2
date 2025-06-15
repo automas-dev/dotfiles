@@ -1,0 +1,12 @@
+[Unit]
+Description=Clean backups
+After=network.target
+
+[Service]
+Type=simple
+User={{ restic_user }}
+Group={{ restic_user }}
+ExecStart=/bin/bash {{ ru.home }}/clean_backups
+WorkingDirectory={{ ru.home }}
+
+# vi: ft=systemd

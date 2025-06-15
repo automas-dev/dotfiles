@@ -47,3 +47,10 @@
     - backup_client
   tags:
     - user_config
+
+- name: Enable backups
+  host: tom-lan
+  vars:
+    restic_public_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519.pub') }}"
+  roles:
+    - backup_server_add_user_key

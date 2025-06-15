@@ -19,11 +19,22 @@
     - backup.service
     - backup.timer
 
-- name: Link restic excludes
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/restic_exclude"
-    dest: "{{ ansible_env.HOME }}/.restic_exclude"
-    state: link
+- name: Configure restic exclude
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_env.HOME }}/.restic_exclude"
+    block: "{{ lookup('file', 'restic_exclude') }}"
+    create: true
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0644"
+
+- name: Write restic password to file
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.restic_pass"
+    content: "{{ restic_password | mandatory }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0400"
 
 - name: Copy backup script
   ansible.builtin.copy:

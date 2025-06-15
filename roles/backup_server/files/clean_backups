@@ -3,5 +3,5 @@
 # Exit on failure with status code of failed command
 set -e
 
-CLEAN_HOST=tom-pc clean_host_backups
-CLEAN_HOST=tom-t470p clean_host_backups
+CLEAN_HOST=tom-pc ./clean_host_backups
+CLEAN_HOST=tom-t470p ./clean_host_backups

@@ -8,11 +8,12 @@ if [ -z "$HOSTNAME" ]; then
     exit 1
 fi
 
-[ -z "$REMOTE_HOST" ] && REMOTE_HOST="tom-lan"
-[ -z "$REMOTE_PATH" ] && REMOTE_PATH="/data/restic"
-[ -z "$RESTIC_EXCLUDE_PATH" ] && RESTIC_EXCLUDE_PATH="$HOME/.restic_exclude"
-[ -z "$RESTIC_PASSWORD_PATH" ] && RESTIC_PASSWORD_PATH="$HOME/.restic_pass"
-[ -z "$RESTIC_TAGS" ] && RESTIC_TAGS="auto,home"
+[ -z "$BACKUPS_HOST" ] && BACKUPS_HOST="tom-lan"
+[ -z "$BACKUPS_USER" ] && BACKUPS_USER="restic"
+[ -z "$BACKUPS_PATH" ] && BACKUPS_PATH="/data/restic"
+[ -z "$BACKUPS_EXCLUDE_PATH" ] && BACKUPS_EXCLUDE_PATH="$HOME/.restic_exclude"
+[ -z "$BACKUPS_PASSWORD_PATH" ] && BACKUPS_PASSWORD_PATH="$HOME/.restic_pass"
+[ -z "$BACKUPS_TAGS" ] && BACKUPS_TAGS="auto,home"
 
 START_SECONDS=$SECONDS
 
@@ -22,19 +23,19 @@ CYAN="\e[0;36m"
 WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
-echo -e "${CYAN}:: ${WHITE}Backing up\
-    ${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}\
-    to ${YELLOW}$REMOTE_HOST${WHITE}:${GREEN}$REMOTE_PATH${RESET}"
+echo -e "${CYAN}:: ${WHITE}Backing up" \
+    "${YELLOW}$HOSTNAME${WHITE}:${GREEN}$HOME${WHITE}" \
+    "to ${YELLOW}$BACKUPS_USER${WHITE}@${YELLOW}$BACKUPS_HOST${WHITE}:${GREEN}$BACKUPS_PATH${RESET}"
 
 notify-send -u low -t 30000 "Backup has started..."
 
 restic -v \
-    -p "$RESTIC_PASSWORD_PATH" \
-    -r "sftp:$REMOTE_HOST:$REMOTE_PATH" \
+    -p "$BACKUPS_PASSWORD_PATH" \
+    -r "sftp:$BACKUPS_USER@$BACKUPS_HOST:$BACKUPS_PATH" \
     backup \
-    --exclude-file "$RESTIC_EXCLUDE_PATH" \
+    --exclude-file "$BACKUPS_EXCLUDE_PATH" \
     "$HOME" \
-    --tag "$RESTIC_TAGS"
+    --tag "$BACKUPS_TAGS"
 
 echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
 

@@ -1,0 +1,31 @@
+- name: Install mdadm
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: mdadm
+
+- name: Create RAID User
+  become: true
+  ansible.builtin.user:
+    name: "{{ raid_user }}"
+    password_lock: true
+    system: true
+    state: present
+    shell: /usr/bin/nologin
+    comment: User owning /data raid mount
+
+- name: Add user to raid group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: "{{ raid_user }}"
+    append: true
+
+- name: Create mount point
+  become: true
+  ansible.builtin.file:
+    path: /data
+    state: directory
+    owner: "{{ raid_user }}"
+    group: "{{ raid_user }}"
+    mode: "2770"

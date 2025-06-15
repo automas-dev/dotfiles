@@ -10,11 +10,16 @@
     - python
     - bash
 
+- name: Setup RAID
+  host: server
+  roles:
+    - server_raid_assemble
+
 - name: Install Extra
-  hosts: server2
+  hosts: server
   roles:
     - server_user_github
-    # - backup_server
+    - backup_server
     # - mail_system_report
 
 - name: Install DDNS

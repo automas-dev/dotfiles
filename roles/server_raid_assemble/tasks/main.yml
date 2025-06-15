@@ -1,0 +1,15 @@
+- name: Not Implemented
+  ansible.builtin.fail:
+    msg: Assemble RAID is not yet implemented
+
+- name: Assemble RAID Array
+  become: true
+  ansible.builtin.command: mdadm -A -s
+
+- name: Mount RAID Array
+  become: true
+  ansible.posix.mount:
+    src: /dev/md0
+    path: /data
+    state: present
+    fstype: ext4

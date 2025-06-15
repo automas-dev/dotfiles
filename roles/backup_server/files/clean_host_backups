@@ -47,10 +47,10 @@ CYAN="\e[0;36m"
 WHITE="\e[1;97m"
 RESET="\e[0;0m"
 
-echo -e "${CYAN}:: ${RESET}Cleaning backups for\
-    ${WHITE}Tag ${YELLOW}$CLEAN_TAG${WHITE}\
-    ${WHITE}Host ${YELLOW}$CLEAN_HOST${WHITE}\
-    ${WHITE}Repo ${GREEN}$RESTIC_REPO_PATH${RESET}"
+echo -e "${CYAN}:: ${RESET}Cleaning backups for" \
+    "${WHITE}Tag ${YELLOW}$CLEAN_TAG${WHITE}" \
+    "${WHITE}Host ${YELLOW}$CLEAN_HOST${WHITE}" \
+    "${WHITE}Repo ${GREEN}$RESTIC_REPO_PATH${RESET}"
 
 echo -e "${CYAN}:: ${RESET}Keeping last" \
     "${RED}$KEEP_HOURLY${RESET} hourly" \
@@ -64,6 +64,7 @@ restic -v \
     -p "$RESTIC_PASSWORD_PATH" \
     -r "$RESTIC_REPO_PATH" \
     forget \
+    --prune \
     --tag "$CLEAN_TAG" \
     --host "$CLEAN_HOST" \
     --keep-hourly "$KEEP_HOURLY" \
@@ -71,10 +72,5 @@ restic -v \
     --keep-weekly "$KEEP_WEEKLY" \
     --keep-monthly "$KEEP_MONTHLY" \
     --keep-yearly "$KEEP_YEARLY"
-
-restic -v \
-    -p "$RESTIC_PASSWORD_PATH" \
-    -r "$RESTIC_REPO_PATH" \
-    prune
 
 echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
