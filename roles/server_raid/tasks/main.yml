@@ -1,3 +1,9 @@
+- name: Install mdadm
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: mdadm
+
 - name: Create RAID User
   become: true
   ansible.builtin.user:
@@ -23,7 +29,3 @@
     owner: "{{ raid_user }}"
     group: "{{ raid_user }}"
     mode: "2770"
-
-# - name: Not Implemented
-#   ansible.builtin.fail:
-#     msg: RAID is not yet implemented, required for the /data drive to exist
