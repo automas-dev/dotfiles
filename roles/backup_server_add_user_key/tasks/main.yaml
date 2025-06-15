@@ -1,0 +1,6 @@
+- name: Add backup client to restic account
+  become: true
+  ansible.posix.authorized_key:
+    user: "{{ restic_user }}"
+    state: present
+    key: "{{ restic_public_key | mandatory }}"
