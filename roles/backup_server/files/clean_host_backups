@@ -64,6 +64,7 @@ restic -v \
     -p "$RESTIC_PASSWORD_PATH" \
     -r "$RESTIC_REPO_PATH" \
     forget \
+    --prune \
     --tag "$CLEAN_TAG" \
     --host "$CLEAN_HOST" \
     --keep-hourly "$KEEP_HOURLY" \
@@ -71,10 +72,5 @@ restic -v \
     --keep-weekly "$KEEP_WEEKLY" \
     --keep-monthly "$KEEP_MONTHLY" \
     --keep-yearly "$KEEP_YEARLY"
-
-restic -v \
-    -p "$RESTIC_PASSWORD_PATH" \
-    -r "$RESTIC_REPO_PATH" \
-    prune
 
 echo -e "${CYAN}:: ${WHITE}Finished in $((SECONDS - START_SECONDS))s!${RESET}"
