@@ -79,6 +79,16 @@
 - tags:
     - init_restic
   block:
+    - name: Stat raid mount
+      ansible.builtin.stat:
+        path: /data
+      register: st
+
+    - name: Fail if the /data dir does not exist
+      ansible.builtin.fail:
+        msg: "RAID mount must first be created at /data"
+      when: not st.stat.exists
+
     - name: Create backups dir
       become: true
       ansible.builtin.file:
