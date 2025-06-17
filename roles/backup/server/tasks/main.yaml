@@ -76,28 +76,29 @@
     group: "{{ restic_user }}"
     mode: "0400"
 
+- name: Stat raid mount
+  ansible.builtin.stat:
+    path: /data
+  register: st
+
+- name: Fail if the /data dir does not exist
+  ansible.builtin.fail:
+    msg: "RAID mount must first be created at /data"
+  when: not st.stat.exists
+
+- name: Create backups dir
+  become: true
+  ansible.builtin.file:
+    path: /data/restic
+    state: directory
+    owner: "{{ restic_user }}"
+    group: "{{ restic_user }}"
+    mode: "0750"
+
 - tags:
     - init_restic
+    - never
   block:
-    - name: Stat raid mount
-      ansible.builtin.stat:
-        path: /data
-      register: st
-
-    - name: Fail if the /data dir does not exist
-      ansible.builtin.fail:
-        msg: "RAID mount must first be created at /data"
-      when: not st.stat.exists
-
-    - name: Create backups dir
-      become: true
-      ansible.builtin.file:
-        path: /data/restic
-        state: directory
-        owner: "{{ restic_user }}"
-        group: "{{ restic_user }}"
-        mode: "0750"
-
     - name: Init restic repo
       become: true
       ansible.builtin.command: >
@@ -108,18 +109,18 @@
       args:
         creates: /data/restic/config
 
-    - name: chown backups dir to restic user
-      become: true
-      ansible.builtin.file:
-        path: /data/restic
-        state: directory
-        recurse: true
-        owner: "{{ restic_user }}"
-        group: "{{ restic_user }}"
+- name: chown backups dir to restic user
+  become: true
+  ansible.builtin.file:
+    path: /data/restic
+    state: directory
+    recurse: true
+    owner: "{{ restic_user }}"
+    group: "{{ restic_user }}"
 
 - name: Enable clean_backups timer
   become: true
   ansible.builtin.systemd:
     name: clean_backups.timer
     daemon_reload: true
-    enabled: true
+    enabled: false
