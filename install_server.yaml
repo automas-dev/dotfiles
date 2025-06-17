@@ -32,9 +32,7 @@
       - twhps.net
       - api.twhps.net
       # - home.twhps.net
-      # - minecraft.twhps.net
       - public.twhps.net
-      # - torc.twhps.net
       - souprfood.com
   roles:
     - server/ddns
