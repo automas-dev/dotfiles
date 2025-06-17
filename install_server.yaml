@@ -13,7 +13,8 @@
 - name: Setup RAID
   host: server
   roles:
-    - server_raid_assemble
+    - server_raid
+    # - server_raid_assemble
 
 - name: Install Extra
   hosts: server
