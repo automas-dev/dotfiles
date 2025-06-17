@@ -14,7 +14,6 @@
   hosts: server
   roles:
     - server/raid
-    # - server/raid_assemble
 
 - name: Install Extra
   hosts: server
