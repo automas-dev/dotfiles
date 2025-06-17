@@ -50,7 +50,7 @@
     - bash_config
     - project_templates
     - gitprompt
-    - backup_client
+    - backup/client
   tags:
     - user_config
 
