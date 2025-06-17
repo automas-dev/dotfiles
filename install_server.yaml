@@ -10,21 +10,18 @@
     - python
     - bash
 
-- name: Setup RAID
-  hosts: server
-  roles:
+    - server/ddns
     - server/raid
 
-- name: Install Extra
-  hosts: server
-  roles:
     - server/user/github
     - server/user/colleen
     # - backup/server
     # - mail_system_report
 
-- name: Install DDNS
-  hosts: server
+    - role: bash_config
+      tags:
+        - user_config
+
   vars:
     ddclient_zone: twhps.net
     ddclient_hosts:
@@ -33,12 +30,3 @@
       # - home.twhps.net
       - public.twhps.net
       - souprfood.com
-  roles:
-    - server/ddns
-
-- name: Configure
-  hosts: server
-  roles:
-    - bash_config
-  tags:
-    - user_config
