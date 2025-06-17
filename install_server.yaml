@@ -3,43 +3,30 @@
 - name: Install System
   hosts: server
   roles:
-    - server_packages
+    - server/packages
     - git
     - yay
     - docker
     - python
     - bash
 
-- name: Setup RAID
-  host: server
-  roles:
-    - server_raid_assemble
+    - server/ddns
+    - server/raid
 
-- name: Install Extra
-  hosts: server
-  roles:
-    - server_user_github
-    - backup_server
+    - server/user/github
+    - server/user/colleen
+    # - backup/server
     # - mail_system_report
 
-- name: Install DDNS
-  hosts: server
+    - role: bash_config
+      tags:
+        - user_config
+
   vars:
     ddclient_zone: twhps.net
     ddclient_hosts:
       - twhps.net
       - api.twhps.net
       # - home.twhps.net
-      # - minecraft.twhps.net
       - public.twhps.net
-      # - torc.twhps.net
       - souprfood.com
-  roles:
-    - ddns
-
-- name: Configure
-  hosts: server
-  roles:
-    - bash_config
-  tags:
-    - user_config

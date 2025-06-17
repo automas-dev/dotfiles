@@ -1,0 +1,9 @@
+- name: Create Colleen User
+  become: true
+  ansible.builtin.user:
+    name: colleen
+    password_lock: true
+    state: present
+    shell: /bin/bash
+    groups:
+      - raid
