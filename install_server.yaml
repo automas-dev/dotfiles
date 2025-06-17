@@ -13,14 +13,15 @@
 - name: Setup RAID
   host: server
   roles:
-    - server_raid
-    # - server_raid_assemble
+    - server/raid
+    # - server/raid_assemble
 
 - name: Install Extra
   hosts: server
   roles:
-    - server_user_github
-    - backup_server
+    - server/user/github
+    - server/user/colleen
+    # - backup/server
     # - mail_system_report
 
 - name: Install DDNS

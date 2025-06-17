@@ -1,4 +1,4 @@
 dependencies:
   - role: update_keyring
   - role: package_cache
-  - role: server_user_raid
+  - role: server/user/raid
