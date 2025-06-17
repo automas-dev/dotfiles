@@ -32,10 +32,10 @@
     - xorg
     - i3
     - plasma
-    - desktop_apps
+    - desktop/appss
     - bluetooth
-    - fonts
-    - desktop_config
+    - desktop/fonts
+    - desktop/config
     - alacritty
     - blender
   tags:
