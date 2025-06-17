@@ -18,4 +18,4 @@
     state: directory
     owner: "{{ raid_user }}"
     group: "{{ raid_user }}"
-    mode: "2770"
+    mode: "0770"
