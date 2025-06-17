@@ -3,7 +3,7 @@
 - name: Install System
   hosts: server
   roles:
-    - server_packages
+    - server/packages
     - git
     - yay
     - docker
@@ -11,7 +11,7 @@
     - bash
 
 - name: Setup RAID
-  host: server
+  hosts: server
   roles:
     - server/raid
     # - server/raid_assemble
@@ -37,7 +37,7 @@
       # - torc.twhps.net
       - souprfood.com
   roles:
-    - ddns
+    - server/ddns
 
 - name: Configure
   hosts: server
