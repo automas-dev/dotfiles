@@ -30,9 +30,9 @@
   hosts: localhost
   roles:
     - xorg
-    - i3
-    - plasma
-    - desktop/appss
+    - desktop/i3
+    - desktop/plasma
+    - desktop/apps
     - bluetooth
     - desktop/fonts
     - desktop/config
@@ -55,7 +55,7 @@
     - user_config
 
 - name: Enable backups
-  host: tom-lan
+  hosts: tom-lan
   vars:
     restic_public_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519.pub') }}"
   roles:
