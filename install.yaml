@@ -36,8 +36,8 @@
     - bluetooth
     - desktop/fonts
     - desktop/config
-    - alacritty
-    - blender
+    - apps/alacritty
+    - apps/blender
   tags:
     - desktop
 
