@@ -1,4 +1,4 @@
 dependencies:
   - role: local_bin
   - role: bash_config
-  - role: git
+  - role: packages/git

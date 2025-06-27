@@ -4,11 +4,11 @@
   hosts: server
   roles:
     - server/packages
-    - git
-    - yay
-    - docker
-    - python
-    - bash
+    - packages/git
+    - packages/yay
+    - packages/docker
+    - packages/python
+    - packages/bash
 
     - server/ddns
     - server/raid

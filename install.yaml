@@ -4,36 +4,36 @@
   roles:
     - pacman_conf
     - packages/base
-    - git
-    - yay
+    - packages/git
+    - packages/yay
   tags:
     - base
 
 - name: Install System
   hosts: localhost
   roles:
-    - docker
-    - python
-    - python_extra
-    - rust
-    - node
-    - ansible
-    - neovim
-    - bash
-    - wine
-    - bazel
-    - reflector
+    - packages/docker
+    - packages/python
+    - packages/python_extra
+    - packages/rust
+    - packages/node
+    - packages/ansible
+    - packages/neovim
+    - packages/bash
+    - packages/wine
+    - packages/bazel
+    - packages/reflector
   tags:
     - system
 
 - name: Install Desktop
   hosts: localhost
   roles:
-    - xorg
+    - packages/xorg
     - desktop/i3
     - desktop/plasma
     - desktop/apps
-    - bluetooth
+    - packages/bluetooth
     - desktop/fonts
     - desktop/config
     - apps/alacritty
