@@ -1,0 +1,45 @@
+- name: Install vim
+  become: true
+  ansible.builtin.package:
+    name: vim
+    state: present
+
+- name: Install Config
+  ansible.builtin.git:
+    repo: "{{ vim_config_git_url }}"
+    dest: "{{ vim_config_path }}"
+  tags:
+    - user_config
+    - skip_ansible_lint
+
+- name: Override .vim
+  ansible.builtin.file:
+    src: "{{ vim_config_path }}"
+    dest: "{{ ansible_env.HOME }}/.vim"
+    state: link
+    mode: 0755
+  tags:
+    - user_config
+
+- name: Override .vimrc
+  ansible.builtin.file:
+    src: "{{ vim_config_path }}/init.vim"
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    state: link
+    mode: 0755
+  tags:
+    - user_config
+
+- name: Plugged Install
+  ansible.builtin.command: "vim +'PlugInstall --sync' +qa"
+  args:
+    creates: "{{ vim_config_path }}/plugged"
+  tags:
+    - user_config
+
+- name: CoC Install
+  ansible.builtin.command: "vim +'CocUpdate' +qa"
+  args:
+    creates: "{{ vim_config_path }}/plugged/coc.nvim/node_modules/"
+  tags:
+    - user_config
