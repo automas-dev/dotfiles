@@ -14,7 +14,7 @@
 
 - name: Generate SSH Key
   ansible.builtin.user:
-    name: "{{ ansible_user }}"
+    name: "{{ ansible_user_id }}"
     generate_ssh_key: true
     ssh_key_type: "{{ ssh_keygen_type }}"
     ssh_key_bits: "{{ ssh_keygen_size }}"
