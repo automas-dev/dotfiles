@@ -1,65 +1,63 @@
 #!/usr/bin/env ansible-playbook
-- name: Install Base
+
+- name: Talk to all hosts just so we can learn about them
   hosts: localhost
+  tasks:
+    - name: Classify hosts depending on their OS distribution
+      ansible.builtin.group_by:
+        key: os_{{ ansible_facts['distribution'] }}
+
+- hosts: os_Archlinux
+  gather_facts: False
   roles:
     - pacman_conf
+    - update_keyring
+
+- name: Install
+  hosts: localhost
+  roles:
+    # Base
     - packages/base
     - packages/git
     - packages/yay
-  tags:
-    - base
 
-- name: Install System
-  hosts: localhost
-  roles:
+    # System
     - packages/docker
     - packages/python
-    - packages/python_extra
-    - packages/rust
-    - packages/node
     - packages/ansible
-    - packages/neovim
     - packages/bash
-    - packages/wine
-    - packages/bazel
-    - packages/reflector
-  tags:
-    - system
+    - packages/pipx
 
-- name: Install Desktop
-  hosts: localhost
-  roles:
-    - packages/xorg
-    - desktop/i3
-    - desktop/plasma
-    - desktop/apps
-    - packages/bluetooth
-    - desktop/fonts
+    - packages/pipx_poetry
+
+    # Desktop
+    # - desktop/fonts
     - desktop/config
-    - apps/alacritty
-    - apps/blender
-  tags:
-    - desktop
 
-- name: Install User
-  hosts: localhost
-  roles:
+    # Desktop Applications
+    # - apps/blender
+    # - apps/arduino
+    - apps/gnome-terminal
+    - apps/google-chrome
+    - apps/virtualbox
+    - apps/vscode
+    - apps/webots
+
+    # User
     - local_bin
     - ssh_keygen
     - no_sudo_password
     - bash_config
     - project_templates
     - gitprompt
-    - backup/client
-  tags:
-    - user_config
+    #- backup/client
 
-- name: Enable backups
-  hosts: tom-lan
-  vars:
-    restic_public_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519.pub') }}"
-  roles:
-    - backup_server_add_user_key
-  tags:
-    - never
-    - enable_backups
+    #- name: Enable backups
+    #  hosts: tom-lan
+    #  vars:
+    #    restic_public_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519.pub') }}"
+    #  roles:
+    #    - backup_server_add_user_key
+    #  tags:
+    #    - never
+    #    - enable_backups

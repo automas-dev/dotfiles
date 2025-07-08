@@ -9,6 +9,7 @@
       - arduino-cli
       - arduino-docs
       - arduino-language-server
+  when: ansible_distribution == "Archlinux"
 
 - name: Add user to serial groups
   ansible.builtin.user:
@@ -16,3 +17,4 @@
     append: true
     groups:
       - uucp
+  when: ansible_distribution == "Archlinux"
