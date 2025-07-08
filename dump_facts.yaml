@@ -1,0 +1,18 @@
+#!/usr/bin/env ansible-playbook
+
+- name: Gather facts about localhost
+  hosts: localhost
+
+- name: Dump vars
+  gather_facts: false
+  hosts: localhost
+  tasks:
+    - ansible.builtin.copy:
+        content: "{{ ansible_facts }}"
+        dest: ansible_facts.json
+    - ansible.builtin.copy:
+        content: "{{ hostvars }}"
+        dest: hostvars.json
+    - ansible.builtin.copy:
+        content: "{{ hostvars['localhost'] }}"
+        dest: local_hostvars.json

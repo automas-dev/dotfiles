@@ -1,5 +1,8 @@
 #!/usr/bin/env ansible-playbook
 
+- name: Gather facts about localhost
+  host: localhost
+
 - name: Install System
   hosts: server
   roles:
