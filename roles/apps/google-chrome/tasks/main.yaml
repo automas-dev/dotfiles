@@ -1,0 +1,5 @@
+- name: Install Google Chrome
+  become: true
+  ansible.builtin.package:
+    deb: "{{ google_chrome_deb }}"
+  when: ansible_distribution == "Ubuntu"

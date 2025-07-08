@@ -1,0 +1,14 @@
+- name: Install VSCode
+  become: true
+  ansible.builtin.package:
+    deb: "{{ vscode_deb }}"
+  when: ansible_distribution == "Ubuntu"
+
+- name: Debconf VSCode
+  become: true
+  when: ansible_distribution == "Ubuntu"
+  ansible.builtin.debconf:
+    name: code
+    question: code/add-microsoft-repo
+    value: "true"
+    vtype: boolean
