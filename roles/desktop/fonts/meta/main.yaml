@@ -1,3 +1,2 @@
 dependencies:
   - role: package_cache
-  - role: packages/xorg
