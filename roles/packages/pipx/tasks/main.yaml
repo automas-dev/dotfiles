@@ -1,5 +1,17 @@
-- name: Install PipX
+- name: Install PipX Ubuntu
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: pipx
+  when: ansible_distribution == "Ubuntu"
+
+- name: Install PipX Archlinux
   become: true
   ansible.builtin.package:
     state: present
     name: python-pipx
+  when: ansible_distribution == "Archlinux"
+
+- name: Ensure Path
+  ansible.builtin.command: pipx ensurepath
+  changed_when: false
