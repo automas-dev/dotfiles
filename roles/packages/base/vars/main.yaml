@@ -23,8 +23,6 @@ packages_all:
     - nmap
     - openconnect
     - ranger
-    - restic
-    - shellcheck
     - sl
     - sshfs
     - sshpass
