@@ -19,3 +19,15 @@
     owner: "{{ raid_user }}"
     group: "{{ raid_user }}"
     mode: "0770"
+
+- name: Examine array
+  become: true
+  ansible.builtin.shell: mdadm --examine --scan
+  register: scan
+  changed_when: false
+
+- name: Reassemble array
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/mdadm/mdadm.conf
+    line: "{{ scan.stdout }}"
