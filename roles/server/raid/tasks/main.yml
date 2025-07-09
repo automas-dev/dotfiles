@@ -31,3 +31,14 @@
   ansible.builtin.lineinfile:
     path: /etc/mdadm/mdadm.conf
     line: "{{ scan.stdout }}"
+
+- name: Add fstab entry
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    line: '/dev/md127              /data   ext4            rw,relatime,nofail      0 2'
+
+- name: Reload systemctl daemon
+  become: true
+  ansible.builtin.systemd:
+    daemon_reload: true

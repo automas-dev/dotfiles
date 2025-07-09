@@ -20,6 +20,7 @@
     - server/user/colleen
 
     # Needs rewrite to remove restic user
+    # or maybe not? /data has raid user owning files from last install
     # - backup/server
     # - mail_system_report
 
