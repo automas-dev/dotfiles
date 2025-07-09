@@ -7,4 +7,5 @@ __pycache__/
 
 os/*.part.bak
 
-vaults/
+vault.yml
+*.vaultpass

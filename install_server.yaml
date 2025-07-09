@@ -1,14 +1,14 @@
 #!/usr/bin/env ansible-playbook
 
 - name: Gather facts about localhost
-  host: localhost
+  hosts: localhost
 
 - name: Install System
   hosts: server
   roles:
     - server/packages
+
     - packages/git
-    - packages/yay
     - packages/docker
     - packages/python
     - packages/bash
@@ -18,6 +18,8 @@
 
     - server/user/github
     - server/user/colleen
+
+    # Needs rewrite to remove restic user
     # - backup/server
     # - mail_system_report
 
@@ -26,6 +28,7 @@
         - user_config
 
   vars:
+    raid_user: data
     ddclient_zone: twhps.net
     ddclient_hosts:
       - twhps.net
