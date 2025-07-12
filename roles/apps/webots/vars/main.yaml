@@ -1,3 +1,0 @@
-cyberbotics_key_url: https://cyberbotics.com/Cyberbotics.asc
-cyberbotics_key_path: /etc/apt/keyrings/Cyberbotics.gpg
-cyberbotics_source_path: /etc/apt/sources.list.d/Cyberbotics.list
