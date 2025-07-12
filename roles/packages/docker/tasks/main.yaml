@@ -19,74 +19,15 @@
 - name: Install Docker Ubuntu
   when: ansible_distribution == "Ubuntu"
   block:
-    - name: Install apt dependencies
-      become: true
-      ansible.builtin.package:
-        state: present
-        name:
-          - ca-certificates
-          - curl
-          - gnupg
-          - lsb-release
-
-    - name: Get DEB architecture
-      ansible.builtin.command: dpkg --print-architecture
-      register: deb_architecture
-      changed_when: false
-
-    - name: Get DEB release
-      ansible.builtin.command: lsb_release -cs
-      register: deb_release
-      changed_when: false
-
-    - name: Create keyrings directory
-      become: true
-      ansible.builtin.file:
-        path: /etc/apt/keyrings
-        state: directory
-        mode: "0755"
-
-    - name: Install GPG key
-      become: true
-      ansible.builtin.shell: |
-        curl -fsSL {{ docker_key_url }} | gpg --dearmor -o {{ docker_key_path }}
-      args:
-        creates: "{{ docker_key_path }}"
-      tags:
-        - skip_ansible_lint
-
-    - name: Apt source
-      become: true
-      block:
-        - name: Stat source file
-          ansible.builtin.stat:
-            path: "{{ docker_source_path }}"
-          register: st
-
-        - name: Remove docker source file
-          ansible.builtin.file:
-            state: absent
-            path: "{{ docker_source_path }}"
-          changed_when: false
-
-        - name: Add docker source file
-          ansible.builtin.lineinfile:
-            line: >
-              deb [arch={{ deb_architecture.stdout }}
-              signed-by={{ docker_key_path }}] https://download.docker.com/linux/ubuntu
-              {{ deb_release.stdout }} stable
-            path: "{{ docker_source_path }}"
-            create: true
-            owner: root
-            group: root
-            mode: "0644"
-          changed_when: not st.stat.exists
-
-    - name: Update Apt Repositories
-      become: true
-      ansible.builtin.package:
-        update_cache: true
-      changed_when: false
+    - name: Install apt repo
+      ansible.builtin.import_role:
+        name: install_apt_repo
+      vars:
+        source_name: docker
+        source_url: https://download.docker.com/linux/ubuntu
+        key_url: https://download.docker.com/linux/ubuntu/gpg
+        components:
+          - stable
 
     - name: Install Docker
       become: true
