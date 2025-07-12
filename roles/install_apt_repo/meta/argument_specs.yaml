@@ -1,0 +1,29 @@
+argument_specs:
+  main:
+    options:
+      source_name:
+        type: "str"
+        required: true
+        description: Package name
+
+      source_url:
+        type: "str"
+        required: true
+        description: URL to apt repo
+
+      key_url:
+        type: "str"
+        required: true
+        description: URL to apt repo's gpg key
+
+      distribution:
+        type: "str"
+        required: false
+        description: system distribution override, defaults to lsb_release -cs
+
+      components:
+        type: "list"
+        elements: "str"
+        required: false
+        description: List of deb components if provided
+        default: []

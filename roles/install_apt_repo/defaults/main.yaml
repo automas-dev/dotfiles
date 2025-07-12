@@ -1,0 +1,4 @@
+key_dir: /etc/apt/keyrings
+key_path: "{{ key_dir }}/{{ source_name }}.gpg"
+source_path: "/etc/apt/sources.list.d/{{ source_name }}.list"
+components: []
