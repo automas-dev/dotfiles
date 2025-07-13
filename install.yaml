@@ -28,8 +28,8 @@
     - packages/bash
     - packages/pyenv
     - packages/pipx
-
     - packages/pipx_poetry
+    - packages/qemu
 
     # Desktop
     # - desktop/fonts

@@ -1,0 +1,6 @@
+- name: Install
+  become: true
+  ansible.builtin.package:
+    state: present
+    name:
+      - qemu-system
