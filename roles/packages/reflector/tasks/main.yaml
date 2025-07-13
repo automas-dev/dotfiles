@@ -9,4 +9,5 @@
   ansible.builtin.copy:
     src: reflector.conf
     dest: /etc/xdg/reflector
+    mode: "0644"
   when: ansible_distribution == "Archlinux"

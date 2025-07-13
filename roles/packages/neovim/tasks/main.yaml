@@ -8,59 +8,29 @@
 - name: Install neovim Ubuntu
   when: ansible_distribution == "Ubuntu"
   block:
-    - name: Install apt dependencies
-      become: true
-      ansible.builtin.package:
-        state: present
-        name: lsb-release
+    # PPA reportedly not working, using older nvim version from apt
+    # - name: Add PPA
+    #   become: true
+    #   ansible.builtin.apt_repository:
+    #     repo: ppa:neovim-ppa/stable
 
-    - name: Get DEB architecture
-      ansible.builtin.command: dpkg --print-architecture
-      register: deb_architecture
-      changed_when: false
-
-    - name: Get DEB release
-      ansible.builtin.command: lsb_release -cs
-      register: deb_release
-      changed_when: false
-
-    - name: Apt source
-      become: true
-      block:
-        - name: Remove neovim source file
-          ansible.builtin.file:
-            state: absent
-            path: "{{ neovim_source_path }}"
-
-        - name: Add neovim source file
-          ansible.builtin.lineinfile:
-            line: >
-              deb https://ppa.launchpadcontent.net/neovim-ppa/unstable/ubuntu/
-              {{ deb_release.stdout }} main
-            path: "{{ neovim_source_path }}"
-            create: true
-            owner: root
-            group: root
-            mode: "0644"
-
-    - name: Update Apt Repositories
-      become: true
-      ansible.builtin.package:
-        update_cache: true
-      changed_when: false
+    # - name: Update Apt Repositories
+    #   become: true
+    #   ansible.builtin.package:
+    #     update_cache: true
+    #   changed_when: false
 
     - name: Install neovim
       become: true
       ansible.builtin.package:
-        state: latest
+        state: present
         name: neovim
-      tags:
-        - skip_ansible_lint
 
 - name: Install Config
   ansible.builtin.git:
     repo: "{{ neovim_config_git_url }}"
     dest: "{{ neovim_config_path }}"
+    update: false
   tags:
     - user_config
     - skip_ansible_lint
@@ -70,7 +40,7 @@
     src: "{{ neovim_config_path }}"
     dest: "{{ ansible_env.HOME }}/.vim"
     state: link
-    mode: 0755
+    mode: "0755"
   tags:
     - user_config
 
@@ -79,7 +49,7 @@
     src: "{{ neovim_config_path }}/init.vim"
     dest: "{{ ansible_env.HOME }}/.vimrc"
     state: link
-    mode: 0755
+    mode: "0755"
   tags:
     - user_config
 

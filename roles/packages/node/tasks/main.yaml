@@ -15,7 +15,7 @@
   block:
     - name: Download nvm installer
       ansible.builtin.get_url:
-        url: "{{ nvm_installer_url}}"
+        url: "{{ nvm_installer_url }}"
         dest: "{{ nvm_installer_script }}"
         mode: "0700"
         owner: "{{ ansible_user_id }}"

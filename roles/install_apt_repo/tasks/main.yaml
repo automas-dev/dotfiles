@@ -20,7 +20,7 @@
       deb [arch={{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }} signed-by={{ key_path }}]
       {{ source_url }}
       {{ distribution | default(ansible_distribution_release) }}
-      {{ components | join (' ') }}
+      {{ components | join(' ') }}
     state: present
     filename: "{{ source_name }}"
     update_cache: true

@@ -7,6 +7,8 @@
 - name: Install Poetry via PipX
   ansible.builtin.command: pipx install poetry
   when: poetry_exists is failed
+  args:
+    creates: /home/thomas/.local/share/pipx/venvs/poetry
 
 - name: Poetry auto complete
   ansible.builtin.command: poetry completions bash
@@ -24,10 +26,11 @@
     state: directory
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_id }}"
-    mode: 0755
+    mode: "0755"
   changed_when: not st.stat.exists
 
 - name: Enable tab completion
   ansible.builtin.copy:
     content: "{{ poetry_completion.stdout }}"
     dest: "/home/{{ ansible_user_id }}/.local/share/bash-completion/completions/poetry"
+    mode: "0644"

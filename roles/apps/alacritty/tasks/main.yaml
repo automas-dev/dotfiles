@@ -19,3 +19,4 @@
       ansible.builtin.copy:
         src: alacritty.toml
         dest: "{{ ansible_env.HOME }}/.config/alacritty/alacritty.toml"
+        mode: "0644"

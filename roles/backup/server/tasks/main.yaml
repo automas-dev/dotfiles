@@ -95,21 +95,20 @@
     group: "{{ restic_user }}"
     mode: "0750"
 
-- tags:
+- name: Init restic repo
+  become: true
+  ansible.builtin.command: >
+    restic -v
+      --password-file {{ ru.home }}/.restic_pass
+      --repo /data/restic
+      init
+  args:
+    creates: /data/restic/config
+  tags:
     - init_restic
     - never
-  block:
-    - name: Init restic repo
-      become: true
-      ansible.builtin.command: >
-        restic -v
-          --password-file {{ ru.home }}/.restic_pass
-          --repo /data/restic
-          init
-      args:
-        creates: /data/restic/config
 
-- name: chown backups dir to restic user
+- name: Chown backups dir to restic user
   become: true
   ansible.builtin.file:
     path: /data/restic

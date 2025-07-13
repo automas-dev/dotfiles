@@ -1,4 +1,11 @@
+- name: Download installer
+  ansible.builtin.get_url:
+    url: https://pyenv.run
+    dest: /tmp/pyenv.run
+    mode: "0700"
+    force: true
+
 - name: Install Pyenv
-  ansible.builtin.shell: curl -fsSL https://pyenv.run | bash
+  ansible.builtin.command: /tmp/sh.rustup.rs -y
   args:
     creates: "{{ ansible_env.HOME }}/.pyenv"

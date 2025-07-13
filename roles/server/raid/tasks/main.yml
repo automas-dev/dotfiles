@@ -22,7 +22,7 @@
 
 - name: Examine array
   become: true
-  ansible.builtin.shell: mdadm --examine --scan
+  ansible.builtin.command: mdadm --examine --scan
   register: scan
   changed_when: false
 
