@@ -26,6 +26,7 @@
     - packages/python
     - packages/ansible
     - packages/bash
+    - packages/pyenv
     - packages/pipx
 
     - packages/pipx_poetry
@@ -37,8 +38,11 @@
     # Desktop Applications
     # - apps/blender
     # - apps/arduino
+    - apps/appimage_launcher
     - apps/gnome-terminal
     - apps/google-chrome
+    - apps/inkscape
+    - apps/play_on_linux
     - apps/virtualbox
     - apps/vscode
     - apps/webots

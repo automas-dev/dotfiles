@@ -21,7 +21,7 @@
 
     # Needs rewrite to remove restic user
     # or maybe not? /data has raid user owning files from last install
-    # - backup/server
+    - backup/server
     # - mail_system_report
 
     - role: bash_config
