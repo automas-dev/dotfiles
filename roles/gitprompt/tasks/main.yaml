@@ -13,8 +13,6 @@
   ansible.builtin.copy:
     src: gitprompt.sh
     dest: "{{ ansible_env.HOME }}/.local/bin/gitprompt.sh"
-    mode: "0644"
-    backup: true
 
 - name: Enable gitprompt
   ansible.builtin.lineinfile:

@@ -3,4 +3,3 @@
     path: "{{ ansible_env.HOME }}/.local/bin"
     state: directory
     recurse: true
-    mode: "0755"
