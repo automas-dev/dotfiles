@@ -1,0 +1,4 @@
+- name: Install Pyenv
+  ansible.builtin.shell: curl -fsSL https://pyenv.run | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.pyenv"

@@ -1,0 +1,5 @@
+- name: Install Inkscape
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: inkscape

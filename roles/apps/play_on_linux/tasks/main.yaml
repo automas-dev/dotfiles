@@ -1,0 +1,11 @@
+- name: Install Dependencies
+  become: true
+  ansible.builtin.package:
+    state: present
+    name: python3-pyasyncore
+
+- name: Install Play On Linux
+  become: true
+  ansible.builtin.package:
+    state: present
+    deb: "{{ play_on_linux_url }}"
