@@ -17,7 +17,7 @@
         source_url: https://download.virtualbox.org/virtualbox/debian
         key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
         components:
-          - stable
+          - contrib     
 
     - name: Install Virtualbox
       become: true
