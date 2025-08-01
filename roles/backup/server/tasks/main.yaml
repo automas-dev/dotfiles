@@ -123,3 +123,13 @@
     name: clean_backups.timer
     daemon_reload: true
     enabled: false
+
+- name: Add backup client to restic account
+  become: true
+  when: restic_public_key is defined
+  ansible.posix.authorized_key:
+    user: "{{ restic_user }}"
+    state: present
+    key: "{{ restic_public_key | mandatory }}"
+  tags:
+    - user_config
