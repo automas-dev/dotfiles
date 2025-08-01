@@ -1,9 +1,9 @@
-- name: Install PipX Ubuntu
+- name: Install PipX Ubuntu / Debian
   become: true
   ansible.builtin.package:
     state: present
     name: pipx
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
 - name: Install PipX Archlinux
   become: true
