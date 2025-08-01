@@ -19,8 +19,6 @@
     - server/user/github
     - server/user/colleen
 
-    # Needs rewrite to remove restic user
-    # or maybe not? /data has raid user owning files from last install
     - backup/server
     # - mail_system_report
 
@@ -37,3 +35,6 @@
       # - home.twhps.net
       - public.twhps.net
       - souprfood.com
+
+    # Get ssh key from previous localhost play
+    restic_public_key: "{{ lookup('file', hostvars['localhost']['ansible_user_dir'] ~ '/.ssh/id_rsa.pub') }}"
