@@ -48,7 +48,7 @@ after_pr() {
 alias branch="git checkout -b"
 
 # Trash alias
-alias trash="gio trash"
+#alias trash="gio trash"
 
 # sudo apt
 alias sa='sudo apt'

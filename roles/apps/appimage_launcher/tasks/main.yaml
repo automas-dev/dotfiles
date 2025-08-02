@@ -1,0 +1,5 @@
+- name: Install AppImage Launcher
+  become: true
+  ansible.builtin.package:
+    state: present
+    deb: "{{ appimage_url }}"

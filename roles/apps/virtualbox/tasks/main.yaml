@@ -1,0 +1,35 @@
+- name: Install Virtualbox Archlinux
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install virtualbox
+      become: true
+      ansible.builtin.fail:
+        msg: You haven't added the Archlinux steps for Virtualbox
+
+- name: Install Virtualbox Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Install apt repo
+      ansible.builtin.import_role:
+        name: install_apt_repo
+      vars:
+        source_name: virtualbox
+        source_url: https://download.virtualbox.org/virtualbox/debian
+        key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+        components:
+          - contrib
+
+    - name: Install Virtualbox
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: virtualbox-7.0
+      tags:
+        - skip_ansible_lint
+
+- name: Add user to vboxuser group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: vboxusers
+    append: true

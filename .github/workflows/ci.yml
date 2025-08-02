@@ -3,6 +3,9 @@ name: ci
 on:
   push:
     branch:
+      - main
+
+  pull_request:
 
 jobs:
   lint:

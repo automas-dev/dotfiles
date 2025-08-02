@@ -1,0 +1,50 @@
+packages_all:
+  base:
+    - ca-certificates
+    - curl
+    - lsb-release
+    - man
+    - rsync
+    - screen
+    - tree
+    - vim
+    - wget
+
+  extra:
+    - bmon
+    - cmake
+    - extra-cmake-modules
+    - figlet
+    - fzf
+    - gnupg
+    - httpie
+    - lolcat
+    - neofetch
+    - nmap
+    - openconnect
+    - ranger
+    - sl
+    - sshfs
+    - sshpass
+    - tmux
+    - trash-cli
+    - usbutils
+    - xclip
+
+packages_ubuntu:
+  base:
+    - apt-transport-https
+    - build-essential
+    - gnupg-agent
+    - gnupg2
+    - libopencv-dev
+    - software-properties-common
+    - tmuxinator
+  extra:
+    - cbonsai
+
+packages_archlinux:
+  base:
+    - inetutils
+  extra:
+    - htop

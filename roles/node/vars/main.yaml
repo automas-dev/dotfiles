@@ -1,3 +1,0 @@
-node_version: 19
-node_installer_url: "https://deb.nodesource.com/setup_{{ node_version }}.x"
-node_installer: /tmp/node_setup.sh

@@ -1,5 +1,0 @@
-- name: Install PipX
-  become: true
-  ansible.builtin.package:
-    state: present
-    name: python-pipx

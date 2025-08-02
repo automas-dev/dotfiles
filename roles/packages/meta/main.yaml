@@ -1,3 +1,0 @@
-dependencies:
-  - role: package_cache
-  - role: update_keyring

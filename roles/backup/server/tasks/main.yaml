@@ -1,3 +1,13 @@
+- name: Stat raid mount
+  ansible.builtin.stat:
+    path: /data
+  register: st
+
+- name: Fail if the /data dir does not exist
+  ansible.builtin.fail:
+    msg: "RAID mount must first be created at /data"
+  when: not st.stat.exists
+
 - name: Install Restic
   become: true
   ansible.builtin.package:
@@ -41,32 +51,6 @@
     groups: "{{ restic_user }}"
     append: true
 
-- name: Copy timer files
-  become: true
-  ansible.builtin.copy:
-    src: clean_backups.timer
-    dest: /usr/lib/systemd/system/clean_backups.timer
-    mode: "0644"
-
-- name: Copy service files
-  become: true
-  ansible.builtin.template:
-    src: clean_backups.service.j2
-    dest: /usr/lib/systemd/system/clean_backups.service
-    mode: "0644"
-
-- name: Copy clean_backups script
-  become: true
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "{{ ru.home }}"
-    owner: "{{ restic_user }}"
-    group: "{{ restic_user }}"
-    mode: "0755"
-  loop:
-    - clean_backups
-    - clean_host_backups
-
 - name: Write restic password to file
   become: true
   ansible.builtin.copy:
@@ -76,50 +60,85 @@
     group: "{{ restic_user }}"
     mode: "0400"
 
-- tags:
-    - init_restic
-  block:
-    - name: Stat raid mount
-      ansible.builtin.stat:
-        path: /data
-      register: st
-
-    - name: Fail if the /data dir does not exist
-      ansible.builtin.fail:
-        msg: "RAID mount must first be created at /data"
-      when: not st.stat.exists
-
-    - name: Create backups dir
-      become: true
-      ansible.builtin.file:
-        path: /data/restic
-        state: directory
-        owner: "{{ restic_user }}"
-        group: "{{ restic_user }}"
-        mode: "0750"
-
-    - name: Init restic repo
-      become: true
-      ansible.builtin.command: >
-        restic -v
-          --password-file {{ ru.home }}/.restic_pass
-          --repo /data/restic
-          init
-      args:
-        creates: /data/restic/config
-
-    - name: chown backups dir to restic user
-      become: true
-      ansible.builtin.file:
-        path: /data/restic
-        state: directory
-        recurse: true
-        owner: "{{ restic_user }}"
-        group: "{{ restic_user }}"
-
-- name: Enable clean_backups timer
+- name: Create backups dir
   become: true
-  ansible.builtin.systemd:
-    name: clean_backups.timer
-    daemon_reload: true
-    enabled: true
+  ansible.builtin.file:
+    path: /data/restic
+    state: directory
+    owner: "{{ restic_user }}"
+    group: "{{ restic_user }}"
+    mode: "0750"
+
+- name: Init restic repo
+  become: true
+  ansible.builtin.command: >
+    restic -v
+      --password-file {{ ru.home }}/.restic_pass
+      --repo /data/restic
+      init
+  args:
+    creates: /data/restic/config
+  tags:
+    - init_restic
+    - never
+
+- name: Chown backups dir to restic user
+  become: true
+  ansible.builtin.file:
+    path: /data/restic
+    state: directory
+    recurse: true
+    owner: "{{ restic_user }}"
+    group: "{{ restic_user }}"
+
+- name: Setup clean backups
+  when: clean_backups_hosts is defined
+  block:
+    - name: Copy timer files
+      become: true
+      ansible.builtin.copy:
+        src: clean_backups.timer
+        dest: /usr/lib/systemd/system/clean_backups.timer
+        mode: "0644"
+
+    - name: Copy service files
+      become: true
+      ansible.builtin.template:
+        src: clean_backups.service.j2
+        dest: /usr/lib/systemd/system/clean_backups.service
+        mode: "0644"
+
+    - name: Copy clean_backups script
+      become: true
+      ansible.builtin.copy:
+        src: clean_host_backups
+        dest: "{{ ru.home }}"
+        owner: "{{ restic_user }}"
+        group: "{{ restic_user }}"
+        mode: "0755"
+
+    - name: Copy service files
+      become: true
+      ansible.builtin.template:
+        src: clean_backups.j2
+        dest: "{{ ru.home }}/clean_backups"
+        owner: "{{ restic_user }}"
+        group: "{{ restic_user }}"
+        mode: "0755"
+
+    - name: Enable clean_backups timer
+      become: true
+      ansible.builtin.systemd:
+        name: clean_backups.timer
+        daemon_reload: true
+        enabled: false
+
+- name: Add backup client to restic account
+  become: true
+  when: restic_public_key is defined
+  ansible.posix.authorized_key:
+    user: "{{ restic_user }}"
+    state: present
+    key: "{{ restic_public_key | mandatory }}"
+  tags:
+    - user_config

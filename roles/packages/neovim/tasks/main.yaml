@@ -1,0 +1,68 @@
+- name: Install neovim Archlinux
+  become: true
+  ansible.builtin.package:
+    name: neovim
+    state: present
+  when: ansible_distribution == "Archlinux"
+
+- name: Install neovim Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    # PPA reportedly not working, using older nvim version from apt
+    # - name: Add PPA
+    #   become: true
+    #   ansible.builtin.apt_repository:
+    #     repo: ppa:neovim-ppa/stable
+
+    # - name: Update Apt Repositories
+    #   become: true
+    #   ansible.builtin.package:
+    #     update_cache: true
+    #   changed_when: false
+
+    - name: Install neovim
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: neovim
+
+- name: Install Config
+  ansible.builtin.git:
+    repo: "{{ neovim_config_git_url }}"
+    dest: "{{ neovim_config_path }}"
+    update: false
+  tags:
+    - user_config
+    - skip_ansible_lint
+
+- name: Override .vim
+  ansible.builtin.file:
+    src: "{{ neovim_config_path }}"
+    dest: "{{ ansible_env.HOME }}/.vim"
+    state: link
+    mode: "0755"
+  tags:
+    - user_config
+
+- name: Override .vimrc
+  ansible.builtin.file:
+    src: "{{ neovim_config_path }}/init.vim"
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+    state: link
+    mode: "0755"
+  tags:
+    - user_config
+
+- name: Plugged Install
+  ansible.builtin.command: "nvim +'PlugInstall --sync' +qa"
+  args:
+    creates: "{{ neovim_config_path }}/plugged"
+  tags:
+    - user_config
+
+- name: CoC Install
+  ansible.builtin.command: "nvim +'CocUpdate' +qa"
+  args:
+    creates: "{{ neovim_config_path }}/plugged/coc.nvim/node_modules/"
+  tags:
+    - user_config

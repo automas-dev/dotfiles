@@ -1,21 +1,25 @@
 #!/usr/bin/env ansible-playbook
 
+- name: Gather facts about localhost
+  hosts: localhost
+
 - name: Install System
   hosts: server
   roles:
     - server/packages
-    - git
-    - yay
-    - docker
-    - python
-    - bash
+
+    - packages/git
+    - packages/docker
+    - packages/python
+    - packages/bash
 
     - server/ddns
     - server/raid
 
     - server/user/github
     - server/user/colleen
-    # - backup/server
+
+    - backup/server
     # - mail_system_report
 
     - role: bash_config
@@ -23,6 +27,7 @@
         - user_config
 
   vars:
+    raid_user: data
     ddclient_zone: twhps.net
     ddclient_hosts:
       - twhps.net
@@ -30,3 +35,10 @@
       # - home.twhps.net
       - public.twhps.net
       - souprfood.com
+
+    # Get ssh key from previous localhost play
+    restic_public_key: "{{ lookup('file', hostvars['localhost']['ansible_user_dir'] ~ '/.ssh/id_rsa.pub') }}"
+
+    clean_backups_hosts:
+      - tom-pc
+      - tom-k-t470p

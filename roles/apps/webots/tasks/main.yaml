@@ -1,0 +1,26 @@
+- name: Install Webots Archlinux
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install webots
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: webots-bin
+
+- name: Install Webots Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Install apt repo
+      ansible.builtin.import_role:
+        name: install_apt_repo
+      vars:
+        source_name: Cyberbotics
+        source_url: https://cyberbotics.com/debian
+        key_url: https://cyberbotics.com/Cyberbotics.asc
+        distribution: binary-amd64/
+
+    - name: Install webots
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: webots

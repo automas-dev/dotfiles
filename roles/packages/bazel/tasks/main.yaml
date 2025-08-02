@@ -1,0 +1,30 @@
+- name: Install Bazel Archlinux
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install bazel
+      become: true
+      ansible.builtin.package:
+        state: present
+        name: bazel
+
+- name: Install Bazel Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Install apt repo
+      ansible.builtin.import_role:
+        name: install_apt_repo
+      vars:
+        source_name: bazel
+        source_url: https://storage.googleapis.com/bazel-apt
+        key_url: https://bazel.build/bazel-release.pub.gpg
+        distribution: stable
+        components:
+          - jdk1.8
+
+    - name: Install Bazel
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: bazel
+      tags:
+        - skip_ansible_lint

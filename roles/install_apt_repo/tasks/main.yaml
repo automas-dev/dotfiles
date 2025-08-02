@@ -1,0 +1,26 @@
+- name: Create keyrings directory
+  become: true
+  ansible.builtin.file:
+    path: "{{ key_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Install GPG key
+  become: true
+  ansible.builtin.shell: curl -fsSL {{ key_url }} | gpg --dearmor -o {{ key_path }}
+  args:
+    creates: "{{ key_path }}"
+  tags:
+    - skip_ansible_lint
+
+- name: Add source file
+  become: true
+  ansible.builtin.apt_repository:
+    repo: >
+      deb [arch={{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }} signed-by={{ key_path }}]
+      {{ source_url }}
+      {{ distribution | default(ansible_distribution_release) }}
+      {{ components | join(' ') }}
+    state: present
+    filename: "{{ source_name }}"
+    update_cache: true

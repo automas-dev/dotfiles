@@ -1,4 +1,0 @@
-dependencies:
-  - role: update_keyring
-  - role: package_cache
-  - role: python

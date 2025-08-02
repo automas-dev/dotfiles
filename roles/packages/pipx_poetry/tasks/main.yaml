@@ -1,0 +1,36 @@
+- name: Check if poetry is installed
+  ansible.builtin.command: poetry --version
+  register: poetry_exists
+  changed_when: false
+  ignore_errors: true
+
+- name: Install Poetry via PipX
+  ansible.builtin.command: pipx install poetry
+  when: poetry_exists is failed
+  args:
+    creates: /home/thomas/.local/share/pipx/venvs/poetry
+
+- name: Poetry auto complete
+  ansible.builtin.command: poetry completions bash
+  register: poetry_completion
+  changed_when: false
+
+- name: Stat bash completion folder
+  ansible.builtin.stat:
+    path: "{{ bash_completion_dir }}"
+  register: st
+
+- name: Create bash completion folder
+  ansible.builtin.file:
+    path: "{{ bash_completion_dir }}"
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+    mode: "0755"
+  changed_when: not st.stat.exists
+
+- name: Enable tab completion
+  ansible.builtin.copy:
+    content: "{{ poetry_completion.stdout }}"
+    dest: "/home/{{ ansible_user_id }}/.local/share/bash-completion/completions/poetry"
+    mode: "0644"

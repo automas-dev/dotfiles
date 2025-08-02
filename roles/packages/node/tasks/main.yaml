@@ -1,0 +1,34 @@
+- name: Install NodeJS Archlinux
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install packages
+      become: true
+      ansible.builtin.package:
+        state: present
+        name:
+          - nodejs
+          - npm
+          - yarn
+
+- name: Install NodeJS Via NVM
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Download nvm installer
+      ansible.builtin.get_url:
+        url: "{{ nvm_installer_url }}"
+        dest: "{{ nvm_installer_script }}"
+        mode: "0700"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Install NVM
+      ansible.builtin.shell: "{{ nvm_installer_script }}"
+      args:
+        executable: /bin/bash
+        creates: "{{ ansible_env.HOME }}/.nvm"
+
+    - name: Install Node
+      ansible.builtin.shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ node_version }}"
+      args:
+        executable: /bin/bash
+        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"

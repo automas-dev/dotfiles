@@ -1,0 +1,56 @@
+- name: Remove old docker-compose
+  become: true
+  ansible.builtin.package:
+    state: absent
+    name: docker-compose
+  changed_when: false
+
+- name: Install Docker Archlinux
+  when: ansible_distribution == "Archlinux"
+  block:
+    - name: Install docker
+      become: true
+      ansible.builtin.package:
+        state: present
+        name:
+          - docker
+          - docker-compose
+
+- name: Install Docker Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Install apt repo
+      ansible.builtin.import_role:
+        name: install_apt_repo
+      vars:
+        source_name: docker
+        source_url: https://download.docker.com/linux/ubuntu
+        key_url: https://download.docker.com/linux/ubuntu/gpg
+        components:
+          - stable
+
+    - name: Install Docker
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+      tags:
+        - skip_ansible_lint
+
+- name: Add user to docker group
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: true
+
+- name: Start docker service
+  become: true
+  ansible.builtin.systemd:
+    state: started
+    name: docker
+    enabled: true
