@@ -1,1 +1,0 @@
-restic_password: "{{ vault_restic_password }}"
