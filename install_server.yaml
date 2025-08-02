@@ -38,3 +38,7 @@
 
     # Get ssh key from previous localhost play
     restic_public_key: "{{ lookup('file', hostvars['localhost']['ansible_user_dir'] ~ '/.ssh/id_rsa.pub') }}"
+
+    clean_backups_hosts:
+      - tom-pc
+      - tom-k-t470p
