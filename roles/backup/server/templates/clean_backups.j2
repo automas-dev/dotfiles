@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Exit on failure with status code of failed command
+set -e
+
+{% for host in clean_backups_hosts %}
+CLEAN_HOST={{ host }} ./clean_host_backups
+{% endfor %}

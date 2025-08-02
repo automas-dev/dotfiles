@@ -1,3 +1,13 @@
+- name: Stat raid mount
+  ansible.builtin.stat:
+    path: /data
+  register: st
+
+- name: Fail if the /data dir does not exist
+  ansible.builtin.fail:
+    msg: "RAID mount must first be created at /data"
+  when: not st.stat.exists
+
 - name: Install Restic
   become: true
   ansible.builtin.package:
@@ -41,32 +51,6 @@
     groups: "{{ restic_user }}"
     append: true
 
-- name: Copy timer files
-  become: true
-  ansible.builtin.copy:
-    src: clean_backups.timer
-    dest: /usr/lib/systemd/system/clean_backups.timer
-    mode: "0644"
-
-- name: Copy service files
-  become: true
-  ansible.builtin.template:
-    src: clean_backups.service.j2
-    dest: /usr/lib/systemd/system/clean_backups.service
-    mode: "0644"
-
-- name: Copy clean_backups script
-  become: true
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "{{ ru.home }}"
-    owner: "{{ restic_user }}"
-    group: "{{ restic_user }}"
-    mode: "0755"
-  loop:
-    - clean_backups
-    - clean_host_backups
-
 - name: Write restic password to file
   become: true
   ansible.builtin.copy:
@@ -75,16 +59,6 @@
     owner: "{{ restic_user }}"
     group: "{{ restic_user }}"
     mode: "0400"
-
-- name: Stat raid mount
-  ansible.builtin.stat:
-    path: /data
-  register: st
-
-- name: Fail if the /data dir does not exist
-  ansible.builtin.fail:
-    msg: "RAID mount must first be created at /data"
-  when: not st.stat.exists
 
 - name: Create backups dir
   become: true
@@ -117,12 +91,47 @@
     owner: "{{ restic_user }}"
     group: "{{ restic_user }}"
 
-- name: Enable clean_backups timer
-  become: true
-  ansible.builtin.systemd:
-    name: clean_backups.timer
-    daemon_reload: true
-    enabled: false
+- name: Setup clean backups
+  when: clean_backups_hosts is defined
+  block:
+    - name: Copy timer files
+      become: true
+      ansible.builtin.copy:
+        src: clean_backups.timer
+        dest: /usr/lib/systemd/system/clean_backups.timer
+        mode: "0644"
+
+    - name: Copy service files
+      become: true
+      ansible.builtin.template:
+        src: clean_backups.service.j2
+        dest: /usr/lib/systemd/system/clean_backups.service
+        mode: "0644"
+
+    - name: Copy clean_backups script
+      become: true
+      ansible.builtin.copy:
+        src: clean_host_backups
+        dest: "{{ ru.home }}"
+        owner: "{{ restic_user }}"
+        group: "{{ restic_user }}"
+        mode: "0755"
+
+    - name: Copy service files
+      become: true
+      ansible.builtin.template:
+        src: clean_backups.j2
+        dest: "{{ ru.home }}/clean_backups"
+        owner: "{{ restic_user }}"
+        group: "{{ restic_user }}"
+        mode: "0755"
+
+    - name: Enable clean_backups timer
+      become: true
+      ansible.builtin.systemd:
+        name: clean_backups.timer
+        daemon_reload: true
+        enabled: false
 
 - name: Add backup client to restic account
   become: true
