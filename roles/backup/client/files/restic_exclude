@@ -1,27 +1,29 @@
 /home/lost+found/
 /home/.__*.db
 /home/games/
-$HOME/.mozilla/
-$HOME/.local/share/Trash/
-$HOME/.local/share/Steam/
-$HOME/.cache/
 $HOME/.android/avd/
-$HOME/.gradle/caches
-$HOME/.restic_pass
+$HOME/.cache/
+$HOME/.cargo/
 $HOME/.config/Code/Cache/
 $HOME/.config/Code/User/workspaceStorage/
-$HOME/.local/share/baloo/index
-$HOME/.local/share/baloo/index-lock
+$HOME/.config/google-chrome/
 $HOME/.config/google-chrome/BrowserMetrics/
 $HOME/.config/google-chrome/GrShaderCache/
-$HOME/.config/google-chrome/ShaderCache/
 $HOME/.config/google-chrome/Profile 1/DawnCache/
 $HOME/.config/google-chrome/Profile 1/GPUCache/
 $HOME/.config/google-chrome/Profile 1/Service Worker/
-$HOME/.config/google-chrome/
+$HOME/.config/google-chrome/ShaderCache/
+$HOME/.gradle/caches
+$HOME/.local/share/baloo/index
+$HOME/.local/share/baloo/index-lock
+$HOME/.local/share/Steam/
+$HOME/.local/share/Trash/
+$HOME/.mozilla/
 $HOME/.npm/_cacache
 $HOME/.npm/_logs
-$HOME/snap/
 $HOME/.nx/
-$HOME/Secure
+$HOME/.restic_pass
+$HOME/.rustup/
 $HOME/Documents/Secure
+$HOME/Secure
+$HOME/snap/
