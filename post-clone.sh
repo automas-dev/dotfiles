@@ -26,11 +26,11 @@ echo "Updating base system"
 if is_distro ubuntu; then
     echo_green "Detected Ubuntu Distro"
     sudo apt-get update
-    sudo apt-get -y upgrade
+    # sudo apt-get -y upgrade
     sudo apt-get -y install ansible
 elif is_distro archlinux; then
     echo_green "Detected Archlinux Distro"
-    sudo pacman -Syu --noconfirm
+    # sudo pacman -Syu --noconfirm
     sudo pacman -Sy --noconfirm ansible
 else
     echo_red "Unknown linux distro"
