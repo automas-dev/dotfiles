@@ -29,6 +29,7 @@
     - packages/pyenv
     - packages/pipx
     - packages/pipx_poetry
+    - packages/pipx_uv
     - packages/qemu
 
     # Desktop

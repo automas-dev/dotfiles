@@ -1,0 +1,25 @@
+- name: Check if uv is installed
+  ansible.builtin.command: uv --version
+  register: uv_exists
+  changed_when: false
+  ignore_errors: true
+
+- name: Install uv via PipX
+  ansible.builtin.command: pipx install uv
+  args:
+    creates: /home/thomas/.local/share/pipx/venvs/uv
+
+- name: Install uvx via PipX
+  ansible.builtin.command: pipx install uvx
+  args:
+    creates: /home/thomas/.local/share/pipx/venvs/uvx
+
+- name: Enable uv bash completion
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: eval "$(uv generate-shell-completion bash)"
+
+- name: Enable uvx bash completion
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: eval "$(uvx --generate-shell-completion bash)"
