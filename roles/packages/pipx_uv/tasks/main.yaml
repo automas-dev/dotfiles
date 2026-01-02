@@ -4,13 +4,21 @@
   changed_when: false
   ignore_errors: true
 
+- name: Check if uvx is installed
+  ansible.builtin.command: uvx --version
+  register: uvx_exists
+  changed_when: false
+  ignore_errors: true
+
 - name: Install uv via PipX
   ansible.builtin.command: pipx install uv
+  when: uv_exists is failed
   args:
     creates: /home/thomas/.local/share/pipx/venvs/uv
 
 - name: Install uvx via PipX
   ansible.builtin.command: pipx install uvx
+  when: uvx_exists is failed
   args:
     creates: /home/thomas/.local/share/pipx/venvs/uvx
 
