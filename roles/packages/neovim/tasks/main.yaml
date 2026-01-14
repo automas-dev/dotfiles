@@ -9,7 +9,7 @@
   when: ansible_distribution == "Ubuntu"
   block:
     # PPA reportedly not working, using older nvim version from apt
-    # - name: Add PPA
+    # - name: Add Neovim PPA
     #   become: true
     #   ansible.builtin.apt_repository:
     #     repo: ppa:neovim-ppa/stable
@@ -23,8 +23,36 @@
     - name: Install neovim
       become: true
       ansible.builtin.package:
-        state: present
+        state: latest
         name: neovim
+
+- name: Upgrade vim Ubuntu
+  when: ansible_distribution == "Ubuntu"
+  block:
+    - name: Add Vim PPA
+      become: true
+      ansible.builtin.apt_repository:
+        repo: ppa:jonathonf/vim
+
+    - name: Update Apt Repositories
+      become: true
+      ansible.builtin.package:
+        update_cache: true
+      changed_when: false
+
+    - name: Install vim
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: vim
+
+    - name: Install vim-gtk for clipboard support
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: vim-gtk
+      tags:
+        - desktop
 
 - name: Install Config
   ansible.builtin.git:
