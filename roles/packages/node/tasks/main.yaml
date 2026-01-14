@@ -32,3 +32,9 @@
       args:
         executable: /bin/bash
         creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+
+    - name: Set Default Version
+      ansible.builtin.shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm alias default {{ node_version }}"
+      args:
+        executable: /bin/bash
+        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
