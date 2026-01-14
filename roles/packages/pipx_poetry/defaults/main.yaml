@@ -1,1 +1,2 @@
 bash_completion_dir: "{{ ansible_env.HOME }}/.local/share/bash-completion/completions"
+pipx_venv_dir: "{{ ansible_env.HOME }}/.local/pipx/venvs"
