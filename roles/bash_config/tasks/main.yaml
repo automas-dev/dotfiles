@@ -17,6 +17,17 @@
   tags:
     - user_config
 
+- name: Enable bash aliases
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    line: "[ -f ~/.bash_aliases ] && source ~/.bash_aliases"
+
+- name: Create ~/.local/bash-completion/completions
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/bash-completion/completions"
+    state: directory
+    recurse: true
+
 - name: Make bash tab complete case insensitive
   ansible.builtin.copy:
     src: inputrc
