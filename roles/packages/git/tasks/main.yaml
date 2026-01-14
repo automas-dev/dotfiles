@@ -7,8 +7,8 @@
       - git-lfs
 
 - name: Install gitconfig
-  ansible.builtin.copy:
-    src: gitconfig
+  ansible.builtin.template:
+    src: gitconfig.j2
     dest: "{{ ansible_env.HOME }}/.gitconfig"
     backup: true
     mode: "0644"
