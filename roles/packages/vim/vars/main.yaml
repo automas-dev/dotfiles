@@ -1,2 +1,0 @@
-vim_config_git_url: https://github.com/automas-dev/dotfiles-nvim.git
-vim_config_path: "{{ ansible_env.HOME }}/.config/nvim"
