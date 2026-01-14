@@ -1,33 +1,34 @@
-- name: Check if uv is installed
-  ansible.builtin.command: uv --version
-  register: uv_exists
-  changed_when: false
-  ignore_errors: true
-
-- name: Check if uvx is installed
-  ansible.builtin.command: uvx --version
-  register: uvx_exists
-  changed_when: false
-  ignore_errors: true
-
 - name: Install uv via PipX
   ansible.builtin.command: pipx install uv
-  when: uv_exists is failed
   args:
-    creates: /home/thomas/.local/share/pipx/venvs/uv
+    creates: "{{ pipx_venv_dir }}/uv"
 
-- name: Install uvx via PipX
-  ansible.builtin.command: pipx install uvx
-  when: uvx_exists is failed
-  args:
-    creates: /home/thomas/.local/share/pipx/venvs/uvx
+# uvx is installed with uv so it does not need a pipx install command
 
-- name: Enable uv bash completion
-  ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
-    line: eval "$(uv generate-shell-completion bash)"
+- name: Generate uv bash completion
+  ansible.builtin.command: uv --generate-shell-completion bash
+  register: uv_completion
+  changed_when: false
 
-- name: Enable uvx bash completion
-  ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
-    line: eval "$(uvx --generate-shell-completion bash)"
+- name: Generate uvx bash completion
+  ansible.builtin.command: uvx --generate-shell-completion bash
+  register: uvx_completion
+  changed_when: false
+
+- name: Create bash completion folder
+  ansible.builtin.file:
+    path: "{{ bash_completion_dir }}"
+    state: directory
+    recurse: true
+
+- name: Enable uv tab completion
+  ansible.builtin.copy:
+    content: "{{ uv_completion.stdout }}"
+    dest: "{{ bash_completion_dir }}/uv"
+    mode: "0644"
+
+- name: Enable uvx tab completion
+  ansible.builtin.copy:
+    content: "{{ uvx_completion.stdout }}"
+    dest: "{{ bash_completion_dir }}/uvx"
+    mode: "0644"
