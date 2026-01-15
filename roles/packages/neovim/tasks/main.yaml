@@ -8,37 +8,25 @@
 - name: Install neovim Ubuntu
   when: ansible_distribution == "Ubuntu"
   block:
-    # PPA reportedly not working, using older nvim version from apt
-    # - name: Add Neovim PPA
-    #   become: true
-    #   ansible.builtin.apt_repository:
-    #     repo: ppa:neovim-ppa/stable
+    - name: Ubuntu Pre 24
+      when: ansible_distribution_major_version | int < 24
+      block:
+        # PPA reportedly not working, using older nvim version from apt
+        # - name: Add Neovim PPA
+        #   become: true
+        #   ansible.builtin.apt_repository:
+        #     repo: ppa:neovim-ppa/stable
 
-    # - name: Update Apt Repositories
-    #   become: true
-    #   ansible.builtin.package:
-    #     update_cache: true
-    #   changed_when: false
+        - name: Add Vim PPA
+          become: true
+          ansible.builtin.apt_repository:
+            repo: ppa:jonathonf/vim
 
-    - name: Install neovim
-      become: true
-      ansible.builtin.package:
-        state: latest
-        name: neovim
-
-- name: Upgrade vim Ubuntu
-  when: ansible_distribution == "Ubuntu"
-  block:
-    - name: Add Vim PPA
-      become: true
-      ansible.builtin.apt_repository:
-        repo: ppa:jonathonf/vim
-
-    - name: Update Apt Repositories
-      become: true
-      ansible.builtin.package:
-        update_cache: true
-      changed_when: false
+        - name: Update Apt Repositories
+          become: true
+          ansible.builtin.package:
+            update_cache: true
+          changed_when: false
 
     - name: Install vim
       become: true
@@ -46,13 +34,21 @@
         state: latest
         name: vim
 
+    - name: Install neovim
+      become: true
+      ansible.builtin.package:
+        state: latest
+        name: neovim
+
     - name: Install vim-gtk for clipboard support
       become: true
       ansible.builtin.package:
         state: latest
         name: vim-gtk
+      when: ansible_distribution_major_version | int < 24
       tags:
         - desktop
+        - vim-clipboard
 
 - name: Install Config
   ansible.builtin.git:

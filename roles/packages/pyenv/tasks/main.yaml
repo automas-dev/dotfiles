@@ -6,6 +6,6 @@
     force: true
 
 - name: Install Pyenv
-  ansible.builtin.command: /tmp/sh.rustup.rs -y
+  ansible.builtin.command: /tmp/pyenv.run
   args:
     creates: "{{ ansible_env.HOME }}/.pyenv"
