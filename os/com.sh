@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -n "${COM_IMPORT}" ]; then
-    echo "[WARNING] Tried to source alredy sourced file $0, skipping"
+    echo "[WARNING] Tried to source already sourced file $0, skipping"
     return 
 fi
 COM_IMPORT=1
