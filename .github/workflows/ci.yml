@@ -2,14 +2,14 @@ name: ci
 
 on:
   push:
-    branch:
+    branches:
       - main
 
-  # pull_request:
-  #   types:
-  #     - opened
-  #     - reopened
-  #     - synchronize
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
   lint:
