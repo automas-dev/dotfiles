@@ -90,7 +90,7 @@ echo "You are about to modify $DISK"
 do_confirm
 
 disk::backup "$DISK"
-# note skipping swap parition size here since it's part of lvm instead
+# note skipping swap partition size here since it's part of lvm instead
 disk::partition "$DISK"
 
 readarray -t PARTS < <(sudo fdisk -l | grep -e "^$DISK" | awk '{print $1}')
