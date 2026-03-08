@@ -1,0 +1,11 @@
+- name: Get dotfiles git tag
+  ansible.builtin.command:
+    cmd: git describe --tags --abbrev=0
+    chdir: "{{ role_path }}"
+  changed_when: false
+  register: git_tag
+
+- name: Set fact
+  ansible.builtin.set_fact:
+    dotfiles_git_tag: "{{ git_tag.stdout }}"
+  changed_when: false

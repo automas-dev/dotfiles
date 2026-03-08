@@ -17,6 +17,7 @@ $HOME/.restic_pass
 $HOME/.rustup/
 $HOME/.vscode/
 $HOME/.zoom/
-$HOME/Documents/Secure
-$HOME/Secure
+$HOME/Documents/Secure/
+$HOME/Secure/
+$HOME/Vaults/
 $HOME/snap/
