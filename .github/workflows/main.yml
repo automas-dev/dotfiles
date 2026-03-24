@@ -1,0 +1,14 @@
+name: main
+
+on:
+  workflow_dispatch:
+
+jobs:
+  main:
+    name: Lint
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - run: exit 1
+      - run: echo hi
