@@ -8,8 +8,8 @@ jobs:
   main:
     name: Lint
     runs-on: ubuntu-latest
-    continue-on-error: true
 
     steps:
       - run: exit 1
+        continue-on-error: true
       - run: echo hi
