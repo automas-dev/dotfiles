@@ -40,11 +40,11 @@
     # - apps/blender
     # - apps/arduino
     - apps/appimage_launcher
-    - apps/gnome-terminal
+      #- apps/gnome-terminal
     - apps/google-chrome
     - apps/inkscape
-    - apps/play_on_linux
-    - apps/virtualbox
+      #- apps/play_on_linux
+      #- apps/virtualbox
     - apps/vscode
     - apps/webots
 
@@ -55,7 +55,7 @@
     - bash_config
     - project_templates
     - gitprompt
-    #- backup/client
+    - backup/client
 
     #- name: Enable backups
     #  hosts: tom-lan
