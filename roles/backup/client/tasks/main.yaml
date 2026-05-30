@@ -6,14 +6,14 @@
 
 - name: Create user systemd folder
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.config/systemd/user"
+    path: "{{ ansible_facts['env']['HOME'] }}/.config/systemd/user"
     state: directory
     mode: "0755"
 
 - name: Copy service files
   ansible.builtin.copy:
     src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/.config/systemd/user/{{ item }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.config/systemd/user/{{ item }}"
     mode: "0644"
   loop:
     - backup.service
@@ -21,7 +21,7 @@
 
 - name: Configure restic exclude
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.restic_exclude"
+    path: "{{ ansible_facts['env']['HOME'] }}/.restic_exclude"
     block: "{{ lookup('file', 'restic_exclude') }}"
     create: true
     owner: "{{ ansible_env.USER }}"
@@ -30,7 +30,7 @@
 
 - name: Write restic password to file
   ansible.builtin.copy:
-    dest: "{{ ansible_env.HOME }}/.restic_pass"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.restic_pass"
     content: "{{ restic_password | mandatory }}"
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
@@ -39,7 +39,7 @@
 - name: Copy backup script
   ansible.builtin.copy:
     src: backup
-    dest: "{{ ansible_env.HOME }}/.local/bin/"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/"
     mode: "0755"
 
 - name: Enable backup timer

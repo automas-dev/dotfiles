@@ -8,14 +8,14 @@
 - name: Install rustup
   ansible.builtin.command: /tmp/sh.rustup.rs -y
   args:
-    creates: "{{ ansible_env.HOME }}/.cargo/env"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.cargo/env"
 
 - name: Install stable toolchain
-  ansible.builtin.command: "{{ ansible_env.HOME }}/.cargo/bin/rustup toolchain install stable"
+  ansible.builtin.command: "{{ ansible_facts['env']['HOME'] }}/.cargo/bin/rustup toolchain install stable"
   args:
-    creates: "{{ ansible_env.HOME }}/.rustup/toolchains/stable-*"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.rustup/toolchains/stable-*"
 
 - name: Install beta toolchain
-  ansible.builtin.command: "{{ ansible_env.HOME }}/.cargo/bin/rustup toolchain install beta"
+  ansible.builtin.command: "{{ ansible_facts['env']['HOME'] }}/.cargo/bin/rustup toolchain install beta"
   args:
-    creates: "{{ ansible_env.HOME }}/.rustup/toolchains/beta-*"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.rustup/toolchains/beta-*"

@@ -9,7 +9,7 @@
 
     - name: Create alacritty config folder
       ansible.builtin.file:
-        path: "{{ ansible_env.HOME }}/.config/alacritty"
+        path: "{{ ansible_facts['env']['HOME'] }}/.config/alacritty"
         state: directory
         mode: "0755"
       tags:
@@ -18,5 +18,5 @@
     - name: Copy config
       ansible.builtin.copy:
         src: alacritty.toml
-        dest: "{{ ansible_env.HOME }}/.config/alacritty/alacritty.toml"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.config/alacritty/alacritty.toml"
         mode: "0644"

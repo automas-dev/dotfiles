@@ -25,16 +25,16 @@
       ansible.builtin.shell: "{{ nvm_installer_script }}"
       args:
         executable: /bin/bash
-        creates: "{{ ansible_env.HOME }}/.nvm"
+        creates: "{{ ansible_facts['env']['HOME'] }}/.nvm"
 
     - name: Install Node
-      ansible.builtin.shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install {{ node_version }}"
+      ansible.builtin.shell: "source {{ ansible_facts['env']['HOME'] }}/.nvm/nvm.sh && nvm install {{ node_version }}"
       args:
         executable: /bin/bash
-        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+        creates: "{{ ansible_facts['env']['HOME'] }}/.nvm/versions/node"
 
     - name: Set Default Version
-      ansible.builtin.shell: "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm alias default {{ node_version }}"
+      ansible.builtin.shell: "source {{ ansible_facts['env']['HOME'] }}/.nvm/nvm.sh && nvm alias default {{ node_version }}"
       args:
         executable: /bin/bash
-        creates: "{{ ansible_env.HOME }}/.nvm/versions/node"
+        creates: "{{ ansible_facts['env']['HOME'] }}/.nvm/versions/node"

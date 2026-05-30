@@ -62,7 +62,7 @@
 - name: Override .vim
   ansible.builtin.file:
     src: "{{ neovim_config_path }}"
-    dest: "{{ ansible_env.HOME }}/.vim"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.vim"
     state: link
     mode: "0755"
   tags:
@@ -71,7 +71,7 @@
 - name: Override .vimrc
   ansible.builtin.file:
     src: "{{ neovim_config_path }}/init.vim"
-    dest: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
     state: link
     mode: "0755"
   tags:
