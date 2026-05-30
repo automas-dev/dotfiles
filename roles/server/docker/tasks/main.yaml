@@ -1,0 +1,15 @@
+- name: Set path to docker data
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/docker/daemon.json
+    src: daemon.json
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Restart docker service
+  become: true
+  ansible.builtin.systemd:
+    state: restarted
+    name: docker
+    daemon_reload: true
