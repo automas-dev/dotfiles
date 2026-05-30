@@ -1,5 +1,5 @@
 - name: Install Bluetooth
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
   block:
     - name: Install Packages
       become: true

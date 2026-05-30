@@ -3,14 +3,14 @@
   ansible.builtin.package:
     state: present
     name: pipx
-  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+  when: ansible_facts["distribution"] == "Ubuntu" or ansible_distribution == "Debian"
 
 - name: Install PipX Archlinux
   become: true
   ansible.builtin.package:
     state: present
     name: python-pipx
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
 
 - name: Ensure Path
   ansible.builtin.command: pipx ensurepath

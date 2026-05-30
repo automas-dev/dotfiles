@@ -1,6 +1,6 @@
 - name: Make bash default shell
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
     shell: /bin/bash
   tags:
     - user_config

@@ -1,12 +1,12 @@
 - name: Install openssh
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
   become: true
   ansible.builtin.package:
     name: openssh
     state: present
 
 - name: Install openssh
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
   become: true
   ansible.builtin.package:
     name: openssh-client
@@ -14,7 +14,7 @@
 
 - name: Generate SSH Key
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
     generate_ssh_key: true
     ssh_key_type: "{{ ssh_keygen_type }}"
     ssh_key_bits: "{{ ssh_keygen_size }}"

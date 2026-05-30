@@ -1,5 +1,5 @@
 - name: Update arch keyring
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
   become: true
   ansible.builtin.package:
     name: archlinux-keyring

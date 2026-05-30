@@ -3,11 +3,11 @@
   ansible.builtin.package:
     state: present
     name: blender
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
 
 # - name: Install Blender Ubuntu
 #   become: true
 #   ansible.builtin.snap:
 #     state: present
 #     name: blender
-#   when: ansible_distribution == "Ubuntu"
+#   when: ansible_facts["distribution"] == "Ubuntu"
