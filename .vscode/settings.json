@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.service": "properties",
+        "*.timer": "properties"
+    }
+}
