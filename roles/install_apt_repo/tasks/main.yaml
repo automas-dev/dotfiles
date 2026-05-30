@@ -17,9 +17,9 @@
   become: true
   ansible.builtin.apt_repository:
     repo: >
-      deb [arch={{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }} signed-by={{ key_path }}]
+      deb [arch={{ 'amd64' if ansible_facts['architecture'] == 'x86_64' else ansible_facts['architecture'] }} signed-by={{ key_path }}]
       {{ source_url }}
-      {{ distribution | default(ansible_distribution_release) }}
+      {{ distribution | default(ansible_facts['distribution_release']) }}
       {{ components | join(' ') }}
     state: present
     filename: "{{ source_name }}"
