@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.service": "properties",
-        "*.timer": "properties"
+        "*.timer": "properties",
+        "hosts": "yaml"
     }
 }
