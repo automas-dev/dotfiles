@@ -27,14 +27,14 @@
 - name: Install executable
   ansible.builtin.copy:
     src: "{{ godot_build_path }}/{{ extract.files[0] }}"
-    dest: "{{ ansible_env.HOME }}/.local/bin/{{ godot_exec }}"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/{{ godot_exec }}"
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
     mode: "0775"
 
 - name: Create ~/.local/share/applications
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/share/applications"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/share/applications"
     state: directory
     recurse: true
     owner: "{{ ansible_env.USER }}"
@@ -44,14 +44,14 @@
 - name: Create Desktop File
   ansible.builtin.template:
     src: templates/Godot.desktop.j2
-    dest: "{{ ansible_env.HOME }}/.local/share/applications/Godot-{{ godot_version }}.desktop"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/share/applications/Godot-{{ godot_version }}.desktop"
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
     mode: "0775"
 
 - name: Create ~/.local/share/icons
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/share/icons"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/share/icons"
     state: directory
     recurse: true
     owner: "{{ ansible_env.USER }}"
@@ -61,7 +61,7 @@
 - name: Create Icon
   ansible.builtin.copy:
     src: godot.png
-    dest: "{{ ansible_env.HOME }}/.local/share/icons/godot.png"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/share/icons/godot.png"
     owner: "{{ ansible_env.USER }}"
     group: "{{ ansible_env.USER }}"
     mode: "0644"

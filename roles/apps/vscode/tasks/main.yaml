@@ -2,11 +2,11 @@
   become: true
   ansible.builtin.package:
     deb: "{{ vscode_deb }}"
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
 
 - name: Debconf VSCode
   become: true
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
   ansible.builtin.debconf:
     name: code
     question: code/add-microsoft-repo

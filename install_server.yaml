@@ -1,10 +1,11 @@
 #!/usr/bin/env ansible-playbook
 
-- name: Gather facts about localhost
-  hosts: localhost
+# - name: Gather facts about localhost
+#   hosts: localhost
 
 - name: Install System
   hosts: server
+  become_exe: sudo.ws
   roles:
     - server/packages
 
@@ -14,13 +15,18 @@
     - packages/bash
 
     - server/ddns
-    - server/raid
+    # TODO this does not handle mounting array properly
+    # - server/raid
+    - server/docker
 
     - server/user/github
     - server/user/colleen
+    - server/user/minecraft
 
     - backup/server
     # - mail_system_report
+
+    - server/disable_ssh_password
 
     - role: bash_config
       tags:
@@ -30,15 +36,15 @@
     raid_user: data
     ddclient_zone: twhps.net
     ddclient_hosts:
-      - twhps.net
-      - api.twhps.net
-      # - home.twhps.net
-      - public.twhps.net
-      - souprfood.com
+      # - twhps.net
+      # - api.twhps.net
+      - home.twhps.net
+      # - public.twhps.net
+      # - souprfood.com
 
     # Get ssh key from previous localhost play
-    restic_public_key: "{{ lookup('file', hostvars['localhost']['ansible_user_dir'] ~ '/.ssh/id_rsa.pub') }}"
+    # restic_public_key: "{{ lookup('file', hostvars['localhost']['ansible_user_dir'] ~ '/.ssh/id_rsa.pub') }}"
 
     clean_backups_hosts:
-      - tom-pc
+      - tom-k-pc
       - tom-k-t470p

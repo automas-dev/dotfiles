@@ -6,7 +6,7 @@
   changed_when: false
 
 - name: Install Docker Archlinux
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
   block:
     - name: Install docker
       become: true
@@ -17,7 +17,7 @@
           - docker-compose
 
 - name: Install Docker Ubuntu
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
   block:
     - name: Install apt repo
       ansible.builtin.import_role:
@@ -44,7 +44,7 @@
 - name: Add user to docker group
   become: true
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
     groups: docker
     append: true
 

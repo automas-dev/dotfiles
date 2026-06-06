@@ -1,6 +1,6 @@
 - name: Make bash default shell
   ansible.builtin.user:
-    name: "{{ ansible_user_id }}"
+    name: "{{ ansible_facts['user_id'] }}"
     shell: /bin/bash
   tags:
     - user_config
@@ -8,7 +8,7 @@
 - name: Create ~/.bashrc
   ansible.builtin.copy:
     src: bashrc
-    dest: "{{ ansible_env.HOME }}/.bashrc"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     mode: "0644"
     force: false # force false instead of backup true so user changes persist
   tags:
@@ -16,7 +16,7 @@
 
 - name: Configure ~/.bash_aliases
   ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bash_aliases"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bash_aliases"
     block: "{{ lookup('file', 'bash_aliases') }}"
     marker: "# {mark} ANSIBLE ALIASES BLOCK"
     create: true
@@ -26,19 +26,19 @@
 
 - name: Enable bash aliases
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     line: "[ -f ~/.bash_aliases ] && source ~/.bash_aliases"
 
 - name: Create ~/.local/bash-completion/completions
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/bash-completion/completions"
+    path: "{{ ansible_facts['env']['HOME'] }}/.local/bash-completion/completions"
     state: directory
     recurse: true
 
 - name: Make bash tab complete case insensitive
   ansible.builtin.copy:
     src: inputrc
-    dest: "{{ ansible_env.HOME }}/.inputrc"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.inputrc"
     backup: true
     mode: "0644"
   tags:

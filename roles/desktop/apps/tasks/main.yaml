@@ -6,26 +6,26 @@
 
 - name: Install Flatpak
   become: true
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
   ansible.builtin.package:
     state: present
     name: flatpak
 
 - name: Install Flatpak Apps
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
   community.general.flatpak:
     name: "{{ flatpak_packages }}"
 
 - name: Install Snap Apps
   become: true
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
   community.general.snap:
     state: present
     name: "{{ snap_packages }}"
 
 - name: Install Snap Classic Apps
   become: true
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
   community.general.snap:
     state: present
     classic: true
@@ -35,4 +35,4 @@
   become: true
   ansible.builtin.package:
     deb: "{{ google_chrome_deb }}"
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"

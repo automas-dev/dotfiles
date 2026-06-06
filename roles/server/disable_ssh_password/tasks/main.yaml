@@ -1,0 +1,18 @@
+- name: Disable password login
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    line: PasswordAuthentication no
+
+- name: Disable root login
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    line: PermitRootLogin no
+# TODO will this break a full install if ssh keys are not yet setup?
+# - name: Restart sshd service
+#   become: true
+#   ansible.builtin.systemd:
+#     state: restarted
+#     name: sshd
+#     daemon_reload: true

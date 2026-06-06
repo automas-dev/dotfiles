@@ -1,21 +1,21 @@
 - name: Disable old gitprompt
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     line: source "$HOME/gitprompt.sh"
     state: absent
 
 - name: Remove old gitprompt
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/gitprompt.sh"
+    path: "{{ ansible_facts['env']['HOME'] }}/gitprompt.sh"
     state: absent
 
 - name: Install gitprompt
   ansible.builtin.copy:
     src: gitprompt.sh
-    dest: "{{ ansible_env.HOME }}/.local/bin/gitprompt.sh"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.local/bin/gitprompt.sh"
     mode: "0644"
 
 - name: Enable gitprompt
   ansible.builtin.lineinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
     line: source "$HOME/.local/bin/gitprompt.sh"

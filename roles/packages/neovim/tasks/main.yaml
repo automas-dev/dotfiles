@@ -3,13 +3,13 @@
   ansible.builtin.package:
     name: neovim
     state: present
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
 
 - name: Install neovim Ubuntu
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
   block:
     - name: Ubuntu Pre 24
-      when: ansible_distribution_major_version | int < 24
+      when: ansible_facts["distribution_major_version"] | int < 24
       block:
         # PPA reportedly not working, using older nvim version from apt
         # - name: Add Neovim PPA
@@ -45,7 +45,7 @@
       ansible.builtin.package:
         state: latest
         name: vim-gtk
-      when: ansible_distribution_major_version | int < 24
+      when: ansible_facts["distribution_major_version"] | int < 24
       tags:
         - desktop
         - vim-clipboard
@@ -62,7 +62,7 @@
 - name: Override .vim
   ansible.builtin.file:
     src: "{{ neovim_config_path }}"
-    dest: "{{ ansible_env.HOME }}/.vim"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.vim"
     state: link
     mode: "0755"
   tags:
@@ -71,7 +71,7 @@
 - name: Override .vimrc
   ansible.builtin.file:
     src: "{{ neovim_config_path }}/init.vim"
-    dest: "{{ ansible_env.HOME }}/.vimrc"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
     state: link
     mode: "0755"
   tags:

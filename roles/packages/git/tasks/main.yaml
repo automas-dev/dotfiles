@@ -9,7 +9,7 @@
 - name: Install gitconfig
   ansible.builtin.template:
     src: gitconfig.j2
-    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    dest: "{{ ansible_facts['env']['HOME'] }}/.gitconfig"
     backup: true
     mode: "0644"
   tags:

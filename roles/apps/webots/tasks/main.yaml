@@ -1,5 +1,5 @@
 - name: Install Webots Archlinux
-  when: ansible_distribution == "Archlinux"
+  when: ansible_facts["distribution"] == "Archlinux"
   block:
     - name: Install webots
       become: true
@@ -8,7 +8,7 @@
         name: webots-bin
 
 - name: Install Webots Ubuntu
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
   block:
     - name: Install apt repo
       ansible.builtin.import_role:

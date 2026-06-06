@@ -20,7 +20,7 @@ flatpak_packages:
 
 snapd_aur_url: https://aur.archlinux.org/snapd.git
 
-snapd_build_path: "{{ ansible_env.HOME }}/.cache/snap_aur"
+snapd_build_path: "{{ ansible_facts['env']['HOME'] }}/.cache/snap_aur"
 
 snap_packages:
   - firefox

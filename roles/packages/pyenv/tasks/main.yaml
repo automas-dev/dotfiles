@@ -8,4 +8,4 @@
 - name: Install Pyenv
   ansible.builtin.command: /tmp/pyenv.run
   args:
-    creates: "{{ ansible_env.HOME }}/.pyenv"
+    creates: "{{ ansible_facts['env']['HOME'] }}/.pyenv"

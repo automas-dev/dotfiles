@@ -2,4 +2,4 @@
   become: true
   ansible.builtin.package:
     deb: "{{ google_chrome_deb }}"
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["distribution"] == "Ubuntu"
