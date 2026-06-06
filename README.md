@@ -46,6 +46,23 @@ in the hosts file.
 
 Vaults can be included with `-e@vaults/vault_name.yml --ask-vault-pass`
 
+If you are using a vault with a password file
+
+```sh
+./install_server.yaml --vault--pass-file .server.vaultpass
+```
+
+## sudo-rs
+
+Newer versions of Ubuntu ship with `sudo-rs` which is not fully compatible with
+`sudo.ws`. Because the password prompt is different, ansible is unable to
+use the become password with a timeout. To use the `sudo.ws` executable when
+running ansible, set the following environment variable.
+
+```sh
+export ANSIBLE_BECOME_EXE=sudo.ws
+```
+
 ### Post Install
 
 #### Enable Clean Backups
