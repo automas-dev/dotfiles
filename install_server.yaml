@@ -26,6 +26,8 @@
     - backup/server
     # - mail_system_report
 
+    - server/disable_ssh_password
+
     - role: bash_config
       tags:
         - user_config
