@@ -9,3 +9,5 @@ os/*.part.bak
 
 vault.yml
 *.vaultpass
+
+.ansible/
