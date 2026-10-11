@@ -1,7 +1,7 @@
 fonts:
-  - adobe-source-code-pro-fonts
-  - gnu-free-fonts
-  - noto-fonts
+  #- adobe-source-code-pro-fonts
+  #- gnu-free-fonts
+  #- noto-fonts
   - ttf-anonymous-pro
   - ttf-cascadia-code
   - ttf-dejavu
