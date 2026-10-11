@@ -6,26 +6,35 @@
       ansible.builtin.fail:
         msg: You haven't added the Archlinux steps for Virtualbox
 
-- name: Install Virtualbox Ubuntu
-  when: ansible_facts["distribution"] == "Ubuntu"
-  block:
-    - name: Install apt repo
-      ansible.builtin.import_role:
-        name: install_apt_repo
-      vars:
-        source_name: virtualbox
-        source_url: https://download.virtualbox.org/virtualbox/debian
-        key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
-        components:
-          - contrib
+# - name: Install Virtualbox Ubuntu
+#   when: ansible_facts["distribution"] == "Ubuntu"
+#   block:
+#     - name: Install apt repo
+#       ansible.builtin.import_role:
+#         name: install_apt_repo
+#       vars:
+#         source_name: virtualbox
+#         source_url: https://download.virtualbox.org/virtualbox/debian
+#         key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+#         components:
+#           - contrib
 
-    - name: Install Virtualbox
-      become: true
-      ansible.builtin.package:
-        state: latest
-        name: virtualbox-7.0
-      tags:
-        - skip_ansible_lint
+#     - name: Install Virtualbox
+#       become: true
+#       ansible.builtin.package:
+#         state: latest
+#         name: virtualbox-7.0
+#       tags:
+#         - skip_ansible_lint
+
+- name: (New) Install Virtualbox Ubuntu
+  when: ansible_facts["distribution"] == "Ubuntu"
+  ansible.builtin.deb822_repository:
+    name: virtualbox
+    uris: https://download.virtualbox.org/virtualbox/debian
+    components:
+      - contrib
+    signed_by: https://www.virtualbox.org/download/oracle_vbox_2016.asc
 
 - name: Add user to vboxuser group
   become: true

@@ -7,20 +7,31 @@
         state: present
         name: webots-bin
 
-- name: Install Webots Ubuntu
-  when: ansible_facts["distribution"] == "Ubuntu"
-  block:
-    - name: Install apt repo
-      ansible.builtin.import_role:
-        name: install_apt_repo
-      vars:
-        source_name: Cyberbotics
-        source_url: https://cyberbotics.com/debian
-        key_url: https://cyberbotics.com/Cyberbotics.asc
-        distribution: binary-amd64/
+# - name: Install Webots Ubuntu
+#   when: ansible_facts["distribution"] == "Ubuntu"
+#   block:
+#     - name: Install apt repo
+#       ansible.builtin.import_role:
+#         name: install_apt_repo
+#       vars:
+#         source_name: Cyberbotics
+#         source_url: https://cyberbotics.com/debian
+#         key_url: https://cyberbotics.com/Cyberbotics.asc
+#         distribution: binary-amd64/
 
-    - name: Install webots
-      become: true
-      ansible.builtin.package:
-        state: present
-        name: webots
+#     - name: Install webots
+#       become: true
+#       ansible.builtin.package:
+#         state: present
+#         name: webots
+
+- name: (New) Install Webots Ubuntu
+  when: ansible_facts["distribution"] == "Ubuntu"
+  ansible.builtin.deb822_repository:
+    name: Cyberbotics
+    uris: https://cyberbotics.com/debian
+    components:
+      - contrib
+    suites:
+      - binary-amd64
+    signed_by: https://cyberbotics.com/Cyberbotics.asc

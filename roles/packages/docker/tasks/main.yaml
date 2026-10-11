@@ -19,15 +19,23 @@
 - name: Install Docker Ubuntu
   when: ansible_facts["distribution"] == "Ubuntu"
   block:
-    - name: Install apt repo
-      ansible.builtin.import_role:
-        name: install_apt_repo
-      vars:
-        source_name: docker
-        source_url: https://download.docker.com/linux/ubuntu
-        key_url: https://download.docker.com/linux/ubuntu/gpg
+    # - name: Install apt repo
+    #   ansible.builtin.import_role:
+    #     name: install_apt_repo
+    #   vars:
+    #     source_name: docker
+    #     source_url: https://download.docker.com/linux/ubuntu
+    #     key_url: https://download.docker.com/linux/ubuntu/gpg
+    #     components:
+    #       - stable
+
+    - name: (New) Install apt repo
+      ansible.builtin.deb822_repository:
+        name: docker
+        uris: https://download.docker.com/linux/ubuntu
         components:
           - stable
+        signed_by: https://download.docker.com/linux/ubuntu/gpg
 
     - name: Install Docker
       become: true
