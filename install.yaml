@@ -7,8 +7,9 @@
       ansible.builtin.group_by:
         key: os_{{ ansible_facts['distribution'] }}
 
-- hosts: os_Archlinux
-  gather_facts: False
+- name: Archlinux Pre-Install
+  hosts: os_Archlinux
+  gather_facts: false
   roles:
     - pacman_conf
     - update_keyring
@@ -21,6 +22,8 @@
     - packages/git
     - packages/yay
 
+    # TODO enable ufw
+
     # System
     - packages/docker
     - packages/python
@@ -28,36 +31,40 @@
     - packages/bash
     - packages/pyenv
     - packages/pipx
-    - packages/pipx_poetry
-    - packages/pipx_uv
+    # Failing for missing file in generate bash completion
+    #- packages/pipx_poetry
+    # Failing for missing file in generate bash completion
+    #- packages/pipx_uv
     - packages/qemu
 
     # Desktop
     # - desktop/fonts
-    - desktop/config
+    # Failing for type int
+    #- desktop/config
 
     # Desktop Applications
-    # - apps/blender
+    - apps/blender
     # - apps/arduino
     - apps/appimage_launcher
-    - apps/gnome-terminal
+    #- apps/gnome-terminal
+    - apps/godot
     - apps/google-chrome
     - apps/inkscape
-    - apps/play_on_linux
-    - apps/virtualbox
+    #- apps/play_on_linux
+    #- apps/virtualbox
     - apps/vscode
     - apps/webots
 
     # User
     - local_bin
-    - ssh_keygen
+    #- ssh_keygen
     - no_sudo_password
     - bash_config
-    - project_templates
+    #- project_templates
     - gitprompt
-    #- backup/client
+    - backup/client
 
-    #- name: Enable backups
+    # - name: Enable backups
     #  hosts: tom-lan
     #  vars:
     #    restic_public_key: "{{ lookup('file', lookup('env', 'HOME') + '/.ssh/id_ed25519.pub') }}"
