@@ -5,4 +5,4 @@
     name: archlinux-keyring
     state: latest
   tags:
-    - skip_ansible_lint
+    - skip_ansible_lint # Package installs should not use latest.
