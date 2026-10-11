@@ -2,3 +2,4 @@ skip_list:
   - yaml[comments]
   - yaml[comments]
   - role-name[path]
+  - var-naming[no-role-prefix]
