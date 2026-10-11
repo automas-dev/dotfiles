@@ -1,0 +1,67 @@
+- name: Create Build Path
+  ansible.builtin.file:
+    path: "{{ build_path }}"
+    state: directory
+    recurse: true
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0775"
+
+- name: Download Archive
+  ansible.builtin.get_url:
+    url: "{{ archive_url }}"
+    dest: "{{ build_path }}/{{ package_name }}.zip"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0644"
+
+- name: Unarchive Executable
+  ansible.builtin.unarchive:
+    src: "{{ build_path }}/{{ package_name }}.zip"
+    dest: "{{ build_path }}"
+    remote_src: true
+    list_files: true
+  register: extract
+  failed_when: extract.files | length != 1
+
+- name: Install Executable
+  ansible.builtin.copy:
+    src: "{{ build_path }}/{{ extract.files[0] }}"
+    dest: "{{ ansible_env.HOME }}/.local/bin/{{ package_name }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0775"
+
+- name: Create ~/.local/share/applications
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/share/applications"
+    state: directory
+    recurse: true
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0775"
+
+- name: Create Desktop File
+  ansible.builtin.template:
+    src: templates/desktop.j2
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/Godot-{{ godot_version }}.desktop"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0775"
+
+- name: Create ~/.local/share/icons
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.local/share/icons"
+    state: directory
+    recurse: true
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0775"
+
+- name: Create Icon
+  ansible.builtin.copy:
+    src: godot.png
+    dest: "{{ ansible_env.HOME }}/.local/share/icons/{{ icon_file }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0644"
